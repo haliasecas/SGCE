@@ -1,0 +1,13 @@
+Las imágenes del diseño se las envío después.
+
+El archivo que "model.html" es el esqueleto para las demás páginas.
+Como pueden notar hay exactamente 3 módulos para el visitante:
+1.- Solicitar Cita
+2.- Informes y Sugerencias
+3.- Ver mis Citas
+
+Así que tenemos que ver que parte hace cada quién con lo del visitante para comenzar.
+Si necesitan vínculos hacia alguna página que aún no exista, ponganle "#" al href.
+
+Por mientras vayan viendo como está hecho el modelo.
+Cualquier duda que tengan me dicen o a los demás.
