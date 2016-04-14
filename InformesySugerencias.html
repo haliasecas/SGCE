@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Modelo</title>
@@ -42,7 +42,7 @@
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">
+					<a class="navbar-brand" href="http://www.isc.escom.ipn.mx/">
 						<img id="logoSGCE" src="Img/logoSGCE.png">
 					</a>
 					<div style="padding-top:33px;">
@@ -66,8 +66,8 @@
 									<span><img src="Img/333.png" height="36px"></span>
 									Solicitar Cita
 								</a></li>
-								<li><a href="#">
-									<span><img src="Img/22.png" height="36px"></span>
+								<li><a href="InformesySugerencias.html">
+									<span><img src="Img/22.png" height="36px"></span>									
 									Informes y Sugerencias
 								</a></li>
 								<li><a href="#">
@@ -87,7 +87,27 @@
 		</nav>
 		
 		<div style="padding-bottom:57px;" id="main-content">
-			
+                    
+                    <h3 class="text-left">Informes y sugerencias</h3>
+                    <p><span>Todos los campos son obligatorios.</span> La respuesta a su pregunta o sugerencia llegará directamente al correo que <br>nos proporcione.</p>
+                    
+                          <form method="post" action="#">
+                           Correo electrónico  <input type="text" placeholder="   ejemplo@dominio.com"><br><br>
+                           
+                            Departamento  <select>
+                                                         <option value="UPIS">Unidad Politécnica de Integración Social</option>                                                                
+                                                          </select>
+                           <br><br>
+                            Asunto <select>
+                                                    <option value="informe" select>Pedir informe</option>
+                                                    <option value="sugerencia">Sugerencia</option>
+                                          </select>
+                            <br><br>
+                            <p>Contenido</p>
+                            <textarea name="comentarios" id="comentarios" cols="50" rows="15" placeholder = "    Exprese su sugerencia o problemática"></textarea>
+                            <br>
+                            <input type="submit" value="Enviar" class="btn btn-success">
+                    </form>
 		</div>
 		
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
@@ -104,13 +124,13 @@
 				<div class="collapse navbar-collapse" id="footer-bar">
 					<ul class="nav navbar-nav navbar-right">
 						<p class="navbar-text">@2016 Team Rocket Inc.</p>
-						<a class="navbar-brand" href="#">
+						<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/?fref=nf">
 							<img src="Img/facebookWhite.png" height="24px">
 						</a>
-						<a class="navbar-brand" href="#">
+						<a class="navbar-brand" href="https://twitter.com/escomunidad">
 							<img src="Img/twitterWhite.png" height="24px">
 						</a>
-						<a class="navbar-brand" href="#">
+						<a class="navbar-brand" href="https://plus.google.com/112263443520207638663/posts">
 							<img src="Img/googleWhite.png" height="24px">
 						</a>
 					</ul>
