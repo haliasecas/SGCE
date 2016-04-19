@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset=UTF-8>
-		<link rel="icon" href="../Img/logoEscomR.png" type="image/x-icon">
-		<link rel="shortcut icon" href="../Img/logoEscomR.png">
-		<title>Cursos de verano ESCOM</title>
-		<script type="text/javascript" src="Scr/jquery.min.js"></script>
-		<script type="text/javascript" src="/Scr/alert.js"></script>
-		<script type="text/javascript" src="/Scr/moment.min.js"></script>
-		<script type="text/javascript" src="/Scr/bootstrap.js"></script>
-		<script type="text/javascript" src="/Scr/bootstrap-datetimepicker.min.js"></script>
-		<link type="text/css" rel="stylesheet" href="/Css/bootstrap.css">
-		<link type="text/css" rel="stylesheet" href="/Css/bootstrap-datetimepicker.css">
-		<link type="text/css" rel="stylesheet" href="/Css/modals.css">
+		<title>Modelo</title>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="Scr/jquery-2.2.0.js"></script>
+		<script type="text/javascript" src="Scr/moment.min.js"></script>
+		<script type="text/javascript" src="Scr/bootstrap.js"></script>
+		<script type="text/javascript" src="Scr/bootstrap-datetimepicker.js"></script>
+		<link type="text/css" rel="stylesheet" href="Css/bootstrap.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<style type="text/css">
+			@font-face{
+				font-family: "Arial";
+				src: url("Fonts/arial.ttf") format("truetype");
+				font-family: "Arial Rounded";
+				src: url("Fonts/arial-rounded.ttf") format("truetype");
+				font-family: "Oswald";
+				src: url("Fonts/Oswald-Light.ttf") format("truetype");
+			}
+			#top-bar, #bottom-bar{
+				font-family: "Oswald";
+				font-size: 18px;
+			}
+			body {
+				font-family: "Arial";
+			}
+			#logoSGCE, .img-head{
+				max-width: 100%;
+    			height: auto;
+    			width: auto\9; /* ie8 */
+			}
+		</style>
 	</head>
 	<body>
         <?php
@@ -23,17 +39,59 @@
             $pass = "6224";    
             $conn = new mysqli($server, $user, $pass);
         ?>
-		<br>
-		<div class="container">
-			<div class="col-md-4" align="center"><img src="Img/logoSEP.png" border="0"></div>
-			<div class="col-md-4" align="center"><img src="Img/logoEscom.png" border="0"></div>
-			<div class="col-md-4" align="center"><img src="Img/logoIPNGris.png" border="0"></div>
+		<div class="container-fluid" style="padding-bottom:9px;" id="header">
+			<img src="Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
+			<img class="img-head" src="Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
-		<br><br>
 
-		<button type="button" class="hidden" data-toggle="modal" data-target="#inicioSesion" id="1"></button>
+		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
+			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">
+						<img id="logoSGCE" src="Img/logoSGCE.png">
+					</a>
+					<div style="padding-top:33px;">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-bar" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+				</div>
 
-		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="inicioSesion" role="dialog" aria-hidden="true">
+				<div class="collapse navbar-collapse" id="header-bar">
+					<ul class="nav navbar-nav navbar-right" style="padding-top:12px;">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">
+									<span><img src="Img/333.png" height="36px"></span>
+									Solicitar Cita
+								</a></li>
+								<li><a href="#">
+									<span><img src="Img/22.png" height="36px"></span>
+									Informes y Sugerencias
+								</a></li>
+								<li><a href="#">
+									<span><img src="Img/11.png" height="36px"></span>
+									Ver mis citas
+								</a></li>
+							</ul>
+						</li>
+						<li class="">
+							<a href="#" data-toggle="modal" data-target="#inicioSesion">
+								<span><img src="Img/loginiGreen.png" height="30px"></span> Iniciar sesión (Administrador)
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="modal fade" data-keyboard="true" id="inicioSesion" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 
@@ -70,7 +128,7 @@
 					</div>
 
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary btn-md btn-block" id="login">
+						<button type="button" class="btn btn-success btn-md btn-block" id="login">
 							Iniciar Sesión
 						</button>
                         <button class="hidden" id="login2"></button>
@@ -140,46 +198,14 @@
 			</div>
 		</div>
 
-		<div id="bienvenida" class="jumbotron hidden" align="center"></div>
-
-		<div id="central" style="padding-bottom:55px;" class="container-fluid hidden">
-			<div class="col-md-6 text-center">
-				<h3>Administrador</h3>
-				<div class="btn-group btn-group-justified">
-					<a href="ModificarPassword.php" class="btn btn-primary">Modificar Contraseña</a>
-				</div>
-				<div class="col-md-6 text-center container-fluid">
-					<h5>Cursos</h5>
-					<div class="btn-group btn-group-justified">
-						<a href="RegistrarCurso.php" class="btn btn-primary">Registrar Curso</a>
-					</div>
-					<div class="btn-group btn-group-justified">
-						<a href="CursosAdmin.php" class="btn btn-default">Lista de Cursos</a>
-					</div>
-				</div>
-				<div class="col-md-6 text-center container-fluid">
-					<h5>Alumnos</h5>
-					<div class="btn-group btn-group-justified">
-						<a href="EliminarAlumno.php" class="btn btn-primary">Eliminar Alumno</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6" align="center">
-				<h3>Alumno</h3>
-				<div class="btn-group btn-group-justified">
-					<a href="ModificarPassword.php" class="btn btn-default">Modificar Contraseña</a>
-					<a href="InscribirACurso.php" class="btn btn-default">Inscribirse a Curso</a>
-				</div>
-				<div class="btn-group btn-group-justified">
-					<a href="ModificarPerfil.php" class="btn btn-primary">Modificar Perfil</a>
-				</div>
-			</div>
+		<div id="bienvenida" class="container-fluid" align="center">
+			
 		</div>
 
-		<nav class="navbar navbar-default navbar-fixed-bottom">
-			<div class="container-fluid">
+		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
+			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navB" aria-expanded="false">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#footer-bar" aria-expanded="false">
 						<span class="sr-only">Toggle navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -187,21 +213,22 @@
 					</button>
 				</div>
 
-				<div class="collapse navbar-collapse" id="navB">
+				<div class="collapse navbar-collapse" id="footer-bar">
 					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<p id="username" class="navbar-text"></p>
-						</li>
-						<li>
-							<button class="btn btn-default navbar-btn hidden" data-toggle="modal" data-target="#cerrarSesion2" id="cerrarSesion1">
-								Cerrar sesión
-							</button>
-						<li>
-						<li><p class="navbar-text"><p></li>
+						<p class="navbar-text">@2016 Team Rocket Inc.</p>
+						<a class="navbar-brand" href="#">
+							<img src="Img/facebookWhite.png" height="24px">
+						</a>
+						<a class="navbar-brand" href="#">
+							<img src="Img/twitterWhite.png" height="24px">
+						</a>
+						<a class="navbar-brand" href="#">
+							<img src="Img/googleWhite.png" height="24px">
+						</a>
 					</ul>
 				</div>
 			</div>
-		</nav>
+		</nav>		
 
 		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="cerrarSesion2" role="dialog">
 			<div class="modal-dialog">
@@ -224,7 +251,33 @@
 
 		<script type="text/javascript">
 			$(document).ready(function (){
-				$('#1').click();
+				// Sticky bar plz
+				$(window).scroll(function() {
+					if ($(window).scrollTop() > $("#header").height()) {
+						$("#top-bar").addClass("navbar-fixed-top");
+						$("#main-content").css({"padding-top":"90px"});
+					}
+					if ($(window).scrollTop() < $("#header").height()) {
+						$("#top-bar").removeClass("navbar-fixed-top");
+						$("#main-content").css({"padding-top":"0px"});
+					}
+				});
+					
+				if ($(window).width() <= 886) {
+					$("#top-bar").removeAttr("style");
+				}
+
+				$(window).resize(function() {
+					if ($(window).width() > 886) {
+						$("#top-bar").attr({"style":"height:84px;"});
+					}
+					if ($(window).width() <= 886) {
+						$("#top-bar").removeAttr("style");
+					}
+				}); 
+			});
+			$("#inicioSesion").on("hidden.bs.modal", function () {
+				$(this).removeData("bs.modal");
 			});
 		</script>
         
