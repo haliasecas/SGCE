@@ -82,7 +82,7 @@
 							</ul>
 						</li>
 						<li class="">
-							<a href="#" data-toggle="modal" data-target="#inicioSesion">
+							<a href="#" data-toggle="modal" data-target="#inicioSesion" onclick="reloadMod();">
 								<span><img src="Img/loginiGreen.png" height="30px"></span> Iniciar sesión (Administrador)
 							</a>
 						</li>
@@ -132,9 +132,6 @@
 							Iniciar Sesión
 						</button>
                         <button class="hidden" id="login2"></button>
-						<span class="help-block" align="center">
-							¿No tiene una cuenta? <a href="RegistrarAlumno.php">Registrarse »</a>
-						</span>
 					</div>
 
 					<script type="text/javascript">
@@ -229,26 +226,7 @@
 				</div>
 			</div>
 		</nav>		
-
-		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="cerrarSesion2" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header modal-has-warning">
-						<h4 class="modal-title">Mensaje de confirmación</h4>
-					</div>
-					<div class="modal-body">
-						<p>¿Seguro que quieres cerrar sesión?</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-warning" onclick="window.location='Login.php';" data-dismiss="modal">
-							Aceptar
-						</button>
-						<button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
+		
 		<script type="text/javascript">
 			$(document).ready(function (){
 				// Sticky bar plz
@@ -275,9 +253,6 @@
 						$("#top-bar").removeAttr("style");
 					}
 				}); 
-			});
-			$("#inicioSesion").on("hidden.bs.modal", function () {
-				$(this).removeData("bs.modal");
 			});
 		</script>
         
