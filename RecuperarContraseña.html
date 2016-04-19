@@ -7,6 +7,7 @@
 		<script type="text/javascript" src="Scr/moment.min.js"></script>
 		<script type="text/javascript" src="Scr/bootstrap.js"></script>
 		<script type="text/javascript" src="Scr/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="Scr/validator.js"></script>
 		<link type="text/css" rel="stylesheet" href="Css/bootstrap.css">
         <link type="text/css" rel="stylesheet" href="Css/style.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -103,9 +104,18 @@
     </div>
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10 ">
-        <button type="button" class="btn btn-success button medium-btn" style="float: right;">Enviar</button>
+        <button type="button" class="btn btn-success button medium-btn" style="float: right;" onclick="validar($('#email').val());">
+			Enviar
+		  </button>
       </div>
     </div>
+	  <script type="text/javascript">
+		  function validar(email) {
+			  if (validate(email)) {
+				  
+			  }
+		  }
+	  </script>
      
   </form>
 </div>
