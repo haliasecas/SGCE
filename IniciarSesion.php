@@ -93,20 +93,20 @@
 			<div class="form-group" style="padding-top: 80px;">
 				<label class="col-lg-2 control-label">Correo electrónico:</label>
 				<div class="col-lg-10">
-				<input type="text" class="form-control" id="user">
+					<input type="text" class="form-control" id="user" placeholder="ejemplo@dominio.com">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-2 control-label">Contraseña:</label>
 				<div class="col-lg-10">
-				<input type="password" class="form-control" id="password">
+				<input type="password" class="form-control" id="password" placeholder="*********">
 				</div>
 			</div>
 				<div class="form-inline" align="right">
 			<div class="form-group">
 				<span class="help-block">
-					<a href="R">¿Olvidaste tu contraseña?</a>
-        			<button type="submit" class="btn btn-primary">Enviar</button>
+					<a href="RecuperarC.php" style="color: #00B85D">¿Olvidaste tu contraseña? &nbsp;&nbsp;</a>
+        			<button type="submit" class="btn btn-success">Enviar</button>
 				</span>
     		</div>
 				</div>

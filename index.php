@@ -76,7 +76,7 @@
 									<span><img src="Img/333.png" height="36px"></span>
 									Solicitar Cita
 								</a></li>
-								<li><a href="#">
+								<li><a href="InformesySugerencias.html">
 									<span><img src="Img/22.png" height="36px"></span>
 									Informes y Sugerencias
 								</a></li>
@@ -129,12 +129,12 @@
 					function initMap() {
 						var mapDiv = document.getElementById('map');
     					var map = new google.maps.Map(mapDiv, {
-							center: {lat: 19.504929, lng: -99.146564},
+							center: {lat: 19.5043238, lng: -99.146794},
       						zoom: 17,
 						});
 					}
 				</script>
-				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKRfb1Z6BSL5qUF8Tlo3SVS_pFlQcbvks&callback=initMap" async defer>
+				<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer>
 				</script>
 			</div>
 		</div>
