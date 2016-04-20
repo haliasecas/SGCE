@@ -76,7 +76,7 @@
 									<span><img src="Img/333.png" height="36px"></span>
 									Solicitar Cita
 								</a></li>
-								<li><a href="#">
+								<li><a href="InformesySugerencias.html">
 									<span><img src="Img/22.png" height="36px"></span>
 									Informes y Sugerencias
 								</a></li>
