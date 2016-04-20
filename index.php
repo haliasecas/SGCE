@@ -8,6 +8,7 @@
 		<script type="text/javascript" src="Scr/bootstrap.js"></script>
 		<script type="text/javascript" src="Scr/bootstrap-datetimepicker.js"></script>
 		<link type="text/css" rel="stylesheet" href="Css/bootstrap.css">
+		<link type="text/css" rel="stylesheet" href="Css/style.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<style type="text/css">
 			@font-face{

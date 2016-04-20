@@ -87,28 +87,30 @@
 		
 		<div style="padding-bottom: 57px;" id="main-content" class="container-fluid col-md-offset-1 col-md-10">
 			<form class="form-horizontal">
-			<h2><p><strong>Iniciar sesión Administrador</strong></p></h2>
-			<p>Ingresa los campos correspondientes a tu cuenta para iniciar sesión</p>
-			
-			<div class="form-group" style="padding-top: 80px;">
-				<label class="col-lg-2 control-label">Correo electrónico:</label>
-				<div class="col-lg-10">
-					<input type="text" class="form-control" id="user" placeholder="ejemplo@dominio.com">
+				<h2><p><strong>Iniciar sesión Administrador</strong></p></h2>
+				<p>Ingresa los campos correspondientes a tu cuenta para iniciar sesión</p>
+
+				<div class="form-group" style="padding-top: 80px;">
+					<label class="col-lg-2 control-label">Correo electrónico:</label>
+					<div class="col-lg-10">
+						<input type="text" class="form-control" id="user" placeholder="ejemplo@dominio.com">
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-2 control-label">Contraseña:</label>
-				<div class="col-lg-10">
-				<input type="password" class="form-control" id="password" placeholder="*********">
+
+				<div class="form-group">
+					<label class="col-lg-2 control-label">Contraseña:</label>
+					<div class="col-lg-10">
+					<input type="password" class="form-control" id="password" placeholder="*********">
+					</div>
 				</div>
-			</div>
+
 				<div class="form-inline" align="right">
-			<div class="form-group">
-				<span class="help-block">
-					<a href="RecuperarC.php" style="color: #00B85D">¿Olvidaste tu contraseña? &nbsp;&nbsp;</a>
-        			<button type="submit" class="btn btn-success">Enviar</button>
-				</span>
-    		</div>
+					<div class="form-group">
+						<span class="help-block">
+							<a href="RecuperarC.php" style="color: #00B85D">¿Olvidaste tu contraseña? &nbsp;&nbsp;</a>
+							<button type="submit" class="btn btn-success">Enviar</button>
+						</span>
+					</div>
 				</div>
 			</form>
 		</div>

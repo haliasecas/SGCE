@@ -30,6 +30,9 @@
     			height: auto;
     			width: auto\9; /* ie8 */
 			}
+			textarea {
+				resize: none;
+			}
 		</style>
 	</head>
 	
@@ -86,57 +89,57 @@
 			</div>
 		</nav>
 		
-		<div style="padding-bottom:57px;" id="main-content">                    
-                       <div class="container-fluid" style="padding-left:40px;">                     
-                        <h3><strong> Informes y sugerencias</strong></h3>
-                           <p><strong class="text-success">Todos los campos son obligatorios.</strong> La respuesta a su pregunta o sugerencia llegará directamente al correo que <br>nos proporcione.</p>                           
-                            <br>
-                            <form action="" method="GET" class="form-horizontal">
-                                <div class="form-group ">                                    
-                                <label  for="email" class="control-label col-md-2">Correo Electrónico</label>
-                                <div class="col-md-10">
-                                            <input type="text" class="form-control" id="" placeholder=" ejemplo@dominio.com">                                                                  
-                                </div>
-                                <br>                                
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="departamento" class="control-label col-md-2">Departamento</label>        
-                                        <div class="col-md-10">                                        
-                                <select name="departamento" class="form-control">
-                                              <option value="UPIS">Unidad Politécnica de Integración Social</option>                                                                
-                                </select>
-                                        </div>
-                                <br>
-                                </div>                                                            
-                                
-                                <div class="form-group">
-                                    <label for="asunto" class="control-label col-md-2">Asunto</label>
-                                    <div class="col-md-10">                                                                            
-                                <select name="asunto" class="form-control">
-                                            <option value="informe" select>Pedir informe</option>
-                                            <option value="sugerencia">Sugerencia</option>
-                                </select>
-                                </div>                
-                                <br>
-                                </div>                    
-                                
-                                <div class="form-group">
-                                     <label for="comentarios" class="control-label col-md-2">Contenido</label>
-                                     <div class="col-md-10">                                                                              
-                                <textarea name="comentarios" class="form-control" cols="30" rows="15" placeholder = "    Exprese su sugerencia o problemática"></textarea>     
-                                        </div>   
-                                        <br>
-                                </div>    
-                                <br>            
-                                <div class="form-group">
-                                       <div class="col-md-offset-11">
-                                        <input type="submit" value="Enviar" class="btn btn-success btn-lg">
-                                        </div>
-                                </div>                                                                       
-                            </form>
-                        </div>
-		</div>		
+		<div style="padding-bottom: 57px;" id="main-content">
+			<div class="container-fluid col-md-offset-1 col-md-10">
+				<form action="" method="GET" class="form-horizontal">
+					<h3><strong> Informes y sugerencias</strong></h3>
+					<p><strong class="text-success">Todos los campos son obligatorios.</strong>
+					La respuesta a su pregunta o sugerencia llegará directamente al correo que<br>nos proporcione.</p><br>
+				
+					<div class="form-group ">
+						<label  for="email" class="control-label col-md-2">Correo Electrónico</label>
+						<div class="col-md-10">
+							<input type="text" class="form-control" id="" placeholder=" ejemplo@dominio.com">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="departamento" class="control-label col-md-2">Departamento</label>
+						<div class="col-md-10">
+							<select name="departamento" class="form-control">
+								<option value="UPIS">Unidad Politécnica de Integración Social</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="asunto" class="control-label col-md-2">Asunto</label>
+						<div class="col-md-10">
+							<select name="asunto" class="form-control">
+								<option value="informe" select>Pedir informe</option>
+								<option value="sugerencia">Sugerencia</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="comentarios" class="control-label col-md-2">Contenido</label>
+						<div class="col-md-10">
+							<textarea name="comentarios" class="form-control" cols="30" rows="15" placeholder="Exprese su sugerencia o problemática"></textarea>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<span class="help-block">
+							<button type="submit" value="Enviar" class="btn btn-success">
+								ENVIAR
+							</button>
+						</span>
+					</div>                                                                       
+				</form>
+			</div>
+		</div>
+		
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
