@@ -91,37 +91,39 @@
 		<div style="padding-bottom:57px;" id="main-content">
             <form class="form-horizontal" role="form">
   <div class="container">
-  <h2>Recuperar contraseña</h2>
-      <h5>Ingresa los campos correspondientes a tu cuenta para recuperar tu contraseña</h5>
-      <br>
   <form class="form-horizontal" role="form">
-
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="email">Correo electrónico:</label>
-      <div class="col-sm-10">
-        <input type="email" class="form-control" id="email" placeholder="ejemplo@dominio.com">
-      </div>
-    </div>
-    <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-10 ">
-        <button type="button" class="btn btn-success button medium-btn" style="float: right;" onclick="validar($('#email').val());">
-			Enviar
-		  </button>
-      </div>
-    </div>
-	  <script type="text/javascript">
-		  function validar(email) {
-			  if (validate(email)) {
-				  
-			  }
-		  }
-	  </script>
-     
-  </form>
+      <form id="frmRestablecer" action="validaremail.php" method="post">
+				  <div class="container">
+				  <h2>Recuperar contraseña</h2>
+				      <h5>Ingresa los campos correspondientes a tu cuenta para recuperar tu contraseña</h5>
+				      <br>
+				  <form class="form-horizontal" role="form">
+				    <div class="form-group">
+				      <label class="control-label col-sm-2" for="email">Correo electrónico:</label>
+				      <div class="col-sm-10">
+				        <input type="email" class="form-control" id="email" placeholder="ejemplo@dominio.com">
+				      </div>
+				    </div>
+				    <div class="form-group">        
+				      <div class="col-sm-offset-2 col-sm-10 ">
+                          <input type="submit" class="btn btn-success button medium-btn" style="float: right;" value="Enviar" >
+                          <!--
+				        <button type="button" class="btn btn-success button medium-btn" style="float: right;" onclick="validar($('#email').val());">
+							Enviar
+						  </button>
+                            -->
+				      </div>
+				    </div>
+				  </form>
+				</div>
+          <div id="mensaje">
+          
+        </div>
+		</form>
+      </form>
 </div>
 </form>
 		</div>
-		
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
@@ -149,7 +151,23 @@
 				</div>
 			</div>
 		</nav>
-		
+		<script>
+            echo
+      $(document).ready(function(){
+        $("#frmRestablecer").submit(function(event){
+          event.preventDefault();
+          $.ajax({
+            url:'validaremail.php',
+            type:'post',
+            dataType:'json',
+            data:$("#frmRestablecer").serializeArray()
+          }).done(function(respuesta){
+            $("#mensaje").html(respuesta.mensaje);
+            $("#email").val('');
+          });
+        });
+      });
+    </script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				// Sticky bar plz
