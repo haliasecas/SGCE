@@ -73,7 +73,7 @@
 								<span><img src="Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#">
+								<li><a href="SolicitarCita.html">
 									<span><img src="Img/333.png" height="36px"></span>
 									Solicitar Cita
 								</a></li>
