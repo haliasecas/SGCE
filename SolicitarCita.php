@@ -215,50 +215,54 @@
                     
                     <!--Dias preferentes-->
                     <div class="form-group">
-						<label for="diapref" class="control-label col-md-2">Día(s) preferentes<br><small>(seleccione al<br> menos uno)</small></label>        
+						<label for="diapref" class="control-label col-md-2">Día(s) preferentes<br><small>(seleccione al<br>menos uno)</small></label>        
 						<div class="col-md-10">
-							<select name="diapref" class="form-control">
-								<option value="fecha">dd/mm/aaaa</option>
-							</select>                                    
+							<div class='input-group date' id='datet1'>
+							<input type='text' class="form-control" />
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
 							<br>
 						</div>                            
 						<div class="col-md-10">
-							<select name="diapref" class="form-control">
-								<option value="fecha">dd/mm/aaaa</option>
-							</select>
+							<div class='input-group date' id='datet2'>
+							<input type='text' class="form-control" />
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
 							<br>
 						</div>
 						<div class="col-md-10 col-md-offset-2">
-							<select name="diapref" class="form-control">
-								<option value="fecha">dd/mm/aaaa</option>
-							</select>                                    
+							<div class='input-group date' id='datet3'>
+							<input type='text' class="form-control" />
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
 						</div>
                     </div>
 					
-					<div class="container">
-						<div class="row">
-							<div class='col-sm-6'>
-								<div class="form-group">
-									<div class='input-group date' id='datetimepicker1'>
-										<input type='text' class="form-control" />
-										<span class="input-group-addon">
-											<span class="glyphicon glyphicon-calendar"></span>
-										</span>
-									</div>
-								</div>
-							</div>
-							<script type="text/javascript">
-								$(function () {
-									$('#datetimepicker1').datetimepicker({
-										minDate: moment().add(3, 'd'),
-										defaultDate: moment().add(3, 'd'),
-										daysOfWeekDisabled: [0, 6]
-									});
-								});
-							</script>
-						</div>
-					</div>
-					
+					<script type="text/javascript">
+						$(function () {
+							$('#datet1').datetimepicker({
+								format: 'DD/MM/YYYY',
+								minDate: moment().add(3, 'd'),
+								daysOfWeekDisabled: [0, 6]
+							});
+							$('#datet2').datetimepicker({
+								format: 'DD/MM/YYYY',
+								minDate: moment().add(4, 'd'),
+								daysOfWeekDisabled: [0, 6]
+							});
+							$('#datet3').datetimepicker({
+								format: 'DD/MM/YYYY',
+								minDate: moment().add(5, 'd'),
+								daysOfWeekDisabled: [0, 6]
+							});
+						});
+					</script>					
                      <!--Boton-->
 					<div class="form-group text-right">
 						 <div class="col-md-10 col-md-offset-2">
