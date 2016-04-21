@@ -63,12 +63,12 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
 							</a>
-							<ul class="dropdown-menu">
-								<li><a href="#">
+							<ul class="dropdown-menu dark">
+								<li><a href="SolicitarCita.html">
 									<span><img src="Img/333.png" height="36px"></span>
 									Solicitar Cita
 								</a></li>
-								<li><a href="#">
+								<li><a href="InformesySugerencias.html">
 									<span><img src="Img/22.png" height="36px"></span>
 									Informes y Sugerencias
 								</a></li>
@@ -96,7 +96,7 @@
 				  <div class="container">
 				  <h2>Recuperar contraseña</h2>
 				      <h5>Ingresa los campos correspondientes a tu cuenta para recuperar tu contraseña</h5>
-				      <br>
+				      <br><br>
 				  <form class="form-horizontal" role="form">
 				    <div class="form-group">
 				      <label class="control-label col-sm-2" for="email">Correo electrónico:</label>
@@ -104,9 +104,9 @@
 				        <input type="email" class="form-control" id="email" placeholder="ejemplo@dominio.com">
 				      </div>
 				    </div>
-				    <div class="form-group">        
-				      <div class="col-sm-offset-2 col-sm-10 ">
-                          <input type="submit" class="btn btn-success button medium-btn" style="float: right;" value="Enviar" >
+				    <div class="form-group text-right">
+				      <div class="col-md-offset-2 col-md-10 ">
+                          <input type="submit" class="btn btn-success button medium-btn" style="width: 150px;" value="ENVIAR" >
                           <!--
 				        <button type="button" class="btn btn-success button medium-btn" style="float: right;" onclick="validar($('#email').val());">
 							Enviar

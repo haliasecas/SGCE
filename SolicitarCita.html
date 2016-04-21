@@ -8,6 +8,8 @@
 		<script type="text/javascript" src="Scr/bootstrap.js"></script>
 		<script type="text/javascript" src="Scr/bootstrap-datetimepicker.js"></script>
 		<link type="text/css" rel="stylesheet" href="Css/bootstrap.css">
+		<link type="text/css" rel="stylesheet" href="Css/bootstrap-datetimepicker.css">
+		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<style type="text/css">
 			@font-face{
@@ -61,7 +63,7 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
 							</a>
-							<ul class="dropdown-menu">
+							<ul class="dropdown-menu dark">
 								<li><a href="#">
 									<span><img src="Img/333.png" height="36px"></span>
 									Solicitar Cita
@@ -90,8 +92,9 @@
             <!--Contenedor principal-->
             <div class="container-fluid col-md-10 col-md-offset-1">
                 <h3><strong>Solicitar Cita</strong></h3>
-                    <p><strong class="text-success">Todos los campos son obligatorios.</strong> La respuesta a su solicitud llegará directamente al correo que nos proporcione.</p>
-                    <br>
+                    <p><strong class="text-success">Todos los campos son obligatorios.</strong>
+						La respuesta a su solicitud llegará directamente al correo que nos proporcione.</p>
+                    <br><br>
                     <h4 class="text-uppercase">datos del interesado:</h4>
             <!--Formulario-->
                 <form action="" class="form-horizontal">
@@ -176,39 +179,35 @@
                     <div class="form-group">
                         <label for="horpref" class="control-label col-md-2">Horario(s) preferentes<br></label>    
                         <div class="col-md-10">
-							<div class="checkbox col-md-2">
+							<div class="checkbox col-md-3">
 								<label >
 									<input type="checkbox">9:00-10:00 hrs.
 								</label>
-							</div>
 
-							<div class="checkbox col-md-2">
-								<label >
-									<input type="checkbox">10:00-11:00 hrs.
-								</label>
-							</div>
-                        
-							<div class="checkbox col-md-2">
-								<label >
-									<input type="checkbox">11:00-12:00 hrs.
-								</label>
-							</div>
-                        
-							<div class="checkbox col-md-2">
-								<label >
-									<input type="checkbox">12:00-13:00 hrs.
-								</label>
-							</div>
-                        
-							<div class="checkbox col-md-2">
 								<label >
 									<input type="checkbox">13:00-14:00 hrs.
 								</label>
 							</div>
                         
-							<div class="checkbox col-md-2">
+							<div class="checkbox col-md-3">
+								<label >
+									<input type="checkbox">10:00-11:00 hrs.
+								</label>
+
 								<label >
 									<input type="checkbox">14:00-15:00 hrs.
+								</label>
+							</div>
+                        
+							<div class="checkbox col-md-3">
+								<label >
+									<input type="checkbox">11:00-12:00 hrs.
+								</label>
+							</div>
+							
+							<div class="checkbox col-md-3">
+								<label >
+									<input type="checkbox">12:00-13:00 hrs.
 								</label>
 							</div>
                         </div>                                                                      
@@ -236,10 +235,34 @@
 						</div>
                     </div>
 					
+					<div class="container">
+						<div class="row">
+							<div class='col-sm-6'>
+								<div class="form-group">
+									<div class='input-group date' id='datetimepicker1'>
+										<input type='text' class="form-control" />
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<script type="text/javascript">
+								$(function () {
+									$('#datetimepicker1').datetimepicker({
+										minDate: moment().add(3, 'd'),
+										defaultDate: moment().add(3, 'd'),
+										daysOfWeekDisabled: [0, 6]
+									});
+								});
+							</script>
+						</div>
+					</div>
+					
                      <!--Boton-->
-					<div class="form-group">
-						 <div class="col-md-offset-11">
-							<input type="submit" value="ENVIAR" class="btn btn-success">
+					<div class="form-group text-right">
+						 <div class="col-md-10 col-md-offset-2">
+							<input type="submit" value="ENVIAR" class="btn btn-success" style="width: 150px;">
 						</div>
 					</div>          
                 </form>                                    
@@ -287,7 +310,7 @@
 						$("#main-content").css({"padding-top":"0px"});
 					}
 				});
-					
+
 				if ($(window).width() <= 886) {
 					$("#top-bar").removeAttr("style");
 				}

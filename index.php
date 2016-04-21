@@ -72,7 +72,7 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
 							</a>
-							<ul class="dropdown-menu">
+							<ul class="dropdown-menu dark">
 								<li><a href="SolicitarCita.html">
 									<span><img src="Img/333.png" height="36px"></span>
 									Solicitar Cita

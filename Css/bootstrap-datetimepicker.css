@@ -90,7 +90,7 @@
 .bootstrap-datetimepicker-widget button[data-action] {
   padding: 6px;
 }
-.bootstrap-datetimepicker-widget .btn[data-action="incrementHours"]::after {
+.bootstrap-datetimepicker-widget .btn-success.btn[data-action="incrementHours"]::after {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -101,7 +101,7 @@
   border: 0;
   content: "Increment Hours";
 }
-.bootstrap-datetimepicker-widget .btn[data-action="incrementMinutes"]::after {
+.bootstrap-datetimepicker-widget .btn-success.btn[data-action="incrementMinutes"]::after {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -112,7 +112,7 @@
   border: 0;
   content: "Increment Minutes";
 }
-.bootstrap-datetimepicker-widget .btn[data-action="decrementHours"]::after {
+.bootstrap-datetimepicker-widget .btn-success.btn[data-action="decrementHours"].btn-success::after {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -123,7 +123,7 @@
   border: 0;
   content: "Decrement Hours";
 }
-.bootstrap-datetimepicker-widget .btn[data-action="decrementMinutes"]::after {
+.bootstrap-datetimepicker-widget .btn[data-action="decrementMinutes"].btn-success::after {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -301,15 +301,29 @@
   display: inline-block;
   border: solid transparent;
   border-width: 0 0 7px 7px;
+  border-bottom-color: ##5CB85C;
+  border-top-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+}
+/*
+.bootstrap-datetimepicker-widget table td.today:before {
+  content: '';
+  display: inline-block;
+  border: solid transparent;
+  border-width: 0 0 7px 7px;
   border-bottom-color: #337ab7;
   border-top-color: rgba(0, 0, 0, 0.2);
   position: absolute;
   bottom: 4px;
   right: 4px;
 }
+*/
 .bootstrap-datetimepicker-widget table td.active,
 .bootstrap-datetimepicker-widget table td.active:hover {
-  background-color: #337ab7;
+/*  background-color: #337ab7; */
+  background-color: #5CB85C;
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
@@ -335,7 +349,8 @@
   background: #eeeeee;
 }
 .bootstrap-datetimepicker-widget table td span.active {
-  background-color: #337ab7;
+/*  background-color: #337ab7; */
+  background-color: #5CB85C;
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
