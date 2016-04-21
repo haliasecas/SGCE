@@ -3,6 +3,7 @@
 	<head>
 		<title>Modelo</title>
 		<meta charset="utf-8">
+		<script type="text/javascript" src="../Scr/jquery-2.2.0.js"></script>
 		<script type="text/javascript" src="../Scr/moment.min.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
@@ -37,7 +38,7 @@
 	
 	<body>
 		<div class="container-fluid" style="padding-bottom:9px;" id="header">
-			<img src="Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
+			<img src="../Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
 		
