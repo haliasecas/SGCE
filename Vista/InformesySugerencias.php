@@ -11,12 +11,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<style type="text/css">
 			@font-face{
-				font-family: "Arial";
-				src: url("Fonts/arial.ttf") format("truetype");
+				font-family: "Ariall";
+				src: url("../Fonts/arial.ttf") format("truetype");
 				font-family: "Arial Rounded";
-				src: url("Fonts/arial-rounded.ttf") format("truetype");
+				src: url("../Fonts/arial-rounded.ttf") format("truetype");
 				font-family: "Oswald";
-				src: url("Fonts/Oswald-Light.ttf") format("truetype");
+				src: url("../Fonts/Oswald-Light.ttf") format("truetype");
 			}
 			#top-bar, #bottom-bar{
 				font-family: "Oswald";
