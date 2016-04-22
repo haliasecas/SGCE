@@ -96,7 +96,7 @@
 					<p><strong class="text-success">Todos los campos son obligatorios.</strong>
 					La respuesta a su pregunta o sugerencia llegará directamente al correo que<br>nos proporcione.</p><br>
 				
-					<div class="form-group ">
+					<div class="form-group">
 						<label  for="email" class="control-label col-md-2">Correo Electrónico</label>
 						<div class="col-md-10">
 							<input type="text" class="form-control" id="" placeholder="ejemplo@dominio.com">
@@ -131,7 +131,7 @@
 					
 					<div class="form-group">
 						<div class="col-lg-10 col-lg-offset-2" align="right">
-							<button type="submit" class="btn btn-success">ENVIAR</button>
+							<button type="submit" class="btn btn-success" style="width: 150px;">ENVIAR</button>
 						</div>
 					</div>
 				</form>

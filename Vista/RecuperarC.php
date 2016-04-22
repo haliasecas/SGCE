@@ -101,7 +101,7 @@
 				    <div class="form-group">
 				      <label class="control-label col-sm-2" for="email">Correo electrónico:</label>
 				      <div class="col-sm-10">
-				        <input type="email" class="form-control" id="email" placeholder="ejemplo@dominio.com">
+				        <input type="text" class="form-control" id="email" placeholder="ejemplo@dominio.com">
 				      </div>
 				    </div>
 				    <div class="form-group text-right">
