@@ -73,11 +73,11 @@
 								<span><img src="Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu dark">
-								<li><a href="SolicitarCita.html">
+								<li><a href="Vista/SolicitarCita.php">
 									<span><img src="Img/333.png" height="36px"></span>
 									Solicitar Cita
 								</a></li>
-								<li><a href="InformesySugerencias.html">
+								<li><a href="/Vista/InformesySugerencias.php">
 									<span><img src="Img/22.png" height="36px"></span>
 									Informes y Sugerencias
 								</a></li>
@@ -88,7 +88,7 @@
 							</ul>
 						</li>
 						<li class="">
-							<a href="IniciarSesion.php">
+							<a href="/Vista/IniciarSesion.php">
 								<span><img src="Img/loginiGreen.png" height="30px"></span> Iniciar sesión (Administrador)
 							</a>
 						</li>
@@ -154,13 +154,13 @@
 				<div class="collapse navbar-collapse" id="footer-bar">
 					<ul class="nav navbar-nav navbar-right">
 						<p class="navbar-text">@2016 Team Rocket Inc.</p>
-						<a class="navbar-brand" href="#">
+						<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/">
 							<img src="Img/facebookWhite.png" height="24px">
 						</a>
-						<a class="navbar-brand" href="#">
+						<a class="navbar-brand" href="https://twitter.com/escomunidad?ref_src=twsrc%5Etfw">
 							<img src="Img/twitterWhite.png" height="24px">
 						</a>
-						<a class="navbar-brand" href="#">
+						<a class="navbar-brand" href="https://plus.google.com/112263443520207638663/posts">
 							<img src="Img/googleWhite.png" height="24px">
 						</a>
 					</ul>
