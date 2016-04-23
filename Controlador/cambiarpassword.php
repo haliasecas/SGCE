@@ -12,9 +12,9 @@ if( $password1 != "" && $password2 != "" && $idusuario != "" && $token != "" ){
   <head>
     <meta name="author" content="denker">
     <title> Restablecer contraseña </title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../Css/bootstrap.min.css" rel="stylesheet">
+    <link href="../Css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../Css/style.css" rel="stylesheet">
   </head>
 
   <body>
@@ -69,8 +69,8 @@ if( $password1 != "" && $password2 != "" && $idusuario != "" && $token != "" ){
 	</div>
 <div class="col-md-2"></div>
 	</div> <!-- /container -->
-<script src="js/jquery-1.11.1.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+<script src="../js/jquery-1.11.1.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
   </body>
 </html>
 <?php
