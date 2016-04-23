@@ -100,7 +100,7 @@
 					</button>
 				</div>
 
-				<div class="collapse navbar-collapse" id="footer-bar">
+					<div class="collapse navbar-collapse" id="footer-bar">
 					<ul class="nav navbar-nav navbar-right">
 						<p class="navbar-text">@2016 Team Rocket Inc.</p>
 						<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/">
