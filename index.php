@@ -73,11 +73,19 @@
 								<span><img src="Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu dark">
+<<<<<<< HEAD
 								<li><a href="Vista/SolicitarCita.php">
 									<span><img src="Img/333.png" height="36px"></span>
 									Solicitar Cita
 								</a></li>
 								<li><a href="/Vista/InformesySugerencias.php">
+=======
+								<li><a href="SolicitarCita.php">
+									<span><img src="Img/333.png" height="36px"></span>
+									Solicitar Cita
+								</a></li>
+								<li><a href="InformesySugerencias.php">
+>>>>>>> 80fb088be5ec1d3896d5f95d1b688276315872c7
 									<span><img src="Img/22.png" height="36px"></span>
 									Informes y Sugerencias
 								</a></li>
