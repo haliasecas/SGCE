@@ -9,30 +9,9 @@
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap-datetimepicker.css">
-		
+		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
+		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<style type="text/css">
-			@font-face{
-				font-family: "Arial";
-				src: url("Fonts/arial.ttf") format("truetype");
-				font-family: "Arial Rounded";
-				src: url("Fonts/arial-rounded.ttf") format("truetype");
-				font-family: "Oswald";
-				src: url("Fonts/Oswald-Light.ttf") format("truetype");
-			}
-			#top-bar, #bottom-bar{
-				font-family: "Oswald";
-				font-size: 18px;
-			}
-			body {
-				font-family: "Arial";
-			}
-			#logoSGCE, .img-head{
-				max-width: 100%;
-    			height: auto;
-    			width: auto\9; /* ie8 */
-			}
-		</style>
 	</head>
 	
 	<body>
@@ -88,7 +67,20 @@
 			</div>
 		</nav>
 		
+		<?php
+			if (!empty($_POST)) {
+				echo ("
+				<script type='text/javascript'>
+					$(document).ready(function() {
+						$('#exitoso').modal();
+					});
+				</script>
+				");
+			}
+		?>
+		
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
+			
             <!--Contenedor principal-->
             <div class="container-fluid col-md-10 col-md-offset-1">
                 <h3><strong>Solicitar Cita</strong></h3>
@@ -97,14 +89,14 @@
                     <br><br>
                     <h4 class="text-uppercase">datos del interesado:</h4>
             <!--Formulario-->
-                <form action="" class="form-horizontal">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="form-horizontal" id="formCita">
                     <!--Correo Electrónico-->
                     <div class="form-group">                                                            
-                                <label  for="email" class="control-label col-md-2">Correo Electrónico</label>
-                                <div class="col-md-10">
-                                            <input type="text" class="form-control" placeholder="ejemplo@dominio.com">
-                                </div>
-                                <br>                                
+				   		<label  for="email" class="control-label col-md-2">Correo Electrónico</label>
+						<div class="col-md-10">
+							<input type="text" class="form-control" placeholder="ejemplo@dominio.com" id="correoE">
+						</div>
+						<br>                                
                     </div>
                     <!--Nombre-->
                     <div class="form-group">
@@ -207,7 +199,7 @@
 							
 							<div class="checkbox col-md-3">
 								<label >
-									<input type="checkbox">12:00-13:00 hrs.
+									<input type="checkbox" name="checkbox">12:00-13:00 hrs.
 								</label>
 							</div>
                         </div>                                                                      
@@ -266,11 +258,48 @@
                      <!--Boton-->
 					<div class="form-group text-right">
 						 <div class="col-md-10 col-md-offset-2">
-							<input type="submit" value="ENVIAR" class="btn btn-success" style="width: 150px;">
+							 <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
 						</div>
-					</div>          
-                </form>                                    
+					</div>
+                </form>
+				<script type="text/javascript">
+					function enviarForm() {
+						$("#formCita").submit();
+					}
+				</script>
             </div>
+		</div>
+		
+		<div class="modal fade" id="exitoso" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Mensaje de alerta</h4>
+					</div>
+					<div class="modal-body">
+						<p>Operación realizada exitosamente.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../index.php';">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="error" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Mensaje de error</h4>
+					</div>
+					<div class="modal-body">
+						<p>Falta un dato obligatorio para efectuar la operación solicitada.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
 		</div>
 		
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
@@ -326,7 +355,7 @@
 					if ($(window).width() <= 886) {
 						$("#top-bar").removeAttr("style");
 					}
-				}); 
+				});
 			});
 		</script>
 	</body>

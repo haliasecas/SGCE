@@ -7,30 +7,10 @@
 		<script type="text/javascript" src="../Scr/moment.min.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="../Scr/validator.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
+		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<style type="text/css">
-			@font-face{
-				font-family: "Arial";
-				src: url("Fonts/arial.ttf") format("truetype");
-				font-family: "Arial Rounded";
-				src: url("Fonts/arial-rounded.ttf") format("truetype");
-				font-family: "Oswald";
-				src: url("Fonts/Oswald-Light.ttf") format("truetype");
-			}
-			#top-bar, #bottom-bar{
-				font-family: "Oswald";
-				font-size: 18px;
-			}
-			body {
-				font-family: "Arial";
-			}
-			#logoSGCE, .img-head{
-				max-width: 100%;
-    			height: auto;
-    			width: auto\9; /* ie8 */
-			}
-		</style>
 	</head>
 	
 	<body>
@@ -87,21 +67,24 @@
 		</nav>
 		
 		<div style="padding-bottom: 57px;" id="main-content" class="container-fluid col-md-offset-1 col-md-10">
-			<form class="form-horizontal">
+			<form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="iniciaSes">
 				<h2><p><strong>Iniciar sesión Administrador</strong></p></h2>
 				<p>Ingresa los campos correspondientes a tu cuenta para iniciar sesión</p>
 				<br><br>
-				<div class="form-group">
+				<div class="form-group" id="correo">
 					<label class="col-lg-2 control-label">Correo electrónico:</label>
 					<div class="col-lg-10">
-						<input type="text" class="form-control" id="user" placeholder="ejemplo@dominio.com">
+						<input type="text" class="form-control" name="email" placeholder="ejemplo@dominio.com">
+						<span id="email01" class=""></span>
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" id="contra">
 					<label class="col-lg-2 control-label">Contraseña:</label>
 					<div class="col-lg-10">
-						<input type="password" class="form-control" id="password" placeholder="***************">
+						<input type="password" class="form-control" name="password" placeholder="***************">
+						<span id="pass01" class=""></span>
+						<span id="pass02" class="text-center help-block hidden"></span>
 					</div>
 				</div>
 
@@ -110,11 +93,32 @@
 						<span class="help-block">
 							<a href="RecuperarC.php" style="color: #00B85D">¿Olvidaste tu contraseña?</a>
 							&nbsp; &nbsp;
-							<button type="submit" class="btn btn-success" style="width: 150px;">ENVIAR</button>
+							<a class="btn btn-success" style="width: 150px;" onclick="logIn();">ENVIAR</a>
 						</span>
 					</div>
 				</div>
 			</form>
+			<script type="text/javascript">
+				function logIn() {
+					if (validate($("[name='email']").val())) {
+						$("#usuario").removeClass("has-error has-feedback");
+						$("#contra").removeClass("has-error has-feedback");
+						$("#user01").attr("class", "hidden");
+						$("#user02").addClass("hidden");
+						$("#pass01").attr("class", "hidden");
+						$("#pass02").addClass("hidden");
+						$("#iniciaSes").submit();
+					}
+					else {
+						$("#correo").addClass("has-error has-feedback");
+						$("#contra").addClass("has-error has-feedback");
+						$("#pass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+						$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+						$("#pass02").text("Usuario y/o contrasena incorrectos");
+						$("#pass02").removeClass("hidden");
+					}
+				}
+			</script>
 		</div>
 		
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
