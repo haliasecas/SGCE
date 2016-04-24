@@ -2,12 +2,11 @@
 	<head>
 		<title>Modelo</title>
 		<meta charset="utf-8">
-		<script type="text/javascript" src="./Scr/jquery-2.2.0.js"></script>
-		<script type="text/javascript" src="./Scr/moment.min.js"></script>
-		<script type="text/javascript" src="./Scr/bootstrap.js"></script>
-		<script type="text/javascript" src="./Scr/bootstrap-datetimepicker.js"></script>
-		<link type="text/css" rel="stylesheet" href="./Css/bootstrap.css">
-		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
+		<script type="text/javascript" src="../Scr/jquery-2.2.0.js"></script>
+		<script type="text/javascript" src="../Scr/moment.min.js"></script>
+		<script type="text/javascript" src="../Scr/bootstrap.js"></script>
+		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
+		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<style type="text/css">
 			@font-face{
@@ -35,15 +34,14 @@
 	
 	<body>
 		<div class="container-fluid" style="padding-bottom:9px;" id="header">
-			<img src="./Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
+			<img src="../Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
 			<img class="img-head" src="./Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
 		
-		<!-- Nav de arriba -->
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
-					<a class="navbar-brand" href=".">
+					<a class="navbar-brand" href="../index.php">
 						<img id="logoSGCE" src="./Img/logoSGCE.png">
 					</a>
 					<div style="padding-top:33px;">
@@ -62,7 +60,7 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="./Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
 							</a>
-							<ul class="dropdown-menu dark">
+						 <ul class="dropdown-menu dark">
 								<li><a href="./Vista/SolicitarCita.php">
 									<span><img src="./Img/333.png" height="36px"></span>
 									Solicitar Cita
@@ -78,7 +76,7 @@
 							</ul>
 						</li>
 						<li class="">
-							<a href="./IniciarSesion.php">
+							<a href="./Vista/IniciarSesion.php">
 								<span><img src="./Img/loginiGreen.png" height="30px"></span> Iniciar sesión (Administrador)
 							</a>
 						</li>
@@ -87,96 +85,10 @@
 			</div>
 		</nav>
 		
-		<!-- Mensajes bajo el campo -->
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
-			<div class="col-md-6 col-md-offset-3">
-				<form class="form-horizontal">
-					<div class="form-group" id="usuario">
-						<input type="text" class="form-control" placeholder="No hay">
-						<span id="user01" class=""></span>
-						<span id="user02" class="text-center help-block hidden"></span>
-					</div>
-					<div class="form-group text-center">
-						<a class="btn btn-danger" onclick="ponerError();">Error</a>
-						<a class="btn btn-success" onclick="quitarError();">No hay error</a>
-					</div>
-				</form>
-			</div>
-			<div class="col-md-12 text-center" style="padding-top: 30px;">
-				<a class="btn btn-success" data-toggle="modal" data-target="#exitoso">Mensaje de alerta</a>
-				<a class="btn btn-danger" data-toggle="modal" data-target="#error">Mensaje de error</a>
-				<a class="btn btn-warning" data-toggle="modal" data-target="#confirmacion">Mensaje de confirmación</a>
-			</div>
-		</div>
-		
-		<script type="text/javascript">
-			function ponerError() {
-				$("#usuario").addClass("has-error has-feedback");
-				$("#user01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-				$("#user02").text("Algún mensaje de error");
-				$("#user02").removeClass("hidden");
-			}
 			
-			function quitarError() {
-				$("#usuario").removeClass("has-error has-feedback");
-				$("#user01").attr("class", "hidden");
-				$("#user02").addClass("hidden");
-			}
-		</script>
-		
-		<!-- Mensaje de alerta -->
-		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="exitoso" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header modal-has-success">
-						<h4 class="modal-title">Mensaje de alerta</h4>
-					</div>
-					<div class="modal-body">
-						<p>Algo ha sido exitoso.</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
-					</div>
-				</div>
-			</div>
 		</div>
 		
-		<!-- Mensaje de error -->
-		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="error" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header modal-has-error">
-						<h4 class="modal-title">Mensaje de error</h4>
-					</div>
-					<div class="modal-body">
-						<p>Algo salió mal.</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- Mensaje de confirmación -->
-		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header modal-has-warning">
-						<h4 class="modal-title">Mensaje de confirmación</h4>
-					</div>
-					<div class="modal-body">
-						<p>¿Seguro que desea...?.</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
-						<button type="button" class="btn btn-warning" onclick="location.reload()" data-dismiss="modal">Aceptar</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- Nav de abajo -->
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
@@ -188,7 +100,7 @@
 					</button>
 				</div>
 
-				<div class="collapse navbar-collapse" id="footer-bar">
+					<div class="collapse navbar-collapse" id="footer-bar">
 					<ul class="nav navbar-nav navbar-right">
 						<p class="navbar-text">@2016 Team Rocket Inc.</p>
 						<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/">
