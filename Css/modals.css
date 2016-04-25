@@ -1,5 +1,6 @@
 table { cursor: default; }
 textarea { resize: none; }
+
 .modal-primary {
 	background-color: #428BCA;
 	border-top-left-radius: 5px;

@@ -8,32 +8,9 @@
 		<script type="text/javascript" src="../Scr/bootstrap.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<style type="text/css">
-			@font-face{
-				font-family: "Ariall";
-				src: url("../Fonts/arial.ttf") format("truetype");
-				font-family: "Arial Rounded";
-				src: url("../Fonts/arial-rounded.ttf") format("truetype");
-				font-family: "Oswald";
-				src: url("../Fonts/Oswald-Light.ttf") format("truetype");
-			}
-			#top-bar, #bottom-bar{
-				font-family: "Oswald";
-				font-size: 18px;
-			}
-			body {
-				font-family: "Arial";
-			}
-			#logoSGCE, .img-head{
-				max-width: 100%;
-    			height: auto;
-    			width: auto\9; /* ie8 */
-			}
-			textarea {
-				resize: none;
-			}
-		</style>
+		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
+		<link type="text/css" rel="stylesheet" href="../Css/modals.css">	
+		<meta name="viewport" content="width=device-width, initial-scale=1">		
 	</head>
 	
 	<body>
@@ -89,9 +66,21 @@
 			</div>
 		</nav>
 		
+		<?php
+			if (!empty($_GET)) {
+				echo ("
+				<script type='text/javascript'>
+					$(document).ready(function() {
+						$('#exitoso').modal();
+					});
+				</script>
+				");
+			}
+		?>
+		
 		<div class="container-fluid" style="padding-bottom: 57px;" id="main-content">
 			<div class="container-fluid col-md-offset-1 col-md-10">
-				<form action="" method="GET" class="form-horizontal">
+				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET" class="form-horizontal" id="informe">
 					<h3><strong> Informes y sugerencias</strong></h3>
 					<p><strong class="text-success">Todos los campos son obligatorios.</strong>
 					La respuesta a su pregunta o sugerencia llegará directamente al correo que<br>nos proporcione.</p><br>
@@ -131,10 +120,47 @@
 					
 					<div class="form-group">
 						<div class="col-lg-10 col-lg-offset-2" align="right">
-							<button type="submit" class="btn btn-success" style="width: 150px;">ENVIAR</button>
+							<a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
 						</div>
 					</div>
 				</form>
+				<script type="text/javascript">
+					function enviarForm() {
+						$("#informe").submit();
+					}
+				</script>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="exitoso" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Mensaje de alerta</h4>
+					</div>
+					<div class="modal-body">
+						<p>Operación realizada exitosamente.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../index.php';">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="error" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Mensaje de error</h4>
+					</div>
+					<div class="modal-body">
+						<p>Falta un dato obligatorio para efectuar la operación solicitada.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
 			</div>
 		</div>
 		

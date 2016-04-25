@@ -1,0 +1,45 @@
+@font-face{
+	font-family: "Arial";
+	src: url("../Fonts/arial.ttf") format("truetype");
+	font-family: "Arial Rounded";
+	src: url("../Fonts/arial-rounded.ttf") format("truetype");
+	font-family: "Oswald";
+	src: url("../Fonts/Oswald-Light.ttf") format("truetype");
+}
+#top-bar, #bottom-bar{
+	font-family: "Oswald";
+	font-size: 18px;
+}
+body {
+	font-family: "Arial";
+}
+#logoSGCE, .img-head{
+	max-width: 100%;
+	height: auto;
+	width: auto\9; /* ie8 */
+}
+
+/* Botones bonitos */
+input[type=radio   ]:not(old){
+  width   : 28px;
+  margin  : 0;
+  padding : 0;
+  opacity : 0;
+}
+
+input[type=checkbox]:not(old) + label,
+input[type=radio   ]:not(old) + label{
+  display      : inline-block;
+  margin-left  : -28px;
+  padding-left : 28px;
+  background   : url('checks.png') no-repeat 0 0;
+  line-height  : 24px;
+}
+
+input[type=checkbox]:not(old):checked + label{
+  background-position : 0 -24px;
+}
+
+input[type=radio]:not(old):checked + label{
+  background-position : 0 -48px;
+}
