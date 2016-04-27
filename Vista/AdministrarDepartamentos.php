@@ -1,4 +1,3 @@
-
 <html>
 	<head>
 		<title>Modelo</title>
@@ -7,11 +6,31 @@
 		<script type="text/javascript" src="../Scr/moment.min.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
-		<script type="text/javascript" src="../Scr/validator.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
-        <link type="text/css" rel="stylesheet" href="../Css/style.css">
-		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
+		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style type="text/css">
+			@font-face{
+				font-family: "Arial";
+				src: url("Fonts/arial.ttf") format("truetype");
+				font-family: "Arial Rounded";
+				src: url("Fonts/arial-rounded.ttf") format("truetype");
+				font-family: "Oswald";
+				src: url("Fonts/Oswald-Light.ttf") format("truetype");
+			}
+			#top-bar, #bottom-bar{
+				font-family: "Oswald";
+				font-size: 18px;
+			}
+			body {
+				font-family: "Arial";
+			}
+			#logoSGCE, .img-head{
+				max-width: 100%;
+    			height: auto;
+    			width: auto\9; /* ie8 */
+			}
+		</style>
 	</head>
 	
 	<body>
@@ -20,6 +39,7 @@
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
 		
+		<!-- Nav de arriba -->
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
@@ -66,43 +86,54 @@
 				</div>
 			</div>
 		</nav>
-		
-		<div style="padding-bottom:57px;" id="main-content">
-            <form class="form-horizontal" role="form">
-  <div class="container">
-  <form class="form-horizontal" role="form">
-      <form id="frmRestablecer" action="validaremail.php" method="post">
-				  <div class="container">
-				  <h2>Recuperar contraseña</h2>
-				      <h5>Ingresa los campos correspondientes a tu cuenta para recuperar tu contraseña</h5>
-				      <br><br>
-				  <form class="form-horizontal" role="form">
-				    <div class="form-group">
-				      <label class="control-label col-sm-2" for="email">Correo electrónico:</label>
-				      <div class="col-sm-10">
-				        <input type="text" class="form-control" id="email" placeholder="ejemplo@dominio.com">
-				      </div>
-				    </div>
-				    <div class="form-group text-right">
-				      <div class="col-md-offset-2 col-md-10 ">
-                          <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
-                          <!--
-				        <button type="button" class="btn btn-success button medium-btn" style="float: right;" onclick="validar($('#email').val());">
-							Enviar
-						  </button>
-                            -->
-				      </div>
-				    </div>
-				  </form>
+        <div class="container-fluid" style="padding-bottom:57px;" id="main-content">
+            <div class="container">
+                <h3><strong>Administrar departamentos</strong></h3>
+                <p>En esta sección  podrás consultar los datos de los departamentos existentes.También podrás registrar nuevos departamentos.</p> 
+                <br>
+                <br>
+                <div class="table-responsive">          
+                    <table class="table">
+                        <thead>
+                            <tr style="color: #FFF; background: #696969;">
+                                <th>Departamento</th>
+                                <th>Correo electrónico</th>
+                                <th colspan="4">Encargado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Departamento A</th>
+                                <th>ejemplo@dominio.com</th>
+                                <th>Nombre encargado</th>
+                                <th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
+                                <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>        
+                            </tr>
+                            <tr>
+                                <th>Departamento B</th>
+                                <th>ejemplo@dominio.com</th>
+                                <th>Nombre encargado</th>
+                                <th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
+                                <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>             
+                            </tr>
+                            <tr>
+                                <th>Departamento C</th>
+                                <th>ejemplo@dominio.com</th>
+                                <th>Nombre encargado</th>
+                                <th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
+                                <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>        
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-group text-right">
+				    <div class="col-md-8 col-md-offset-4">							                     
+					   <a class="btn btn-success" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
+				    </div>           
 				</div>
-          <div id="mensaje">
-          
-        </div>
-		</form>
-      </form>
-</div>
-</form>
+            </div>                                                               
 		</div>
+		<!-- Nav de abajo -->
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
@@ -117,10 +148,10 @@
 				<div class="collapse navbar-collapse" id="footer-bar">
 					<ul class="nav navbar-nav navbar-right">
 						<p class="navbar-text">@2016 Team Rocket Inc.</p>
-						<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/?fref=nf">
+						<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/">
 							<img src="../Img/facebookWhite.png" height="24px">
 						</a>
-						<a class="navbar-brand" href="https://twitter.com/escomunidad">
+						<a class="navbar-brand" href="https://twitter.com/escomunidad?ref_src=twsrc%5Etfw">
 							<img src="../Img/twitterWhite.png" height="24px">
 						</a>
 						<a class="navbar-brand" href="https://plus.google.com/112263443520207638663/posts">
@@ -130,23 +161,7 @@
 				</div>
 			</div>
 		</nav>
-		<script>
-            echo
-      $(document).ready(function(){
-        $("#frmRestablecer").submit(function(event){
-          event.preventDefault();
-          $.ajax({
-            url:'validaremail.php',
-            type:'post',
-            dataType:'json',
-            data:$("#frmRestablecer").serializeArray()
-          }).done(function(respuesta){
-            $("#mensaje").html(respuesta.mensaje);
-            $("#email").val('');
-          });
-        });
-      });
-    </script>
+		
 		<script type="text/javascript">
 			$(document).ready(function() {
 				// Sticky bar plz

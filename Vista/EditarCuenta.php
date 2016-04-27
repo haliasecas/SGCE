@@ -1,17 +1,36 @@
-
 <html>
 	<head>
 		<title>Modelo</title>
 		<meta charset="utf-8">
-		<script type="text/javascript" src="../Scr/jquery-2.2.0.js"></script>
+		<script type="text/javascript" src="./Scr/jquery-2.2.0.js"></script>
 		<script type="text/javascript" src="../Scr/moment.min.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
-		<script type="text/javascript" src="../Scr/validator.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
-        <link type="text/css" rel="stylesheet" href="../Css/style.css">
-		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
+		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style type="text/css">
+			@font-face{
+				font-family: "Arial";
+				src: url("Fonts/arial.ttf") format("truetype");
+				font-family: "Arial Rounded";
+				src: url("Fonts/arial-rounded.ttf") format("truetype");
+				font-family: "Oswald";
+				src: url("Fonts/Oswald-Light.ttf") format("truetype");
+			}
+			#top-bar, #bottom-bar{
+				font-family: "Oswald";
+				font-size: 18px;
+			}
+			body {
+				font-family: "Arial";
+			}
+			#logoSGCE, .img-head{
+				max-width: 100%;
+    			height: auto;
+    			width: auto\9; /* ie8 */
+			}
+		</style>
 	</head>
 	
 	<body>
@@ -20,6 +39,7 @@
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
 		
+		<!-- Nav de arriba -->
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
@@ -58,7 +78,7 @@
 							</ul>
 						</li>
 						<li class="">
-							<a href="../Vista/IniciarSesion.php">
+							<a href="../IniciarSesion.php">
 								<span><img src="../Img/loginiGreen.png" height="30px"></span> Iniciar sesión (Administrador)
 							</a>
 						</li>
@@ -66,43 +86,61 @@
 				</div>
 			</div>
 		</nav>
-		
-		<div style="padding-bottom:57px;" id="main-content">
-            <form class="form-horizontal" role="form">
-  <div class="container">
-  <form class="form-horizontal" role="form">
-      <form id="frmRestablecer" action="validaremail.php" method="post">
-				  <div class="container">
-				  <h2>Recuperar contraseña</h2>
-				      <h5>Ingresa los campos correspondientes a tu cuenta para recuperar tu contraseña</h5>
-				      <br><br>
-				  <form class="form-horizontal" role="form">
-				    <div class="form-group">
-				      <label class="control-label col-sm-2" for="email">Correo electrónico:</label>
-				      <div class="col-sm-10">
-				        <input type="text" class="form-control" id="email" placeholder="ejemplo@dominio.com">
-				      </div>
-				    </div>
-				    <div class="form-group text-right">
-				      <div class="col-md-offset-2 col-md-10 ">
-                          <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
-                          <!--
-				        <button type="button" class="btn btn-success button medium-btn" style="float: right;" onclick="validar($('#email').val());">
-							Enviar
-						  </button>
-                            -->
-				      </div>
-				    </div>
-				  </form>
-				</div>
-          <div id="mensaje">
-          
+            <!-- Mensajes bajo el campo -->
+		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
+            <div class="container">
+                <h3><strong>Editar área</strong></h3>
+                <p><strong class="text-success">Todos los campos son obligatorios.</strong> El nombre del departamento debe estar previamente registrado en el sistema.</p> 
+                <br>
+                <br>                                
+                <form action="" class="form-horizontal">
+                    <div class="form-group">
+                        <label  for="" class="control-label col-md-2">Nombre(s)</label>
+                        <div class="col-md-10">
+                           <input type="nombre" class="form-control" placeholder="Francisco" >
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <label  for="" class="control-label col-md-2">Apellido paterno</label>
+                        <div class="col-md-10">
+                           <input type="appaterno" class="form-control" placeholder="Pérez" >
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <label  for="" class="control-label col-md-2">Apellido materno</label>
+                        <div class="col-md-10">
+                           <input type="apmaterno" class="form-control" placeholder="Pérez" >
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <label  for="" class="control-label col-md-2">Correo electrónico</label>
+                        <div class="col-md-10">
+                           <input type="apmaterno" class="form-control" placeholder="ejemplo@dominio.com" >
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <label  for="" class="control-label col-md-2">Nombre del departamento</label>
+                        <div class="col-md-10">                                        
+                            <select name="departamento" class="form-control">
+                                <option value="DepartamentoA">Departamento A</option> 
+                            </select>
+                        </div>                                                                       
+                        <br><br><br>                                                 
+                        <div class="form-group text-right">
+                            <div class="col-md-8 col-md-offset-4">
+                                <a class="btn btn-success" style="width: 150px;" onclick="#">CANCELAR</a>
+                                <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>   
+            </div>
         </div>
-		</form>
-      </form>
-</div>
-</form>
-		</div>
+		<!-- Nav de abajo -->
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
@@ -117,10 +155,10 @@
 				<div class="collapse navbar-collapse" id="footer-bar">
 					<ul class="nav navbar-nav navbar-right">
 						<p class="navbar-text">@2016 Team Rocket Inc.</p>
-						<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/?fref=nf">
+						<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/">
 							<img src="../Img/facebookWhite.png" height="24px">
 						</a>
-						<a class="navbar-brand" href="https://twitter.com/escomunidad">
+						<a class="navbar-brand" href="https://twitter.com/escomunidad?ref_src=twsrc%5Etfw">
 							<img src="../Img/twitterWhite.png" height="24px">
 						</a>
 						<a class="navbar-brand" href="https://plus.google.com/112263443520207638663/posts">
@@ -130,23 +168,7 @@
 				</div>
 			</div>
 		</nav>
-		<script>
-            echo
-      $(document).ready(function(){
-        $("#frmRestablecer").submit(function(event){
-          event.preventDefault();
-          $.ajax({
-            url:'validaremail.php',
-            type:'post',
-            dataType:'json',
-            data:$("#frmRestablecer").serializeArray()
-          }).done(function(respuesta){
-            $("#mensaje").html(respuesta.mensaje);
-            $("#email").val('');
-          });
-        });
-      });
-    </script>
+		
 		<script type="text/javascript">
 			$(document).ready(function() {
 				// Sticky bar plz
