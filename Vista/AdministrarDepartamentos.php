@@ -1,3 +1,4 @@
+
 <html>
 	<head>
 		<title>Modelo</title>
@@ -6,31 +7,11 @@
 		<script type="text/javascript" src="../Scr/moment.min.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="../Scr/validator.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
-		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
+        <link type="text/css" rel="stylesheet" href="../Css/style.css">
+		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<style type="text/css">
-			@font-face{
-				font-family: "Arial";
-				src: url("Fonts/arial.ttf") format("truetype");
-				font-family: "Arial Rounded";
-				src: url("Fonts/arial-rounded.ttf") format("truetype");
-				font-family: "Oswald";
-				src: url("Fonts/Oswald-Light.ttf") format("truetype");
-			}
-			#top-bar, #bottom-bar{
-				font-family: "Oswald";
-				font-size: 18px;
-			}
-			body {
-				font-family: "Arial";
-			}
-			#logoSGCE, .img-head{
-				max-width: 100%;
-    			height: auto;
-    			width: auto\9; /* ie8 */
-			}
-		</style>
 	</head>
 	
 	<body>
@@ -39,7 +20,6 @@
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
 		
-		<!-- Nav de arriba -->
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
@@ -86,7 +66,8 @@
 				</div>
 			</div>
 		</nav>
-        <div class="container-fluid" style="padding-bottom:57px;" id="main-content">
+		
+		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
             <div class="container">
                 <h3><strong>Administrar departamentos</strong></h3>
                 <p>En esta sección  podrás consultar los datos de los departamentos existentes.También podrás registrar nuevos departamentos.</p> 
@@ -133,7 +114,6 @@
 				</div>
             </div>                                                               
 		</div>
-		<!-- Nav de abajo -->
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
@@ -148,10 +128,10 @@
 				<div class="collapse navbar-collapse" id="footer-bar">
 					<ul class="nav navbar-nav navbar-right">
 						<p class="navbar-text">@2016 Team Rocket Inc.</p>
-						<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/">
+						<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/?fref=nf">
 							<img src="../Img/facebookWhite.png" height="24px">
 						</a>
-						<a class="navbar-brand" href="https://twitter.com/escomunidad?ref_src=twsrc%5Etfw">
+						<a class="navbar-brand" href="https://twitter.com/escomunidad">
 							<img src="../Img/twitterWhite.png" height="24px">
 						</a>
 						<a class="navbar-brand" href="https://plus.google.com/112263443520207638663/posts">
@@ -161,7 +141,23 @@
 				</div>
 			</div>
 		</nav>
-		
+		<script>
+            echo
+      $(document).ready(function(){
+        $("#frmRestablecer").submit(function(event){
+          event.preventDefault();
+          $.ajax({
+            url:'validaremail.php',
+            type:'post',
+            dataType:'json',
+            data:$("#frmRestablecer").serializeArray()
+          }).done(function(respuesta){
+            $("#mensaje").html(respuesta.mensaje);
+            $("#email").val('');
+          });
+        });
+      });
+    </script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				// Sticky bar plz
