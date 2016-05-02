@@ -40,9 +40,9 @@
 	</head>
 	<body>
 		<?php
-		$server = "localhost";
+		$server = "127.0.0.1";
 		$user = "root";
-		$pass = "6224";    # Depende de tu BD en tu computadora
+		$pass = "rodrigo10";    # Depende de tu BD en tu computadora
 		$conn = new mysqli($server, $user, $pass);
 		?>
 		<div class="container-fluid" style="padding-bottom:9px;" id="header">

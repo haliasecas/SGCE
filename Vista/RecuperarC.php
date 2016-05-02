@@ -66,43 +66,42 @@
 				</div>
 			</div>
 		</nav>
-		
-		<div style="padding-bottom:57px;" id="main-content">
-            <form class="form-horizontal" role="form">
-  <div class="container">
-  <form class="form-horizontal" role="form">
-      <form id="frmRestablecer" action="validaremail.php" method="post">
-				  <div class="container">
-				  <h2>Recuperar contraseña</h2>
-				      <h5>Ingresa los campos correspondientes a tu cuenta para recuperar tu contraseña</h5>
-				      <br><br>
-				  <form class="form-horizontal" role="form">
-				    <div class="form-group">
-				      <label class="control-label col-sm-2" for="email">Correo electrónico:</label>
-				      <div class="col-sm-10">
-				        <input type="text" class="form-control" id="email" placeholder="ejemplo@dominio.com">
-				      </div>
-				    </div>
-				    <div class="form-group text-right">
-				      <div class="col-md-offset-2 col-md-10 ">
-                          <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
+	<div style="padding-bottom:57px;" id="main-content">
+    	<form class="form-horizontal" role="form" id="frmRestablecer" action="../Modelo/restablecer1.php" method="post">
+  			<div class="container">
+				  	<div class="container">
+				  		<h2>Recuperar contraseña</h2>
+				      	<h5>Ingresa los campos correspondientes a tu cuenta para recuperar tu contraseña</h5>
+				      	<br><br>
+				    	<div class="form-group">
+				      		<label class="control-label col-sm-2" for="email">Correo electrónico:</label>
+				      		<div class="col-sm-10">
+				        		<input type="text" class="form-control" name="email" placeholder="ejemplo@dominio.com">
+				      		</div>
+				    	</div>
+				    	<div class="form-group text-right">
+				      		<div class="col-md-offset-2 col-md-10 ">
+				      			
+                          		<a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
                           <!--
 				        <button type="button" class="btn btn-success button medium-btn" style="float: right;" onclick="validar($('#email').val());">
 							Enviar
 						  </button>
                             -->
-				      </div>
-				    </div>
-				  </form>
-				</div>
-          <div id="mensaje">
-          
-        </div>
+				      		</div>
+				    	</div>
+					</div>
+          			<div id="mensaje">
+        			</div>
+			</div>
 		</form>
-      </form>
-</div>
-</form>
-		</div>
+		<script type="text/javascript">
+					function enviarForm() {
+						$("#frmRestablecer").submit();
+					}
+				</script>
+	</div>
+
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
@@ -115,7 +114,7 @@
 				</div>
 
 				<div class="collapse navbar-collapse" id="footer-bar">
-					<ul class="nav navbar-nav navbar-right">
+					<ul class="nav navbar-nav navbar-right">IniciarSesion.php
 						<p class="navbar-text">@2016 Team Rocket Inc.</p>
 						<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/?fref=nf">
 							<img src="../Img/facebookWhite.png" height="24px">
