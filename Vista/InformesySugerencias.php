@@ -86,12 +86,19 @@
 					La respuesta a su pregunta o sugerencia llegará directamente al correo que<br>nos proporcione.</p><br>
 				
 					<div class="form-group">
-						<label  for="email" class="control-label col-md-2">Correo Electrónico</label>
+						<label  for="email" class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
 							<input type="text" class="form-control" id="" placeholder="ejemplo@dominio.com">
 						</div>
 					</div>
 
+					<div class="form-group">
+						<label  for="email" class="control-label col-md-2">Repetir correo electrónico</label>
+						<div class="col-md-10" style="padding-top: 6px;">
+							<input type="text" class="form-control" id="" placeholder="ejemplo@dominio.com">
+						</div>
+					</div>
+					
 					<div class="form-group">
 						<label for="departamento" class="control-label col-md-2">Departamento</label>
 						<div class="col-md-10">

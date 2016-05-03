@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Modelo</title>
+		<title>SGCE</title>
 		<meta charset="utf-8">
 		<script type="text/javascript" src="../Scr/jquery-2.2.0.js"></script>
 		<script type="text/javascript" src="../Scr/moment.min.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
+		<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>		
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap-datetimepicker.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
@@ -23,7 +24,7 @@
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="../index.php">
+					<a class="navbar-brand" href="../">
 						<img id="logoSGCE" src="../Img/logoSGCE.png">
 					</a>
 					<div style="padding-top:33px;">
@@ -67,17 +68,21 @@
 			</div>
 		</nav>
 		
-		<?php
-			if (!empty($_POST)) {
-				echo ("
+		<?php if (!empty($_POST)) { ?>
+				
+		<?php if ($_POST["g-recaptcha-response"]) { ?>
 				<script type='text/javascript'>
 					$(document).ready(function() {
 						$('#exitoso').modal();
 					});
 				</script>
-				");
-			}
-		?>
+		<?php } else { ?>
+				<script type='text/javascript'>
+					$(document).ready(function() {
+						$('#error').modal();
+					});
+				</script>
+		<?php } } ?>
 		
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
 			
@@ -92,8 +97,16 @@
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="form-horizontal" id="formCita">
                     <!--Correo Electrónico-->
                     <div class="form-group">                                                            
-				   		<label  for="email" class="control-label col-md-2">Correo Electrónico</label>
+				   		<label  for="email" class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
+							<input type="text" class="form-control" placeholder="ejemplo@dominio.com" id="correoE">
+						</div>
+						<br>                                
+                    </div>
+					<!--Repetir Correo Electrónico-->
+                    <div class="form-group">                                                            
+				   		<label  for="email" class="control-label col-md-2">Repetir correo electrónico</label>
+						<div class="col-md-10" style="padding-top: 6px;">
 							<input type="text" class="form-control" placeholder="ejemplo@dominio.com" id="correoE">
 						</div>
 						<br>                                
@@ -108,7 +121,7 @@
                     </div>
                     <!--Apellido Paterno-->
                     <div class="form-group">
-                                <label  for="appat" class="control-label col-md-2">Apellido Paterno</label>
+                                <label  for="appat" class="control-label col-md-2">Apellido paterno</label>
                                 <div class="col-md-10">
                                             <input type="text" class="form-control" placeholder="Pérez">
                                 </div>
@@ -116,7 +129,7 @@
                     </div>
                     <!--Apellido Materno-->
                     <div class="form-group">
-                                <label  for="apmat" class="control-label col-md-2">Apellido Materno</label>
+                                <label  for="apmat" class="control-label col-md-2">Apellido materno</label>
                                 <div class="col-md-10">
                                             <input type="text" class="form-control" placeholder="Pérez">
                                 </div>
@@ -128,7 +141,7 @@
                                 <div class="col-md-10">
                                             <input type="text" class="form-control" placeholder="55555555">
                                 </div>
-                                <br> 
+                                <br><br><br>
                     </div>
                     <h4 class="text-uppercase">datos de la cita:</h4>
                     <!--Departamento-->
@@ -157,20 +170,18 @@
                                 </div>
                                 <br> 
                     </div>
-                    <!--Turno-->
+                    
+                    <!--Dias preferentes-->
                     <div class="form-group">
-                                 <label for="turno" class="control-label col-md-2">Turno</label>        
-                                        <div class="col-md-10">                                        
-                                <select name="turno" class="form-control">
-                                              <option value="Turno">Matutino</option>   
-                                              <option value="Turno">Vespertino</option>   
-                                </select>
-                                        </div> 
-                    </div>
-                    <!--Horarios preferentes-->
-                    <div class="form-group">
-                        <label for="horpref" class="control-label col-md-2">Horario(s) preferentes<br></label>    
-                        <div class="col-md-10">
+						<label for="diapref" class="control-label col-md-2">Día(s) preferentes<br><small>(seleccione al<br>menos uno)</small></label>        
+						<div class="col-md-10">
+							<div class='input-group date' id='datet1'>
+							<input type='text' class="form-control" />
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
+						
 							<div class="checkbox col-md-3">
 								<label >
 									<input type="checkbox">9:00-10:00 hrs.
@@ -178,6 +189,10 @@
 
 								<label >
 									<input type="checkbox">13:00-14:00 hrs.
+								</label>
+								
+								<label>
+									<input type="checkbox">20:00-21:00 hrs.
 								</label>
 							</div>
                         
@@ -195,45 +210,128 @@
 								<label >
 									<input type="checkbox">11:00-12:00 hrs.
 								</label>
+								
+								<label >
+									<input type="checkbox">18:00-19:00 hrs.
+								</label>
 							</div>
 							
 							<div class="checkbox col-md-3">
 								<label >
 									<input type="checkbox" name="checkbox">12:00-13:00 hrs.
 								</label>
+								
+								<label >
+									<input type="checkbox">19:00-20:00 hrs.
+								</label>
 							</div>
-                        </div>                                                                      
-                    </div>
-                    
-                    <!--Dias preferentes-->
-                    <div class="form-group">
-						<label for="diapref" class="control-label col-md-2">Día(s) preferentes<br><small>(seleccione al<br>menos uno)</small></label>        
-						<div class="col-md-10">
-							<div class='input-group date' id='datet1'>
-							<input type='text' class="form-control" />
-								<span class="input-group-addon">
-									<span class="glyphicon glyphicon-calendar"></span>
-								</span>
-							</div>
-							<br>
-						</div>                            
-						<div class="col-md-10">
+                        </div>
+						
+						<div class="col-md-10 col-md-offset-2" style="padding-top: 10px;">
 							<div class='input-group date' id='datet2'>
 							<input type='text' class="form-control" />
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-calendar"></span>
 								</span>
 							</div>
-							<br>
-						</div>
-						<div class="col-md-10 col-md-offset-2">
+						
+							<div class="checkbox col-md-3">
+								<label >
+									<input type="checkbox">9:00-10:00 hrs.
+								</label>
+
+								<label >
+									<input type="checkbox">13:00-14:00 hrs.
+								</label>
+								
+								<label>
+									<input type="checkbox">20:00-21:00 hrs.
+								</label>
+							</div>
+                        
+							<div class="checkbox col-md-3">
+								<label >
+									<input type="checkbox">10:00-11:00 hrs.
+								</label>
+
+								<label >
+									<input type="checkbox">14:00-15:00 hrs.
+								</label>
+							</div>
+                        
+							<div class="checkbox col-md-3">
+								<label >
+									<input type="checkbox">11:00-12:00 hrs.
+								</label>
+								
+								<label >
+									<input type="checkbox">18:00-19:00 hrs.
+								</label>
+							</div>
+							
+							<div class="checkbox col-md-3">
+								<label >
+									<input type="checkbox" name="checkbox">12:00-13:00 hrs.
+								</label>
+								
+								<label >
+									<input type="checkbox">19:00-20:00 hrs.
+								</label>
+							</div>
+                        </div>                                                                      
+						
+						<div class="col-md-10 col-md-offset-2" style="padding-top: 10px;">
 							<div class='input-group date' id='datet3'>
 							<input type='text' class="form-control" />
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-calendar"></span>
 								</span>
 							</div>
-						</div>
+						
+							<div class="checkbox col-md-3">
+								<label >
+									<input type="checkbox">9:00-10:00 hrs.
+								</label>
+
+								<label >
+									<input type="checkbox">13:00-14:00 hrs.
+								</label>
+								
+								<label>
+									<input type="checkbox">20:00-21:00 hrs.
+								</label>
+							</div>
+                        
+							<div class="checkbox col-md-3">
+								<label >
+									<input type="checkbox">10:00-11:00 hrs.
+								</label>
+
+								<label >
+									<input type="checkbox">14:00-15:00 hrs.
+								</label>
+							</div>
+                        
+							<div class="checkbox col-md-3">
+								<label >
+									<input type="checkbox">11:00-12:00 hrs.
+								</label>
+								
+								<label >
+									<input type="checkbox">18:00-19:00 hrs.
+								</label>
+							</div>
+							
+							<div class="checkbox col-md-3">
+								<label >
+									<input type="checkbox" name="checkbox">12:00-13:00 hrs.
+								</label>
+								
+								<label >
+									<input type="checkbox">19:00-20:00 hrs.
+								</label>
+							</div>
+                        </div>                                                                      
                     </div>
 					
 					<script type="text/javascript">
@@ -241,28 +339,43 @@
 							$('#datet1').datetimepicker({
 								format: 'DD/MM/YYYY',
 								minDate: moment().add(3, 'd'),
+								maxDate: moment().add(33, 'd'),
 								daysOfWeekDisabled: [0, 6]
 							});
 							$('#datet2').datetimepicker({
 								format: 'DD/MM/YYYY',
 								minDate: moment().add(4, 'd'),
+								maxDate: moment().add(34, 'd'),
 								daysOfWeekDisabled: [0, 6]
 							});
 							$('#datet3').datetimepicker({
 								format: 'DD/MM/YYYY',
 								minDate: moment().add(5, 'd'),
+								maxDate: moment().add(35, 'd'),
 								daysOfWeekDisabled: [0, 6]
 							});
 						});
-					</script>					
-                     <!--Boton-->
+					</script>
 					<div class="form-group text-right">
+						<label  for="nombre" class="control-label col-md-4">
+							*Verifica que no eres un robot informático.
+						</label>
+						<div class="col-md-4" id="html_element"></div>
+					</div>
+                     <!--Boton-->
+					<div class="form-group text-right" style="padding-top: 10px;">
 						 <div class="col-md-10 col-md-offset-2">
+							 <a class="btn btn-success" style="width: 150px;">CANCELAR</a>
 							 <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
 						</div>
 					</div>
                 </form>
 				<script type="text/javascript">
+					var onloadCallback = function() {
+						grecaptcha.render('html_element', {
+          					'sitekey' : '6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW'
+        				});
+      				};
 					function enviarForm() {
 						$("#formCita").submit();
 					}
@@ -280,7 +393,7 @@
 						<p>Operación realizada exitosamente.</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../index.php';">Aceptar</button>
+						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
 					</div>
 				</div>
 			</div>
