@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Modelo</title>
+		<title>SGCE</title>
 		<meta charset="utf-8">
 		<script type="text/javascript" src="../Scr/jquery-2.2.0.js"></script>
 		<script type="text/javascript" src="../Scr/moment.min.js"></script>
@@ -22,7 +22,7 @@
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="../index.php">
+					<a class="navbar-brand" href="../">
 						<img id="logoSGCE" src="../Img/logoSGCE.png">
 					</a>
 					<div style="padding-top:33px;">
@@ -149,7 +149,7 @@
 						<p>Operación realizada exitosamente.</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../index.php';">Aceptar</button>
+						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
 					</div>
 				</div>
 			</div>

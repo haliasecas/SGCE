@@ -23,7 +23,7 @@
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="../index.php">
+					<a class="navbar-brand" href="../">
 						<img id="logoSGCE" src="../Img/logoSGCE.png">
 					</a>
 					<div style="padding-top:33px;">
@@ -74,7 +74,7 @@
 				      	<h5>Ingresa los campos correspondientes a tu cuenta para recuperar tu contraseña</h5>
 				      	<br><br>
 				    	<div class="form-group">
-				      		<label class="control-label col-sm-2" for="email">Correo electrónico:</label>
+				      		<label class="control-label col-sm-2" for="email">Correo electrónico</label>
 				      		<div class="col-sm-10">
 				        		<input type="text" class="form-control" name="email" placeholder="ejemplo@dominio.com">
 				      		</div>

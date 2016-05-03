@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Modelo</title>
+		<title>SGCE</title>
 		<meta charset="utf-8">
 		<script type="text/javascript" src="../Scr/jquery-2.2.0.js"></script>
 		<script type="text/javascript" src="../Scr/moment.min.js"></script>
@@ -72,7 +72,7 @@
 				<p>Ingresa los campos correspondientes a tu cuenta para iniciar sesión</p>
 				<br><br>
 				<div class="form-group" id="correo">
-					<label class="col-lg-2 control-label">Correo electrónico:</label>
+					<label class="col-lg-2 control-label">Correo electrónico</label>
 					<div class="col-lg-10">
 						<input type="text" class="form-control" name="email" placeholder="ejemplo@dominio.com">
 						<span id="email01" class=""></span>
@@ -80,7 +80,7 @@
 				</div>
 
 				<div class="form-group" id="contra">
-					<label class="col-lg-2 control-label">Contraseña:</label>
+					<label class="col-lg-2 control-label">Contraseña</label>
 					<div class="col-lg-10">
 						<input type="password" class="form-control" name="password" placeholder="***************">
 						<span id="pass01" class=""></span>

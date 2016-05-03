@@ -365,7 +365,7 @@
                      <!--Boton-->
 					<div class="form-group text-right" style="padding-top: 10px;">
 						 <div class="col-md-10 col-md-offset-2">
-							 <a class="btn btn-success" style="width: 150px;">CANCELAR</a>
+							 <button class="btn btn-success" type="reset" style="width: 150px;">CANCELAR</button>
 							 <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
 						</div>
 					</div>
