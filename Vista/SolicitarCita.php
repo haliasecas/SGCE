@@ -193,122 +193,123 @@
                                 <div class="col-md-10">
 									<input type="text" class="form-control" placeholder="Breve descripción del asunto de la cita" id="asunto">
 									<span id="sub01" class="hidden glyphicon form-control-feedback"></span>
-									<span id="sub02" class="text-center help-block hidden"></span>
                                 </div>
                                 <br> 
                     </div>
                     
                     <!--Dias preferentes-->
-                    <div class="form-group">
+                    <div class="form-group" id="checkboxes01">
 						<label for="diapref" class="control-label col-md-2">
 							Día(s) preferentes<br><small>(seleccione al<br>menos uno)</small>
 						</label>        
 						<div class="col-md-10">
 							<div class='input-group date' id='datet1'>
-							<input type='text' class="form-control" />
+							<input type='text' class="form-control" id="date01">
 								<span class="input-group-addon">
-									<span class="glyphicon glyphicon-calendar"></span>
+									<span class="glyphicon glyphicon-calendar" id="icon01"></span>
 								</span>
 							</div>
 						
 							<div class="checkbox col-md-3">
 								<label >
-									<input type="checkbox">9:00-10:00 hrs.
+									<input type="checkbox" class="hora01" value="1">9:00-10:00 hrs.
 								</label>
 
 								<label >
-									<input type="checkbox">13:00-14:00 hrs.
+									<input type="checkbox" class="hora01" value="2">13:00-14:00 hrs.
 								</label>
 								
 								<label>
-									<input type="checkbox">20:00-21:00 hrs.
+									<input type="checkbox" class="hora01" value="3">20:00-21:00 hrs.
 								</label>
 							</div>
                         
 							<div class="checkbox col-md-3">
 								<label >
-									<input type="checkbox">10:00-11:00 hrs.
+									<input type="checkbox" class="hora01" value="4">10:00-11:00 hrs.
 								</label>
 
 								<label >
-									<input type="checkbox">14:00-15:00 hrs.
+									<input type="checkbox" class="hora01" value="5">14:00-15:00 hrs.
 								</label>
 							</div>
                         
 							<div class="checkbox col-md-3">
 								<label >
-									<input type="checkbox">11:00-12:00 hrs.
+									<input type="checkbox" class="hora01" value="6">11:00-12:00 hrs.
 								</label>
 								
 								<label >
-									<input type="checkbox">18:00-19:00 hrs.
+									<input type="checkbox" class="hora01" value="7">18:00-19:00 hrs.
 								</label>
 							</div>
 							
 							<div class="checkbox col-md-3">
 								<label >
-									<input type="checkbox" name="checkbox">12:00-13:00 hrs.
+									<input type="checkbox" class="hora01" value="8">12:00-13:00 hrs.
 								</label>
 								
 								<label >
-									<input type="checkbox">19:00-20:00 hrs.
+									<input type="checkbox" class="hora01" value="9">19:00-20:00 hrs.
 								</label>
 							</div>
                         </div>
+					</div>
 						
+					<div class="form-group" id="checkboxes02">
 						<div class="col-md-10 col-md-offset-2" style="padding-top: 10px;">
 							<div class='input-group date' id='datet2'>
-							<input type='text' class="form-control" />
+							<input type='text' class="form-control" id="date02">
 								<span class="input-group-addon">
-									<span class="glyphicon glyphicon-calendar"></span>
+									<span class="glyphicon glyphicon-calendar" id="icon02"></span>
 								</span>
 							</div>
 						
 							<div class="checkbox col-md-3">
 								<label >
-									<input type="checkbox">9:00-10:00 hrs.
+									<input type="checkbox" class="hora02" value="1">9:00-10:00 hrs.
 								</label>
 
 								<label >
-									<input type="checkbox">13:00-14:00 hrs.
+									<input type="checkbox" class="hora02" value="2">13:00-14:00 hrs.
 								</label>
 								
 								<label>
-									<input type="checkbox">20:00-21:00 hrs.
+									<input type="checkbox" class="hora02" value="3">20:00-21:00 hrs.
 								</label>
 							</div>
                         
 							<div class="checkbox col-md-3">
 								<label >
-									<input type="checkbox">10:00-11:00 hrs.
+									<input type="checkbox" class="hora02" value="4">10:00-11:00 hrs.
 								</label>
 
 								<label >
-									<input type="checkbox">14:00-15:00 hrs.
+									<input type="checkbox" class="hora02" value="5">14:00-15:00 hrs.
 								</label>
 							</div>
                         
 							<div class="checkbox col-md-3">
 								<label >
-									<input type="checkbox">11:00-12:00 hrs.
+									<input type="checkbox" class="hora02" value="6">11:00-12:00 hrs.
 								</label>
 								
 								<label >
-									<input type="checkbox">18:00-19:00 hrs.
+									<input type="checkbox" class="hora02" value="7">18:00-19:00 hrs.
 								</label>
 							</div>
 							
 							<div class="checkbox col-md-3">
 								<label >
-									<input type="checkbox" name="checkbox">12:00-13:00 hrs.
+									<input type="checkbox" class="hora02" value="8">12:00-13:00 hrs.
 								</label>
 								
-								<label >
-									<input type="checkbox">19:00-20:00 hrs.
+								<label>
+									<input type="checkbox" class="hora02" value="9">19:00-20:00 hrs.
 								</label>
 							</div>
                         </div>                                                                      
-						
+					</div>	
 					<script type="text/javascript">
 						$(function () {
 							$('#datet1').datetimepicker({
@@ -325,7 +326,7 @@
 							});
 						});
 					</script>
-					<div class="form-group text-right">
+					<div class="form-group text-right" id="recaptcha">
 						<label for="nombre" class="control-label col-md-4" style="padding-top: 18px;">
 							*Verifica que no eres un robot informático.
 						</label>
@@ -336,6 +337,7 @@
 						 <div class="col-md-10 col-md-offset-2">
 							 <button class="btn btn-success" type="reset" style="width: 150px;">CANCELAR</button>
 							 <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
+							 <a class="btn btn-success" style="width: 150px;" id="bb1">ENVIAR</a>
 						</div>
 					</div>
                 </form>
@@ -345,84 +347,6 @@
           					'sitekey' : '6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW'
         				});
       				};
-					function enviarForm() {
-						var valido;
-						if (!validate($("#correoE01").val()) || ($("#correoE01").val() !== $("#correoE02").val())) {
-							$("#Email01").attr("class", "form-group has-feedback has-error");
-							$("#Email02").attr("class", "form-group has-feedback has-error");
-							$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-							$("#email02").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-							$("#email03").attr("class", "text-center help-block");
-							if ($("#correoE01").val() !== $("#correoE02").val()) {
-								$("#email03").text("Correos proporcionados no coinciden");
-							}
-							valido = false;
-						}
-						else {
-							$("#Email01").attr("class", "form-group has-feedback has-success");
-							$("#Email02").attr("class", "form-group has-feedback has-success");
-							$("#email01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
-							$("#email02").attr("class", "glyphicon glyphicon-ok form-control-feedback");
-							$("#email03").attr("class", "hidden"); valido = true;
-						}
-						
-						if (!valname($("#nombre").val()) || !valname($("#appat").val()) || !valname($("#apmat").val())) {
-							if (valname($("#nombre").val())) {
-								$("#Nombre").attr("class", "form-group has-feedback has-success");
-								$("#name01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
-							}
-							else {
-								$("#Nombre").attr("class", "form-group has-feedback has-error");
-								$("#name01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-							}
-							
-							if (valname($("#appat").val())) {
-								$("#ApellidoP").attr("class", "form-group has-feedback has-success");
-								$("#app01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
-							}
-							else {
-								$("#ApellidoP").attr("class", "form-group has-feedback has-error");
-								$("#app01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-							}
-							
-							if (valname($("#apmat").val())) {
-								$("#ApellidoM").attr("class", "form-group has-feedback has-success");
-								$("#apm01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
-							}
-							else {
-								$("#ApellidoM").attr("class", "form-group has-feedback has-error");								
-								$("#apm01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-							}
-							
-							$("#apm02").attr("class", "text-center help-block");
-							$("#apm02").text("Formato de nombre o apellido incorrecto");
-							valido = false;
-						}
-						else {
-							$("#Nombre").attr("class", "form-group has-feedback has-success");
-							$("#name01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
-							$("#ApellidoP").attr("class", "form-group has-feedback has-success");
-							$("#app01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
-							$("#ApellidoM").attr("class", "form-group has-feedback has-success");								
-							$("#apm01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
-							$("#apm02").attr("class", "hidden text-center help-block"); 
-							valido = true;
-						}
-						
-						if (!valphone($("#telefono").val())) {
-							$("#Telefono").attr("class", "form-group has-feedback has-error");
-							$("#phone01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-							$("#phone02").attr("class", "text-center help-block");
-							$("#phone02").text("Formato de numero de teléfono incorrecto");
-							valido = false;
-						}
-						else {
-							$("#Telefono").attr("class", "form-group has-feedback has-success");
-							$("#phone01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
-							$("#phone02").attr("class", "hidden text-center help-block");
-							valido = true;
-						}
-					}
 				</script>
             </div>
 		</div>
@@ -458,7 +382,7 @@
 				</div>
 			</div>
 		</div>
-		
+			
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
