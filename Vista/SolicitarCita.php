@@ -7,6 +7,7 @@
 		<script type="text/javascript" src="../Scr/moment.min.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="../Scr/validator.js"></script>
 		<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>		
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap-datetimepicker.css">
@@ -96,54 +97,78 @@
             <!--Formulario-->
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="form-horizontal" id="formCita">
                     <!--Correo Electrónico-->
-                    <div class="form-group">                                                            
+                    <div class="form-group has-feedback" id="Email01">                                                            
 				   		<label  for="email" class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" placeholder="ejemplo@dominio.com" id="correoE">
+							<input type="text" class="form-control" placeholder="ejemplo@dominio.com" id="correoE01">
+							<span id="email01" class="hidden glyphicon form-control-feedback"></span>
 						</div>
 						<br>                                
                     </div>
+					
 					<!--Repetir Correo Electrónico-->
-                    <div class="form-group">                                                            
+                    <div class="form-group has-feedback" id="Email02">                                                            
 				   		<label  for="email" class="control-label col-md-2">Repetir correo electrónico</label>
 						<div class="col-md-10" style="padding-top: 6px;">
-							<input type="text" class="form-control" placeholder="ejemplo@dominio.com" id="correoE">
+							<input type="text" class="form-control" placeholder="ejemplo@dominio.com" id="correoE02">
+							<span id="email02" style="padding-top: 6px;" class="hidden glyphicon form-control-feedback"></span>
 						</div>
 						<br>                                
                     </div>
+					<div class="form-group has-feedback has-error">
+						<div class="col-md-10 col-md-offset-2">
+							<span id="email03" class="text-center help-block hidden">
+								Formato de correo electrónico incorrecto
+							</span>
+						</div>
+					</div>
                     <!--Nombre-->
-                    <div class="form-group">
+                    <div class="form-group has-feedback" id="Nombre">
                                 <label  for="nombre" class="control-label col-md-2">Nombre(s)</label>
                                 <div class="col-md-10">
-                                            <input type="text" class="form-control" placeholder="Francisco">
+                                	<input type="text" class="form-control" placeholder="Francisco" id="nombre">
+									<span id="name01" class="hidden glyphicon form-control-feedback"></span>
                                 </div>
                                 <br>       
                     </div>
                     <!--Apellido Paterno-->
-                    <div class="form-group">
+                    <div class="form-group has-feedback" id="ApellidoP">
                                 <label  for="appat" class="control-label col-md-2">Apellido paterno</label>
                                 <div class="col-md-10">
-                                            <input type="text" class="form-control" placeholder="Pérez">
+									<input type="text" class="form-control" placeholder="Pérez" id="appat">
+									<span id="app01" class="hidden glyphicon form-control-feedback"></span>
                                 </div>
                                 <br>       
                     </div>
                     <!--Apellido Materno-->
-                    <div class="form-group">
+                    <div class="form-group has-feedback" id="ApellidoM">
                                 <label  for="apmat" class="control-label col-md-2">Apellido materno</label>
                                 <div class="col-md-10">
-                                            <input type="text" class="form-control" placeholder="Pérez">
+									<input type="text" class="form-control" placeholder="Pérez" id="apmat">
+									<span id="apm01" class="hidden glyphicon form-control-feedback"></span>
                                 </div>
                                 <br>   
                     </div>
+					<div class="form-group has-feedback has-error">
+						<div class="col-md-10 col-md-offset-2">
+							<span id="apm02" class="text-center help-block hidden"></span>
+						</div>
+					</div>
                     <!--Teléfono-->
-                    <div class="form-group">
+                    <div class="form-group has-feedback" id="Telefono">
                                 <label  for="telefono" class="control-label col-md-2">Teléfono</label>
                                 <div class="col-md-10">
-                                            <input type="text" class="form-control" placeholder="55555555">
+									<input type="text" class="form-control" placeholder="55555555" id="telefono">
+									<span id="phone01" class="hidden glyphicon form-control-feedback"></span>
                                 </div>
-                                <br><br><br>
                     </div>
-                    <h4 class="text-uppercase">datos de la cita:</h4>
+					<div class="form-group has-feedback has-error">
+						<div class="col-md-10 col-md-offset-2">
+							<span id="phone02" class="text-center help-block hidden"></span>
+						</div> 
+						<br>
+					</div>
+                    <h4 class="text-uppercase">Datos de la cita:</h4>
                     <!--Departamento-->
                     <div class="form-group">
                             <label for="departamento" class="control-label col-md-2">Departamento</label>        
@@ -163,17 +188,21 @@
                                         </div>                        
                     </div>
                     <!--Asunto-->
-                    <div class="form-group">
+                    <div class="form-group has-feedback" id="Asunto">
                            <label  for="asunto" class="control-label col-md-2">Asunto</label>
                                 <div class="col-md-10">
-                                            <input type="text" class="form-control" placeholder="Breve descripción del asunto de la cita">
+									<input type="text" class="form-control" placeholder="Breve descripción del asunto de la cita" id="asunto">
+									<span id="sub01" class="hidden glyphicon form-control-feedback"></span>
+									<span id="sub02" class="text-center help-block hidden"></span>
                                 </div>
                                 <br> 
                     </div>
                     
                     <!--Dias preferentes-->
                     <div class="form-group">
-						<label for="diapref" class="control-label col-md-2">Día(s) preferentes<br><small>(seleccione al<br>menos uno)</small></label>        
+						<label for="diapref" class="control-label col-md-2">
+							Día(s) preferentes<br><small>(seleccione al<br>menos uno)</small>
+						</label>        
 						<div class="col-md-10">
 							<div class='input-group date' id='datet1'>
 							<input type='text' class="form-control" />
@@ -280,60 +309,6 @@
 							</div>
                         </div>                                                                      
 						
-						<div class="col-md-10 col-md-offset-2" style="padding-top: 10px;">
-							<div class='input-group date' id='datet3'>
-							<input type='text' class="form-control" />
-								<span class="input-group-addon">
-									<span class="glyphicon glyphicon-calendar"></span>
-								</span>
-							</div>
-						
-							<div class="checkbox col-md-3">
-								<label >
-									<input type="checkbox">9:00-10:00 hrs.
-								</label>
-
-								<label >
-									<input type="checkbox">13:00-14:00 hrs.
-								</label>
-								
-								<label>
-									<input type="checkbox">20:00-21:00 hrs.
-								</label>
-							</div>
-                        
-							<div class="checkbox col-md-3">
-								<label >
-									<input type="checkbox">10:00-11:00 hrs.
-								</label>
-
-								<label >
-									<input type="checkbox">14:00-15:00 hrs.
-								</label>
-							</div>
-                        
-							<div class="checkbox col-md-3">
-								<label >
-									<input type="checkbox">11:00-12:00 hrs.
-								</label>
-								
-								<label >
-									<input type="checkbox">18:00-19:00 hrs.
-								</label>
-							</div>
-							
-							<div class="checkbox col-md-3">
-								<label >
-									<input type="checkbox" name="checkbox">12:00-13:00 hrs.
-								</label>
-								
-								<label >
-									<input type="checkbox">19:00-20:00 hrs.
-								</label>
-							</div>
-                        </div>                                                                      
-                    </div>
-					
 					<script type="text/javascript">
 						$(function () {
 							$('#datet1').datetimepicker({
@@ -348,22 +323,16 @@
 								maxDate: moment().add(34, 'd'),
 								daysOfWeekDisabled: [0, 6]
 							});
-							$('#datet3').datetimepicker({
-								format: 'DD/MM/YYYY',
-								minDate: moment().add(5, 'd'),
-								maxDate: moment().add(35, 'd'),
-								daysOfWeekDisabled: [0, 6]
-							});
 						});
 					</script>
 					<div class="form-group text-right">
-						<label  for="nombre" class="control-label col-md-4">
+						<label for="nombre" class="control-label col-md-4" style="padding-top: 18px;">
 							*Verifica que no eres un robot informático.
 						</label>
-						<div class="col-md-4" id="html_element"></div>
+						<div class="col-md-4" id="html_element" style="padding-top: 18px;"></div>
 					</div>
                      <!--Boton-->
-					<div class="form-group text-right" style="padding-top: 10px;">
+					<div class="form-group text-right" style="padding-top: 9px;">
 						 <div class="col-md-10 col-md-offset-2">
 							 <button class="btn btn-success" type="reset" style="width: 150px;">CANCELAR</button>
 							 <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
@@ -377,7 +346,82 @@
         				});
       				};
 					function enviarForm() {
-						$("#formCita").submit();
+						var valido;
+						if (!validate($("#correoE01").val()) || ($("#correoE01").val() !== $("#correoE02").val())) {
+							$("#Email01").attr("class", "form-group has-feedback has-error");
+							$("#Email02").attr("class", "form-group has-feedback has-error");
+							$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+							$("#email02").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+							$("#email03").attr("class", "text-center help-block");
+							if ($("#correoE01").val() !== $("#correoE02").val()) {
+								$("#email03").text("Correos proporcionados no coinciden");
+							}
+							valido = false;
+						}
+						else {
+							$("#Email01").attr("class", "form-group has-feedback has-success");
+							$("#Email02").attr("class", "form-group has-feedback has-success");
+							$("#email01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+							$("#email02").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+							$("#email03").attr("class", "hidden"); valido = true;
+						}
+						
+						if (!valname($("#nombre").val()) || !valname($("#appat").val()) || !valname($("#apmat").val())) {
+							if (valname($("#nombre").val())) {
+								$("#Nombre").attr("class", "form-group has-feedback has-success");
+								$("#name01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+							}
+							else {
+								$("#Nombre").attr("class", "form-group has-feedback has-error");
+								$("#name01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+							}
+							
+							if (valname($("#appat").val())) {
+								$("#ApellidoP").attr("class", "form-group has-feedback has-success");
+								$("#app01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+							}
+							else {
+								$("#ApellidoP").attr("class", "form-group has-feedback has-error");
+								$("#app01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+							}
+							
+							if (valname($("#apmat").val())) {
+								$("#ApellidoM").attr("class", "form-group has-feedback has-success");
+								$("#apm01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+							}
+							else {
+								$("#ApellidoM").attr("class", "form-group has-feedback has-error");								
+								$("#apm01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+							}
+							
+							$("#apm02").attr("class", "text-center help-block");
+							$("#apm02").text("Formato de nombre o apellido incorrecto");
+							valido = false;
+						}
+						else {
+							$("#Nombre").attr("class", "form-group has-feedback has-success");
+							$("#name01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+							$("#ApellidoP").attr("class", "form-group has-feedback has-success");
+							$("#app01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+							$("#ApellidoM").attr("class", "form-group has-feedback has-success");								
+							$("#apm01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+							$("#apm02").attr("class", "hidden text-center help-block"); 
+							valido = true;
+						}
+						
+						if (!valphone($("#telefono").val())) {
+							$("#Telefono").attr("class", "form-group has-feedback has-error");
+							$("#phone01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+							$("#phone02").attr("class", "text-center help-block");
+							$("#phone02").text("Formato de numero de teléfono incorrecto");
+							valido = false;
+						}
+						else {
+							$("#Telefono").attr("class", "form-group has-feedback has-success");
+							$("#phone01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+							$("#phone02").attr("class", "hidden text-center help-block");
+							valido = true;
+						}
 					}
 				</script>
             </div>
@@ -399,7 +443,7 @@
 			</div>
 		</div>
 		
-		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="error" role="dialog">
+		<div class="modal fade" data-keyboard="false" id="error" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header modal-has-error">
