@@ -113,15 +113,18 @@ function enviarForm() {
 	
 	if ($(".hora01:checkbox:checked").length > 0 && $("#date01").val()) {
 		$("#checkboxes01").removeClass("has-error");
+		$("#checkboxes02").addClass("has-success");
 		vcb = true;		
 	}
 	else {
+		$("#checkboxes01").removeClass("has-success");
 		$("#checkboxes01").addClass("has-error");
 		vcb = false;
 	}
 	
 	if ($(".hora02:checkbox:checked").length > 0 && $("#date02").val()) {
 		$("#checkboxes02").removeClass("has-error");
+		$("#checkboxes02").addClass("has-success");
 		vcb = true;		
 	}
 	else {
@@ -137,10 +140,6 @@ function enviarForm() {
 		$("#error").modal();
 	}
 }
-
-$("#bb1").click(function() {
-	$("#datet1").data("DateTimePicker").show();
-});
 
 $("#date01").focus(function() {
 	$("#datet1").data("DateTimePicker").show();

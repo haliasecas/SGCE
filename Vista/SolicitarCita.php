@@ -324,6 +324,12 @@
 								maxDate: moment().add(34, 'd'),
 								daysOfWeekDisabled: [0, 6]
 							});
+							$("#date02").click(function() {
+								$("#datet2").data("DateTimePicker").show();
+							});
+							$("#date01").click(function() {
+								$("#datet1").data("DateTimePicker").show();
+							});
 						});
 					</script>
 					<div class="form-group text-right" id="recaptcha">
@@ -337,7 +343,6 @@
 						 <div class="col-md-10 col-md-offset-2">
 							 <button class="btn btn-success" type="reset" style="width: 150px;">CANCELAR</button>
 							 <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
-							 <a class="btn btn-success" style="width: 150px;" id="bb1">ENVIAR</a>
 						</div>
 					</div>
                 </form>
@@ -355,10 +360,11 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header modal-has-success">
-						<h4 class="modal-title">Mensaje de alerta</h4>
+						<h4 class="modal-title">Enlace de validación de correo</h4>
 					</div>
 					<div class="modal-body">
-						<p>Operación realizada exitosamente.</p>
+						<p>Se le ha enviado un correo con instrucciones para continuar el proceso de solicitud de cita.
+							Verifique que ha recibido el correo, de lo contrario vuelva a llenar la solicitud.</p>	
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
