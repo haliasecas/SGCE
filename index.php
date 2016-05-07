@@ -13,10 +13,7 @@
 	</head>
 	<body>
 		<?php
-		$server = "127.0.0.1";
-		$user = "root";
-		$pass = "rodrigo10";    # Depende de tu BD en tu computadora
-		$conn = new mysqli($server, $user, $pass);
+		include("Vista/abre_conexion.php");  
 		?>
 		<div class="container-fluid" style="padding-bottom:9px;" id="header">
 			<img src="Img/SEP.png" height="64px" style="float:left; padding-left:15px;">

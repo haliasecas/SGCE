@@ -1,3 +1,3 @@
 <?php 
-				$link = mysqli_connect('localhost','root','','mybd');		
+				$link = mysqli_connect('localhost','root','','mydb');		
 ?>

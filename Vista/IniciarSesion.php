@@ -55,6 +55,7 @@
 									Ver mis citas
 								</a></li>
 							</ul>
+                            
 						</li>
 						<li>
 							<a href="../Vista/IniciarSesion.php">
@@ -67,14 +68,14 @@
 		</nav>
 		
 		<div style="padding-bottom: 57px;" id="main-content" class="container-fluid col-md-offset-1 col-md-10">
-			<form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="iniciaSes">
+			<form class="form-horizontal" action="sesion_in.php" method="post" id="iniciaSes">
 				<h2><p><strong>Iniciar sesión Administrador</strong></p></h2>
 				<p>Ingresa los campos correspondientes a tu cuenta para iniciar sesión</p>
 				<br><br>
 				<div class="form-group" id="correo">
 					<label class="col-lg-2 control-label">Correo electrónico</label>
 					<div class="col-lg-10">
-						<input type="text" class="form-control" name="email" placeholder="ejemplo@dominio.com">
+						<input type="text" class="form-control" name="miemail" placeholder="ejemplo@dominio.com">
 						<span id="email01" class=""></span>
 					</div>
 				</div>
@@ -82,7 +83,7 @@
 				<div class="form-group" id="contra">
 					<label class="col-lg-2 control-label">Contraseña</label>
 					<div class="col-lg-10">
-						<input type="password" class="form-control" name="password" placeholder="***************">
+						<input type="password" class="form-control" name="mipass" placeholder="***************">
 						<span id="pass01" class=""></span>
 						<span id="pass02" class="text-center help-block hidden"></span>
 					</div>
@@ -100,7 +101,7 @@
 			</form>
 			<script type="text/javascript">
 				function logIn() {
-					if (validate($("[name='email']").val())) {
+					if (validate($("[name='miemail']").val())) {
 						$("#usuario").removeClass("has-error has-feedback");
 						$("#contra").removeClass("has-error has-feedback");
 						$("#user01").attr("class", "hidden");
