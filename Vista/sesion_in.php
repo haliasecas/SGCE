@@ -42,7 +42,7 @@
                 // Cerramos la conexion a la base de datos  
                 include("cierra_conexion.php");  
 
-                echo "<p class='avisos'>Ningun usuario registrado coincide con los datos recibidos</p> <p><a href='inicio-sesion.php' >Regresar</a></p> "; 
+                echo "<p class='avisos'>Ningun usuario registrado coincide con los datos recibidos</p> <p><a href='IniciarSesion.php' >Regresar</a></p> "; 
             }
         ?>  
 
