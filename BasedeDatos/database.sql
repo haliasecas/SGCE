@@ -95,12 +95,26 @@ CREATE TABLE IF NOT EXISTS `mydb`.`interesado` (
   PRIMARY KEY (`idinteresado`)  COMMENT '')
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `mydb`.`Solicitud Token`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`SolicitudToken` (
+  `token` varchar(64) NOT NULL,
+   `idSolicitud` INT NOT NULL COMMENT '',
+  -- PRIMARY KEY (`idpersonal`, `iddepto`)  COMMENT '',
+  INDEX `fk_solicitudtoken1_idx` (`idSolicitud` ASC)  COMMENT '',
+  CONSTRAINT `fk_solicitudtoken1`
+    FOREIGN KEY (`idSolicitud`)
+    REFERENCES `mydb`.`Solicitud` (`idSolicitud`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Solicitud`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Solicitud` (
-  `idSolicitud` INT NOT NULL COMMENT '',
+  `idSolicitud` INT NOT NULL AUTO_INCREMENT,
   `asunto` VARCHAR(60) NULL COMMENT '',
   `turno` VARCHAR(1) NULL COMMENT '',
   `estado` VARCHAR(20) NULL COMMENT '',
@@ -192,7 +206,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Mensaje`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Mensaje` (
-  `idMensaje` INT NOT NULL COMMENT '',
+  `idMensaje` INT NOT NULL AUTO_INCREMENT,
   `correo` VARCHAR(60) NULL COMMENT '',
   `asunto` VARCHAR(30) NULL COMMENT '',
   `contenido` VARCHAR(200) NULL COMMENT '',
@@ -212,7 +226,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Cita`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Cita` (
-  `idCita` INT NOT NULL COMMENT '',
+  `idCita` INT NOT NULL AUTO_INCREMENT,
   `turno` VARCHAR(1) NULL COMMENT '',
   `hinicio` TIME NULL COMMENT '',
   `hfin` TIME NULL COMMENT '',

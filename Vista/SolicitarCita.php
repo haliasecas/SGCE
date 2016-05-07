@@ -71,18 +71,42 @@
 		
 		<?php if (!empty($_POST)) { ?>
 				
-		<?php if ($_POST["g-recaptcha-response"]) { ?>
-				<script type='text/javascript'>
+		<?php if ($_POST["g-recaptcha-response"]) { 
+            require_once("../Modelo/enviarCorreo.php");
+            $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            $string = '';
+            $random_string_length = 20;
+            for ($i = 0; $i < $random_string_length; $i++) {
+                $string .= $characters[rand(0, strlen($characters) - 1)];
+            }
+            $token = sha1($string);
+            
+    
+    
+            
+    
+    
+    
+    
+    
+    
+    
+            if(mandarCorreo()){
+                echo "<script type='text/javascript'>
 					$(document).ready(function() {
-						$('#exitoso').modal();
+						$('#MSGA_09').modal();
 					});
-				</script>
+				</script>";
+            }
+            else{
+                echo "<script type='text/javascript'>
+					$(document).ready(function() {
+						$('#MSG_E06').modal();
+					});
+				</script>";
+            } ?>
 		<?php } else { ?>
-				<script type='text/javascript'>
-					$(document).ready(function() {
-						$('#error').modal();
-					});
-				</script>
+				
 		<?php } } ?>
 		
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
@@ -100,7 +124,7 @@
                     <div class="form-group has-feedback" id="Email01">                                                            
 				   		<label  for="email" class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" placeholder="ejemplo@dominio.com" id="correoE01">
+							<input type="text" class="form-control" placeholder="ejemplo@dominio.com" id="correoE01" name="email">
 							<span id="email01" class="hidden glyphicon form-control-feedback"></span>
 						</div>
 						<br>                                
@@ -124,9 +148,9 @@
 					</div>
                     <!--Nombre-->
                     <div class="form-group has-feedback" id="Nombre">
-                                <label  for="nombre" class="control-label col-md-2">Nombre(s)</label>
+                                <label for="nombre" class="control-label col-md-2">Nombre(s)</label>
                                 <div class="col-md-10">
-                                	<input type="text" class="form-control" placeholder="Francisco" id="nombre">
+                                	<input type="text" class="form-control" placeholder="Francisco" id="nombre" name="nombre">
 									<span id="name01" class="hidden glyphicon form-control-feedback"></span>
                                 </div>
                                 <br>       
@@ -135,7 +159,7 @@
                     <div class="form-group has-feedback" id="ApellidoP">
                                 <label  for="appat" class="control-label col-md-2">Apellido paterno</label>
                                 <div class="col-md-10">
-									<input type="text" class="form-control" placeholder="Pérez" id="appat">
+									<input type="text" class="form-control" placeholder="Pérez" id="appat" name="appat">
 									<span id="app01" class="hidden glyphicon form-control-feedback"></span>
                                 </div>
                                 <br>       
@@ -144,7 +168,7 @@
                     <div class="form-group has-feedback" id="ApellidoM">
                                 <label  for="apmat" class="control-label col-md-2">Apellido materno</label>
                                 <div class="col-md-10">
-									<input type="text" class="form-control" placeholder="Pérez" id="apmat">
+									<input type="text" class="form-control" placeholder="Pérez" id="apmat" name="apmat">
 									<span id="apm01" class="hidden glyphicon form-control-feedback"></span>
                                 </div>
                                 <br>   
@@ -158,7 +182,7 @@
                     <div class="form-group has-feedback" id="Telefono">
                                 <label  for="telefono" class="control-label col-md-2">Teléfono</label>
                                 <div class="col-md-10">
-									<input type="text" class="form-control" placeholder="55555555" id="telefono">
+									<input type="text" class="form-control" placeholder="55555555" id="telefono" name="telefono">
 									<span id="phone01" class="hidden glyphicon form-control-feedback"></span>
                                 </div>
                     </div>
@@ -204,7 +228,7 @@
 						</label>        
 						<div class="col-md-10">
 							<div class='input-group date' id='datet1'>
-							<input type='text' class="form-control" id="date01">
+							<input type='text' class="form-control" id="date01" name="date01">
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-calendar" id="icon01"></span>
 								</span>
@@ -212,45 +236,45 @@
 						
 							<div class="checkbox col-md-3">
 								<label >
-									<input type="checkbox" class="hora01" value="1">9:00-10:00 hrs.
+									<input type="checkbox" class="hora01" value="1" name="hora01[]">9:00-10:00 hrs.
 								</label>
 
 								<label >
-									<input type="checkbox" class="hora01" value="2">13:00-14:00 hrs.
+									<input type="checkbox" class="hora01" value="2" name="hora01[]">13:00-14:00 hrs.
 								</label>
 								
 								<label>
-									<input type="checkbox" class="hora01" value="3">20:00-21:00 hrs.
+									<input type="checkbox" class="hora01" value="3" name="hora01[]">20:00-21:00 hrs.
 								</label>
 							</div>
                         
 							<div class="checkbox col-md-3">
 								<label >
-									<input type="checkbox" class="hora01" value="4">10:00-11:00 hrs.
+									<input type="checkbox" class="hora01" value="4" name="hora01[]">10:00-11:00 hrs.
 								</label>
 
 								<label >
-									<input type="checkbox" class="hora01" value="5">14:00-15:00 hrs.
+									<input type="checkbox" class="hora01" value="5" name="hora01[]">14:00-15:00 hrs.
 								</label>
 							</div>
                         
 							<div class="checkbox col-md-3">
 								<label >
-									<input type="checkbox" class="hora01" value="6">11:00-12:00 hrs.
+									<input type="checkbox" class="hora01" value="6" name="hora01[]">11:00-12:00 hrs.
 								</label>
 								
 								<label >
-									<input type="checkbox" class="hora01" value="7">18:00-19:00 hrs.
+									<input type="checkbox" class="hora01" value="7" name="hora01[]">18:00-19:00 hrs.
 								</label>
 							</div>
 							
 							<div class="checkbox col-md-3">
 								<label >
-									<input type="checkbox" class="hora01" value="8">12:00-13:00 hrs.
+									<input type="checkbox" class="hora01" value="8" name="hora01[]">12:00-13:00 hrs.
 								</label>
 								
 								<label >
-									<input type="checkbox" class="hora01" value="9">19:00-20:00 hrs.
+									<input type="checkbox" class="hora01" value="9" name="hora01[]">19:00-20:00 hrs.
 								</label>
 							</div>
                         </div>
@@ -259,7 +283,7 @@
 					<div class="form-group" id="checkboxes02">
 						<div class="col-md-10 col-md-offset-2" style="padding-top: 10px;">
 							<div class='input-group date' id='datet2'>
-							<input type='text' class="form-control" id="date02">
+							<input type='text' class="form-control" id="date02" name="date02">
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-calendar" id="icon02"></span>
 								</span>
@@ -267,45 +291,45 @@
 						
 							<div class="checkbox col-md-3">
 								<label >
-									<input type="checkbox" class="hora02" value="1">9:00-10:00 hrs.
+									<input type="checkbox" class="hora02" value="1" name="hora02[]">9:00-10:00 hrs.
 								</label>
 
 								<label >
-									<input type="checkbox" class="hora02" value="2">13:00-14:00 hrs.
+									<input type="checkbox" class="hora02" value="2" name="hora02[]">13:00-14:00 hrs.
 								</label>
 								
 								<label>
-									<input type="checkbox" class="hora02" value="3">20:00-21:00 hrs.
+									<input type="checkbox" class="hora02" value="3" name="hora02[]">20:00-21:00 hrs.
 								</label>
 							</div>
                         
 							<div class="checkbox col-md-3">
 								<label >
-									<input type="checkbox" class="hora02" value="4">10:00-11:00 hrs.
+									<input type="checkbox" class="hora02" value="4" name="hora02[]">10:00-11:00 hrs.
 								</label>
 
 								<label >
-									<input type="checkbox" class="hora02" value="5">14:00-15:00 hrs.
+									<input type="checkbox" class="hora02" value="5" name="hora02[]">14:00-15:00 hrs.
 								</label>
 							</div>
                         
 							<div class="checkbox col-md-3">
 								<label >
-									<input type="checkbox" class="hora02" value="6">11:00-12:00 hrs.
+									<input type="checkbox" class="hora02" value="6" name="hora02[]">11:00-12:00 hrs.
 								</label>
 								
 								<label >
-									<input type="checkbox" class="hora02" value="7">18:00-19:00 hrs.
+									<input type="checkbox" class="hora02" value="7" name="hora02[]">18:00-19:00 hrs.
 								</label>
 							</div>
 							
 							<div class="checkbox col-md-3">
 								<label >
-									<input type="checkbox" class="hora02" value="8">12:00-13:00 hrs.
+									<input type="checkbox" class="hora02" value="8" name="hora02[]">12:00-13:00 hrs.
 								</label>
 								
 								<label>
-									<input type="checkbox" class="hora02" value="9">19:00-20:00 hrs.
+									<input type="checkbox" class="hora02" value="9" name="hora02[]">19:00-20:00 hrs.
 								</label>
 							</div>
                         </div>                                                                      
@@ -343,6 +367,10 @@
 						 <div class="col-md-10 col-md-offset-2">
 							 <button class="btn btn-success" type="reset" style="width: 150px;">CANCELAR</button>
 							 <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
+<<<<<<< HEAD
+=======
+							
+>>>>>>> 6534914db3c9b01c7eb1ad8cf0d8996e1c9ca674
 						</div>
 					</div>
                 </form>
@@ -356,7 +384,7 @@
             </div>
 		</div>
 		
-		<div class="modal fade" id="exitoso" role="dialog">
+		<div class="modal fade" id="MSGA_09" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header modal-has-success">
@@ -364,10 +392,30 @@
 					</div>
 					<div class="modal-body">
 						<p>Se le ha enviado un correo con instrucciones para continuar el proceso de solicitud de cita.
+<<<<<<< HEAD
 							Verifique que ha recibido el correo, de lo contrario vuelva a llenar la solicitud.</p>	
+=======
+Verifique que le ha llegado el correo, de lo contrario vuelva a llenar la solicitud.</p>
+>>>>>>> 6534914db3c9b01c7eb1ad8cf0d8996e1c9ca674
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+        
+        <div class="modal fade" data-keyboard="false" id="MSG_E06" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Error al enviar el correo electrónico</h4>
+					</div>
+					<div class="modal-body">
+						<p>Ocurrió un error interno al enviar el correo electrónico, por favor intente de nuevo.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
 					</div>
 				</div>
 			</div>
