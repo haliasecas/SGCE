@@ -104,6 +104,7 @@ function enviarForm() {
 	}
 
 	if (grecaptcha.getResponse()) {
+		$("#html_element").attr("style", "")
 		vcap = true;
 	}
 	else {

@@ -367,10 +367,6 @@
 						 <div class="col-md-10 col-md-offset-2">
 							 <button class="btn btn-success" type="reset" style="width: 150px;">CANCELAR</button>
 							 <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
-<<<<<<< HEAD
-=======
-							
->>>>>>> 6534914db3c9b01c7eb1ad8cf0d8996e1c9ca674
 						</div>
 					</div>
                 </form>
@@ -392,11 +388,7 @@
 					</div>
 					<div class="modal-body">
 						<p>Se le ha enviado un correo con instrucciones para continuar el proceso de solicitud de cita.
-<<<<<<< HEAD
-							Verifique que ha recibido el correo, de lo contrario vuelva a llenar la solicitud.</p>	
-=======
-Verifique que le ha llegado el correo, de lo contrario vuelva a llenar la solicitud.</p>
->>>>>>> 6534914db3c9b01c7eb1ad8cf0d8996e1c9ca674
+							Verifique que ha recibido el correo, de lo contrario vuelva a llenar la solicitud.</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
