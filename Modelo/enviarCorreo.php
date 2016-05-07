@@ -1,0 +1,53 @@
+<?php
+function mandarCorreo() {
+header("Content-Type: text/html;charset=utf-8");
+$email = $_POST['email'];
+$nombre = $_POST['nombre'];
+$appat = $_POST['appat'];
+$apmat = $_POST['apmat'];
+
+require 'PHPMailerAutoload.php';
+$mail = new PHPMailer();
+$mail->IsSMTP();
+$mail->SMTPAuth = true;
+$mail->SMTPSecure = "ssl";
+$mail->Host = "smtp.gmail.com";
+$mail->Port = 465;
+$mail->SMTPKeepAlive = true;
+$mail->Username = "sgceescom@gmail.com";
+$mail->Password = "sgceescom10";
+$mail->CharSet = 'UTF-8';
+$mail->From = $email;
+$mail->FromName = "Estimado ".$nombre." ".$appat." ".$apmat;
+$mail->Subject = "Operación para validar la cita.";
+$mail->AltBody = "Este es un mensaje de prueba.";
+$msg="<div class=\"container-fluid\" style=\"padding-bottom:9px;\" id=\"header\">
+			<img src=\"../Img/SEP.png\" height=\"64px\" style=\"float:left; padding-left:15px;\">
+			<img class=\"img-head\" src=\"../Img/logoIPNGris.png\" style=\"float:right; padding-top:15px; padding-right:15px;\">
+		</div><br><br><br><br> <br> <b>Buen día </b> <br> ".$nombre." ".$appat." ".$apmat."<br> <b>Haz pedido agendar una cita el/los día(s)</b><br>El dia: ".$_POST['date01']."<br>Con horarios:<br>";
+$horarios = array(' ','9:00-10:00','13:00-14:00','20:00-21:00','10:00-11:00','14:00-15:00','11:00-12:00','18:00-19:00','12:00-13:00','19:00-20:00');
+    if(!empty($_POST['hora01'])){
+        foreach($_POST['hora01'] as $selected){
+            $msg = $msg.$horarios[$selected]."<br>";
+        }
+    }
+    else
+        $msg = $msg."(S/N)"
+$msg=$msg."Y el dia:".$_POST['date02']."<br>Con horarios:<br>";
+    if(!empty($_POST['hora02'])){
+        foreach($_POST['hora02'] as $selected){
+            $msg = $msg.$horarios[$selected]."<br>";
+        }
+    }
+    else
+        $msg = $msg."(S/N)"
+$mail->MsgHTML($msg);
+$mail->AddAddress($email, "Holaaaaaaaa");
+$mail->IsHTML(true);
+if(!$mail->Send()) {
+	return 0;
+ } else {
+	return 1;
+}
+}
+?>
