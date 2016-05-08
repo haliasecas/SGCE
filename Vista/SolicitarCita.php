@@ -71,7 +71,7 @@
 		
 		<?php if (!empty($_POST)) { ?>
 				
-		<?php if (($_POST["g-recaptcha-response"]))  {
+		<?php if (($_POST["g-recaptcha-response"]))  { 
             if(!(empty($_POST))){
             require_once("../Modelo/enviarCorreo.php");
             $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -89,11 +89,21 @@
             $dpto = $_POST['departamento'];
             $telefono=$_POST['telefono'];
             include("abre_conexion.php"); 
-            $sql = sprintf("SELECT * FROM interesado WHERE nombre='$nombre' appaterno='$appat' apmaterno='$apmat'");
-            $rec = mysqli_query($link,$sql);
-            echo $rec;
-            $sql = "INSERT INTO interesado(idinteresado,nombre,appterno,apmaterno,correo,telefono) VALUES ('01','$nombre','$appat','$apmat','$email','$telefono')";
-            $rec = mysqli_query($link,$sql);
+            $busqueda=mysqli_query($link,"SELECT nombre, appaterno, apmaterno FROM interesado WHERE nombre='$nombre' appaterno='$appat' apmaterno='$apmat' limit 1");
+            $row_cnt = mysqli_num_rows($busqueda);
+            //$rec = mysqli_query($link,$sql);
+            if($row_cnt>0) { 
+                    $id = sprintf("SELECT id FROM interesado WHERE nombre='$nombre' appaterno='$appat' apmaterno='$apmat'");
+                    echo $id;
+                    mysqli_free_result($busqueda);
+            }
+                else{
+                    $sql = sprintf("INSERT INTO interesado(idinteresado,nombre,appaterno,apmaterno) VALUES (NULL,'$nombre','$appat','$apmat')");
+                    $rec = mysqli_query($link,$sql);
+                }
+                
+                
+            
             //$sql = "INSERT INTO Solicitud(idSolicitud,asunto,)"
             if(!empty($_POST['hora01'])){
                 foreach($_POST['hora01'] as $selected){

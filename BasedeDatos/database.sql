@@ -308,6 +308,11 @@ ALTER TABLE `Solicitud`
 ALTER TABLE `SolicitudToken`
   MODIFY `idtoken` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT de la tabla `interesado`
+--
+ALTER TABLE `interesado`
+  MODIFY `idinteresado` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- Restricciones para tablas volcadas
 --
 
