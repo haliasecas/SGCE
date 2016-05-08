@@ -88,22 +88,25 @@
             $area = $_POST['area'];
             $dpto = $_POST['departamento'];
             $telefono=$_POST['telefono'];
-            include("abre_conexion.php"); 
-            $busqueda=mysqli_query($link,"SELECT nombre, appaterno, apmaterno FROM interesado WHERE nombre='$nombre' appaterno='$appat' apmaterno='$apmat' limit 1");
-            $row_cnt = mysqli_num_rows($busqueda);
-            //$rec = mysqli_query($link,$sql);
-            if($row_cnt>0) { 
-                    $id = sprintf("SELECT id FROM interesado WHERE nombre='$nombre' appaterno='$appat' apmaterno='$apmat'");
-                    echo $id;
-                    mysqli_free_result($busqueda);
+            $busqueda = sprintf("SELECT nombre,appaterno,apmaterno FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
+            $result=mysqli_query($link,$busqueda);
+            $row_cnt = mysqli_num_rows($result);
+            if($row_cnt==1) {
+                $id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='Ramon' AND appaterno='$appat' AND apmaterno='$apmat'");
+                $result=mysqli_query($link,$id);
             }
                 else{
-                    $sql = sprintf("INSERT INTO interesado(idinteresado,nombre,appaterno,apmaterno) VALUES (NULL,'$nombre','$appat','$apmat')");
-                    $rec = mysqli_query($link,$sql);
+                    $sql = sprintf("INSERT INTO interesado (idinteresado, nombre, appaterno,apmaterno,correo,telefono)
+                    VALUES (NULL,'$nombre','$appat','$apmat','$email','$telefono')");
+                    $result=mysqli_query($link,$sql);
+                    $id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='Ramon' AND appaterno='$appat' AND apmaterno='$apmat'");
+                    $result=mysqli_query($link,$id);
                 }
+            $row = mysqli_fetch_assoc($result);
+            $id=$row["idinteresado"];
+            $iddept=$_POST["departamento"];
+            $idarea=$_POST["area"];
                 
-                
-            
             //$sql = "INSERT INTO Solicitud(idSolicitud,asunto,)"
             if(!empty($_POST['hora01'])){
                 foreach($_POST['hora01'] as $selected){
@@ -232,7 +235,20 @@
                             <label for="departamento" class="control-label col-md-2">Departamento</label>        
                                         <div class="col-md-10">                                        
                                 <select name="departamento" class="form-control" >
-                                              <option value="UPIS">Unidad Politécnica de Integración Social</option> 
+                                    <?php
+                                        include("abre_conexion.php"); 
+                                        $id=sprintf("SELECT * FROM depto");       
+                                        $resulta=mysqli_query($link,$id);
+                                        $numero = mysqli_num_rows($resulta); // obtenemos el número de filas
+                                        for($i = 1; $i <= $numero; $i++){
+                                            $sql=sprintf("SELECT nombre FROM depto WHERE iddepto='$i'");
+                                            $result=mysqli_query($link,$id);
+                                            $row = mysqli_fetch_assoc($result);
+                                            $nombre=$row["nombre"];
+                                                                echo ("<option value=$i>$nombre</option>");
+                                        }
+                                    ?>
+                                              
                                 </select>
                                         </div>                        
                     </div>
@@ -240,8 +256,22 @@
                     <div class="form-group">
                         <label for="area" class="control-label col-md-2">Área</label>        
                                         <div class="col-md-10">                                        
-                                <select name="area" class="form-control" >
-                                              <option value="MovA">Movilidad académica</option>   
+                                <select name="area" class="form-control" onchange="this.form.submit()" >
+                                    <?php
+                                        $id=sprintf("SELECT * FROM area ");       
+                                        $resulta=mysqli_query($link,$id);
+                                        $numero = mysqli_num_rows($resulta); // obtenemos el número de filas
+                                        for($i = 1; $i <= $numero; $i++){
+                                            $sql=sprintf("SELECT nombre FROM area WHERE idarea='$i'");
+                                            $result=mysqli_query($link,$id);
+                                            $row = mysqli_fetch_assoc($result);
+
+                                            $nombre=$row["nombre"];
+                                                                echo ("<option value=$i>$nombre</option>");
+                                        } 
+                                        
+                                        
+                                    ?>
                                 </select>
                                         </div>                        
                     </div>

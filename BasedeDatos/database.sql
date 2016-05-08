@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 08-05-2016 a las 19:53:36
+-- Tiempo de generación: 08-05-2016 a las 22:02:50
 -- Versión del servidor: 10.1.10-MariaDB
 -- Versión de PHP: 7.0.4
 
@@ -27,7 +27,6 @@ SET time_zone = "+00:00";
 --
 CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 USE `mydb` ;
-
 CREATE TABLE `area` (
   `idarea` int(11) NOT NULL,
   `nombre` varchar(60) DEFAULT NULL,
@@ -101,7 +100,16 @@ CREATE TABLE `HoraPref` (
   `hinicio` time DEFAULT NULL,
   `hfin` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+ INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('1','09:00','10:00');
+ INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('2','10:00','11:00');
+ INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('3','11:00','12:00');
+ INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('4','12:00','13:00');
+ INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('5','13:00','14:00');
+ INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('6','14:00','15:00');
+ INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('7','18:00','19:00');
+ INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('8','19:00','20:00');
+ INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('9','20:00','21:00');
+ 
 -- --------------------------------------------------------
 
 --
@@ -127,6 +135,13 @@ CREATE TABLE `interesado` (
   `correo` varchar(60) DEFAULT NULL,
   `telefono` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `interesado`
+--
+
+INSERT INTO `interesado` (`idinteresado`, `nombre`, `appaterno`, `apmaterno`, `correo`, `telefono`) VALUES
+(1, 'DODO', 'DEDE', 'UDU', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -293,6 +308,11 @@ ALTER TABLE `SolicitudToken`
 ALTER TABLE `Cita`
   MODIFY `idCita` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT de la tabla `interesado`
+--
+ALTER TABLE `interesado`
+  MODIFY `idinteresado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
@@ -326,8 +346,8 @@ ALTER TABLE `area`
 -- Filtros para la tabla `Cita`
 --
 ALTER TABLE `Cita`
-  ADD CONSTRAINT `fk_Cita_area1` FOREIGN KEY (`idarea`,`iddepto`) REFERENCES `area` (`idarea`, `iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Cita_interesado1` FOREIGN KEY (`idinteresado`) REFERENCES `interesado` (`idinteresado`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `Cita_ibfk_1` FOREIGN KEY (`idinteresado`) REFERENCES `interesado` (`idinteresado`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Cita_area1` FOREIGN KEY (`idarea`,`iddepto`) REFERENCES `area` (`idarea`, `iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `DiaSol`
@@ -359,8 +379,8 @@ ALTER TABLE `personal`
 -- Filtros para la tabla `Solicitud`
 --
 ALTER TABLE `Solicitud`
-  ADD CONSTRAINT `fk_Solicitud_area1` FOREIGN KEY (`idarea`,`iddepto`) REFERENCES `area` (`idarea`, `iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Solicitud_interesado1` FOREIGN KEY (`idinteresado`) REFERENCES `interesado` (`idinteresado`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `Solicitud_ibfk_1` FOREIGN KEY (`idinteresado`) REFERENCES `interesado` (`idinteresado`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Solicitud_area1` FOREIGN KEY (`idarea`,`iddepto`) REFERENCES `area` (`idarea`, `iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
