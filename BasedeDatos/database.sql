@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 08, 2016 at 02:09 
+-- Generation Time: May 08, 2016 at 03:01 
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -42,7 +42,6 @@ CREATE TABLE `area` (
 
 CREATE TABLE `Cita` (
   `idCita` int(11) NOT NULL,
-  `turno` varchar(1) DEFAULT NULL,
   `hinicio` time DEFAULT NULL,
   `hfin` time DEFAULT NULL,
   `dia` date DEFAULT NULL,
@@ -184,6 +183,18 @@ CREATE TABLE `Solicitud` (
   `iddepto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `SolicitudToken`
+--
+
+CREATE TABLE `SolicitudToken` (
+  `idtoken` int(11) NOT NULL,
+  `idSolicitud` int(11) NOT NULL,
+  `token` varchar(20) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 --
 -- Indexes for dumped tables
 --
@@ -266,6 +277,13 @@ ALTER TABLE `Solicitud`
   ADD KEY `fk_Solicitud_area1_idx` (`idarea`,`iddepto`);
 
 --
+-- Indexes for table `SolicitudToken`
+--
+ALTER TABLE `SolicitudToken`
+  ADD PRIMARY KEY (`idtoken`),
+  ADD KEY `idSolicitud` (`idSolicitud`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -274,6 +292,11 @@ ALTER TABLE `Solicitud`
 --
 ALTER TABLE `personal`
   MODIFY `idpersonal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `SolicitudToken`
+--
+ALTER TABLE `SolicitudToken`
+  MODIFY `idtoken` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --

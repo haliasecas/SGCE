@@ -1,7 +1,6 @@
-
 <html>
 	<head>
-		<title>Modelo</title>
+		<title>SGCE</title>
 		<meta charset="utf-8">
 		<script type="text/javascript" src="../Scr/jquery-2.2.0.js"></script>
 		<script type="text/javascript" src="../Scr/moment.min.js"></script>
@@ -9,7 +8,6 @@
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
 		<script type="text/javascript" src="../Scr/validator.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
-        <link type="text/css" rel="stylesheet" href="../Css/style.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
@@ -142,7 +140,6 @@
 			</div>
 		</nav>
 		<script>
-            echo
       $(document).ready(function(){
         $("#frmRestablecer").submit(function(event){
           event.preventDefault();
