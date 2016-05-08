@@ -79,8 +79,12 @@
             for ($i = 0; $i < $random_string_length; $i++) {
                 $string .= $characters[rand(0, strlen($characters) - 1)];
             }
+            $email = $_POST['email'];
+            $nombre = $_POST['nombre'];
+            $appat = $_POST['appat'];
+            $apmat = $_POST['apmat'];
             include("abre_conexion.php"); 
-            
+            $sql = "INSERT INTO Solicitud('NULL',)"
     
     
             
