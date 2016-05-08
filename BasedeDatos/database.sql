@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 08-05-2016 a las 19:53:36
+-- Tiempo de generación: 08-05-2016 a las 22:02:50
 -- Versión del servidor: 10.1.10-MariaDB
 -- Versión de PHP: 7.0.4
 
@@ -25,8 +25,6 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `area`
 --
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `mydb` ;
 
 CREATE TABLE `area` (
   `idarea` int(11) NOT NULL,
@@ -127,6 +125,13 @@ CREATE TABLE `interesado` (
   `correo` varchar(60) DEFAULT NULL,
   `telefono` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `interesado`
+--
+
+INSERT INTO `interesado` (`idinteresado`, `nombre`, `appaterno`, `apmaterno`, `correo`, `telefono`) VALUES
+(1, 'DODO', 'DEDE', 'UDU', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -293,6 +298,11 @@ ALTER TABLE `SolicitudToken`
 ALTER TABLE `Cita`
   MODIFY `idCita` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT de la tabla `interesado`
+--
+ALTER TABLE `interesado`
+  MODIFY `idinteresado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
@@ -321,8 +331,8 @@ ALTER TABLE `area`
 -- Filtros para la tabla `Cita`
 --
 ALTER TABLE `Cita`
-  ADD CONSTRAINT `fk_Cita_area1` FOREIGN KEY (`idarea`,`iddepto`) REFERENCES `area` (`idarea`, `iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Cita_interesado1` FOREIGN KEY (`idinteresado`) REFERENCES `interesado` (`idinteresado`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `Cita_ibfk_1` FOREIGN KEY (`idinteresado`) REFERENCES `interesado` (`idinteresado`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Cita_area1` FOREIGN KEY (`idarea`,`iddepto`) REFERENCES `area` (`idarea`, `iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `DiaSol`
@@ -354,8 +364,8 @@ ALTER TABLE `personal`
 -- Filtros para la tabla `Solicitud`
 --
 ALTER TABLE `Solicitud`
-  ADD CONSTRAINT `fk_Solicitud_area1` FOREIGN KEY (`idarea`,`iddepto`) REFERENCES `area` (`idarea`, `iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Solicitud_interesado1` FOREIGN KEY (`idinteresado`) REFERENCES `interesado` (`idinteresado`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `Solicitud_ibfk_1` FOREIGN KEY (`idinteresado`) REFERENCES `interesado` (`idinteresado`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Solicitud_area1` FOREIGN KEY (`idarea`,`iddepto`) REFERENCES `area` (`idarea`, `iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
