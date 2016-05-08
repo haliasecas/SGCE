@@ -91,7 +91,7 @@
             $sql = sprintf("SELECT * FROM interesado WHERE nombre='$nombre' appaterno='$appat' apmaterno='$apmat'");
             $rec = mysqli_query($link,$sql);
             echo $rec;
-            $sql = sprintf("INSERT INTO interesado(idinteresado,nombre,appaterno,apmaterno) VALUES (1,'$nombre','$appaterno','$apmaterno')");
+            $sql = sprintf("INSERT INTO interesado(idinteresado,nombre,appaterno,apmaterno) VALUES (1,'$nombre','$appat','$apmat')");
             $rec = mysqli_query($link,$sql);
             //$sql = "INSERT INTO Solicitud(idSolicitud,asunto,)"
             if(!empty($_POST['hora01'])){
