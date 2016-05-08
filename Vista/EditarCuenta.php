@@ -1,7 +1,6 @@
-
 <html>
 	<head>
-		<title>Modelo</title>
+		<title>SGCE</title>
 		<meta charset="utf-8">
 		<script type="text/javascript" src="../Scr/jquery-2.2.0.js"></script>
 		<script type="text/javascript" src="../Scr/moment.min.js"></script>
@@ -9,7 +8,6 @@
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
 		<script type="text/javascript" src="../Scr/validator.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
-        <link type="text/css" rel="stylesheet" href="../Css/style.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
@@ -66,9 +64,9 @@
 				</div>
 			</div>
 		</nav>
-		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
+		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
             <div class="container">
-                <h3><strong>Editar área</strong></h3>
+                <h3><strong>Editar cuenta</strong></h3>
                 <p><strong class="text-success">Todos los campos son obligatorios.</strong> El nombre del departamento debe estar previamente registrado en el sistema.</p> 
                 <br>
                 <br>                                
@@ -148,7 +146,6 @@
 			</div>
 		</nav>
 		<script>
-            echo
       $(document).ready(function(){
         $("#frmRestablecer").submit(function(event){
           event.preventDefault();
@@ -172,7 +169,7 @@
 						$("#top-bar").addClass("navbar-fixed-top");
 						$("#main-content").css({"padding-top":"90px"});
 					}
-					if ($(window).scrollTop() < $("#header").height()) {
+					if ($(window).scrollTop() <= $("#header").height()) {
 						$("#top-bar").removeClass("navbar-fixed-top");
 						$("#main-content").css({"padding-top":"0px"});
 					}
