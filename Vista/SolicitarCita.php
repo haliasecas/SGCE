@@ -79,7 +79,7 @@
             for ($i = 0; $i < $random_string_length; $i++) {
                 $string .= $characters[rand(0, strlen($characters) - 1)];
             }
-            $token = sha1($string);
+            include("abre_conexion.php"); 
             
     
     

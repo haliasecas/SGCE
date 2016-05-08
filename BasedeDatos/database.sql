@@ -116,7 +116,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`Solicitud` (
   `idSolicitud` INT NOT NULL AUTO_INCREMENT,
   `asunto` VARCHAR(60) NULL COMMENT '',
-  `turno` VARCHAR(1) NULL COMMENT '',
+    `turno` VARCHAR(1) NULL COMMENT '',
   `estado` VARCHAR(20) NULL COMMENT '',
   `idinteresado` INT NOT NULL COMMENT '',
   `idarea` INT NOT NULL COMMENT '',
@@ -227,7 +227,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Cita` (
   `idCita` INT NOT NULL AUTO_INCREMENT,
-  `turno` VARCHAR(1) NULL COMMENT '',
+`turno` VARCHAR(1) NULL COMMENT '',
   `hinicio` TIME NULL COMMENT '',
   `hfin` TIME NULL COMMENT '',
   `dia` DATE NULL COMMENT '',
