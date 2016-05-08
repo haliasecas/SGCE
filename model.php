@@ -209,6 +209,8 @@
                         <?php
                         if (isset($_COOKIE["cargo"])) {
                         ?>
+                        <?php if($_COOKIE["cargo"]==1){ ?>
+                         
                         
                         <!--  Administrador -->
                         <li class="dropdown">
@@ -245,6 +247,53 @@
 								</a></li>
 							</ul>
 						</li>
+                        
+                        
+                        <?php }else{?> 
+                        
+                        <! Personal administrativo -->
+                        
+                        
+                        
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="./Img/bookmarkGreen.png" height="30px"></span> Personal Administrativo<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="./Vista/SolicitarCita.php">
+									<span><img src="./Img/333.png" height="36px"></span>
+									Calendario
+								</a></li>
+								<li><a href="./Vista/InformesySugerencias.php">
+									<span><img src="./Img/22.png" height="36px"></span>
+									Informes y Sugerencias
+								</a></li>
+								<li><a href="#">
+									<span><img src="./Img/11.png" height="36px"></span>
+									Solicitudes de citas
+								</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="./Img/loginiGreen.png" height="30px"></span> Bienvenido(a)<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="./Vista/CambiarContrasena.php">
+									<span><img src="./Img/Edit2.png" height="36px"></span>
+									Cambiar contraseña
+								</a></li>
+								<li><a href="./Vista/cierra_conexion.php">
+									<span><img src="./Img/Out.png" height="36px"></span>
+									Cerrar sesión
+								</a></li>
+							</ul>
+						</li>
+			
+                        
+                        
+                       <?php } ?>
+                        
 
                         <?php
                         }else{
@@ -272,7 +321,7 @@
 							</ul>
 						</li>
                         <li class="">
-							<a href="./IniciarSesion.php">
+							<a href="Vista/IniciarSesion.php">
 								<span><img src="./Img/loginiGreen.png" height="30px"></span> Iniciar sesión (Administrador)
 							</a>
 						</li>
