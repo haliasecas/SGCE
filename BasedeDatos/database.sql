@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 08, 2016 at 03:01 
+-- Generation Time: May 08, 2016 at 05:50 
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -176,7 +176,6 @@ INSERT INTO `personal` (`idpersonal`, `nombre`, `appaterno`, `apmaterno`, `corre
 CREATE TABLE `Solicitud` (
   `idSolicitud` int(11) NOT NULL,
   `asunto` varchar(60) DEFAULT NULL,
-  `turno` varchar(1) DEFAULT NULL,
   `estado` varchar(20) DEFAULT NULL,
   `idinteresado` int(11) NOT NULL,
   `idarea` int(11) NOT NULL,
@@ -287,6 +286,11 @@ ALTER TABLE `SolicitudToken`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `Cita`
+--
+ALTER TABLE `Cita`
+  MODIFY `idCita` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `personal`
 --
