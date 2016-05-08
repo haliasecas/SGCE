@@ -68,7 +68,7 @@
 		</nav>
 		
 		<div style="padding-bottom: 57px;" id="main-content" class="container-fluid col-md-offset-1 col-md-10">
-			<form class="form-horizontal" action="sesion_in.php" method="post" id="iniciaSes">
+			<form class="form-horizontal" action="../sesion_in.php" method="post" id="iniciaSes">
 				<h2><p><strong>Iniciar sesión Administrador</strong></p></h2>
 				<p>Ingresa los campos correspondientes a tu cuenta para iniciar sesión</p>
 				<br><br>

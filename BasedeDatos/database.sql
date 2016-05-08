@@ -2,10 +2,10 @@
 -- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: May 08, 2016 at 05:50 
--- Server version: 10.1.10-MariaDB
--- PHP Version: 7.0.4
+-- Servidor: localhost
+-- Tiempo de generación: 08-05-2016 a las 19:53:36
+-- Versión del servidor: 10.1.10-MariaDB
+-- Versión de PHP: 7.0.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mydb`
+-- Base de datos: `mydb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `area`
+-- Estructura de tabla para la tabla `area`
 --
 CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 USE `mydb` ;
@@ -37,7 +37,7 @@ CREATE TABLE `area` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Cita`
+-- Estructura de tabla para la tabla `Cita`
 --
 
 CREATE TABLE `Cita` (
@@ -53,7 +53,7 @@ CREATE TABLE `Cita` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `depto`
+-- Estructura de tabla para la tabla `depto`
 --
 
 CREATE TABLE `depto` (
@@ -62,7 +62,7 @@ CREATE TABLE `depto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `depto`
+-- Volcado de datos para la tabla `depto`
 --
 
 INSERT INTO `depto` (`iddepto`, `nombre`) VALUES
@@ -71,7 +71,7 @@ INSERT INTO `depto` (`iddepto`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `DiaPref`
+-- Estructura de tabla para la tabla `DiaPref`
 --
 
 CREATE TABLE `DiaPref` (
@@ -82,7 +82,7 @@ CREATE TABLE `DiaPref` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `DiaSol`
+-- Estructura de tabla para la tabla `DiaSol`
 --
 
 CREATE TABLE `DiaSol` (
@@ -93,7 +93,7 @@ CREATE TABLE `DiaSol` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `HoraPref`
+-- Estructura de tabla para la tabla `HoraPref`
 --
 
 CREATE TABLE `HoraPref` (
@@ -105,7 +105,7 @@ CREATE TABLE `HoraPref` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `HoraSol`
+-- Estructura de tabla para la tabla `HoraSol`
 --
 
 CREATE TABLE `HoraSol` (
@@ -116,7 +116,7 @@ CREATE TABLE `HoraSol` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `interesado`
+-- Estructura de tabla para la tabla `interesado`
 --
 
 CREATE TABLE `interesado` (
@@ -131,7 +131,7 @@ CREATE TABLE `interesado` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Mensaje`
+-- Estructura de tabla para la tabla `Mensaje`
 --
 
 CREATE TABLE `Mensaje` (
@@ -146,7 +146,7 @@ CREATE TABLE `Mensaje` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal`
+-- Estructura de tabla para la tabla `personal`
 --
 
 CREATE TABLE `personal` (
@@ -161,16 +161,17 @@ CREATE TABLE `personal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `personal`
+-- Volcado de datos para la tabla `personal`
 --
 
 INSERT INTO `personal` (`idpersonal`, `nombre`, `appaterno`, `apmaterno`, `correo`, `contrasena`, `iddepto`, `cargo`) VALUES
-(1, 'Nathaniel', 'Cabrera', 'Herrera', 'nathaniel981@gmail.com', 0xca1f5daa97182bd802a026a132c8e8e4, 1, 2);
+(1, 'Nathaniel', 'Cabrera', 'Herrera', 'nathaniel981@gmail.com', 0xca1f5daa97182bd802a026a132c8e8e4, 1, 2),
+(2, 'Nathaniel', 'Cabrera', 'Herrera', 'nathaniel981@hotmail.com', 0xca1f5daa97182bd802a026a132c8e8e4, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Solicitud`
+-- Estructura de tabla para la tabla `Solicitud`
 --
 
 CREATE TABLE `Solicitud` (
@@ -185,7 +186,7 @@ CREATE TABLE `Solicitud` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `SolicitudToken`
+-- Estructura de tabla para la tabla `SolicitudToken`
 --
 
 CREATE TABLE `SolicitudToken` (
@@ -195,18 +196,18 @@ CREATE TABLE `SolicitudToken` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `area`
+-- Indices de la tabla `area`
 --
 ALTER TABLE `area`
   ADD PRIMARY KEY (`idarea`,`iddepto`),
   ADD KEY `fk_area_depto_idx` (`iddepto`);
 
 --
--- Indexes for table `Cita`
+-- Indices de la tabla `Cita`
 --
 ALTER TABLE `Cita`
   ADD PRIMARY KEY (`idCita`,`idarea`,`iddepto`,`idinteresado`),
@@ -214,61 +215,61 @@ ALTER TABLE `Cita`
   ADD KEY `fk_Cita_interesado1_idx` (`idinteresado`);
 
 --
--- Indexes for table `depto`
+-- Indices de la tabla `depto`
 --
 ALTER TABLE `depto`
   ADD PRIMARY KEY (`iddepto`);
 
 --
--- Indexes for table `DiaPref`
+-- Indices de la tabla `DiaPref`
 --
 ALTER TABLE `DiaPref`
   ADD PRIMARY KEY (`idDia`);
 
 --
--- Indexes for table `DiaSol`
+-- Indices de la tabla `DiaSol`
 --
 ALTER TABLE `DiaSol`
-  ADD PRIMARY KEY (`idDia`,`idSolicitud`),
+  ADD PRIMARY KEY (`idSolicitud`,`idDia`),
   ADD KEY `fk_Dia_has_Solicitud_Solicitud1_idx` (`idSolicitud`),
   ADD KEY `fk_Dia_has_Solicitud_Dia1_idx` (`idDia`);
 
 --
--- Indexes for table `HoraPref`
+-- Indices de la tabla `HoraPref`
 --
 ALTER TABLE `HoraPref`
   ADD PRIMARY KEY (`idHorario`);
 
 --
--- Indexes for table `HoraSol`
+-- Indices de la tabla `HoraSol`
 --
 ALTER TABLE `HoraSol`
-  ADD PRIMARY KEY (`idHorario`,`idSolicitud`),
+  ADD PRIMARY KEY (`idSolicitud`,`idHorario`),
   ADD KEY `fk_Horario_has_Solicitud_Solicitud1_idx` (`idSolicitud`),
   ADD KEY `fk_Horario_has_Solicitud_Horario1_idx` (`idHorario`);
 
 --
--- Indexes for table `interesado`
+-- Indices de la tabla `interesado`
 --
 ALTER TABLE `interesado`
   ADD PRIMARY KEY (`idinteresado`);
 
 --
--- Indexes for table `Mensaje`
+-- Indices de la tabla `Mensaje`
 --
 ALTER TABLE `Mensaje`
   ADD PRIMARY KEY (`idMensaje`,`depto_iddepto`),
   ADD KEY `fk_Mensaje_depto1_idx` (`depto_iddepto`);
 
 --
--- Indexes for table `personal`
+-- Indices de la tabla `personal`
 --
 ALTER TABLE `personal`
   ADD PRIMARY KEY (`idpersonal`,`iddepto`),
   ADD KEY `fk_personal_depto1_idx` (`iddepto`);
 
 --
--- Indexes for table `Solicitud`
+-- Indices de la tabla `Solicitud`
 --
 ALTER TABLE `Solicitud`
   ADD PRIMARY KEY (`idSolicitud`,`idinteresado`,`idarea`,`iddepto`),
@@ -276,76 +277,81 @@ ALTER TABLE `Solicitud`
   ADD KEY `fk_Solicitud_area1_idx` (`idarea`,`iddepto`);
 
 --
--- Indexes for table `SolicitudToken`
+-- Indices de la tabla `SolicitudToken`
 --
 ALTER TABLE `SolicitudToken`
   ADD PRIMARY KEY (`idtoken`),
   ADD KEY `idSolicitud` (`idSolicitud`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `Cita`
+-- AUTO_INCREMENT de la tabla `Cita`
 --
 ALTER TABLE `Cita`
   MODIFY `idCita` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `personal`
+-- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `idpersonal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idpersonal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `SolicitudToken`
+-- AUTO_INCREMENT de la tabla `Solicitud`
+--
+ALTER TABLE `Solicitud`
+  MODIFY `idSolicitud` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `SolicitudToken`
 --
 ALTER TABLE `SolicitudToken`
   MODIFY `idtoken` int(11) NOT NULL AUTO_INCREMENT;
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `area`
+-- Filtros para la tabla `area`
 --
 ALTER TABLE `area`
   ADD CONSTRAINT `fk_area_depto` FOREIGN KEY (`iddepto`) REFERENCES `depto` (`iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `Cita`
+-- Filtros para la tabla `Cita`
 --
 ALTER TABLE `Cita`
   ADD CONSTRAINT `fk_Cita_area1` FOREIGN KEY (`idarea`,`iddepto`) REFERENCES `area` (`idarea`, `iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Cita_interesado1` FOREIGN KEY (`idinteresado`) REFERENCES `interesado` (`idinteresado`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `DiaSol`
+-- Filtros para la tabla `DiaSol`
 --
 ALTER TABLE `DiaSol`
-  ADD CONSTRAINT `fk_Dia_has_Solicitud_Dia1` FOREIGN KEY (`idDia`) REFERENCES `DiaPref` (`idDia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Dia_has_Solicitud_Solicitud1` FOREIGN KEY (`idSolicitud`) REFERENCES `Solicitud` (`idSolicitud`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `DiaSol_ibfk_1` FOREIGN KEY (`idSolicitud`) REFERENCES `Solicitud` (`idSolicitud`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Dia_has_Solicitud_Dia1` FOREIGN KEY (`idDia`) REFERENCES `DiaPref` (`idDia`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `HoraSol`
+-- Filtros para la tabla `HoraSol`
 --
 ALTER TABLE `HoraSol`
-  ADD CONSTRAINT `fk_Horario_has_Solicitud_Horario1` FOREIGN KEY (`idHorario`) REFERENCES `HoraPref` (`idHorario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Horario_has_Solicitud_Solicitud1` FOREIGN KEY (`idSolicitud`) REFERENCES `Solicitud` (`idSolicitud`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `HoraSol_ibfk_1` FOREIGN KEY (`idSolicitud`) REFERENCES `Solicitud` (`idSolicitud`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Horario_has_Solicitud_Horario1` FOREIGN KEY (`idHorario`) REFERENCES `HoraPref` (`idHorario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `Mensaje`
+-- Filtros para la tabla `Mensaje`
 --
 ALTER TABLE `Mensaje`
   ADD CONSTRAINT `fk_Mensaje_depto1` FOREIGN KEY (`depto_iddepto`) REFERENCES `depto` (`iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `personal`
+-- Filtros para la tabla `personal`
 --
 ALTER TABLE `personal`
   ADD CONSTRAINT `fk_personal_depto1` FOREIGN KEY (`iddepto`) REFERENCES `depto` (`iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `Solicitud`
+-- Filtros para la tabla `Solicitud`
 --
 ALTER TABLE `Solicitud`
   ADD CONSTRAINT `fk_Solicitud_area1` FOREIGN KEY (`idarea`,`iddepto`) REFERENCES `area` (`idarea`, `iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
