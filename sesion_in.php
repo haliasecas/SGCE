@@ -27,8 +27,8 @@
                                 setcookie("id",$row["idpersonal"]);
 
                     echo " 
-                <p class='avisos'>Bienvenid@ " . $row["nombre"] . " \n Sera redireccionado automaticamente en 2 segundos</p>";  
-                header("refresh: 2; url = index.php");//Linea de reedirección
+                <p class='avisos'>Bienvenid@ " . $row["nombre"] . " \n Sera redireccionado automaticamente en 1 segundos</p>";  
+                header("refresh: 1; url = index.php");//Linea de reedirección
                 /**
                 echo " 
                 <p class='avisos'>Bienvenid@\n" . $_SESSION["Nombre"] . "</p> 

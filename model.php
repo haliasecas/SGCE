@@ -241,7 +241,7 @@
 									<span><img src="./Img/Edit2.png" height="36px"></span>
 									Cambiar contraseña
 								</a></li>
-								<li><a href="./Vista/cierra_conexion.php">
+								<li><a href="./Vista/cierra_sesion.php">
 									<span><img src="./Img/Out.png" height="36px"></span>
 									Cerrar sesión
 								</a></li>
@@ -283,7 +283,7 @@
 									<span><img src="./Img/Edit2.png" height="36px"></span>
 									Cambiar contraseña
 								</a></li>
-								<li><a href="./Vista/cierra_conexion.php">
+								<li><a href="./Vista/cierra_sesion.php">
 									<span><img src="./Img/Out.png" height="36px"></span>
 									Cerrar sesión
 								</a></li>
