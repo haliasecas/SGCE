@@ -87,11 +87,12 @@
             $asunto = $_POST['asunto'];
             $area = $_POST['area'];
             $dpto = $_POST['departamento'];
+            $telefono=$_POST['telefono'];
             include("abre_conexion.php"); 
             $sql = sprintf("SELECT * FROM interesado WHERE nombre='$nombre' appaterno='$appat' apmaterno='$apmat'");
             $rec = mysqli_query($link,$sql);
             echo $rec;
-            $sql = sprintf("INSERT INTO interesado(nombre,appterno,apmaterno) VALUES ('$nombre','$appat','$apmat')");
+            $sql = "INSERT INTO interesado(idinteresado,nombre,appterno,apmaterno,correo,telefono) VALUES ('01','$nombre','$appat','$apmat','$email','$telefono')";
             $rec = mysqli_query($link,$sql);
             //$sql = "INSERT INTO Solicitud(idSolicitud,asunto,)"
             if(!empty($_POST['hora01'])){
