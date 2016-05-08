@@ -68,48 +68,54 @@
 		
 		<!-- Mensajes bajo el campo -->
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
-			            <div class="container">
-                              <h3><strong>Administrar áreas</strong></h3>
-                              <p>En esta sección  podrás consultar los datos de las áreas existentes.También podrás registrar nuevas áreas.</p> 
-                               <br>
-                               <br>
-                                 <div class="table-responsive">          
-                                      <table class="table">
-                                                    <thead>
-                                                            <tr style="color: #FFF; background: #221f1f;">
-                                                                    <th>Áreas</th>
-                                                                    <th colspan="3">Departamento</th>                                                                                                                                     
-                                                            </tr>
-                                                    </thead>
-                                                    
-                                                    <tbody>
-                                                                <tr>
-                                                                        <th>Área A</th>
-                                                                        <th>Departamento A</th>
-                                                                        <th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
-                                                                        <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>                                        
-                                                                </tr>
-                                                                <tr>
-                                                                        <th>Área B</th>
-                                                                        <th>Departamento B</th>
-                                                                        <th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
-                                                                        <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>                               
-                                                                </tr>
-                                                                    <tr>
-                                                                        <th>Área C</th>
-                                                                        <th>Departamento C</th>
-                                                                        <th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
-                                                                        <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>                                                            
-                                                                </tr>
-                                                    </tbody>
-                                      </table>
-                              </div>
-                              <div class="form-group text-right">
-						              <div class="col-md-8 col-md-offset-4">							                     
-							                     <a class="btn btn-success" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
-						              </div>					                                                                               						                             
-					       </div>
-                    </div>                                                               
+            <div class="container">
+                  <h3><strong>Administrar áreas</strong></h3>
+                  <p>En esta sección  podrás consultar los datos de las áreas existentes.También podrás registrar nuevas áreas.</p> 
+                   <br>
+                   <br>
+                     <div class="table-responsive">          
+                          <table class="table">
+                            <thead>
+                                <tr style="color: #FFF; background: #221f1f;">
+                                        <th>Áreas</th>
+                                        <th colspan="3">Departamento</th>      
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                              <!--  <tr>
+                                        <th>Área A</th>
+                                        <th>Departamento A</th>
+                                        <th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
+                                        <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>                                        
+                                </tr>-->
+                                <?php
+                                
+                                include("abre_conexion.php");
+                                $query = "SELECT a.nombre as area,d.nombre as depto FROM area a, depto d WHERE idarea>0 and a.iddepto=d.iddepto ORDER BY a.nombre";
+                                $result = mysqli_query($link, $query);
+                                
+                                while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                                    $area = $row['area'];
+                                    $depto = $row['depto'];
+                                    echo "<tr>";
+                                        echo "<th>$area</th>";
+                                        echo "<th>$depto</th>";
+                                        echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='#'>Editar</a></th>";   
+                                        echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='#'>Eliminar</a></th>  ";
+                                    echo "</tr>";
+                                }
+                                
+                                ?>
+                            </tbody>
+                          </table>
+                  </div>
+                  <div class="form-group text-right">
+                          <div class="col-md-8 col-md-offset-4">							                     
+                                     <a class="btn btn-success" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
+                          </div>					                                                                               						                             
+               </div>
+        </div>                                                               
 		</div>
                         
 		<!-- Nav de abajo -->
