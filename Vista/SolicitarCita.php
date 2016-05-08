@@ -88,6 +88,7 @@
             $area = $_POST['area'];
             $dpto = $_POST['departamento'];
             $telefono=$_POST['telefono'];
+            include("abre_conexion.php"); 
             $busqueda = sprintf("SELECT nombre,appaterno,apmaterno FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
             $result=mysqli_query($link,$busqueda);
             $row_cnt = mysqli_num_rows($result);
@@ -247,6 +248,7 @@
                                             $nombre=$row["nombre"];
                                                                 echo ("<option value=$i>$nombre</option>");
                                         }
+                                    include("cierra_conexion.php"); 
                                     ?>
                                               
                                 </select>
@@ -256,8 +258,9 @@
                     <div class="form-group">
                         <label for="area" class="control-label col-md-2">Área</label>        
                                         <div class="col-md-10">                                        
-                                <select name="area" class="form-control" onchange="this.form.submit()" >
+                                <select name="area" class="form-control" >
                                     <?php
+                                        include("abre_conexion.php"); 
                                         $id=sprintf("SELECT * FROM area ");       
                                         $resulta=mysqli_query($link,$id);
                                         $numero = mysqli_num_rows($resulta); // obtenemos el número de filas
@@ -270,7 +273,7 @@
                                                                 echo ("<option value=$i>$nombre</option>");
                                         } 
                                         
-                                        
+                                        include("cierra_conexion.php"); 
                                     ?>
                                 </select>
                                         </div>                        

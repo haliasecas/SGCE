@@ -32,7 +32,14 @@ CREATE TABLE `area` (
   `nombre` varchar(60) DEFAULT NULL,
   `iddepto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+-- Volcado de datos para la tabla `area`
+--
 
+INSERT INTO `area` (`idarea`, `nombre`,`iddepto`) VALUES
+(1,'Area patito',1);
+INSERT INTO `area` (`idarea`, `nombre`,`iddepto`) VALUES
+(2,'Area patito2',1);
 -- --------------------------------------------------------
 
 --
