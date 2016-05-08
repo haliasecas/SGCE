@@ -71,7 +71,8 @@
 		
 		<?php if (!empty($_POST)) { ?>
 				
-		<?php if ($_POST["g-recaptcha-response"]) { 
+		<?php if (($_POST["g-recaptcha-response"]))  {
+            if(!(empty($_POST))){
             require_once("../Modelo/enviarCorreo.php");
             $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
             $string = '';
@@ -83,11 +84,29 @@
             $nombre = $_POST['nombre'];
             $appat = $_POST['appat'];
             $apmat = $_POST['apmat'];
+            $asunto = $_POST['asunto'];
+            $area = $_POST['area'];
+            $dpto = $_POST['departamento'];
             include("abre_conexion.php"); 
-            $sql = "INSERT INTO Solicitud('NULL',)"
-    
+            $sql = sprintf("SELECT * FROM interesado WHERE nombre='$nombre' appaterno='$appat' apmaterno='$apmat'");
+            $rec = mysqli_query($link,$sql);
+            echo $rec;
+            $sql = sprintf("INSERT INTO interesado(nombre,appterno,apmaterno) VALUES ('$nombre','$appat','$apmat')");
+            $rec = mysqli_query($link,$sql);
+            //$sql = "INSERT INTO Solicitud(idSolicitud,asunto,)"
+            if(!empty($_POST['hora01'])){
+                foreach($_POST['hora01'] as $selected){
+                    //$sql = "INSERT INTO "
+                    //$msg = $msg.$horarios[$selected]."<br>";
+                }
+            }
+            else{
+                //$msg = $msg."(S/N)"
+                //$sql = "INSERT INTO Solicitud('NULL',)"
+            }
     
             
+            include("cierra_conexion.php"); 
     
     
     
@@ -111,7 +130,7 @@
             } ?>
 		<?php } else { ?>
 				
-		<?php } } ?>
+		<?php }}}  ?>
 		
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
 			
@@ -201,7 +220,7 @@
                     <div class="form-group">
                             <label for="departamento" class="control-label col-md-2">Departamento</label>        
                                         <div class="col-md-10">                                        
-                                <select name="departamento" class="form-control">
+                                <select name="departamento" class="form-control" >
                                               <option value="UPIS">Unidad Politécnica de Integración Social</option> 
                                 </select>
                                         </div>                        
@@ -210,7 +229,7 @@
                     <div class="form-group">
                         <label for="area" class="control-label col-md-2">Área</label>        
                                         <div class="col-md-10">                                        
-                                <select name="area" class="form-control">
+                                <select name="area" class="form-control" >
                                               <option value="MovA">Movilidad académica</option>   
                                 </select>
                                         </div>                        
@@ -219,7 +238,7 @@
                     <div class="form-group has-feedback" id="Asunto">
                            <label  for="asunto" class="control-label col-md-2">Asunto</label>
                                 <div class="col-md-10">
-									<input type="text" class="form-control" placeholder="Breve descripción del asunto de la cita" id="asunto">
+									<input type="text" class="form-control" placeholder="Breve descripción del asunto de la cita" id="asunto" name="asunto">
 									<span id="sub01" class="hidden glyphicon form-control-feedback"></span>
                                 </div>
                                 <br> 

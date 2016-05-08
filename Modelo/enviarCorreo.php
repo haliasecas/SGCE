@@ -32,7 +32,7 @@ $horarios = array(' ','9:00-10:00','13:00-14:00','20:00-21:00','10:00-11:00','14
         }
     }
     else
-        $msg = $msg."(S/N)"
+        $msg = $msg."(S/N)";
 $msg=$msg."Y el dia:".$_POST['date02']."<br>Con horarios:<br>";
     if(!empty($_POST['hora02'])){
         foreach($_POST['hora02'] as $selected){
@@ -40,7 +40,7 @@ $msg=$msg."Y el dia:".$_POST['date02']."<br>Con horarios:<br>";
         }
     }
     else
-        $msg = $msg."(S/N)"
+        $msg = $msg."(S/N)";
 $mail->MsgHTML($msg);
 $mail->AddAddress($email, "Holaaaaaaaa");
 $mail->IsHTML(true);
