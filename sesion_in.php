@@ -35,26 +35,28 @@
 				</div>
 
 				<div class="collapse navbar-collapse" id="header-bar">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-							<span><img src="./Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu dark">
-							<li><a href="./Vista/SolicitarCita.php">
-								<span><img src="./Img/333.png" height="36px"></span>
-								Solicitar Cita
-								</a></li>
-							<li><a href="./Vista/InformesySugerencias.php">
-								<span><img src="./Img/22.png" height="36px"></span>
-								Informes y Sugerencias
-								</a></li>
-						</ul>
-					</li>
-					<li class="">
-						<a href="Vista/IniciarSesion.php">
-							<span><img src="./Img/loginiGreen.png" height="30px"></span> Iniciar sesión (Administrador)
-						</a>
-					</li>
+					<ul class="nav navbar-nav navbar-right" style="padding-top:12px;">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="./Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="./Vista/SolicitarCita.php">
+									<span><img src="./Img/333.png" height="36px"></span>
+									Solicitar Cita
+									</a></li>
+								<li><a href="./Vista/InformesySugerencias.php">
+									<span><img src="./Img/22.png" height="36px"></span>
+									Informes y Sugerencias
+									</a></li>
+							</ul>
+						</li>
+						<li class="">
+							<a href="./Vista/IniciarSesion.php">
+								<span><img src="./Img/loginiGreen.png" height="30px"></span> Iniciar sesión (Administrador)
+							</a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</nav>
@@ -77,25 +79,28 @@
 					setcookie("cargo",$row["cargo"]);
 					setcookie("id",$row["idpersonal"]);
 
-					echo " 
-                <p class='avisos'>Bienvenid@ " . $row["nombre"] . " \n, Sera redireccionado automaticamente en 3 segundos</p>";  
+					echo 
+						"<p class='avisos'>Bienvenid@ " . $row["nombre"] . " \n, Sera redireccionado automaticamente en 3 segundos</p>";  
 					header("refresh: 3; url = ./");//Linea de reedirección
 					/**
-                echo " 
-                <p class='avisos'>Bienvenid@\n" . $_SESSION["Nombre"] . "</p> 
-                <p><a href='index.php' >Continuar Navegando</a></p> 
-                "; **/
+                		echo " 
+                		<p class='avisos'>Bienvenid@\n" . $_SESSION["Nombre"] . "</p> 
+                		<p><a href='index.php' >Continuar Navegando</a></p> 
+                	"; **/
 				}
 				else {
 
 					// Cerramos la conexion a la base de datos  
 					include("Vista/cierra_conexion.php");  
 
-					echo "<p class='avisos'>Ningun usuario registrado coincide con los datos recibidos</p> <p><a href='Vista/IniciarSesion.php' >Regresar</a></p> "; 
+					echo 
+						"<p class='avisos'>Ningun usuario registrado coincide con los datos recibidos</p>
+						<p><a href='Vista/IniciarSesion.php' >Regresar</a></p>";
 				}
 				?>  
 			</div>
 		</div>
+
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
@@ -122,7 +127,7 @@
 					</ul>
 				</div>
 			</div>
-		</nav>		
+		</nav>
 
 		<script type="text/javascript">
 			$(document).ready(function (){
@@ -132,7 +137,7 @@
 						$("#top-bar").addClass("navbar-fixed-top");
 						$("#main-content").css({"padding-top":"90px"});
 					}
-					if ($(window).scrollTop() < $("#header").height()) {
+					else {
 						$("#top-bar").removeClass("navbar-fixed-top");
 						$("#main-content").css({"padding-top":"0px"});
 					}
