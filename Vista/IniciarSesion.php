@@ -134,6 +134,7 @@
 						if (msg == 1) error("Usuario y/o contraseña incorrectos.");
 						else if (msg == 2) error("Correo no registrado, por favor revise que haya escrito el correo correctamente.");
 						else {
+							//console.log(msg);
 							nohayerror();
 							window.location = "../";
 						}

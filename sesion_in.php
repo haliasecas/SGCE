@@ -4,29 +4,30 @@ $miemail = $_POST["miemail"];
 $mipass = $_POST["mipass"]; 
 
 // Abrimos la conexion a la base de datos  
-include("../Vista/abre_conexion.php");
+include("./Vista/abre_conexion.php");
 
 $usuario = mysqli_query($link, "select correo from personal where correo = '$miemail'");
 $nuevo_usuario = mysqli_query($link, "select correo, contrasena from personal where correo = '$miemail' and contrasena = aes_encrypt('$mipass','C1r4l3t1890')");
+
 if (mysqli_num_rows($usuario) > 0) { 
 	if (mysqli_num_rows($nuevo_usuario) > 0) {
 		$query = "select * from personal where correo='$miemail'";
 		$result = mysqli_query($link, $query);
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-		setcookie("cargo", $row["cargo"]);
-		setcookie("id", $row["idpersonal"]);
+		setcookie("cargo", $row["cargo"], time() + 60 * 60 * 24 * 30, "/SGCE");
+		setcookie("id", $row["idpersonal"], time() + 60 * 60 * 24 * 30, "/SGCE");
 
 		echo $row["cargo"] . " " . $row["idpersonal"];
 	}
 	else {
-		include("Vista/cierra_conexion.php");
+		include("./Vista/cierra_conexion.php");
 		echo "1";
 	}
 }
 else {
 	// Cerramos la conexion a la base de datos  
-	include("Vista/cierra_conexion.php");
+	include("./Vista/cierra_conexion.php");
 	echo "2";
 }
 ?>  
