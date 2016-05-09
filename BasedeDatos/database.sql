@@ -201,6 +201,7 @@ CREATE TABLE `solicitud` (
   `asunto` varchar(60) DEFAULT NULL,
   `estado` varchar(20) DEFAULT NULL,
   `idinteresado` int(11) NOT NULL,
+  `dia` date DEFAULT NULL,
   `idarea` int(11) NOT NULL,
   `iddepto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
