@@ -81,27 +81,34 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <!--<tr>
                                 <th>Departamento A</th>
                                 <th>ejemplo@dominio.com</th>
                                 <th>Nombre encargado</th>
                                 <th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
                                 <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>        
-                            </tr>
-                            <tr>
-                                <th>Departamento B</th>
-                                <th>ejemplo@dominio.com</th>
-                                <th>Nombre encargado</th>
-                                <th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
-                                <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>             
-                            </tr>
-                            <tr>
-                                <th>Departamento C</th>
-                                <th>ejemplo@dominio.com</th>
-                                <th>Nombre encargado</th>
-                                <th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
-                                <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>        
-                            </tr>
+                            </tr>-->
+                            <?php
+                                
+                                include("abre_conexion.php");
+                                $query = "SELECT nombre,iddepto  FROM area  WHERE idarea>0 ORDER BY nombre";
+                                $result = mysqli_query($link, $query);
+                                
+                                while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                                    $iddepto=$row['iddepto'];
+                                    $nombre = $row['nombre'];
+                                    
+                                    echo "<tr>";
+                                        echo "<th>$nombre</th>";
+                                        echo "<th>ejemplo@dominio.com</th>";
+                                        echo "<th>Nombre encargado</th>";
+                                        echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='#?id=$iddepto'>Editar</a></th>";   
+                                        echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='#?id=$iddepto'>Eliminar</a></th>  ";
+                                    echo "</tr>";
+                                }
+                                
+                                ?>
+                            
                         </tbody>
                     </table>
                 </div>

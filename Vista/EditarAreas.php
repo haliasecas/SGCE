@@ -66,6 +66,18 @@
 			</div>
 		</nav>
             
+        
+        <?php 
+            if(isset($_GET["id"]))
+	           $id = $_GET['id'];
+            include("abre_conexion.php");
+            $query = "SELECT a.nombre as nombrearea FROM area a WHERE idarea = '$id'";
+            $result = mysqli_query($link, $query);
+            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            $nombrearea = $row['nombrearea'];
+            
+        ?>
+        
             <!-- Mensajes bajo el campo -->
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
                     <div class="container">
@@ -77,7 +89,8 @@
                                     <div class="form-group">
                                                 <label  for="" class="control-label col-md-2">Nombre del área</label>
 						                        <div class="col-md-10">
-							                             <input type="password" class="form-control" placeholder="Área Z" >							                             	
+							                         <?php echo "<input type='text' class='form-control' placeholder=$nombrearea >";	?>
+                                                    
 						                        </div>
 						                        <br>              						                               
 						                        <br>              						                               
@@ -85,7 +98,16 @@
                                                 <label  for="" class="control-label col-md-2">Nombre del departamento</label>						                                                                
                                                         <div class="col-md-10">                                        
                                                                 <select name="departamento" class="form-control">
-                                                                            <option value="DepartamentoA">Departamento A</option> 
+                                                                    <!--<option value="DepartamentoA">Departamento A</option> -->
+                                                                    <?php
+                                                                    $query = "SELECT * FROM depto";
+                                                                    $result2 = mysqli_query($link, $query);
+                                                                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                                                                    while($row = mysqli_fetch_array($result2, MYSQLI_ASSOC)){
+                                                                        $nombredepto= $row['nombre'];
+                                                                        echo "<option value='DepartamentoA'>$nombredepto</option>";
+                                                                    }
+                                                                    ?>
                                                                 </select>
                                                         </div>                                                                       
                                                <br><br><br>                                                 
