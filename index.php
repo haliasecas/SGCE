@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<?php
-		include("Vista/abre_conexion.php");  
+		include("Vista/abre_conexion.php");
 		?>
 		<div class="container-fluid" style="padding-bottom:9px;" id="header">
 			<img src="Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
@@ -43,8 +43,7 @@
                         if (isset($_COOKIE["cargo"])) {
                         ?>
                         <?php if($_COOKIE["cargo"]==1){ ?>
-                         
-                        
+                       
                         <!--  Administrador -->
                         <li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -84,9 +83,7 @@
                         
                         <?php }else{?> 
                         
-                        <! Personal administrativo -->
-                        
-                        
+                        <! Personal administrativo -->                    
                         
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
