@@ -103,7 +103,7 @@
                                         echo "<th>$area</th>";
                                         echo "<th>$depto</th>";
                                         echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarAreas.php?id=$idarea'>Editar</a></th>";   
-                                        echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='#'>Eliminar</a></th>  ";
+                                        echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='eliminar_area.php?id=$idarea'>Eliminar</a></th>  ";
                                     echo "</tr>";
                                 }
                                 
