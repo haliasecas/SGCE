@@ -12,13 +12,13 @@
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
-	
+
 	<body>
 		<div class="container-fluid" style="padding-bottom:9px;" id="header">
 			<img src="../Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
-		
+
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
@@ -45,17 +45,13 @@
 								<li><a href="../Vista/SolicitarCita.php">
 									<span><img src="../Img/333.png" height="36px"></span>
 									Solicitar Cita
-								</a></li>
+									</a></li>
 								<li><a href="../Vista/InformesySugerencias.php">
 									<span><img src="../Img/22.png" height="36px"></span>
 									Informes y Sugerencias
-								</a></li>
-								<li><a href="#">
-									<span><img src="../Img/11.png" height="36px"></span>
-									Ver mis citas
-								</a></li>
+									</a></li>
 							</ul>
-                            
+
 						</li>
 						<li>
 							<a href="../Vista/IniciarSesion.php">
@@ -66,7 +62,7 @@
 				</div>
 			</div>
 		</nav>
-		
+
 		<div style="padding-bottom: 57px;" id="main-content" class="container-fluid col-md-offset-1 col-md-10">
 			<form class="form-horizontal" action="../sesion_in.php" method="post" id="iniciaSes">
 				<h2><p><strong>Iniciar sesión Administrador</strong></p></h2>
@@ -121,7 +117,7 @@
 				}
 			</script>
 		</div>
-		
+
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
@@ -132,7 +128,7 @@
 						<span class="icon-bar"></span>
 					</button>
 				</div>
-                <div class="collapse navbar-collapse" id="footer-bar">
+				<div class="collapse navbar-collapse" id="footer-bar">
 					<ul class="nav navbar-nav navbar-right">
 						<p class="navbar-text">@2016 Team Rocket Inc.</p>
 						<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/?fref=nf">
@@ -148,7 +144,7 @@
 				</div>
 			</div>
 		</nav>
-		
+
 		<script type="text/javascript">
 			$(document).ready(function() {
 				// Sticky bar plz
@@ -162,7 +158,7 @@
 						$("#main-content").css({"padding-top":"0px"});
 					}
 				});
-					
+
 				if ($(window).width() <= 886) {
 					$("#top-bar").removeAttr("style");
 				}

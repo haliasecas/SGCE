@@ -53,10 +53,6 @@
 									<span><img src="../Img/22.png" height="36px"></span>
 									Informes y Sugerencias
 									</a></li>
-								<li><a href="#">
-									<span><img src="../Img/11.png" height="36px"></span>
-									Ver mis citas
-									</a></li>
 							</ul>
 						</li>
 						<li class="">
@@ -87,7 +83,7 @@
 					$asunto = $_POST['asunto'];
 					$area = $_POST['area'];
 					$dpto = $_POST['departamento'];
-					$telefono=$_POST['telefono'];
+					$telefono = $_POST['telefono'];
 					include("abre_conexion.php"); 
 					$busqueda = sprintf("SELECT nombre,appaterno,apmaterno FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
 					$result=mysqli_query($link,$busqueda);
@@ -264,7 +260,7 @@
 											url: "getAreas.php",
 											data: { value: $("[name='departamento']").val() }
 										})
-										.done(function(msg){
+											.done(function(msg){
 											$("[name='area']").append("<option value=1>" + msg + "</option>");
 										});
 									}
@@ -423,7 +419,7 @@
 						</label>
 						<div class="col-md-4" id="html_element" style="padding-top: 18px;"></div>
 					</div>
-					
+
 					<!--Boton-->
 					<div class="form-group text-right" style="padding-top: 9px;">
 						<div class="col-md-10 col-md-offset-2">

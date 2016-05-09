@@ -147,10 +147,6 @@
 									<span><img src="./Img/22.png" height="36px"></span>
 									Informes y Sugerencias
 								</a></li>
-								<li><a href="#">
-									<span><img src="./Img/11.png" height="36px"></span>
-									Ver mis citas
-								</a></li>
 							</ul>
 						</li>
                         <li class="">
@@ -250,7 +246,7 @@
 						$("#top-bar").addClass("navbar-fixed-top");
 						$("#main-content").css({"padding-top":"90px"});
 					}
-					if ($(window).scrollTop() < $("#header").height()) {
+					else {
 						$("#top-bar").removeClass("navbar-fixed-top");
 						$("#main-content").css({"padding-top":"0px"});
 					}

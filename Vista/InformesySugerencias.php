@@ -12,13 +12,13 @@
 		<link type="text/css" rel="stylesheet" href="../Css/modals.css">	
 		<meta name="viewport" content="width=device-width, initial-scale=1">		
 	</head>
-	
+
 	<body>
 		<div class="container-fluid" style="padding-bottom:9px;" id="header">
 			<img src="../Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
-		
+
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
@@ -45,15 +45,11 @@
 								<li><a href="../Vista/SolicitarCita.php">
 									<span><img src="../Img/333.png" height="36px"></span>
 									Solicitar Cita
-								</a></li>
+									</a></li>
 								<li><a href="../Vista/InformesySugerencias.php">
 									<span><img src="../Img/22.png" height="36px"></span>									
 									Informes y Sugerencias
-								</a></li>
-								<li><a href="#">
-									<span><img src="../Img/11.png" height="36px"></span>
-									Ver mis citas
-								</a></li>
+									</a></li>
 							</ul>
 						</li>
 						<li class="">
@@ -65,26 +61,26 @@
 				</div>
 			</div>
 		</nav>
-		
+
 		<?php
-			if (!empty($_GET)) {
-				echo ("
+		if (!empty($_GET)) {
+			echo ("
 				<script type='text/javascript'>
 					$(document).ready(function() {
 						$('#exitoso').modal();
 					});
 				</script>
 				");
-			}
+		}
 		?>
-		
+
 		<div class="container-fluid" style="padding-bottom: 57px;" id="main-content">
 			<div class="container-fluid col-md-offset-1 col-md-10">
 				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET" class="form-horizontal" id="informe">
 					<h3><strong> Informes y sugerencias</strong></h3>
 					<p><strong class="text-success">Todos los campos son obligatorios.</strong>
-					La respuesta a su pregunta o sugerencia llegará directamente al correo que<br>nos proporcione.</p><br>
-				
+						La respuesta a su pregunta o sugerencia llegará directamente al correo que<br>nos proporcione.</p><br>
+
 					<div class="form-group">
 						<label  for="email" class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
@@ -98,7 +94,7 @@
 							<input type="text" class="form-control" id="" placeholder="ejemplo@dominio.com">
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<label for="departamento" class="control-label col-md-2">Departamento</label>
 						<div class="col-md-10">
@@ -124,7 +120,7 @@
 							<textarea name="comentarios" class="form-control" cols="30" rows="15" placeholder="Exprese su sugerencia o problemática"></textarea>
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<div class="col-lg-10 col-lg-offset-2" align="right">
 							<a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
@@ -138,7 +134,7 @@
 				</script>
 			</div>
 		</div>
-		
+
 		<div class="modal fade" id="exitoso" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -154,7 +150,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="error" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -170,7 +166,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
@@ -198,7 +194,7 @@
 				</div>
 			</div>
 		</nav>
-		
+
 		<script type="text/javascript">
 			$(document).ready(function() {
 				// Sticky bar plz
@@ -212,7 +208,7 @@
 						$("#main-content").css({"padding-top":"0px"});
 					}
 				});
-					
+
 				if ($(window).width() <= 886) {
 					$("#top-bar").removeAttr("style");
 				}
