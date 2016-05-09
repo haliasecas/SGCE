@@ -103,33 +103,17 @@ function enviarForm() {
 		vs = true;
 	}
 
-	if (grecaptcha.getResponse()) {
-		$("#html_element").attr("style", "")
-		vcap = true;
-	}
-	else {
-		$("#html_element").attr("style", "border-style: solid; border-width: 2px; border-color: #A94442;")
-		vcap = false;
-	}
+	if (grecaptcha.getResponse()) vcap = true;
+	else vcap = false;
 
 	if ($(".hora01:checkbox:checked").length > 0 && $("#date01").val()) {
 		$("#checkboxes01").removeClass("has-error");
-		$("#checkboxes02").addClass("has-success");
+		$("#checkboxes01").addClass("has-success");
 		vcb = true;		
 	}
 	else {
 		$("#checkboxes01").removeClass("has-success");
 		$("#checkboxes01").addClass("has-error");
-		vcb = false;
-	}
-
-	if ($(".hora02:checkbox:checked").length > 0 && $("#date02").val()) {
-		$("#checkboxes02").removeClass("has-error");
-		$("#checkboxes02").addClass("has-success");
-		vcb = true;		
-	}
-	else {
-		$("#checkboxes02").addClass("has-error");
 		vcb = false;
 	}
 

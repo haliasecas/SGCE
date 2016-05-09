@@ -64,7 +64,7 @@
 		</nav>
 
 		<div style="padding-bottom: 57px;" id="main-content" class="container-fluid col-md-offset-1 col-md-10">
-			<form class="form-horizontal" action="../sesion_in.php" method="post" id="iniciaSes">
+			<form class="form-horizontal" method="post" id="iniciaSes">
 				<h2><p><strong>Iniciar sesión Administrador</strong></p></h2>
 				<p>Ingresa los campos correspondientes a tu cuenta para iniciar sesión</p>
 				<br><br>
@@ -96,24 +96,48 @@
 				</div>
 			</form>
 			<script type="text/javascript">
+				function error(str) {
+					$("#correo").addClass("has-error has-feedback");
+					$("#contra").addClass("has-error has-feedback");
+					$("#pass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+					$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+					$("#pass02").removeClass("hidden");
+					$("#pass02").text(str);
+				}
+
+				function nohayerror() {
+					$("#contra").removeClass("has-error has-feedback");
+					$("#correo").removeClass("has-error has-feedback");
+					$("#email01").addClass("hidden");
+					$("#user01").attr("class", "hidden");
+					$("#user02").addClass("hidden");
+					$("#pass01").attr("class", "hidden");
+					$("#pass02").addClass("hidden");
+				}
+				
 				function logIn() {
-					if (validate($("[name='miemail']").val())) {
-						$("#usuario").removeClass("has-error has-feedback");
-						$("#contra").removeClass("has-error has-feedback");
-						$("#user01").attr("class", "hidden");
-						$("#user02").addClass("hidden");
-						$("#pass01").attr("class", "hidden");
-						$("#pass02").addClass("hidden");
-						$("#iniciaSes").submit();
-					}
-					else {
-						$("#correo").addClass("has-error has-feedback");
-						$("#contra").addClass("has-error has-feedback");
-						$("#pass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-						$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-						$("#pass02").text("Usuario y/o contrasena incorrectos");
-						$("#pass02").removeClass("hidden");
-					}
+					var mail = $("[name='miemail']").val();
+					var ps = $("[name='mipass']").val();
+					if (ps == "") error("El correo electrónico y la contraseña que ingresaste no coinciden.");
+					else if (validate(mail)) logIn2();
+					else error("Por favor, introduce una dirección de correo electrónico válida. Por ejemplo usuario@dominio.com");
+				}
+
+				function logIn2() {
+					var m = $("[name='miemail']").val();
+					var p = $("[name='mipass']").val();
+					$.ajax({
+						method: "POST",
+						url: "../Modelo/sesion_in.php",
+						data: { miemail: m, mipass: p }
+					}).done(function(msg) {
+						if (msg == 1) error("Usuario y/o contraseña incorrectos.");
+						else if (msg == 2) error("Correo no registrado, por favor revise que haya escrito el correo correctamente.");
+						else {
+							nohayerror();
+							window.location = "../";
+						}
+					});
 				}
 			</script>
 		</div>

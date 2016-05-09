@@ -337,60 +337,6 @@
 						</div>
 					</div>
 
-					<div class="form-group" id="checkboxes02">
-						<div class="col-md-10 col-md-offset-2" style="padding-top: 10px;">
-							<div class='input-group date' id='datet2'>
-								<input type='text' class="form-control" id="date02" name="date02">
-								<span class="input-group-addon">
-									<span class="glyphicon glyphicon-calendar" id="icon02"></span>
-								</span>
-							</div>
-
-							<div class="checkbox col-md-3">
-								<label >
-									<input type="checkbox" class="hora02" value="1" name="hora02[]">9:00-10:00 hrs.
-								</label>
-
-								<label >
-									<input type="checkbox" class="hora02" value="2" name="hora02[]">13:00-14:00 hrs.
-								</label>
-
-								<label>
-									<input type="checkbox" class="hora02" value="3" name="hora02[]">20:00-21:00 hrs.
-								</label>
-							</div>
-
-							<div class="checkbox col-md-3">
-								<label >
-									<input type="checkbox" class="hora02" value="4" name="hora02[]">10:00-11:00 hrs.
-								</label>
-
-								<label >
-									<input type="checkbox" class="hora02" value="5" name="hora02[]">14:00-15:00 hrs.
-								</label>
-							</div>
-
-							<div class="checkbox col-md-3">
-								<label >
-									<input type="checkbox" class="hora02" value="6" name="hora02[]">11:00-12:00 hrs.
-								</label>
-
-								<label >
-									<input type="checkbox" class="hora02" value="7" name="hora02[]">18:00-19:00 hrs.
-								</label>
-							</div>
-
-							<div class="checkbox col-md-3">
-								<label >
-									<input type="checkbox" class="hora02" value="8" name="hora02[]">12:00-13:00 hrs.
-								</label>
-
-								<label>
-									<input type="checkbox" class="hora02" value="9" name="hora02[]">19:00-20:00 hrs.
-								</label>
-							</div>
-						</div>                                                                      
-					</div>
 					<script type="text/javascript">
 						$(function () {
 							$('#datet1').datetimepicker({
@@ -399,20 +345,12 @@
 								maxDate: moment().add(33, 'd'),
 								daysOfWeekDisabled: [0, 6]
 							});
-							$('#datet2').datetimepicker({
-								format: 'DD/MM/YYYY',
-								minDate: moment().add(4, 'd'),
-								maxDate: moment().add(34, 'd'),
-								daysOfWeekDisabled: [0, 6]
-							});
-							$("#date02").click(function() {
-								$("#datet2").data("DateTimePicker").show();
-							});
 							$("#date01").click(function() {
 								$("#datet1").data("DateTimePicker").show();
 							});
 						});
 					</script>
+					
 					<div class="form-group text-right" id="recaptcha">
 						<label for="nombre" class="control-label col-md-4" style="padding-top: 18px;">
 							*Verifica que no eres un robot informático.
@@ -478,7 +416,7 @@
 						<h4 class="modal-title">Mensaje de error</h4>
 					</div>
 					<div class="modal-body">
-						<p>Falta un dato obligatorio para efectuar la operación solicitada.</p>
+						<p>Falta al menos un dato obligatorio para efectuar la operación solicitada.</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
