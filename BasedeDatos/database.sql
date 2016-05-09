@@ -393,17 +393,4 @@ ALTER TABLE `solicitud`
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-
-if(!empty($_POST['hora01'])){
-                foreach($_POST['hora01'] as $selected){
-                    //$busqueda = sprintf("SELECT idHorario FROM HoraSol WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
-                    $dia='1';
-                    //$sql = "INSERT INTO "
-                    //$msg = $msg.$horarios[$selected]."<br>";
-                }
-            }
-            else{
-                //$msg = $msg."(S/N)"
-                //$sql = "INSERT INTO Solicitud('NULL',)"
-            }
     

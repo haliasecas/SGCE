@@ -131,12 +131,13 @@
             $iddept=$_POST["departamento"];
             $idarea=$_POST["area"];
             $soli = sprintf("INSERT INTO solicitud (idSolicitud, asunto, estado,idinteresado,idarea,iddepto)
-                    VALUES (NULL,'$asunto','PENDIENTE','$idint','$idarea','$iddept')");
+                    VALUES (NULL,'$asunto',' ','$idint','$idarea','$iddept')");
             $result=mysqli_query($link,$soli);
             $idSol = sprintf("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='mydb' and TABLE_NAME='solicitud'");
             $result=mysqli_query($link,$idSol);
             $row= mysqli_fetch_array($result);
-            $tok=sprintf("INSERT INTO SolicitudToken (idtoken, idSolicitud, token) VALUES (NULL,'$row[0]-1','$string')");   
+            $idsolicitud=$row[0]-1;
+            $tok=sprintf("INSERT INTO SolicitudToken (idtoken, idSolicitud, token) VALUES (NULL,'$idsolicitud','$string')");   
             $result=mysqli_query($link,$tok);    
             include("cierra_conexion.php"); 
             if(mandarCorreo($string)){

@@ -1,13 +1,13 @@
 <?php
 include("abre_conexion.php"); 
-$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-            $string = '';
-            $random_string_length = 20;
-            for ($i = 0; $i < $random_string_length; $i++) {
-                $string .= $characters[rand(0, strlen($characters) - 1)];
-            }
-                    $enlace = $_SERVER['SERVER_NAME']."/SGCE/SGCE/Validar.php?token=".$string;
-                echo $enlace;
+$id = sprintf("SELECT idSolicitud FROM SolicitudToken WHERE token='mw70k7f3gw45bk3kjah5'");
+                    $result=mysqli_query($link,$id);
+            $row = mysqli_fetch_assoc($result);
+            $idSol=$row["idSolicitud"];
+
+            $sql = sprintf("UPDATE solicitud SET estado='PENDIENTE' WHERE idSolicitud='$idSol'");
+$result=mysqli_query($link,$sql);
+            //echo $idint;
 
                 //echo $idint;
                 include("cierra_conexion.php"); 
