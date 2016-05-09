@@ -428,7 +428,6 @@
 						</div>
 					</div>
 				</form>
-				<!--
 				<script type="text/javascript">
 					var onloadCallback = function() {
 						grecaptcha.render('html_element', {
@@ -436,7 +435,6 @@
 						});
 					};
 				</script>
-				-->
 			</div>
 		</div>
 

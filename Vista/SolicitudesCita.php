@@ -12,6 +12,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 
+	<style> p { cursor: default; } </style>
+
 	<body>
 		<div class="container-fluid" style="padding-bottom:9px;" id="header">
 			<img src="../Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
@@ -81,6 +83,18 @@
 				<p>En esta sección  podrás consultar y administrar las solicitudes de citas recibidas.</p> 
 				<br>
 				<br>
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label class="control-label col-md-2">Selecciona</label>
+						<div class="col-md-10">
+							<select name="select" class="form-control" onChange="meetings();">
+								<option value="1">Todas</option>
+								<option value="2">Aceptadas</option>
+								<option value="3">Pendientes</option>
+							</select>
+						</div>                        
+					</div>
+				</form>
 				<div class="table-responsive">          
 					<table class="table">
 						<thead>
@@ -93,6 +107,17 @@
 							</tr>
 						</thead>
 						<tbody>
+							<script type="text/javascript">
+								function meetings() {
+									$.ajax({
+										method: "POST",
+										url: "SolicitudCita.php",
+										data: { value: $idD, parent: $idP }
+									}).done(function(msg){
+										console.log(msg);
+									});
+								}
+							</script>
 							<tr id="eg1">
 								<td>Departamento A</td>
 								<td>ejemplo@dominio.com</td>
