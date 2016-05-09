@@ -120,7 +120,7 @@
                 </div>
                 <div class="form-group text-right">
 				    <div class="col-md-8 col-md-offset-4">							                     
-					   <a class="btn btn-success" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
+					   <a class="btn btn-success" href="AgregarCuenta.php" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
 				    </div>           
 				</div>
             </div>                                                               
