@@ -17,6 +17,9 @@ if (mysqli_num_rows($usuario) > 0) {
 
 		setcookie("cargo", $row["cargo"], time() + 60 * 60 * 24 * 30, "/SGCE");
 		setcookie("id", $row["idpersonal"], time() + 60 * 60 * 24 * 30, "/SGCE");
+		setcookie("first", 1, time() + 60 * 60 * 24 * 30, "/SGCE");
+		setcookie("name", $row["nombre"], time() + 60 * 60 * 24 * 30, "/SGCE");
+		
 
 		echo $row["cargo"] . " " . $row["idpersonal"];
 	}

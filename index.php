@@ -8,15 +8,15 @@
 		<script type="text/javascript" src="./Scr/bootstrap.js"></script>
 		<script type="text/javascript" src="./Scr/bootstrap-datetimepicker.js"></script>
 		<link type="text/css" rel="stylesheet" href="./Css/bootstrap.css">
-		<link type="text/css" rel="stylesheet" href="Css/letras.css">
+		<link type="text/css" rel="stylesheet" href="./Css/letras.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
 		<?php
-		include("Vista/abre_conexion.php");  
+		include("Vista/abre_conexion.php");
 		?>
 		<div class="container-fluid" style="padding-bottom:9px;" id="header">
-			<img src="Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
+			<img src="./Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
 			<img class="img-head" src="./Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
 
@@ -43,8 +43,7 @@
                         if (isset($_COOKIE["cargo"])) {
                         ?>
                         <?php if($_COOKIE["cargo"]==1){ ?>
-                         
-                        
+                       
                         <!--  Administrador -->
                         <li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -59,7 +58,7 @@
 									<span><img src="./Img/Admin_Area.png" height="36px"></span>
 									Administrar areas
 								</a></li>
-								<li><a href="./Vista/AdministrarCuentas.php">
+								<li><a href="./Vista/EditarCuenta.php">
 									<span><img src="./Img/Admin_Cont.png" height="36px"></span>
 									Administrar cuentas
 								</a></li>
@@ -84,9 +83,13 @@
                         
                         <?php }else{?> 
                         
-                        <! Personal administrativo -->
+<<<<<<< HEAD
+                        <!-- Personal administrativo -->
                         
                         
+=======
+                        <! Personal administrativo -->                    
+>>>>>>> af427766b65d7c2c1db5ddc413df964b1343097b
                         
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -101,7 +104,7 @@
 									<span><img src="./Img/22.png" height="36px"></span>
 									Informes y Sugerencias
 								</a></li>
-								<li><a href="./Vista/SolicitudesCita.php">
+								<li><a href="#">
 									<span><img src="./Img/11.png" height="36px"></span>
 									Solicitudes de citas
 								</a></li>

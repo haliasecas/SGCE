@@ -129,8 +129,10 @@
 		<div id="main-content" class="container-fluid" align="center" style="padding-bottom: 50px;">
 			<div class="jumbotron">
 				<?php 
-				setcookie("cargo","",time()-3600);			
-				setcookie("id","",time()-3600);
+				setcookie("cargo", "", time()-3600);			
+				setcookie("id", "", time()-3600);
+				setcookie("first", "", time()-3600);			
+				setcookie("name", "", time()-3600);
 
 				echo "<p class='avisos'>Se ha cerrado sesion. Será redirigido automáticamente en 3 segundos</p>"; 
 				header("refresh: 3; url = ./");
