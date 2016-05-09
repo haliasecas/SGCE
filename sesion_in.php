@@ -14,11 +14,10 @@
             $mipass = $_POST["mipass"]; 
 
 
-
             // Abrimos la conexion a la base de datos  
-            include("Vista/abre_conexion.php");  
-
-            $nuevo_usuario=mysqli_query($link,"select correo,contrasena from personal where correo='$miemail' and contrasena=aes_encrypt('$mipass','C1r4l3t1890')");
+            include("Vista/abre_conexion.php");
+	
+            $nuevo_usuario = mysqli_query($link, "select correo, contrasena from personal where correo = '$miemail' and contrasena = aes_encrypt('$mipass','C1r4l3t1890')");
             if(mysqli_num_rows($nuevo_usuario)>0) { 
                 $query = "select * from personal where correo='$miemail'";
                                 $result = mysqli_query($link, $query);

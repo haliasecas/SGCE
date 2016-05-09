@@ -44,15 +44,15 @@
 								<li><a href="../Vista/SolicitarCita.php">
 									<span><img src="../Img/333.png" height="36px"></span>
 									Calendario
-									</a></li>
+								</a></li>
 								<li><a href="./InformesySugerencias.php">
 									<span><img src="../Img/22.png" height="36px"></span>
 									Informes y Sugerencias
-									</a></li>
+								</a></li>
 								<li><a href="#">
 									<span><img src="../Img/11.png" height="36px"></span>
 									Solicitudes de citas
-									</a></li>
+								</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -63,11 +63,11 @@
 								<li><a href="./CambiarContrasena.php">
 									<span><img src="../Img/Edit2.png" height="36px"></span>
 									Cambiar contraseña
-									</a></li>
+								</a></li>
 								<li><a href="../cierra_sesion.php">
 									<span><img src="../Img/Out.png" height="36px"></span>
 									Cerrar sesión
-									</a></li>
+								</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -75,98 +75,136 @@
 			</div>
 		</nav>
 
-		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
-			<div class="container">
-				<h3><strong>Solicitudes de citas</strong></h3>
-				<p>En esta sección  podrás consultar y administrar las solicitudes de citas recibidas.</p> 
-				<br>
-				<br>
-				<div class="table-responsive">          
-					<table class="table">
-						<thead>
-							<tr style="color: #FFF; background: #696969;">
-								<th>Área</th>
-								<th>Correo electrónico</th>
-								<th>Recibido</th>
-								<th colspan="4">Estado</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr id="eg1">
-								<td>Departamento A</td>
-								<td>ejemplo@dominio.com</td>
-								<td>Nombre encargado</td>
-								<td>PENDIENTE</td>
-								<td><p class="click-me text-success text-right"  style="text-decoration:underline;" id="1">Editar</p></td>
-								<td><p class="click-me text-success text-right" style="text-decoration:underline;"  id="2">Eliminar</p></td>
-							</tr>
-							<tr id="eg2">
-								<td>Departamento B</td>
-								<td>ejemplo@dominio.com</td>
-								<td>Nombre encargado</td>
-								<td>APROBADO</td>
-								<td><p class="click-me text-success text-right"  style="text-decoration:underline;" id="1">Editar</p></td>
-								<td><p class="click-me text-success text-right" style="text-decoration:underline;"  id="2">Eliminar</p></td>
-							</tr>
-							<script type="text/javascript">
-								$(".click-me").click(function() {
-									$idD = this.id;
-									$idP = $(this).parent().id;
-									$.ajax({
-										method: "POST",
-										url: "SolicitudCita.php",
-										data: { value: $idD, parent: $idP }
-									}).done(function(msg){
-										console.log(msg);
-									});
-								});
-							</script>
-							<?php
+		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
+			<div class="container-fluid col-md-10 col-md-offset-1">
+				<h3><strong>Ver más</strong></h3>
+				<p>Una vez agendada la cita se enviará la confirmación directamente al correo electrónico
+					indicado y el estado de la solicitud pasará a "AGENDADA".<br> Si la cita es rechazada, 
+					se notificará automáticamente al correo electrónico indicado y el estado
+					de la solicitud parasá a "RECHAZADA"</p>
+				<br><br>
+				<form class="form-horizontal">
+					<h4 class="text-uppercase">Datos del interesado:</h4>
 
-							include("abre_conexion.php");
-							$query = "SELECT idSolicitud,idarea,dia,estado,idinteresado FROM solicitud";
-							$result = mysqli_query($link, $query);
-							echo "<form action='prueba.php' method='post' name='testform'>";
-							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-								$idarea=$row['idarea'];
-								$id = sprintf("SELECT nombre FROM area WHERE idarea='$idarea'");
-								$result2=mysqli_query($link,$id);
-								$rowarea = mysqli_fetch_assoc($result2);
-								$area = $rowarea['nombre'];
-								$idinteresado=$row['idinteresado'];
-								$id = sprintf("SELECT correo FROM interesado WHERE idinteresado='$idinteresado'");
-								$result3=mysqli_query($link,$id);
-								$rowinteresado = mysqli_fetch_assoc($result3);
-								$correo = $rowinteresado['correo'];
-								$recibido=$row['dia'];
-								$estado=$row['estado'];
-								$idsolicitud=$row['idSolicitud'];
-								echo "<tr>";
-								echo "<th>$area</th>";
-								echo "<th>$correo</th>";
-								echo "<th>$recibido</th>";
-								echo "<th>$estado</th>";
-								//echo "<input type='submit' name='data' value='M'.$idsolicitud>";
-								//echo "<a name='adios' href = '#'  id = 'solution2' onClick='submit';'>Solution1 </a>";
-								//echo "<a name='hola' href = '#'  id = 'solution1' onClick='submit';'>Solution1 </a>";
-								echo "<input type='submit' name='data' value=$idsolicitud>";
-								//echo "<th><a class=' text-success text-right '  style = 'text-decoration:underline;' id=$idsolicitud' >Ver más</a></th>";
-								//echo "<th><a class=' text-success text-right delete-rod' style = 'text-decoration:underline;'  id=$idsolicitud' href=#>Eliminar</a></th> ";
-								echo "</tr>";
-							}
-							echo"</form>";
-							?>
+					<!-- Correo electrónico -->
+					<div class="form-group has-feedback" id="Email01">                                                            
+						<label  class="control-label col-md-2">Correo electrónico</label>
+						<div class="col-md-10">
+							<p class="form-control-static" id="correoE01" name="email">ejemplo@dominio.com</p>	
+						</div>
+						<br>
+					</div>
 
-						</tbody>
-					</table>
-				</div>
-				<div class="form-group text-right">
-					<div class="col-md-8 col-md-offset-4">							                     
-						<a class="btn btn-success" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
-					</div>           
-				</div>
-			</div>                                                               
+					<!--Nombre-->
+					<div class="form-group has-feedback" id="Nombre">
+						<label class="control-label col-md-2">Nombre(s)</label>
+						<div class="col-md-10">
+							<p class="form-control-static" id="nombre" name="nombre">Francisco</p>
+						</div>
+						<br>       
+					</div>
+
+					<!--Apellido Paterno-->
+					<div class="form-group has-feedback" id="ApellidoP">
+						<label  for="appat" class="control-label col-md-2">Apellido paterno</label>
+						<div class="col-md-10">
+							<p class="form-control-static" id="appat" name="appat">Pérez</p>
+						</div>
+						<br>       
+					</div>
+
+					<!--Apellido Materno-->
+					<div class="form-group has-feedback" id="ApellidoM">
+						<label  for="apmat" class="control-label col-md-2">Apellido materno</label>
+						<div class="col-md-10">
+							<p class="form-control-static" id="apmat" name="apmat">Pérez</p>
+						</div>
+						<br>   
+					</div>
+
+					<!--Teléfono-->
+					<div class="form-group has-feedback" id="Telefono">
+						<label  for="telefono" class="control-label col-md-2">Teléfono</label>
+						<div class="col-md-10">
+							<p class="form-control-static" id="telefono" name="telefono">55555555</p>
+							<br><br>
+						</div>
+					</div>
+
+					<h4 class="text-uppercase">Datos de la cita:</h4>
+
+					<!--Area-->
+					<div class="form-group">
+						<label class="control-label col-md-2">Área</label>        
+						<div class="col-md-10">                                        
+							<p class="form-control-static" id="area" name="area">Movilidad académica</p>
+						</div>                        
+					</div>
+
+					<!--Asunto-->
+					<div class="form-group has-feedback" id="Asunto">
+						<label class="control-label col-md-2">Asunto</label>
+						<div class="col-md-10">
+							<p class="form-control-static" id="asunto" name="asunto">Breve descripción del asunto de la cita</p>
+						</div>
+						<br> 
+					</div>
+
+					<!-- Horarios -->
+					<div class="form-group has-feedback" id="Horarios">
+						<label class="control-label col-md-2">Horario(s) preferente(s)</label>
+						<div class="col-md-10">
+							<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
+							<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
+							<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
+						</div>
+						<br> 
+					</div>
+
+					<!-- Acción -->
+					<div class="form-group has-feedback" id="Accion">
+						<label class="control-label col-md-2"><p class="text-success">Khé kiere PRRO?</p></label>
+						<div class="col-md-10">
+							<select class="form-control">
+								<option>Agendar</option>
+								<option>Nel PRRO</option>
+							</select>
+						</div>
+						<br> 
+					</div>
+
+					<!-- Día -->
+					<div class="form-group has-feedback" id="Dia">
+						<label class="control-label col-md-2">Día</label>
+						<div class="col-md-10">
+							<select class="form-control">
+								<option>DD/MM/AAAA</option>
+							</select>
+						</div>
+						<br> 
+					</div>
+
+					<!-- Horario -->
+					<div class="form-group has-feedback" id="Horario">
+						<label class="control-label col-md-2">Hora</label>
+						<div class="col-md-10">
+							<select class="form-control">
+								<option>9:00 - 10:00 hrs.</option>
+							</select>
+						</div>
+						<br> 
+					</div>
+					
+					<!-- Botones -->
+					<div class="form-group text-right" style="padding-top: 9px;">
+						 <div class="col-md-10 col-md-offset-2">
+							 <button class="btn btn-success" type="reset" style="width: 150px;">CANCELAR</button>
+							 <a class="btn btn-success" style="width: 150px;">ENVIAR</a>
+						</div>
+					</div>
+
+				</form>
+			</div>
 		</div>
 
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
