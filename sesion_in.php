@@ -22,6 +22,7 @@ if (mysqli_num_rows($usuario) > 0) {
 	else {
 		include("Vista/cierra_conexion.php");
 		echo "1";
+        
 	}
 }
 else {
