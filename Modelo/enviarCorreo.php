@@ -1,5 +1,5 @@
 <?php
-function mandarCorreo() {
+function mandarCorreo($stringtoken) {
 header("Content-Type: text/html;charset=utf-8");
 $email = $_POST['email'];
 $nombre = $_POST['nombre'];
@@ -41,6 +41,10 @@ $msg=$msg."Y el dia:".$_POST['date02']."<br>Con horarios:<br>";
     }
     else
         $msg = $msg."(S/N)";
+$enlace = $_SERVER['SERVER_NAME']."/SGCE/SGCE/Validar.php?token=".$stringtoken;
+$msg=$msg."<b>Da click en el siguiente enlace: <a href='$enlace'>Validar Cita</a></b> <br>";
+$msg=$msg."Recibirás un correo electrónico a esta misma dirección sobre la confirmación o negación de tu cita en menos de 24 horas, de lo contrario favor de comunicarte al 57296000<br>";
+$msg=$msg."Gracias por utilizar el sistema generador de citas de ESCOM <br>";
 $mail->MsgHTML($msg);
 $mail->AddAddress($email, "Holaaaaaaaa");
 $mail->IsHTML(true);

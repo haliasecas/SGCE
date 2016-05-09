@@ -196,7 +196,7 @@ INSERT INTO `personal` (`idpersonal`, `nombre`, `appaterno`, `apmaterno`, `corre
 -- Estructura de tabla para la tabla `Solicitud`
 --
 
-CREATE TABLE `Solicitud` (
+CREATE TABLE `solicitud` (
   `idSolicitud` int(11) NOT NULL,
   `asunto` varchar(60) DEFAULT NULL,
   `estado` varchar(20) DEFAULT NULL,
@@ -291,7 +291,7 @@ ALTER TABLE `personal`
   ADD KEY `fk_personal_depto1_idx` (`iddepto`);
 
 --
--- Indices de la tabla `Solicitud`
+-- Indices de la tabla `solicitud`
 --
 ALTER TABLE `Solicitud`
   ADD PRIMARY KEY (`idSolicitud`,`idinteresado`,`idarea`,`iddepto`),
@@ -325,9 +325,9 @@ ALTER TABLE `interesado`
 ALTER TABLE `personal`
   MODIFY `idpersonal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT de la tabla `Solicitud`
+-- AUTO_INCREMENT de la tabla `solicitud`
 --
-ALTER TABLE `Solicitud`
+ALTER TABLE `solicitud`
   MODIFY `idSolicitud` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `SolicitudToken`
@@ -360,14 +360,14 @@ ALTER TABLE `Cita`
 -- Filtros para la tabla `DiaSol`
 --
 ALTER TABLE `DiaSol`
-  ADD CONSTRAINT `DiaSol_ibfk_1` FOREIGN KEY (`idSolicitud`) REFERENCES `Solicitud` (`idSolicitud`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `DiaSol_ibfk_1` FOREIGN KEY (`idSolicitud`) REFERENCES `solicitud` (`idSolicitud`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_Dia_has_Solicitud_Dia1` FOREIGN KEY (`idDia`) REFERENCES `DiaPref` (`idDia`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `HoraSol`
 --
 ALTER TABLE `HoraSol`
-  ADD CONSTRAINT `HoraSol_ibfk_1` FOREIGN KEY (`idSolicitud`) REFERENCES `Solicitud` (`idSolicitud`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `HoraSol_ibfk_1` FOREIGN KEY (`idSolicitud`) REFERENCES `solicitud` (`idSolicitud`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_Horario_has_Solicitud_Horario1` FOREIGN KEY (`idHorario`) REFERENCES `HoraPref` (`idHorario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -383,12 +383,27 @@ ALTER TABLE `personal`
   ADD CONSTRAINT `fk_personal_depto1` FOREIGN KEY (`iddepto`) REFERENCES `depto` (`iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `Solicitud`
+-- Filtros para la tabla `solicitud`
 --
-ALTER TABLE `Solicitud`
+ALTER TABLE `solicitud`
   ADD CONSTRAINT `Solicitud_ibfk_1` FOREIGN KEY (`idinteresado`) REFERENCES `interesado` (`idinteresado`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_Solicitud_area1` FOREIGN KEY (`idarea`,`iddepto`) REFERENCES `area` (`idarea`, `iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+if(!empty($_POST['hora01'])){
+                foreach($_POST['hora01'] as $selected){
+                    //$busqueda = sprintf("SELECT idHorario FROM HoraSol WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
+                    $dia='1';
+                    //$sql = "INSERT INTO "
+                    //$msg = $msg.$horarios[$selected]."<br>";
+                }
+            }
+            else{
+                //$msg = $msg."(S/N)"
+                //$sql = "INSERT INTO Solicitud('NULL',)"
+            }
+    

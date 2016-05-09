@@ -14,6 +14,29 @@
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
 		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+            function showUser(str) {
+                if (str == "") {
+                    document.getElementById("txtHint").innerHTML = "";
+                    return;
+                } else { 
+                    if (window.XMLHttpRequest) {
+                        // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttp = new XMLHttpRequest();
+                    } else {
+                        // code for IE6, IE5
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function() {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                           
+                        }
+                    };
+                    xmlhttp.open("GET","getuser.php?q="+str,true);
+                    
+                }
+            }
+</script>
 	</head>
 	
 	<body>
@@ -93,43 +116,30 @@
             $result=mysqli_query($link,$busqueda);
             $row_cnt = mysqli_num_rows($result);
             if($row_cnt==1) {
-                $id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='Ramon' AND appaterno='$appat' AND apmaterno='$apmat'");
+                $id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
                 $result=mysqli_query($link,$id);
             }
                 else{
                     $sql = sprintf("INSERT INTO interesado (idinteresado, nombre, appaterno,apmaterno,correo,telefono)
                     VALUES (NULL,'$nombre','$appat','$apmat','$email','$telefono')");
                     $result=mysqli_query($link,$sql);
-                    $id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='Ramon' AND appaterno='$appat' AND apmaterno='$apmat'");
+                    $id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
                     $result=mysqli_query($link,$id);
                 }
             $row = mysqli_fetch_assoc($result);
-            $id=$row["idinteresado"];
+            $idint=$row["idinteresado"];
             $iddept=$_POST["departamento"];
             $idarea=$_POST["area"];
-                
-            //$sql = "INSERT INTO Solicitud(idSolicitud,asunto,)"
-            if(!empty($_POST['hora01'])){
-                foreach($_POST['hora01'] as $selected){
-                    //$sql = "INSERT INTO "
-                    //$msg = $msg.$horarios[$selected]."<br>";
-                }
-            }
-            else{
-                //$msg = $msg."(S/N)"
-                //$sql = "INSERT INTO Solicitud('NULL',)"
-            }
-    
-            
+            $soli = sprintf("INSERT INTO solicitud (idSolicitud, asunto, estado,idinteresado,idarea,iddepto)
+                    VALUES (NULL,'$asunto','PENDIENTE','$idint','$idarea','$iddept')");
+            $result=mysqli_query($link,$soli);
+            $idSol = sprintf("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='mydb' and TABLE_NAME='solicitud'");
+            $result=mysqli_query($link,$idSol);
+            $row= mysqli_fetch_array($result);
+            $tok=sprintf("INSERT INTO SolicitudToken (idtoken, idSolicitud, token) VALUES (NULL,'$row[0]-1','$string')");   
+            $result=mysqli_query($link,$tok);    
             include("cierra_conexion.php"); 
-    
-    
-    
-    
-    
-    
-    
-            if(mandarCorreo()){
+            if(mandarCorreo($string)){
                 echo "<script type='text/javascript'>
 					$(document).ready(function() {
 						$('#MSGA_09').modal();
@@ -236,6 +246,7 @@
                             <label for="departamento" class="control-label col-md-2">Departamento</label>        
                                         <div class="col-md-10">                                        
                                 <select name="departamento" class="form-control" >
+                                    <option value="">Selecciona un Departamento</option>
                                     <?php
                                         include("abre_conexion.php"); 
                                         $id=sprintf("SELECT * FROM depto");       
@@ -243,7 +254,7 @@
                                         $numero = mysqli_num_rows($resulta); // obtenemos el número de filas
                                         for($i = 1; $i <= $numero; $i++){
                                             $sql=sprintf("SELECT nombre FROM depto WHERE iddepto='$i'");
-                                            $result=mysqli_query($link,$id);
+                                            $result=mysqli_query($link,$sql);
                                             $row = mysqli_fetch_assoc($result);
                                             $nombre=$row["nombre"];
                                                                 echo ("<option value=$i>$nombre</option>");
@@ -258,23 +269,23 @@
                     <div class="form-group">
                         <label for="area" class="control-label col-md-2">Área</label>        
                                         <div class="col-md-10">                                        
-                                <select name="area" class="form-control" >
+                                <select name="area" class="form-control">
                                     <?php
                                         include("abre_conexion.php"); 
-                                        $id=sprintf("SELECT * FROM area ");       
+                                        $iddept='1'; //'$_POST["departamento"]'
+                                        $id=sprintf("SELECT * FROM area WHERE iddepto='$iddept'");       
                                         $resulta=mysqli_query($link,$id);
                                         $numero = mysqli_num_rows($resulta); // obtenemos el número de filas
+    
                                         for($i = 1; $i <= $numero; $i++){
-                                            $sql=sprintf("SELECT nombre FROM area WHERE idarea='$i'");
-                                            $result=mysqli_query($link,$id);
-                                            $row = mysqli_fetch_assoc($result);
-
-                                            $nombre=$row["nombre"];
-                                                                echo ("<option value=$i>$nombre</option>");
-                                        } 
-                                        
-                                        include("cierra_conexion.php"); 
-                                    ?>
+                                                $sql=sprintf("SELECT nombre FROM area WHERE idarea='$i' AND iddepto='$iddept'");
+                                                $result=mysqli_query($link,$sql);
+                                                $row = mysqli_fetch_assoc($result);
+                                                $nombre=$row["nombre"];
+                                            echo ("<option value=$i>$nombre</option>");
+                                        }
+                                    include("cierra_conexion.php"); 
+                                       ?> 
                                 </select>
                                         </div>                        
                     </div>
