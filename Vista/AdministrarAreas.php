@@ -92,16 +92,17 @@
                                 <?php
                                 
                                 include("abre_conexion.php");
-                                $query = "SELECT a.nombre as area,d.nombre as depto FROM area a, depto d WHERE idarea>0 and a.iddepto=d.iddepto ORDER BY a.nombre";
+                                $query = "SELECT a.nombre as area,a.idarea as idarea,d.nombre as depto FROM area a, depto d WHERE idarea>0 and a.iddepto=d.iddepto ORDER BY a.nombre";
                                 $result = mysqli_query($link, $query);
                                 
                                 while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                                    $idarea=$row['idarea'];
                                     $area = $row['area'];
                                     $depto = $row['depto'];
                                     echo "<tr>";
                                         echo "<th>$area</th>";
                                         echo "<th>$depto</th>";
-                                        echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='#'>Editar</a></th>";   
+                                        echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarAreas.php?id=$idarea'>Editar</a></th>";   
                                         echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='#'>Eliminar</a></th>  ";
                                     echo "</tr>";
                                 }
