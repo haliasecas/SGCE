@@ -128,7 +128,7 @@
 					var p = $("[name='mipass']").val();
 					$.ajax({
 						method: "POST",
-						url: "../Modelo/sesion_in.php",
+						url: "../sesion_in.php",
 						data: { miemail: m, mipass: p }
 					}).done(function(msg) {
 						if (msg == 1) error("Usuario y/o contraseña incorrectos.");
