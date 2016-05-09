@@ -1,0 +1,4 @@
+# Ignora things
+composer.*
+quickstart.php
+vendor/
