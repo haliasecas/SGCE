@@ -71,6 +71,7 @@
 
 		<?php if (!empty($_POST)) { ?>
 
+<<<<<<< HEAD
 		<?php if (($_POST["g-recaptcha-response"])) { 
 			if(!(empty($_POST))) {
 				require_once("../Modelo/enviarCorreo.php");
@@ -126,6 +127,64 @@
 			}
 			else {
 				echo "<script type='text/javascript'>
+=======
+		<?php if (($_POST["g-recaptcha-response"]))  { 
+	if(!(empty($_POST))){
+		require_once("../Modelo/enviarCorreo.php");
+		$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+		$string = '';
+		$random_string_length = 20;
+		for ($i = 0; $i < $random_string_length; $i++) {
+			$string .= $characters[rand(0, strlen($characters) - 1)];
+		}
+		$email = $_POST['email'];
+		$nombre = $_POST['nombre'];
+		$appat = $_POST['appat'];
+		$apmat = $_POST['apmat'];
+		$asunto = $_POST['asunto'];
+		$area = $_POST['area'];
+		$dpto = $_POST['departamento'];
+		$telefono=$_POST['telefono'];
+		include("abre_conexion.php"); 
+		$busqueda = sprintf("SELECT nombre,appaterno,apmaterno FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
+		$result=mysqli_query($link,$busqueda);
+		$row_cnt = mysqli_num_rows($result);
+		if($row_cnt==1) {
+			$id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
+			$result=mysqli_query($link,$id);
+		}
+		else{
+			$sql = sprintf("INSERT INTO interesado (idinteresado, nombre, appaterno,apmaterno,correo,telefono)
+                    VALUES (NULL,'$nombre','$appat','$apmat','$email','$telefono')");
+			$result=mysqli_query($link,$sql);
+			$id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
+			$result=mysqli_query($link,$id);
+		}
+		$row = mysqli_fetch_assoc($result);
+		$idint=$row["idinteresado"];
+		$iddept=$_POST["departamento"];
+		$idarea=$_POST["area"];
+        $timestamp = date('Y/m/d');
+		$soli = sprintf("INSERT INTO solicitud (idSolicitud, asunto, estado,idinteresado,dia,idarea,iddepto)
+                    VALUES (NULL,'$asunto',' ','$idint','$timestamp','$idarea','$iddept')");
+		$result=mysqli_query($link,$soli);
+		$idSol = sprintf("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='mydb' and TABLE_NAME='solicitud'");
+		$result=mysqli_query($link,$idSol);
+		$row= mysqli_fetch_array($result);
+		$idsolicitud=$row[0]-1;
+		$tok=sprintf("INSERT INTO SolicitudToken (idtoken, idSolicitud, token) VALUES (NULL,'$idsolicitud','$string')");   
+		$result=mysqli_query($link,$tok);    
+		include("cierra_conexion.php"); 
+		if(mandarCorreo($string)){
+			echo "<script type='text/javascript'>
+					$(document).ready(function() {
+						$('#MSGA_09').modal();
+					});
+				</script>";
+		}
+		else{
+			echo "<script type='text/javascript'>
+>>>>>>> 06de6b6bf209b688b4a17c4cc5d3cbbe6e4f2e11
 					$(document).ready(function() {
 						$('#MSG_E06').modal();
 					});

@@ -75,63 +75,136 @@
 			</div>
 		</nav>
 
-		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
-            <div class="container">
-                <h3><strong>Administrar departamentos</strong></h3>
-                <p>En esta sección  podrás consultar los datos de los departamentos existentes.También podrás registrar nuevos departamentos.</p> 
-                <br>
-                <br>
-                <div class="table-responsive">          
-                    <table class="table">
-                        <thead>
-                            <tr style="color: #FFF; background: #696969;">
-                                <th>Área</th>
-                                <th>Correo electrónico</th>
-                                <th>Recibido</th>
-                                <th>Estado</th>
-                                <th colspan="4">Encargado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!--<tr>
-                                <th>Departamento A</th>
-                                <th>ejemplo@dominio.com</th>
-                                <th>Nombre encargado</th>
-                                <th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
-                                <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>        
-                            </tr>-->
-                            <?php
-                                
-                                include("abre_conexion.php");
-                                $query = "SELECT nombre,iddepto  FROM area  WHERE idarea>0 ORDER BY nombre";
-                                $result = mysqli_query($link, $query);
-                                
-                                while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                                    $iddepto=$row['iddepto'];
-                                    $nombre = $row['nombre'];
-                                    
-                                    echo "<tr>";
-                                        echo "<th>$nombre</th>";
-                                        echo "<th>ejemplo@dominio.com</th>";
-                                        echo "<th>Nombre encargado</th>";
-                                        echo "<th>Nombre encargado</th>";
-                                        echo "<th>Nombre encargado</th>";
-                                        echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='#?id=$iddepto'>Editar</a></th>";   
-                                        echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='#?id=$iddepto'>Eliminar</a></th>  ";
-                                    echo "</tr>";
-                                }
-                                
-                                ?>
-                            
-                        </tbody>
-                    </table>
-                </div>
-                <div class="form-group text-right">
-				    <div class="col-md-8 col-md-offset-4">							                     
-					   <a class="btn btn-success" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
-				    </div>           
-				</div>
-            </div>                                                               
+		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
+			<div class="container-fluid col-md-10 col-md-offset-1">
+				<h3><strong>Ver más</strong></h3>
+				<p>Una vez agendada la cita se enviará la confirmación directamente al correo electrónico
+					indicado y el estado de la solicitud pasará a "AGENDADA".<br> Si la cita es rechazada, 
+					se notificará automáticamente al correo electrónico indicado y el estado
+					de la solicitud parasá a "RECHAZADA"</p>
+				<br><br>
+				<form class="form-horizontal">
+					<h4 class="text-uppercase">Datos del interesado:</h4>
+
+					<!-- Correo electrónico -->
+					<div class="form-group has-feedback" id="Email01">                                                            
+						<label  class="control-label col-md-2">Correo electrónico</label>
+						<div class="col-md-10">
+							<p class="form-control-static" id="correoE01" name="email">ejemplo@dominio.com</p>	
+						</div>
+						<br>
+					</div>
+
+					<!--Nombre-->
+					<div class="form-group has-feedback" id="Nombre">
+						<label class="control-label col-md-2">Nombre(s)</label>
+						<div class="col-md-10">
+							<p class="form-control-static" id="nombre" name="nombre">Francisco</p>
+						</div>
+						<br>       
+					</div>
+
+					<!--Apellido Paterno-->
+					<div class="form-group has-feedback" id="ApellidoP">
+						<label  for="appat" class="control-label col-md-2">Apellido paterno</label>
+						<div class="col-md-10">
+							<p class="form-control-static" id="appat" name="appat">Pérez</p>
+						</div>
+						<br>       
+					</div>
+
+					<!--Apellido Materno-->
+					<div class="form-group has-feedback" id="ApellidoM">
+						<label  for="apmat" class="control-label col-md-2">Apellido materno</label>
+						<div class="col-md-10">
+							<p class="form-control-static" id="apmat" name="apmat">Pérez</p>
+						</div>
+						<br>   
+					</div>
+
+					<!--Teléfono-->
+					<div class="form-group has-feedback" id="Telefono">
+						<label  for="telefono" class="control-label col-md-2">Teléfono</label>
+						<div class="col-md-10">
+							<p class="form-control-static" id="telefono" name="telefono">55555555</p>
+							<br><br>
+						</div>
+					</div>
+
+					<h4 class="text-uppercase">Datos de la cita:</h4>
+
+					<!--Area-->
+					<div class="form-group">
+						<label class="control-label col-md-2">Área</label>        
+						<div class="col-md-10">                                        
+							<p class="form-control-static" id="area" name="area">Movilidad académica</p>
+						</div>                        
+					</div>
+
+					<!--Asunto-->
+					<div class="form-group has-feedback" id="Asunto">
+						<label class="control-label col-md-2">Asunto</label>
+						<div class="col-md-10">
+							<p class="form-control-static" id="asunto" name="asunto">Breve descripción del asunto de la cita</p>
+						</div>
+						<br> 
+					</div>
+
+					<!-- Horarios -->
+					<div class="form-group has-feedback" id="Horarios">
+						<label class="control-label col-md-2">Horario(s) preferente(s)</label>
+						<div class="col-md-10">
+							<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
+							<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
+							<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
+						</div>
+						<br> 
+					</div>
+
+					<!-- Acción -->
+					<div class="form-group has-feedback" id="Accion">
+						<label class="control-label col-md-2"><p class="text-success">Khé kiere PRRO?</p></label>
+						<div class="col-md-10">
+							<select class="form-control">
+								<option>Agendar</option>
+								<option>Nel PRRO</option>
+							</select>
+						</div>
+						<br> 
+					</div>
+
+					<!-- Día -->
+					<div class="form-group has-feedback" id="Dia">
+						<label class="control-label col-md-2">Día</label>
+						<div class="col-md-10">
+							<select class="form-control">
+								<option>DD/MM/AAAA</option>
+							</select>
+						</div>
+						<br> 
+					</div>
+
+					<!-- Horario -->
+					<div class="form-group has-feedback" id="Horario">
+						<label class="control-label col-md-2">Hora</label>
+						<div class="col-md-10">
+							<select class="form-control">
+								<option>9:00 - 10:00 hrs.</option>
+							</select>
+						</div>
+						<br> 
+					</div>
+					
+					<!-- Botones -->
+					<div class="form-group text-right" style="padding-top: 9px;">
+						 <div class="col-md-10 col-md-offset-2">
+							 <button class="btn btn-success" type="reset" style="width: 150px;">CANCELAR</button>
+							 <a class="btn btn-success" style="width: 150px;">ENVIAR</a>
+						</div>
+					</div>
+
+				</form>
+			</div>
 		</div>
 
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
