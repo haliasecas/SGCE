@@ -107,8 +107,9 @@
 			$idint=$row["idinteresado"];
 			$iddept=$_POST["departamento"];
 			$idarea=$_POST["area"];
-			$soli = sprintf("INSERT INTO solicitud (idSolicitud, asunto, estado,idinteresado,idarea,iddepto)
-						VALUES (NULL,'$asunto',' ','$idint','$idarea','$iddept')");
+            $timestamp = date('Y/m/d');
+			$soli = sprintf("INSERT INTO solicitud (idSolicitud, asunto, estado,idinteresado,dia,idarea,iddepto)
+						VALUES (NULL,'$asunto',' ','$idint','$timestamp','$idarea','$iddept')");
 			$result=mysqli_query($link,$soli);
 			$idSol = sprintf("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='mydb' and TABLE_NAME='solicitud'");
 			$result=mysqli_query($link,$idSol);
