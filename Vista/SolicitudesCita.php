@@ -10,27 +10,6 @@
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <script>
-            <?php
-  echo ("$(document).ready(function() {
-   /* Try to dis-comment this:
-   $('#a').click(function () {
-    alert('jQuery.click()');
-    return true;
-   });
-   */
-  });
-  function button_onClick() {
-   $('#a').click();
-  }
-  function a_onClick(objref) {
-      var hola=objref.id;
-      alert(hola);
-  }");     
-    ?>
-      
- </script>
 	</head>
 
 	<body>
@@ -65,15 +44,15 @@
 								<li><a href="../Vista/SolicitarCita.php">
 									<span><img src="../Img/333.png" height="36px"></span>
 									Calendario
-								</a></li>
+									</a></li>
 								<li><a href="./InformesySugerencias.php">
 									<span><img src="../Img/22.png" height="36px"></span>
 									Informes y Sugerencias
-								</a></li>
+									</a></li>
 								<li><a href="#">
 									<span><img src="../Img/11.png" height="36px"></span>
 									Solicitudes de citas
-								</a></li>
+									</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -84,11 +63,11 @@
 								<li><a href="./CambiarContrasena.php">
 									<span><img src="../Img/Edit2.png" height="36px"></span>
 									Cambiar contraseña
-								</a></li>
+									</a></li>
 								<li><a href="../cierra_sesion.php">
 									<span><img src="../Img/Out.png" height="36px"></span>
 									Cerrar sesión
-								</a></li>
+									</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -97,74 +76,97 @@
 		</nav>
 
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
-            <div class="container">
-                <h3><strong>Solicitudes de citas</strong></h3>
-                <p>En esta sección  podrás consultar y administrar las solicitudes de citas recibidas.</p> 
-                <br>
-                <br>
-                <div class="table-responsive">          
-                    <table class="table">
-                        <thead>
-                            <tr style="color: #FFF; background: #696969;">
-                                <th>Área</th>
-                                <th>Correo electrónico</th>
-                                <th>Recibido</th>
-                                <th colspan="4">Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!--<tr>
-                                <th>Departamento A</th>
-                                <th>ejemplo@dominio.com</th>
-                                <th>Nombre encargado</th>
-                                <th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
-                                <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>        
-                            </tr>-->
-                            <?php
-                                
-                                include("abre_conexion.php");
-                                $query = "SELECT idSolicitud,idarea,dia,estado,idinteresado FROM solicitud";
-                                $result = mysqli_query($link, $query);
-                                echo "<form action='prueba.php' method='post' name='testform'>";
-                                while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                                    $idarea=$row['idarea'];
-                                    $id = sprintf("SELECT nombre FROM area WHERE idarea='$idarea'");
-                                    $result2=mysqli_query($link,$id);
-                                    $rowarea = mysqli_fetch_assoc($result2);
-                                    $area = $rowarea['nombre'];
-                                    $idinteresado=$row['idinteresado'];
-                                    $id = sprintf("SELECT correo FROM interesado WHERE idinteresado='$idinteresado'");
-                                    $result3=mysqli_query($link,$id);
-                                    $rowinteresado = mysqli_fetch_assoc($result3);
-                                    $correo = $rowinteresado['correo'];
-                                    $recibido=$row['dia'];
-                                    $estado=$row['estado'];
-                                    $idsolicitud=$row['idSolicitud'];
-                                    echo "<tr>";
-                                        echo "<th>$area</th>";
-                                        echo "<th>$correo</th>";
-                                        echo "<th>$recibido</th>";
-                                        echo "<th>$estado</th>";
-                                        //echo "<input type='submit' name='data' value='M'.$idsolicitud>";
-                                           //echo "<a name='adios' href = '#'  id = 'solution2' onClick='submit';'>Solution1 </a>";
-                                           //echo "<a name='hola' href = '#'  id = 'solution1' onClick='submit';'>Solution1 </a>";
-                                        echo "<input type='submit' name='data' value=$idsolicitud>";
-                                        //echo "<th><a class=' text-success text-right '  style = 'text-decoration:underline;' id=$idsolicitud' >Ver más</a></th>";
-                                        //echo "<th><a class=' text-success text-right delete-rod' style = 'text-decoration:underline;'  id=$idsolicitud' href=#>Eliminar</a></th> ";
-                                    echo "</tr>";
-                                }
-                                echo"</form>";
-                                ?>
-                            
-                        </tbody>
-                    </table>
-                </div>
-                <div class="form-group text-right">
-				    <div class="col-md-8 col-md-offset-4">							                     
-					   <a class="btn btn-success" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
-				    </div>           
+			<div class="container">
+				<h3><strong>Solicitudes de citas</strong></h3>
+				<p>En esta sección  podrás consultar y administrar las solicitudes de citas recibidas.</p> 
+				<br>
+				<br>
+				<div class="table-responsive">          
+					<table class="table">
+						<thead>
+							<tr style="color: #FFF; background: #696969;">
+								<th>Área</th>
+								<th>Correo electrónico</th>
+								<th>Recibido</th>
+								<th colspan="4">Estado</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="eg1">
+								<td>Departamento A</td>
+								<td>ejemplo@dominio.com</td>
+								<td>Nombre encargado</td>
+								<td>PENDIENTE</td>
+								<td><p class="click-me text-success text-right"  style="text-decoration:underline;" id="1">Editar</p></td>
+								<td><p class="click-me text-success text-right" style="text-decoration:underline;"  id="2">Eliminar</p></td>
+							</tr>
+							<tr id="eg2">
+								<td>Departamento B</td>
+								<td>ejemplo@dominio.com</td>
+								<td>Nombre encargado</td>
+								<td>APROBADO</td>
+								<td><p class="click-me text-success text-right"  style="text-decoration:underline;" id="1">Editar</p></td>
+								<td><p class="click-me text-success text-right" style="text-decoration:underline;"  id="2">Eliminar</p></td>
+							</tr>
+							<script type="text/javascript">
+								$(".click-me").click(function() {
+									$idD = this.id;
+									$idP = $(this).parent().id;
+									$.ajax({
+										method: "POST",
+										url: "SolicitudCita.php",
+										data: { value: $idD, parent: $idP }
+									}).done(function(msg){
+										console.log(msg);
+									});
+								});
+							</script>
+							<?php
+
+							include("abre_conexion.php");
+							$query = "SELECT idSolicitud,idarea,dia,estado,idinteresado FROM solicitud";
+							$result = mysqli_query($link, $query);
+							echo "<form action='prueba.php' method='post' name='testform'>";
+							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+								$idarea=$row['idarea'];
+								$id = sprintf("SELECT nombre FROM area WHERE idarea='$idarea'");
+								$result2=mysqli_query($link,$id);
+								$rowarea = mysqli_fetch_assoc($result2);
+								$area = $rowarea['nombre'];
+								$idinteresado=$row['idinteresado'];
+								$id = sprintf("SELECT correo FROM interesado WHERE idinteresado='$idinteresado'");
+								$result3=mysqli_query($link,$id);
+								$rowinteresado = mysqli_fetch_assoc($result3);
+								$correo = $rowinteresado['correo'];
+								$recibido=$row['dia'];
+								$estado=$row['estado'];
+								$idsolicitud=$row['idSolicitud'];
+								echo "<tr>";
+								echo "<th>$area</th>";
+								echo "<th>$correo</th>";
+								echo "<th>$recibido</th>";
+								echo "<th>$estado</th>";
+								//echo "<input type='submit' name='data' value='M'.$idsolicitud>";
+								//echo "<a name='adios' href = '#'  id = 'solution2' onClick='submit';'>Solution1 </a>";
+								//echo "<a name='hola' href = '#'  id = 'solution1' onClick='submit';'>Solution1 </a>";
+								echo "<input type='submit' name='data' value=$idsolicitud>";
+								//echo "<th><a class=' text-success text-right '  style = 'text-decoration:underline;' id=$idsolicitud' >Ver más</a></th>";
+								//echo "<th><a class=' text-success text-right delete-rod' style = 'text-decoration:underline;'  id=$idsolicitud' href=#>Eliminar</a></th> ";
+								echo "</tr>";
+							}
+							echo"</form>";
+							?>
+
+						</tbody>
+					</table>
 				</div>
-            </div>                                                               
+				<div class="form-group text-right">
+					<div class="col-md-8 col-md-offset-4">							                     
+						<a class="btn btn-success" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
+					</div>           
+				</div>
+			</div>                                                               
 		</div>
 
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">

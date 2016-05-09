@@ -233,7 +233,6 @@
 						<label for="departamento" class="control-label col-md-2">Departamento</label>        
 						<div class="col-md-10">                                        
 							<select name="departamento" class="form-control" onChange="despAreas();">
-								<option value=0>Hola</option>
 								<?php
 								include("abre_conexion.php"); 
 								$id = sprintf("SELECT * FROM depto");     
@@ -424,6 +423,7 @@
 						</label>
 						<div class="col-md-4" id="html_element" style="padding-top: 18px;"></div>
 					</div>
+					
 					<!--Boton-->
 					<div class="form-group text-right" style="padding-top: 9px;">
 						<div class="col-md-10 col-md-offset-2">
@@ -521,6 +521,7 @@
 
 		<script type="text/javascript">
 			$(document).ready(function() {
+				despAreas();
 				// Sticky bar plz
 				$(window).scroll(function() {
 					if ($(window).scrollTop() > $("#header").height()) {
