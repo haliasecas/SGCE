@@ -247,7 +247,6 @@
                             <label for="departamento" class="control-label col-md-2">Departamento</label>        
                                         <div class="col-md-10">                                        
                                 <select name="departamento" class="form-control" >
-                                    <option value="">Selecciona un Departamento</option>
                                     <?php
                                         include("abre_conexion.php"); 
                                         $id=sprintf("SELECT * FROM depto");       
