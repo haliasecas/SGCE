@@ -10,6 +10,27 @@
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <script>
+            <?php
+  echo ("$(document).ready(function() {
+   /* Try to dis-comment this:
+   $('#a').click(function () {
+    alert('jQuery.click()');
+    return true;
+   });
+   */
+  });
+  function button_onClick() {
+   $('#a').click();
+  }
+  function a_onClick(objref) {
+      var hola=objref.id;
+      alert(hola);
+  }");     
+    ?>
+      
+ </script>
 	</head>
 
 	<body>
@@ -77,8 +98,8 @@
 
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
             <div class="container">
-                <h3><strong>Administrar departamentos</strong></h3>
-                <p>En esta sección  podrás consultar los datos de los departamentos existentes.También podrás registrar nuevos departamentos.</p> 
+                <h3><strong>Solicitudes de citas</strong></h3>
+                <p>En esta sección  podrás consultar y administrar las solicitudes de citas recibidas.</p> 
                 <br>
                 <br>
                 <div class="table-responsive">          
@@ -88,8 +109,7 @@
                                 <th>Área</th>
                                 <th>Correo electrónico</th>
                                 <th>Recibido</th>
-                                <th>Estado</th>
-                                <th colspan="4">Encargado</th>
+                                <th colspan="4">Estado</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -103,24 +123,37 @@
                             <?php
                                 
                                 include("abre_conexion.php");
-                                $query = "SELECT nombre,iddepto  FROM area  WHERE idarea>0 ORDER BY nombre";
+                                $query = "SELECT idSolicitud,idarea,dia,estado,idinteresado FROM solicitud";
                                 $result = mysqli_query($link, $query);
-                                
+                                echo "<form action='prueba.php' method='post' name='testform'>";
                                 while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                                    $iddepto=$row['iddepto'];
-                                    $nombre = $row['nombre'];
-                                    
+                                    $idarea=$row['idarea'];
+                                    $id = sprintf("SELECT nombre FROM area WHERE idarea='$idarea'");
+                                    $result2=mysqli_query($link,$id);
+                                    $rowarea = mysqli_fetch_assoc($result2);
+                                    $area = $rowarea['nombre'];
+                                    $idinteresado=$row['idinteresado'];
+                                    $id = sprintf("SELECT correo FROM interesado WHERE idinteresado='$idinteresado'");
+                                    $result3=mysqli_query($link,$id);
+                                    $rowinteresado = mysqli_fetch_assoc($result3);
+                                    $correo = $rowinteresado['correo'];
+                                    $recibido=$row['dia'];
+                                    $estado=$row['estado'];
+                                    $idsolicitud=$row['idSolicitud'];
                                     echo "<tr>";
-                                        echo "<th>$nombre</th>";
-                                        echo "<th>ejemplo@dominio.com</th>";
-                                        echo "<th>Nombre encargado</th>";
-                                        echo "<th>Nombre encargado</th>";
-                                        echo "<th>Nombre encargado</th>";
-                                        echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='#?id=$iddepto'>Editar</a></th>";   
-                                        echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='#?id=$iddepto'>Eliminar</a></th>  ";
+                                        echo "<th>$area</th>";
+                                        echo "<th>$correo</th>";
+                                        echo "<th>$recibido</th>";
+                                        echo "<th>$estado</th>";
+                                        //echo "<input type='submit' name='data' value='M'.$idsolicitud>";
+                                           //echo "<a name='adios' href = '#'  id = 'solution2' onClick='submit';'>Solution1 </a>";
+                                           //echo "<a name='hola' href = '#'  id = 'solution1' onClick='submit';'>Solution1 </a>";
+                                        echo "<input type='submit' name='data' value=$idsolicitud>";
+                                        //echo "<th><a class=' text-success text-right '  style = 'text-decoration:underline;' id=$idsolicitud' >Ver más</a></th>";
+                                        //echo "<th><a class=' text-success text-right delete-rod' style = 'text-decoration:underline;'  id=$idsolicitud' href=#>Eliminar</a></th> ";
                                     echo "</tr>";
                                 }
-                                
+                                echo"</form>";
                                 ?>
                             
                         </tbody>
