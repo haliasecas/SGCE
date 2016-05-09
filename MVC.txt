@@ -1,0 +1,14 @@
+¿Qué va en cada Carpeta?
+
+El MVC es un patron de diseño bla bla bla bla..., el punto aquí es la separación en sus tres partes
+que son las Sguientes:
+
+
+Modelo: Aquí en esta carpeta van las clases que van a hacer referencia con la base de datos, en general es la lógica de negocio.
+
+Vista: Son las páginas que se muestran al usuario,tales como información relevante y legible.
+
+Controlador: Es el que se encarga entre la interacción entre el modelo y la vista, pero exactamente a que se refiere, bueno a las interacciones que el usuario realiza en la vista y las peticiones que realiza al modelo que devuelve el resultado a la vista, sin tanto choro son llamadas a clases y a metodos y los datos recibidos de los formularios.
+
+
+
