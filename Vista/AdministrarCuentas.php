@@ -64,94 +64,67 @@
 				</div>
 			</div>
 		</nav>
-        
-        <?php 
-            if(isset($_GET["id"]))
-	           $id = $_GET['id'];
-            include("abre_conexion.php");
-            $query = "SELECT * FROM personal WHERE idpersonal = '$id'";
-            $result = mysqli_query($link, $query);
-            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-            $appaterno=$row['appaterno'];
-            $nombre = $row['nombre'];
-            $apmaterno=$row['apmaterno'];
-            $correo = $row['correo'];
-            
-        ?>
-		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
-            <div class="container">
-                <h3><strong>Editar cuenta</strong></h3>
-                <p><strong class="text-success">Todos los campos son obligatorios.</strong> El nombre del departamento debe estar previamente registrado en el sistema.</p> 
-                <br>
-                <br>                                
-                <form action="" class="form-horizontal">
-                    <div class="form-group">
-                        <label  for="" class="control-label col-md-2">Nombre(s)</label>
-                        <div class="col-md-10">
-                           <?php 
-                            echo "<input type='nombre' class='form-control' value='$nombre' >"
-                            ?>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <label  for="" class="control-label col-md-2">Apellido paterno</label>
-                        <div class="col-md-10">
-                            <?php 
-                            echo "<input type='appaterno' class='form-control' value='$appaterno' >"
-                            ?>
-                           
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <label  for="" class="control-label col-md-2">Apellido materno</label>
-                        <div class="col-md-10">
-                            <?php 
-                            echo "<input type='apmaterno' class='form-control' value='$apmaterno' >"
-                            ?>
-                           
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <label  for="" class="control-label col-md-2">Correo electrónico</label>
-                        <div class="col-md-10">
-                            <?php 
-                            echo "<input type='apmaterno' class='form-control' value='$correo' >"
-                            ?>
-                           
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <label  for="" class="control-label col-md-2">Nombre del departamento</label>
-                        <div class="col-md-10">                                        
-                            <select name="departamento" class="form-control">
-                               <!-- <option value="DepartamentoA">Departamento A</option> -->
-                                <?php
-                                    $query = "SELECT * FROM depto";
-                                    $result2 = mysqli_query($link, $query);
-                                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                                    while($row = mysqli_fetch_array($result2, MYSQLI_ASSOC)){
-                                        $nombredepto= $row['nombre'];
-                                        echo "<option value='DepartamentoA'>$nombredepto</option>";
-                                    }
-                                ?>
-                            </select>
-                        </div>                                                                       
-                        <br><br><br>                                                 
-                        <div class="form-group text-right">
-                            <div class="col-md-8 col-md-offset-4">
-                                <a class="btn btn-success" style="width: 150px;" onclick="#">CANCELAR</a>
-                                <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
-                            </div>
-                        </div>
-                    </div>
-                </form>   
-            </div>
-        </div>
 		
+		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
+            <div class="container">
+                <h3><strong>Administrar cuentas</strong></h3>
+                <p>En esta sección  podrás consultar los datos de los usuarios existentes.También podrás registrar nuevos usuarios.</p> 
+                <br>
+                <br>
+                <div class="table-responsive">          
+                    <table class="table">
+                        <thead>
+                            <tr style="color: #FFF; background: #696969;">
+                                <th>Nombre</th>
+                                <th>Apellido Paterno</th>
+                                <th>Apellido Materno</th>
+                                <th>Correo</th>
+                                <th colspan="4">Cargo</th>
+                                <!--<th colspan="4">Encargado</th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <?php
+                                
+                                include("abre_conexion.php");
+                                $query = "SELECT *  FROM personal  WHERE idpersonal>0 ORDER BY nombre";
+                                $result = mysqli_query($link, $query);
+                                
+                                while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                                    $appaterno=$row['appaterno'];
+                                    $nombre = $row['nombre'];
+                                    $apmaterno=$row['apmaterno'];
+                                    $correo = $row['correo'];
+                                    $cargo = $row['cargo'];
+                                    $idpersonal = $row['idpersonal'];
+                                    
+                                    echo "<tr>";
+                                        echo "<th>$nombre</th>";
+                                        echo "<th>$appaterno</th>";
+                                        echo "<th>$apmaterno</th>";
+                                        echo "<th>$correo</th>";   
+                                    if($cargo==2)
+                                        echo "<th>Personal Administrativo</th>  ";
+                                    else
+                                        echo "<th>Administrador</th>  ";
+                                    echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarCuenta.php?id=$idpersonal'>Editar</a></th>";   
+                                    echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='#?id=$idpersonal'>Eliminar</a></th>  ";
+                                    echo "</tr>";
+                                }
+                                
+                                ?>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-group text-right">
+				    <div class="col-md-8 col-md-offset-4">							                     
+					   <a class="btn btn-success" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
+				    </div>           
+				</div>
+            </div>                                                               
+		</div>
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
@@ -203,7 +176,7 @@
 						$("#top-bar").addClass("navbar-fixed-top");
 						$("#main-content").css({"padding-top":"90px"});
 					}
-					if ($(window).scrollTop() <= $("#header").height()) {
+					if ($(window).scrollTop() < $("#header").height()) {
 						$("#top-bar").removeClass("navbar-fixed-top");
 						$("#main-content").css({"padding-top":"0px"});
 					}
