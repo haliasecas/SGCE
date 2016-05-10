@@ -69,13 +69,6 @@
 		if (!empty($_POST)) {
 			if (($_POST["g-recaptcha-response"])) { 
 				if(!(empty($_POST))) {
-					require_once("../Modelo/enviarCorreo.php");
-					$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-					$string = '';
-					$random_string_length = 20;
-					for ($i = 0; $i < $random_string_length; $i++) {
-						$string .= $characters[rand(0, strlen($characters) - 1)];
-					}
 					$email = $_POST['email'];
 					$nombre = $_POST['nombre'];
 					$appat = $_POST['appat'];
@@ -84,7 +77,15 @@
 					$area = $_POST['area'];
 					$dpto = $_POST['departamento'];
 					$telefono = $_POST['telefono'];
+
 					include("abre_conexion.php"); 
+					require_once("../Modelo/enviarCorreo.php");
+					$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+					$string = '';
+					$random_string_length = 20;	//GENERAMOS EL TOKEN
+					for ($i = 0; $i < $random_string_length; $i++) {
+						$string .= $characters[rand(0, strlen($characters) - 1)];
+					}
 					$busqueda = sprintf("SELECT nombre,appaterno,apmaterno FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
 					$result=mysqli_query($link,$busqueda);
 					$row_cnt = mysqli_num_rows($result);
@@ -110,9 +111,9 @@
 					$row= mysqli_fetch_array($result);
 					$idsolicitud=$row[0]-1;
 					$tok=sprintf("INSERT INTO SolicitudToken (idtoken, idSolicitud, token) VALUES (NULL,'$idsolicitud','$string')");   
-					$result=mysqli_query($link,$tok);    
-					include("cierra_conexion.php"); 
-					if (mandarCorreo($string)) {
+					$result=mysqli_query($link,$tok);
+					include("cierra_conexion.php");
+					if (mandarCorreoSolicitud($nombre,$appat,$apmat,$email,$string)) {
 						echo 
 							"<script type='text/javascript'>
 								$(document).ready(function() {
@@ -129,7 +130,7 @@
 							</script>";
 					} 
 				}
-				else { 
+				else {
 				}
 			}
 		}

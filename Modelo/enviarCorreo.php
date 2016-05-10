@@ -1,11 +1,6 @@
 <?php
-function mandarCorreo($stringtoken) {
+function mandarCorreoSolicitud($nombre,$appat,$apmat,$email,$stringtoken) {
 header("Content-Type: text/html;charset=utf-8");
-$email = $_POST['email'];
-$nombre = $_POST['nombre'];
-$appat = $_POST['appat'];
-$apmat = $_POST['apmat'];
-
 require 'PHPMailerAutoload.php';
 $mail = new PHPMailer();
 $mail->IsSMTP();
@@ -33,15 +28,7 @@ $horarios = array(' ','9:00-10:00','13:00-14:00','20:00-21:00','10:00-11:00','14
     }
     else
         $msg = $msg."(S/N)";
-$msg=$msg."Y el dia:".$_POST['date02']."<br>Con horarios:<br>";
-    if(!empty($_POST['hora02'])){
-        foreach($_POST['hora02'] as $selected){
-            $msg = $msg.$horarios[$selected]."<br>";
-        }
-    }
-    else
-        $msg = $msg."(S/N)";
-$enlace = $_SERVER['SERVER_NAME']."/SGCE/SGCE/Validar.php?token=".$stringtoken;
+$enlace = $_SERVER['SERVER_NAME']."/SGCE/Vista/Validar.php?token=".$stringtoken;
 $msg=$msg."<b>Da click en el siguiente enlace: <a href='$enlace'>Validar Cita</a></b> <br>";
 $msg=$msg."Recibirás un correo electrónico a esta misma dirección sobre la confirmación o negación de tu cita en menos de 24 horas, de lo contrario favor de comunicarte al 57296000<br>";
 $msg=$msg."Gracias por utilizar el sistema generador de citas de ESCOM <br>";
