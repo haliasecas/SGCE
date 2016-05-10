@@ -1,7 +1,7 @@
-# Ignora things
+# Ignore files
 
+Modelo/abre_conexion.php
 client_secret*
-Vista/abre_conexion.php
 composer.*
 quickstart.php
 vendor/

@@ -21,7 +21,8 @@
 			<img src="../Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
-
+		
+		<!-- Nueva nav -->
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
@@ -40,6 +41,98 @@
 
 				<div class="collapse navbar-collapse" id="header-bar">
 					<ul class="nav navbar-nav navbar-right" style="padding-top:12px;">
+
+						<?php
+						if (isset($_COOKIE["cargo"])) {
+						?>
+						<?php if($_COOKIE["cargo"]==1){ ?>
+
+						<!--  Administrador -->
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Administrador<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="../Vista/AdministrarDepartamentos.php">
+									<span><img src="../Img/Admin_Dep.png" height="36px"></span>
+									Administrar departamentos
+									</a></li>
+								<li><a href="../Vista/AdministrarAreas.php">
+									<span><img src="../Img/Admin_Area.png" height="36px"></span>
+									Administrar areas
+									</a></li>
+								<li><a href="../Vista/AdministrarCuentas.php">
+									<span><img src="../Img/Admin_Cont.png" height="36px"></span>
+									Administrar cuentas
+									</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="../Img/loginiGreen.png" height="30px"></span> Bienvenido(a)<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="../Vista/CambiarContrasena.php">
+									<span><img src="../Img/Edit2.png" height="36px"></span>
+									Cambiar contraseña
+									</a></li>
+								<li><a href="cierra_sesion.php">
+									<span><img src="../Img/Out.png" height="36px"></span>
+									Cerrar sesión
+									</a></li>
+							</ul>
+						</li>
+
+
+						<?php }else{?> 
+
+
+						<!-- Personal administrativo -->                    
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Personal Administrativo<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="../Vista/Calendario.php">
+									<span><img src="../Img/333.png" height="36px"></span>
+									Calendario
+									</a></li>
+								<li><a href="../Vista/VerInformesYS.php">
+									<span><img src="../Img/22.png" height="36px"></span>
+									Informes y Sugerencias
+									</a></li>
+								<li><a href="../Vista/SolicitudesCita.php">
+									<span><img src="../Img/11.png" height="36px"></span>
+									Solicitudes de citas
+									</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="../Img/loginiGreen.png" height="30px"></span> Bienvenido(a)<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="../Vista/CambiarContrasena.php">
+									<span><img src="../Img/Edit2.png" height="36px"></span>
+									Cambiar contraseña
+									</a></li>
+								<li><a href="cierra_sesion.php">
+									<span><img src="../Img/Out.png" height="36px"></span>
+									Cerrar sesión
+									</a></li>
+							</ul>
+						</li>
+
+
+
+						<?php } ?>
+
+
+						<?php
+						}else{
+						?>
+
+						<!--  Visitante -->
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
@@ -60,6 +153,10 @@
 								<span><img src="../Img/loginiGreen.png" height="30px"></span> Iniciar sesión (Administrador)
 							</a>
 						</li>
+
+						<?php
+						}			
+						?>
 					</ul>
 				</div>
 			</div>
@@ -68,14 +165,7 @@
 		<?php 
 		if (!empty($_POST)) {
 			if (($_POST["g-recaptcha-response"])) { 
-				if(!(empty($_POST))) {
-					require_once("../Modelo/enviarCorreo.php");
-					$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-					$string = '';
-					$random_string_length = 20;
-					for ($i = 0; $i < $random_string_length; $i++) {
-						$string .= $characters[rand(0, strlen($characters) - 1)];
-					}
+				if (!(empty($_POST))) {
 					$email = $_POST['email'];
 					$nombre = $_POST['nombre'];
 					$appat = $_POST['appat'];
@@ -84,9 +174,17 @@
 					$area = $_POST['area'];
 					$dpto = $_POST['departamento'];
 					$telefono = $_POST['telefono'];
-					include("abre_conexion.php"); 
+
+					include("../Modelo/abre_conexion.php"); 
+					require_once("../Modelo/enviarCorreo.php");
+					$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+					$string = '';
+					$random_string_length = 20;	//GENERAMOS EL TOKEN
+					for ($i = 0; $i < $random_string_length; $i++) {
+						$string .= $characters[rand(0, strlen($characters) - 1)];
+					}
 					$busqueda = sprintf("SELECT nombre,appaterno,apmaterno FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
-					$result=mysqli_query($link,$busqueda);
+					$result=mysqli_query($link, $busqueda);
 					$row_cnt = mysqli_num_rows($result);
 					if($row_cnt==1) {
 						$id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
@@ -102,6 +200,8 @@
 					$idint=$row["idinteresado"];
 					$iddept=$_POST["departamento"];
 					$idarea=$_POST["area"];
+					echo "$iddept";
+					//echo $_POST['datas'];
 					$timestamp = date('Y/m/d');
 					$soli = sprintf("INSERT INTO solicitud (idSolicitud, asunto, estado,idinteresado,dia,idarea,iddepto) VALUES (NULL,'$asunto',' ','$idint','$timestamp','$idarea','$iddept')");
 					$result=mysqli_query($link,$soli);
@@ -110,9 +210,15 @@
 					$row= mysqli_fetch_array($result);
 					$idsolicitud=$row[0]-1;
 					$tok=sprintf("INSERT INTO SolicitudToken (idtoken, idSolicitud, token) VALUES (NULL,'$idsolicitud','$string')");   
-					$result=mysqli_query($link,$tok);    
-					include("cierra_conexion.php"); 
-					if (mandarCorreo($string)) {
+					$result=mysqli_query($link,$tok);
+					if(!empty($_POST['hora01'])){
+				        foreach($_POST['hora01'] as $selected){
+				        	$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
+							$result=mysqli_query($link,$tok);
+				        }
+    				}
+					include("../Modelo/cierra_conexion.php");
+					if (mandarCorreoSolicitud($nombre, $appat, $apmat, $email, $string)) {
 						echo 
 							"<script type='text/javascript'>
 								$(document).ready(function() {
@@ -129,7 +235,7 @@
 							</script>";
 					} 
 				}
-				else { 
+				else {
 				}
 			}
 		}
@@ -165,6 +271,7 @@
 						</div>
 						<br>                                
 					</div>
+					
 					<div class="form-group has-feedback has-error">
 						<div class="col-md-10 col-md-offset-2">
 							<span id="email03" class="text-center help-block hidden">
@@ -225,30 +332,28 @@
 					<h4 class="text-uppercase">Datos de la cita:</h4>
 
 					<!--Departamento-->
-					<div class="form-group">
-						<label for="departamento" class="control-label col-md-2">Departamento</label>        
+					<div class="form-group" id="Departamento">
+						<label class="control-label col-md-2">Departamento</label>        
 						<div class="col-md-10">                                        
 							<select name="departamento" class="form-control" onChange="despAreas();">
 								<?php
-								include("abre_conexion.php"); 
-								$id = sprintf("SELECT * FROM depto");     
-								$resulta = mysqli_query($link,$id);
-								$numero = mysqli_num_rows($resulta); // obtenemos el número de filas
-								for ($i = 1; $i <= $numero; $i++) {
-									$sql = sprintf("SELECT nombre FROM depto WHERE iddepto='$i'");
-									$result = mysqli_query($link, $sql);
-									$row = mysqli_fetch_assoc($result);
-									$nombre = $row["nombre"];
-									echo ("<option value=$i>$nombre</option>");
-								}
-								include("cierra_conexion.php"); 
+									include("../Modelo/abre_conexion.php"); 
+									$id = sprintf("SELECT * FROM depto");     
+									$resulta = mysqli_query($link,$id);
+									$numero = mysqli_num_rows($resulta); // obtenemos el número de filas
+									while ($row = mysqli_fetch_array($resulta, MYSQLI_ASSOC)) {
+										$nombredepto= $row['nombre'];
+										$iddepto = $row["iddepto"];
+										echo "<option value='$iddepto'>$nombredepto</option>";
+									}
+									include("../Modelo/cierra_conexion.php"); 
 								?>
 							</select>
 						</div>                        
 					</div>
 
 					<!--Area-->
-					<div class="form-group">
+					<div class="form-group" id="Area">
 						<label class="control-label col-md-2">Área</label>        
 						<div class="col-md-10">                                        
 							<select name="area" class="form-control">
@@ -257,11 +362,10 @@
 										$("[name='area']").text("");
 										$.ajax({
 											method: "POST",
-											url: "getAreas.php",
+											url: "../Modelo/getAreas.php",
 											data: { value: $("[name='departamento']").val() }
-										})
-											.done(function(msg){
-											$("[name='area']").append("<option value=1>" + msg + "</option>");
+										}).done(function(msg){
+											$("[name='area']").append(msg);
 										});
 									}
 								</script>
@@ -350,7 +454,7 @@
 							});
 						});
 					</script>
-					
+
 					<div class="form-group text-right" id="recaptcha">
 						<label for="nombre" class="control-label col-md-4" style="padding-top: 18px;">
 							*Verifica que no eres un robot informático.

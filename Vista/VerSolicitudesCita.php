@@ -18,10 +18,11 @@
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
 
+		<!-- Nueva nav -->
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="../index.php">
+					<a class="navbar-brand" href="../">
 						<img id="logoSGCE" src="../Img/logoSGCE.png">
 					</a>
 					<div style="padding-top:33px;">
@@ -36,23 +37,32 @@
 
 				<div class="collapse navbar-collapse" id="header-bar">
 					<ul class="nav navbar-nav navbar-right" style="padding-top:12px;">
+
+						<?php
+						if (isset($_COOKIE["cargo"])) {
+						?>
+						<?php
+							if($_COOKIE["cargo"]==1){ 
+						?>
+
+						<!--  Administrador -->
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Personal Administrativo<span class="caret"></span>
+								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Administrador<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu dark">
-								<li><a href="../Vista/SolicitarCita.php">
-									<span><img src="../Img/333.png" height="36px"></span>
-									Calendario
-								</a></li>
-								<li><a href="./InformesySugerencias.php">
-									<span><img src="../Img/22.png" height="36px"></span>
-									Informes y Sugerencias
-								</a></li>
-								<li><a href="#">
-									<span><img src="../Img/11.png" height="36px"></span>
-									Solicitudes de citas
-								</a></li>
+								<li><a href="../Vista/AdministrarDepartamentos.php">
+									<span><img src="../Img/Admin_Dep.png" height="36px"></span>
+									Administrar departamentos
+									</a></li>
+								<li><a href="../Vista/AdministrarAreas.php">
+									<span><img src="../Img/Admin_Area.png" height="36px"></span>
+									Administrar areas
+									</a></li>
+								<li><a href="../Vista/AdministrarCuentas.php">
+									<span><img src="../Img/Admin_Cont.png" height="36px"></span>
+									Administrar cuentas
+									</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -60,37 +70,112 @@
 								<span><img src="../Img/loginiGreen.png" height="30px"></span> Bienvenido(a)<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu dark">
-								<li><a href="./CambiarContrasena.php">
+								<li><a href="../Vista/CambiarContrasena.php">
 									<span><img src="../Img/Edit2.png" height="36px"></span>
 									Cambiar contraseña
-								</a></li>
+									</a></li>
 								<li><a href="../cierra_sesion.php">
 									<span><img src="../Img/Out.png" height="36px"></span>
 									Cerrar sesión
-								</a></li>
+									</a></li>
 							</ul>
 						</li>
+
+						<?php }else{?> 
+
+						<! Personal administrativo -->                    
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Personal Administrativo<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="../Vista/Calendario.php">
+									<span><img src="../Img/333.png" height="36px"></span>
+									Calendario
+									</a></li>
+								<li><a href="../Vista/VerInformesYS.php">
+									<span><img src="../Img/22.png" height="36px"></span>
+									Informes y Sugerencias
+									</a></li>
+								<li><a href="../Vista/SolicitudesCita.php">
+									<span><img src="../Img/11.png" height="36px"></span>
+									Solicitudes de citas
+									</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="../Img/loginiGreen.png" height="30px"></span> Bienvenido(a)<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="../Vista/CambiarContrasena.php">
+									<span><img src="../Img/Edit2.png" height="36px"></span>
+									Cambiar contraseña
+									</a></li>
+								<li><a href="../cierra_sesion.php">
+									<span><img src="../Img/Out.png" height="36px"></span>
+									Cerrar sesión
+									</a></li>
+							</ul>
+						</li>
+						<?php
+							} } else {
+						?>
+						<script type="text/javascript">
+							window.location = "../";
+						</script>
+						<?php }?>
 					</ul>
 				</div>
 			</div>
 		</nav>
-
+		
 		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
 			<div class="container-fluid col-md-10 col-md-offset-1">
 				<h3><strong>Ver más</strong></h3>
 				<p>Una vez agendada la cita se enviará la confirmación directamente al correo electrónico
-					indicado y el estado de la solicitud pasará a "AGENDADA".<br> Si la cita es rechazada, 
+					indicado y el estado de la solicitud pasará a "AGENDADA".Si la cita es rechazada, 
 					se notificará automáticamente al correo electrónico indicado y el estado
 					de la solicitud parasá a "RECHAZADA"</p>
 				<br><br>
 				<form class="form-horizontal">
 					<h4 class="text-uppercase">Datos del interesado:</h4>
+					<?php
+							if(isset($_GET["id"]))
+								$idsol = $_GET['id'];
+							include("../Modelo/abre_conexion.php");
+							$query = "SELECT * FROM solicitud WHERE idsolicitud = '$idsol'";
+							$result = mysqli_query($link, $query);
+							$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+							$idinteresado=$row['idinteresado'];
 
+							$query = "SELECT * FROM interesado WHERE idinteresado='$idinteresado'";
+							$result2 = mysqli_query($link, $query);
+							$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
+
+							$idarea=$row['idarea'];
+							$query = "SELECT * FROM area WHERE idarea='$idarea'";
+							$result3 = mysqli_query($link, $query);
+							$row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+
+							
+
+							
+							$asunto=$row['asunto'];
+							$appaterno=$row2['appaterno'];
+							$nombre = $row2['nombre'];
+							$apmaterno=$row2['apmaterno'];
+							$correo = $row2['correo'];
+							$telefono = $row2['telefono'];
+							$area = $row3['nombre'];
+					?>
 					<!-- Correo electrónico -->
 					<div class="form-group has-feedback" id="Email01">                                                            
 						<label  class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
-							<p class="form-control-static" id="correoE01" name="email">ejemplo@dominio.com</p>	
+							<?php 
+								echo "<p class='form-control-static' id='correo' name='nombre'>$correo</p>";
+								?>
 						</div>
 						<br>
 					</div>
@@ -99,7 +184,9 @@
 					<div class="form-group has-feedback" id="Nombre">
 						<label class="control-label col-md-2">Nombre(s)</label>
 						<div class="col-md-10">
-							<p class="form-control-static" id="nombre" name="nombre">Francisco</p>
+						<?php 
+								echo "<p class='form-control-static' id='nombre' name='nombre'>$nombre</p>";
+								?>
 						</div>
 						<br>       
 					</div>
@@ -108,7 +195,9 @@
 					<div class="form-group has-feedback" id="ApellidoP">
 						<label  for="appat" class="control-label col-md-2">Apellido paterno</label>
 						<div class="col-md-10">
-							<p class="form-control-static" id="appat" name="appat">Pérez</p>
+							<?php 
+								echo "<p class='form-control-static' id='appat' name='nombre'>$appaterno</p>";
+								?>
 						</div>
 						<br>       
 					</div>
@@ -117,7 +206,9 @@
 					<div class="form-group has-feedback" id="ApellidoM">
 						<label  for="apmat" class="control-label col-md-2">Apellido materno</label>
 						<div class="col-md-10">
-							<p class="form-control-static" id="apmat" name="apmat">Pérez</p>
+							<?php 
+								echo "<p class='form-control-static' id='apmat' name='nombre'>$apmaterno</p>";
+								?>
 						</div>
 						<br>   
 					</div>
@@ -126,7 +217,9 @@
 					<div class="form-group has-feedback" id="Telefono">
 						<label  for="telefono" class="control-label col-md-2">Teléfono</label>
 						<div class="col-md-10">
-							<p class="form-control-static" id="telefono" name="telefono">55555555</p>
+							<?php 
+								echo "<p class='form-control-static' id='tel' name='nombre'>$telefono</p>";
+								?>
 							<br><br>
 						</div>
 					</div>
@@ -137,7 +230,9 @@
 					<div class="form-group">
 						<label class="control-label col-md-2">Área</label>        
 						<div class="col-md-10">                                        
-							<p class="form-control-static" id="area" name="area">Movilidad académica</p>
+							<?php 
+								echo "<p class='form-control-static' id='area' name='nombre'>$area</p>";
+								?>
 						</div>                        
 					</div>
 
@@ -145,7 +240,9 @@
 					<div class="form-group has-feedback" id="Asunto">
 						<label class="control-label col-md-2">Asunto</label>
 						<div class="col-md-10">
-							<p class="form-control-static" id="asunto" name="asunto">Breve descripción del asunto de la cita</p>
+							<?php 
+								echo "<p class='form-control-static'  name='asunto'>$asunto</p>";
+								?>
 						</div>
 						<br> 
 					</div>

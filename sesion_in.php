@@ -4,7 +4,7 @@ $miemail = $_POST["miemail"];
 $mipass = $_POST["mipass"]; 
 
 // Abrimos la conexion a la base de datos  
-include("./Vista/abre_conexion.php");
+include("./Modelo/abre_conexion.php");
 
 $usuario = mysqli_query($link, "select correo from personal where correo = '$miemail'");
 $nuevo_usuario = mysqli_query($link, "select correo, contrasena from personal where correo = '$miemail' and contrasena = aes_encrypt('$mipass','C1r4l3t1890')");
@@ -24,14 +24,14 @@ if (mysqli_num_rows($usuario) > 0) {
 		echo $row["cargo"] . " " . $row["idpersonal"];
 	}
 	else {
-		include("./Vista/cierra_conexion.php");
+		include("./Modelo/cierra_conexion.php");
 		echo "1";
         
 	}
 }
 else {
 	// Cerramos la conexion a la base de datos  
-	include("./Vista/cierra_conexion.php");
+	include("./Modelo/cierra_conexion.php");
 	echo "2";
 }
 ?>  

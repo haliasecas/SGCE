@@ -7,19 +7,21 @@
 		<script type="text/javascript" src="../Scr/moment.min.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="../Scr/validator.js"></script>
+		<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>		
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
+		<link type="text/css" rel="stylesheet" href="../Css/bootstrap-datetimepicker.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
+		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
-
-	<style> p { cursor: default; } </style>
 
 	<body>
 		<div class="container-fluid" style="padding-bottom:9px;" id="header">
 			<img src="../Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
-
+		
 		<!-- Nueva nav -->
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
@@ -133,84 +135,48 @@
 		</nav>
 
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
-			<div class="container">
-				<h3><strong>Informes y sugerencias</strong></h3>
-				<p>En esta sección podrás consultar los correos enviados por los usuarios
-					para pedir informes o dar sugerencias al departamento.</p> 
-				<br>
-				<br>
-				<form class="form-horizontal">
-					<div class="form-group">
-						<label class="control-label col-md-2">Selecciona</label>
-						<div class="col-md-10">
-							<select name="select" class="form-control" onChange="meetings();">
-								<option value="1">Todo</option>
-								<option value="2">Resuelto</option>
-								<option value="3">Pendiente</option>
-							</select>
-						</div>                        
-					</div>
-				</form>
-				<div class="table-responsive">          
-					<table class="table">
-						<thead>
-							<tr style="color: #FFF; background: #696969;">
-								<th>Asunto</th>
-								<th>Correo electrónico</th>
-								<th>Fecha</th>
-								<th colspan="4">Estado</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<script type="text/javascript">
-								function meetings() {
-									$.ajax({
-										method: "POST",
-										url: "Informes.php",
-										data: { value: $idD, parent: $idP }
-									}).done(function(msg){
-										console.log(msg);
-									});
-								}
-							</script>
-							<tr id="eg1">
-								<td>Departamento A</td>
-								<td>ejemplo@dominio.com</td>
-								<td>Nombre encargado</td>
-								<td>PENDIENTE</td>
-								<td><p class="click-me text-success text-right"  style="text-decoration:underline;" id="1">Ver más</p></td>
-								<td><p class="click-me text-success text-right" style="text-decoration:underline;"  id="2">Eliminar</p></td>
-							</tr>
-							<tr id="eg2">
-								<td>Departamento B</td>
-								<td>ejemplo@dominio.com</td>
-								<td>Nombre encargado</td>
-								<td>APROBADO</td>
-								<td><p class="click-me text-success text-right"  style="text-decoration:underline;" id="1">Ver más</p></td>
-								<td><p class="click-me text-success text-right" style="text-decoration:underline;"  id="2">Eliminar</p></td>
-							</tr>
-							<script type="text/javascript">
-								$(".click-me").click(function() {
-									$idD = this.id;
-									$idP = $(this).parent().id;
-									$.ajax({
-										method: "POST",
-										url: "SolicitudCita.php",
-										data: { value: $idD, parent: $idP }
-									}).done(function(msg){
-										console.log(msg);
-									});
-								});
-							</script>
-							<?php
-							?>
-						</tbody>
-					</table>
-				</div>
-			</div>                                                               
+			<!--Contenedor principal-->
+			<div class="container-fluid col-md-10 col-md-offset-1">
+				<!--Formulario-->
+				<script type="text/javascript">
+					var onloadCallback = function() {
+						grecaptcha.render('html_element', {
+							'sitekey' : '6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW'
+						});
+					};
+				</script>
+			</div>
 		</div>
-
+		<div class="modal fade" id="MSGA_09" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Token Válido</h4>
+					</div>
+					<div class="modal-body">
+						<p>Su cita ha pasado al estado de Pendiente</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="MSG_E06" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Token Inválido</h4>
+					</div>
+					<div class="modal-body">
+						<p>El enlace es incorrecto.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
@@ -225,10 +191,10 @@
 				<div class="collapse navbar-collapse" id="footer-bar">
 					<ul class="nav navbar-nav navbar-right">
 						<p class="navbar-text">@2016 Team Rocket Inc.</p>
-						<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/">
+						<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/?fref=nf">
 							<img src="../Img/facebookWhite.png" height="24px">
 						</a>
-						<a class="navbar-brand" href="https://twitter.com/escomunidad?ref_src=twsrc%5Etfw">
+						<a class="navbar-brand" href="https://twitter.com/escomunidad">
 							<img src="../Img/twitterWhite.png" height="24px">
 						</a>
 						<a class="navbar-brand" href="https://plus.google.com/112263443520207638663/posts">
@@ -238,9 +204,41 @@
 				</div>
 			</div>
 		</nav>
-
+		<?php
+		include("abre_conexion.php"); 
+		$token=$_GET['token'];
+		$busqueda = sprintf("SELECT token FROM SolicitudToken WHERE token='$token'");
+		$result=mysqli_query($link,$busqueda);
+		$row_cnt = mysqli_num_rows($result);
+		if($row_cnt>0){
+			$id = sprintf("SELECT idSolicitud FROM SolicitudToken WHERE token='$token'");
+			$result=mysqli_query($link,$id);
+			$row = mysqli_fetch_assoc($result);
+			$idSol=$row["idSolicitud"];
+			$sql = sprintf("UPDATE solicitud SET estado='PENDIENTE' WHERE idSolicitud='$idSol'");
+			$result=mysqli_query($link,$sql);
+			echo 
+				"<script type='text/javascript'>
+											$(document).ready(function() {
+												$('#MSGA_09').modal();
+											});
+										</script>";
+			$sql = "DELETE FROM SolicitudToken WHERE token='$token'";
+			$result=mysqli_query($link,$sql);
+		}
+		else{
+			echo 
+				"<script type='text/javascript'>
+											$(document).ready(function() {
+												$('#MSG_E06').modal();
+											});
+										</script>";    //echo $row_cnt;
+		}
+		include("cierra_conexion.php");
+		?>
 		<script type="text/javascript">
 			$(document).ready(function() {
+				despAreas();
 				// Sticky bar plz
 				$(window).scroll(function() {
 					if ($(window).scrollTop() > $("#header").height()) {
@@ -264,7 +262,7 @@
 					if ($(window).width() <= 886) {
 						$("#top-bar").removeAttr("style");
 					}
-				}); 
+				});
 			});
 		</script>
 	</body>

@@ -15,6 +15,7 @@ function valphone(phone) {
 
 function enviarForm() {
 	var vn = false, vm = false, vcap = false, vt = false, vs = false, vcb = false;
+	var vda = false;
 	if (!validate($("#correoE01").val()) || ($("#correoE01").val() !== $("#correoE02").val())) {								
 		$("#Email01").attr("class", "form-group has-feedback has-error");
 		$("#Email02").attr("class", "form-group has-feedback has-error");
@@ -117,7 +118,24 @@ function enviarForm() {
 		vcb = false;
 	}
 
-	if (vcap && vm && vn && vs && vt && vcb) {
+	if ($("[name='departamento']").val() == -1){
+		$("#Departamento").attr("class", "form-group has-feedback has-error");
+		vda = false;
+	}
+	else {
+		$("#Departamento").attr("class", "form-group has-feedback has-success");
+	}
+
+	if ($("[name='area']").val() == -1) {
+		$("#Area").attr("class", "form-group has-feedback has-error");
+		vda = false;
+	}
+	else {
+		$("#Area").attr("class", "form-group has-feedback has-success");
+		vda = true;
+	}
+
+	if (vcap && vm && vn && vs && vt && vcb && vda) {
 		$("#formCita").submit();
 	}
 	else {

@@ -20,10 +20,11 @@
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
 
+		<!-- Nueva nav -->
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="../index.php">
+					<a class="navbar-brand" href="../">
 						<img id="logoSGCE" src="../Img/logoSGCE.png">
 					</a>
 					<div style="padding-top:33px;">
@@ -38,20 +39,67 @@
 
 				<div class="collapse navbar-collapse" id="header-bar">
 					<ul class="nav navbar-nav navbar-right" style="padding-top:12px;">
+
+						<?php
+						if (isset($_COOKIE["cargo"])) {
+						?>
+						<?php
+							if($_COOKIE["cargo"]==1){ 
+						?>
+
+						<!--  Administrador -->
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Administrador<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="../Vista/AdministrarDepartamentos.php">
+									<span><img src="../Img/Admin_Dep.png" height="36px"></span>
+									Administrar departamentos
+									</a></li>
+								<li><a href="../Vista/AdministrarAreas.php">
+									<span><img src="../Img/Admin_Area.png" height="36px"></span>
+									Administrar areas
+									</a></li>
+								<li><a href="../Vista/AdministrarCuentas.php">
+									<span><img src="../Img/Admin_Cont.png" height="36px"></span>
+									Administrar cuentas
+									</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="../Img/loginiGreen.png" height="30px"></span> Bienvenido(a)<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="../Vista/CambiarContrasena.php">
+									<span><img src="../Img/Edit2.png" height="36px"></span>
+									Cambiar contraseña
+									</a></li>
+								<li><a href="../cierra_sesion.php">
+									<span><img src="../Img/Out.png" height="36px"></span>
+									Cerrar sesión
+									</a></li>
+							</ul>
+						</li>
+
+						<?php }else{?> 
+
+						<! Personal administrativo -->                    
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Personal Administrativo<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu dark">
-								<li><a href="../Vista/SolicitarCita.php">
+								<li><a href="../Vista/Calendario.php">
 									<span><img src="../Img/333.png" height="36px"></span>
 									Calendario
 									</a></li>
-								<li><a href="./InformesySugerencias.php">
+								<li><a href="../Vista/VerInformesYS.php">
 									<span><img src="../Img/22.png" height="36px"></span>
 									Informes y Sugerencias
 									</a></li>
-								<li><a href="#">
+								<li><a href="../Vista/SolicitudesCita.php">
 									<span><img src="../Img/11.png" height="36px"></span>
 									Solicitudes de citas
 									</a></li>
@@ -62,7 +110,7 @@
 								<span><img src="../Img/loginiGreen.png" height="30px"></span> Bienvenido(a)<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu dark">
-								<li><a href="./CambiarContrasena.php">
+								<li><a href="../Vista/CambiarContrasena.php">
 									<span><img src="../Img/Edit2.png" height="36px"></span>
 									Cambiar contraseña
 									</a></li>
@@ -72,6 +120,13 @@
 									</a></li>
 							</ul>
 						</li>
+						<?php
+							} } else {
+						?>
+						<script type="text/javascript">
+							window.location = "../";
+						</script>
+						<?php }?>
 					</ul>
 				</div>
 			</div>
@@ -88,14 +143,15 @@
 						<label class="control-label col-md-2">Selecciona</label>
 						<div class="col-md-10">
 							<select name="select" class="form-control" onChange="meetings();">
-								<option value="1">Todas</option>
-								<option value="2">Aceptadas</option>
-								<option value="3">Pendientes</option>
+								<option >Selecciona el estado de citas</option>
+								<option value="1" id="1">Todas</option>
+								<option value="2" id="2">Aceptadas</option>
+								<option value="3" id="3">Pendientes</option>
 							</select>
 						</div>                        
 					</div>
 				</form>
-				<div class="table-responsive">          
+				<div class="table-responsive" name="hola" >          
 					<table class="table">
 						<thead>
 							<tr style="color: #FFF; background: #696969;">
@@ -109,31 +165,16 @@
 						<tbody>
 							<script type="text/javascript">
 								function meetings() {
+									$idD = this.id;
 									$.ajax({
 										method: "POST",
-										url: "SolicitudCita.php",
-										data: { value: $idD, parent: $idP }
+										url: "../Modelo/SolicitudesCitaFiltrado.php",
+										data: { value: $("[name='select']").val() }
 									}).done(function(msg){
-										console.log(msg);
+										$("[name='hola']").append(msg);
 									});
 								}
 							</script>
-							<tr id="eg1">
-								<td>Departamento A</td>
-								<td>ejemplo@dominio.com</td>
-								<td>Nombre encargado</td>
-								<td>PENDIENTE</td>
-								<td><p class="click-me text-success text-right"  style="text-decoration:underline;" id="1">Editar</p></td>
-								<td><p class="click-me text-success text-right" style="text-decoration:underline;"  id="2">Eliminar</p></td>
-							</tr>
-							<tr id="eg2">
-								<td>Departamento B</td>
-								<td>ejemplo@dominio.com</td>
-								<td>Nombre encargado</td>
-								<td>APROBADO</td>
-								<td><p class="click-me text-success text-right"  style="text-decoration:underline;" id="1">Editar</p></td>
-								<td><p class="click-me text-success text-right" style="text-decoration:underline;"  id="2">Eliminar</p></td>
-							</tr>
 							<script type="text/javascript">
 								$(".click-me").click(function() {
 									$idD = this.id;
@@ -147,42 +188,6 @@
 									});
 								});
 							</script>
-							<?php
-
-							include("abre_conexion.php");
-							$query = "SELECT idSolicitud,idarea,dia,estado,idinteresado FROM solicitud";
-							$result = mysqli_query($link, $query);
-							echo "<form action='prueba.php' method='post' name='testform'>";
-							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-								$idarea=$row['idarea'];
-								$id = sprintf("SELECT nombre FROM area WHERE idarea='$idarea'");
-								$result2=mysqli_query($link,$id);
-								$rowarea = mysqli_fetch_assoc($result2);
-								$area = $rowarea['nombre'];
-								$idinteresado=$row['idinteresado'];
-								$id = sprintf("SELECT correo FROM interesado WHERE idinteresado='$idinteresado'");
-								$result3=mysqli_query($link,$id);
-								$rowinteresado = mysqli_fetch_assoc($result3);
-								$correo = $rowinteresado['correo'];
-								$recibido=$row['dia'];
-								$estado=$row['estado'];
-								$idsolicitud=$row['idSolicitud'];
-								echo "<tr>";
-								echo "<th>$area</th>";
-								echo "<th>$correo</th>";
-								echo "<th>$recibido</th>";
-								echo "<th>$estado</th>";
-								//echo "<input type='submit' name='data' value='M'.$idsolicitud>";
-								//echo "<a name='adios' href = '#'  id = 'solution2' onClick='submit';'>Solution1 </a>";
-								//echo "<a name='hola' href = '#'  id = 'solution1' onClick='submit';'>Solution1 </a>";
-								echo "<input type='submit' name='data' value=$idsolicitud>";
-								//echo "<th><a class=' text-success text-right '  style = 'text-decoration:underline;' id=$idsolicitud' >Ver más</a></th>";
-								//echo "<th><a class=' text-success text-right delete-rod' style = 'text-decoration:underline;'  id=$idsolicitud' href=#>Eliminar</a></th> ";
-								echo "</tr>";
-							}
-							echo"</form>";
-							?>
-
 						</tbody>
 					</table>
 				</div>
