@@ -92,7 +92,7 @@
 								<span><img src="./Img/bookmarkGreen.png" height="30px"></span> Personal Administrativo<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu dark">
-								<li><a href="./Vista/SolicitarCita.php">
+								<li><a href="./Vista/Calendario.php">
 									<span><img src="./Img/333.png" height="36px"></span>
 									Calendario
 								</a></li>
@@ -132,7 +132,6 @@
                         ?>
 
                         <!--  Visitante -->
-
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="./Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
