@@ -144,53 +144,7 @@
 
 		<!-- Mensajes bajo el campo -->
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
-<<<<<<< HEAD
-                    <div class="container">
-                              <h3><strong>Agregar área</strong></h3>
-                              <p><strong class="text-success">Todos los campos son obligatorios.</strong>El nombre del departamento debe estar previamente registrado en el sistema.</p> 
-                               <br>
-                               <br>                                
-                               <form action="" class="form-horizontal">
-                                    <div class="form-group">
-                                                <label  for="" class="control-label col-md-2">Nombre del área</label>
-						                        <div class="col-md-10">
-							                         
-                                                    <input type='text' class='form-control' placeholder="Nombre del Area" >
-						                        </div>
-						                        <br>              						                               
-						                        <br>              						                               
-						                        <br>              						                               
-                                                <label  for="" class="control-label col-md-2">Nombre del departamento</label>						                                                                
-                                                        <div class="col-md-10">                                        
-                                                                <select name="departamento" class="form-control">
-                                                                    <!--<option value="DepartamentoA">Departamento A</option> -->
-                                                                    <?php
-                                                                     include("abre_conexion.php");
-                                                                    $query = "SELECT * FROM depto";
-                                                                    $result2 = mysqli_query($link, $query);
-                                                                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                                                                    while($row = mysqli_fetch_array($result2, MYSQLI_ASSOC)){
-                                                                        $nombredepto= $row['nombre'];
-                                                                        $iddepto = $row["iddepto"];
-                                                                        echo "<option value='$iddepto'>$nombredepto</option>";
-                                                                    }
-                                                                    ?>
-                                                                </select>
-                                                        </div>                                                                       
-                                               <br><br><br>                                                 
-                                               <div class="form-group text-right">
-						                             <div class="col-md-8 col-md-offset-4">
-							                                 <a class="btn btn-success" href="../" style="width: 150px;" onclick="#">CANCELAR</a>							                                 
-							                                 <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
-						                             </div>					                                                                               						                             
-					                           </div>
-                                    </div>
-                                </form>   
-                    </div>
-        </div>                                
-				
-			
-=======
+
 			<div class="container">
 				<h3><strong>Agregar área</strong></h3>
 				<p><strong class="text-success">Todos los campos son obligatorios.</strong>El nombre del departamento debe estar previamente registrado en el sistema.</p> 
@@ -235,8 +189,6 @@
 			</div>
 		</div>                                
 
-
->>>>>>> 578ade89fa5e795c9a090cdfff77b1128508524a
 		<!-- Nav de abajo -->
 
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
