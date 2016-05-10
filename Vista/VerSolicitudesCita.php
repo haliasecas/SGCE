@@ -130,9 +130,9 @@
 			</div>
 		</nav>
 		<?php
-if (!empty($_POST)) {
-	echo "Hola";
-}
+			if (!empty($_POST)) {
+				echo "Hola";
+			}
 		?>
 		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
 			<div class="container-fluid col-md-10 col-md-offset-1">
