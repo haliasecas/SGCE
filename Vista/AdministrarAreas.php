@@ -127,165 +127,113 @@
 
 		<!-- Mensajes bajo el campo -->
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
-<<<<<<< HEAD
-			<div class="container">
-				<h3><strong>Administrar áreas</strong></h3>
-				<p>En esta sección  podrás consultar los datos de las áreas existentes.También podrás registrar nuevas áreas.</p> 
-				<br>
-				<br>
-				<div class="table-responsive">          
-					<table class="table">
-						<thead>
-							<tr style="color: #FFF; background: #656565;">
-								<th>Áreas</th>
-								<th colspan="3">Departamento</th>      
-							</tr>
-						</thead>
+		<div class="container">
+			<h3><strong>Administrar áreas</strong></h3>
+			<p>En esta sección  podrás consultar los datos de las áreas existentes.También podrás registrar nuevas áreas.</p> 
+			<br>
+			<br>
+			<div class="table-responsive">          
+				<table class="table">
+					<thead>
+						<tr style="color: #FFF; background: #656565;">
+							<th>Áreas</th>
+							<th colspan="3">Departamento</th>      
+						</tr>
+					</thead>
 
-						<tbody>
-							<!--  <tr>
+					<tbody>
+						<!--  <tr>
 <th>Área A</th>
 <th>Departamento A</th>
 <th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
 <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>                                        
 </tr>-->
-							<?php
+						<?php
 
-							include("../Modelo/abre_conexion.php");
-							$query = "SELECT a.nombre as area,a.idarea as idarea,d.nombre as depto FROM area a, depto d WHERE idarea>0 and a.iddepto=d.iddepto ORDER BY a.nombre";
-							$result = mysqli_query($link, $query);
+						include("../Modelo/abre_conexion.php");
+						$query = "SELECT a.nombre as area,a.idarea as idarea,d.nombre as depto FROM area a, depto d WHERE idarea>0 and a.iddepto=d.iddepto ORDER BY a.nombre";
+						$result = mysqli_query($link, $query);
 
-							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-								$idarea=$row['idarea'];
-								$area = $row['area'];
-								$depto = $row['depto'];
-								echo "<tr>";
-								echo "<th>$area</th>";
-								echo "<th>$depto</th>";
-								echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarAreas.php?id=$idarea'>Editar</a></th>";   
-								echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='eliminar_area.php?id=$idarea'>Eliminar</a></th>  ";
-								echo "</tr>";
-							}
+						while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+							$idarea=$row['idarea'];
+							$area = $row['area'];
+							$depto = $row['depto'];
+							echo "<tr>";
+							echo "<th>$area</th>";
+							echo "<th>$depto</th>";
+							echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarAreas.php?id=$idarea'>Editar</a></th>";   
+							echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='eliminar_area.php?id=$idarea'>Eliminar</a></th>  ";
+							echo "</tr>";
+						}
 
-							?>
-						</tbody>
-					</table>
-				</div>
-				<div class="form-group text-right">
-					<div class="col-md-8 col-md-offset-4">							                     
-						<a class="btn btn-success" href="AgregarArea.php" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
-					</div>					                                                                               						                             
-				</div>
-			</div>                                                               
-=======
-            <div class="container">
-                  <h3><strong>Administrar áreas</strong></h3>
-                  <p>En esta sección  podrás consultar los datos de las áreas existentes.También podrás registrar nuevas áreas.</p> 
-                   <br>
-                   <br>
-                     <div class="table-responsive">          
-                          <table class="table">
-                            <thead>
-                                <tr style="color: #FFF; background: #656565;">
-                                        <th>Áreas</th>
-                                        <th colspan="3">Departamento</th>      
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                              <!--  <tr>
-                                        <th>Área A</th>
-                                        <th>Departamento A</th>
-                                        <th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
-                                        <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>                                        
-                                </tr>-->
-                                <?php
-                                
-                                include("../Modelo/abre_conexion.php");
-                                $query = "SELECT a.nombre as area,a.idarea as idarea,d.nombre as depto FROM area a, depto d WHERE idarea>0 and a.iddepto=d.iddepto ORDER BY a.nombre";
-                                $result = mysqli_query($link, $query);
-                                
-                                while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                                    $idarea=$row['idarea'];
-                                    $area = $row['area'];
-                                    $depto = $row['depto'];
-                                    echo "<tr>";
-                                        echo "<th>$area</th>";
-                                        echo "<th>$depto</th>";
-                                        echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarAreas.php?id=$idarea'>Editar</a></th>";   
-                                        echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='eliminar_area.php?id=$idarea'>Eliminar</a></th>  ";
-                                    echo "</tr>";
-                                }
-                                
-                                ?>
-                            </tbody>
-                          </table>
-                  </div>
-                  <div class="form-group text-right">
-                          <div class="col-md-8 col-md-offset-4">							                     
-                                     <a class="btn btn-success" href="AgregarArea.php" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
-                          </div>					                                                                               						                             
-               </div>
-        </div>                                                               
->>>>>>> edc3d7bf1dec19732cc8a18c7820ca77cd2c3c2a
+						?>
+					</tbody>
+				</table>
+			</div>
+			<div class="form-group text-right">
+				<div class="col-md-8 col-md-offset-4">							                     
+					<a class="btn btn-success" href="AgregarArea.php" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
+				</div>					                                                                               						                             
+			</div>
+		</div>                                                               
 		</div>
 
-		<!-- Nav de abajo -->
-		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
-			<div class="container-fluid" style="padding-right:51px;">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#footer-bar" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-
-				<div class="collapse navbar-collapse" id="footer-bar">
-					<ul class="nav navbar-nav navbar-right">
-						<p class="navbar-text">@2016 Team Rocket Inc.</p>
-						<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/">
-							<img src="../Img/facebookWhite.png" height="24px">
-						</a>
-						<a class="navbar-brand" href="https://twitter.com/escomunidad?ref_src=twsrc%5Etfw">
-							<img src="../Img/twitterWhite.png" height="24px">
-						</a>
-						<a class="navbar-brand" href="https://plus.google.com/112263443520207638663/posts">
-							<img src="../Img/googleWhite.png" height="24px">
-						</a>
-					</ul>
-				</div>
+	<!-- Nav de abajo -->
+	<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
+		<div class="container-fluid" style="padding-right:51px;">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#footer-bar" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
 			</div>
-		</nav>
 
-		<script type="text/javascript">
-			$(document).ready(function() {
-				// Sticky bar plz
-				$(window).scroll(function() {
-					if ($(window).scrollTop() > $("#header").height()) {
-						$("#top-bar").addClass("navbar-fixed-top");
-						$("#main-content").css({"padding-top":"90px"});
-					}
-					if ($(window).scrollTop() < $("#header").height()) {
-						$("#top-bar").removeClass("navbar-fixed-top");
-						$("#main-content").css({"padding-top":"0px"});
-					}
-				});
+			<div class="collapse navbar-collapse" id="footer-bar">
+				<ul class="nav navbar-nav navbar-right">
+					<p class="navbar-text">@2016 Team Rocket Inc.</p>
+					<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/">
+						<img src="../Img/facebookWhite.png" height="24px">
+					</a>
+					<a class="navbar-brand" href="https://twitter.com/escomunidad?ref_src=twsrc%5Etfw">
+						<img src="../Img/twitterWhite.png" height="24px">
+					</a>
+					<a class="navbar-brand" href="https://plus.google.com/112263443520207638663/posts">
+						<img src="../Img/googleWhite.png" height="24px">
+					</a>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// Sticky bar plz
+			$(window).scroll(function() {
+				if ($(window).scrollTop() > $("#header").height()) {
+					$("#top-bar").addClass("navbar-fixed-top");
+					$("#main-content").css({"padding-top":"90px"});
+				}
+				if ($(window).scrollTop() < $("#header").height()) {
+					$("#top-bar").removeClass("navbar-fixed-top");
+					$("#main-content").css({"padding-top":"0px"});
+				}
+			});
+
+			if ($(window).width() <= 886) {
+				$("#top-bar").removeAttr("style");
+			}
+
+			$(window).resize(function() {
+				if ($(window).width() > 886) {
+					$("#top-bar").attr({"style":"height:84px;"});
+				}
 				if ($(window).width() <= 886) {
 					$("#top-bar").removeAttr("style");
 				}
-
-				$(window).resize(function() {
-					if ($(window).width() > 886) {
-						$("#top-bar").attr({"style":"height:84px;"});
-					}
-					if ($(window).width() <= 886) {
-						$("#top-bar").removeAttr("style");
-					}
-				}); 
-			});
-		</script>
+			}); 
+		});
+	</script>
 	</body>
 </html>
