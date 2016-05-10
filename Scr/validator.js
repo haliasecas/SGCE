@@ -117,20 +117,21 @@ function enviarForm() {
 		$("#checkboxes01").addClass("has-error");
 		vcb = false;
 	}
-	
-	if ($("[name='departamento']").val() == 0 || $("[name='area']").val() == 0) {
-		$("#Area").attr("class", "form-group has-feedback has-error");
+
+	if ($("[name='departamento']").val() == -1){
 		$("#Departamento").attr("class", "form-group has-feedback has-error");
-		$("#phone01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-		$("#phone02").attr("class", "text-center help-block");
-		$("#phone02").text("Formato de numero de teléfono incorrecto");
+		vda = false;
+	}
+	else {
+		$("#Departamento").attr("class", "form-group has-feedback has-success");
+	}
+
+	if ($("[name='area']").val() == -1) {
+		$("#Area").attr("class", "form-group has-feedback has-error");
 		vda = false;
 	}
 	else {
 		$("#Area").attr("class", "form-group has-feedback has-success");
-		$("#Departamento").attr("class", "form-group has-feedback has-success");
-		$("#phone01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
-		$("#phone02").attr("class", "hidden text-center help-block");
 		vda = true;
 	}
 
