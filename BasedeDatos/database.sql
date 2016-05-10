@@ -3,7 +3,15 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
+<<<<<<< HEAD
 -- Tiempo de generación: 10-05-2016 a las 21:31:54
+=======
+<<<<<<< HEAD
+-- Tiempo de generación: 10-05-2016 a las 21:18:21
+=======
+-- Tiempo de generación: 10-05-2016 a las 21:01:29
+>>>>>>> e82e06fa842e87912d0ddf431ac6dbadf2c6aaad
+>>>>>>> 882fad17052ae907e8833743569e52038a88f1fe
 -- Versión del servidor: 10.1.10-MariaDB
 -- Versión de PHP: 7.0.4
 
@@ -324,6 +332,11 @@ ALTER TABLE `SolicitudToken`
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
+--
+-- AUTO_INCREMENT de la tabla `DiaPref`
+--
+ALTER TABLE `DiaPref`
+  MODIFY `idDia` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `Cita`
 --

@@ -217,6 +217,31 @@
 							$result=mysqli_query($link,$tok);
 				        }
     				}
+
+    				$dia=$_POST['date01'];
+    				$busquedadia = sprintf("SELECT dia FROM DiaPref WHERE dia='$dia'");
+					$resultdia=mysqli_query($link, $busquedadia);
+					$row_dia = mysqli_num_rows($resultdia);
+					if($row_dia==1) {
+						$id = sprintf("SELECT idDia FROM DiaPref WHERE dia='$dia'");
+						$resultiddia=mysqli_query($link,$id);
+					}
+					else{
+						$sql = sprintf("INSERT INTO DiaPref (idDia, dia) VALUES (NULL,'$dia')");
+						$resultiddia=mysqli_query($link,$sql);
+						$id = sprintf("SELECT idDia FROM DiaPref WHERE dia='$dia'");
+						$resultiddia=mysqli_query($link,$id);
+					}
+					$row = mysqli_fetch_assoc($resultiddia);
+					$idDiaa=$row["idDia"];
+
+					$resultDiaSol=sprintf("INSERT INTO DiaSol (idDia, idSolicitud) VALUES ('$idDiaa','$idsolicitud')");
+    				$result=mysqli_query($link,$resultDiaSol);
+
+
+
+    				$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
+    				$result=mysqli_query($link,$tok);
 					include("../Modelo/cierra_conexion.php");
 					if (mandarCorreoSolicitud($nombre, $appat, $apmat, $email, $string)) {
 						echo 
@@ -444,7 +469,7 @@
 					<script type="text/javascript">
 						$(function () {
 							$('#datet1').datetimepicker({
-								format: 'DD/MM/YYYY',
+								format: 'YYYY/MM/DD',
 								minDate: moment().add(3, 'd'),
 								maxDate: moment().add(33, 'd'),
 								daysOfWeekDisabled: [0, 6]
