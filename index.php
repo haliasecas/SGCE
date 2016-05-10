@@ -14,7 +14,7 @@
 	
 	<body>
 		<?php
-		include("Vista/abre_conexion.php");
+		include("Modelo/abre_conexion.php");
 		?>
 		<div class="container-fluid" style="padding-bottom:9px;" id="header">
 			<img src="./Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
