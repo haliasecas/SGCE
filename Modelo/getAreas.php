@@ -15,7 +15,7 @@ if (mysqli_num_rows($areas) > 0) {
 }
 
 else {
-	echo ("No hay áreas disponibles");
+	echo "<option value=0> No hay áreas disponibles </option>";
 	include("cierra_conexion.php");
 }
 ?>

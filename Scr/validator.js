@@ -15,6 +15,7 @@ function valphone(phone) {
 
 function enviarForm() {
 	var vn = false, vm = false, vcap = false, vt = false, vs = false, vcb = false;
+	var vda = false;
 	if (!validate($("#correoE01").val()) || ($("#correoE01").val() !== $("#correoE02").val())) {								
 		$("#Email01").attr("class", "form-group has-feedback has-error");
 		$("#Email02").attr("class", "form-group has-feedback has-error");
@@ -116,8 +117,24 @@ function enviarForm() {
 		$("#checkboxes01").addClass("has-error");
 		vcb = false;
 	}
+	
+	if ($("[name='departamento']").val() == 0 || $("[name='area']").val() == 0) {
+		$("#Area").attr("class", "form-group has-feedback has-error");
+		$("#Departamento").attr("class", "form-group has-feedback has-error");
+		$("#phone01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+		$("#phone02").attr("class", "text-center help-block");
+		$("#phone02").text("Formato de numero de teléfono incorrecto");
+		vda = false;
+	}
+	else {
+		$("#Area").attr("class", "form-group has-feedback has-success");
+		$("#Departamento").attr("class", "form-group has-feedback has-success");
+		$("#phone01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+		$("#phone02").attr("class", "hidden text-center help-block");
+		vda = true;
+	}
 
-	if (vcap && vm && vn && vs && vt && vcb) {
+	if (vcap && vm && vn && vs && vt && vcb && vda) {
 		$("#formCita").submit();
 	}
 	else {
