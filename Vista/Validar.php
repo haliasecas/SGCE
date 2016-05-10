@@ -205,7 +205,7 @@
 			</div>
 		</nav>
 		<?php
-		include("abre_conexion.php"); 
+		include("../Modelo/abre_conexion.php"); 
 		$token=$_GET['token'];
 		$busqueda = sprintf("SELECT token FROM SolicitudToken WHERE token='$token'");
 		$result=mysqli_query($link,$busqueda);
@@ -234,7 +234,7 @@
 											});
 										</script>";    //echo $row_cnt;
 		}
-		include("cierra_conexion.php");
+		include("../Modelo/cierra_conexion.php");
 		?>
 		<script type="text/javascript">
 			$(document).ready(function() {

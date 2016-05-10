@@ -250,12 +250,11 @@
 					<div class="form-group has-feedback" id="Horarios">
 						<label class="control-label col-md-2">Horario(s) preferente(s)</label>
 						<div class="col-md-10">
+						<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
+							<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
+							<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
 						<?php
-
-						
-							<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
-							<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
-							<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
+							
 							?>
 						</div>
 						<br> 
