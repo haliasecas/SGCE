@@ -130,9 +130,12 @@
 			</div>
 		</nav>
 		<?php
-if (!empty($_POST)) {
-	echo "Hola";
-}
+		if (!empty($_POST)) {
+			echo "Hola";
+		}
+		else {
+			echo "Adios";
+		}
 		?>
 		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
 			<div class="container-fluid col-md-10 col-md-offset-1">
@@ -142,43 +145,43 @@ if (!empty($_POST)) {
 					se notificará automáticamente al correo electrónico indicado y el estado
 					de la solicitud parasá a "RECHAZADA"</p>
 				<br><br>
-				<form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+				<form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" id="Formulario" method="POST">
 					<h4 class="text-uppercase">Datos del interesado:</h4>
 					<?php
-							if(isset($_GET["id"]))
-								$idsol = $_GET['id'];
-							include("../Modelo/abre_conexion.php");
-							$query = "SELECT * FROM solicitud WHERE idsolicitud = '$idsol'";
-							$result = mysqli_query($link, $query);
-							$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-							$idinteresado=$row['idinteresado'];
+					if(isset($_GET["id"]))
+						$idsol = $_GET['id'];
+					include("../Modelo/abre_conexion.php");
+					$query = "SELECT * FROM solicitud WHERE idsolicitud = '$idsol'";
+					$result = mysqli_query($link, $query);
+					$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+					$idinteresado=$row['idinteresado'];
 
-							$query = "SELECT * FROM interesado WHERE idinteresado='$idinteresado'";
-							$result2 = mysqli_query($link, $query);
-							$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
+					$query = "SELECT * FROM interesado WHERE idinteresado='$idinteresado'";
+					$result2 = mysqli_query($link, $query);
+					$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
 
-							$idarea=$row['idarea'];
-							$query = "SELECT * FROM area WHERE idarea='$idarea'";
-							$result3 = mysqli_query($link, $query);
-							$row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
-							
+					$idarea=$row['idarea'];
+					$query = "SELECT * FROM area WHERE idarea='$idarea'";
+					$result3 = mysqli_query($link, $query);
+					$row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
 
-							
-							$asunto=$row['asunto'];
-							$appaterno=$row2['appaterno'];
-							$nombre = $row2['nombre'];
-							$apmaterno=$row2['apmaterno'];
-							$correo = $row2['correo'];
-							$telefono = $row2['telefono'];
-							$area = $row3['nombre'];
+
+
+					$asunto=$row['asunto'];
+					$appaterno=$row2['appaterno'];
+					$nombre = $row2['nombre'];
+					$apmaterno=$row2['apmaterno'];
+					$correo = $row2['correo'];
+					$telefono = $row2['telefono'];
+					$area = $row3['nombre'];
 					?>
 					<!-- Correo electrónico -->
 					<div class="form-group has-feedback" id="Email01">                                                            
 						<label  class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
 							<?php 
-								echo "<p class='form-control-static' id='correo' name='nombre'>$correo</p>";
-								?>
+							echo "<p class='form-control-static' id='correo' name='nombre'>$correo</p>";
+							?>
 						</div>
 						<br>
 					</div>
@@ -187,9 +190,9 @@ if (!empty($_POST)) {
 					<div class="form-group has-feedback" id="Nombre">
 						<label class="control-label col-md-2">Nombre(s)</label>
 						<div class="col-md-10">
-						<?php 
-								echo "<p class='form-control-static' id='nombre' name='nombre'>$nombre</p>";
-								?>
+							<?php 
+							echo "<p class='form-control-static' id='nombre' name='nombre'>$nombre</p>";
+							?>
 						</div>
 						<br>       
 					</div>
@@ -199,8 +202,8 @@ if (!empty($_POST)) {
 						<label  for="appat" class="control-label col-md-2">Apellido paterno</label>
 						<div class="col-md-10">
 							<?php 
-								echo "<p class='form-control-static' id='appat' name='nombre'>$appaterno</p>";
-								?>
+							echo "<p class='form-control-static' id='appat' name='nombre'>$appaterno</p>";
+							?>
 						</div>
 						<br>       
 					</div>
@@ -210,8 +213,8 @@ if (!empty($_POST)) {
 						<label  for="apmat" class="control-label col-md-2">Apellido materno</label>
 						<div class="col-md-10">
 							<?php 
-								echo "<p class='form-control-static' id='apmat' name='nombre'>$apmaterno</p>";
-								?>
+							echo "<p class='form-control-static' id='apmat' name='nombre'>$apmaterno</p>";
+							?>
 						</div>
 						<br>   
 					</div>
@@ -221,8 +224,8 @@ if (!empty($_POST)) {
 						<label  for="telefono" class="control-label col-md-2">Teléfono</label>
 						<div class="col-md-10">
 							<?php 
-								echo "<p class='form-control-static' id='tel' name='nombre'>$telefono</p>";
-								?>
+							echo "<p class='form-control-static' id='tel' name='nombre'>$telefono</p>";
+							?>
 							<br><br>
 						</div>
 					</div>
@@ -234,8 +237,8 @@ if (!empty($_POST)) {
 						<label class="control-label col-md-2">Área</label>        
 						<div class="col-md-10">                                        
 							<?php 
-								echo "<p class='form-control-static' id='area' name='nombre'>$area</p>";
-								?>
+							echo "<p class='form-control-static' id='area' name='nombre'>$area</p>";
+							?>
 						</div>                        
 					</div>
 
@@ -244,8 +247,8 @@ if (!empty($_POST)) {
 						<label class="control-label col-md-2">Asunto</label>
 						<div class="col-md-10">
 							<?php 
-								echo "<p class='form-control-static'  name='asunto'>$asunto</p>";
-								?>
+							echo "<p class='form-control-static'  name='asunto'>$asunto</p>";
+							?>
 						</div>
 						<br> 
 					</div>
@@ -254,7 +257,7 @@ if (!empty($_POST)) {
 					<div class="form-group has-feedback" id="Horarios">
 						<label class="control-label col-md-2">Horario(s) preferente(s)</label>
 						<div class="col-md-10">
-						<?php
+							<?php
 							$busquedadia = sprintf("SELECT idDia FROM DiaSol WHERE idsolicitud='$idsol'");
 							$resultdia=mysqli_query($link, $busquedadia);
 							$row = mysqli_fetch_assoc($resultdia);
@@ -272,14 +275,14 @@ if (!empty($_POST)) {
 								$result2=mysqli_query($link,$query2);
 								$rowarea = mysqli_fetch_assoc($result2);
 								echo "<p class='form-control-static' id='horario' name='horario'>".$Dia." ".$rowarea['hinicio']."-".$rowarea['hfin']."</p>";
-						}
+							}
 							//$row_dia = mysqli_num_rows($resultdia);
 
 							//
 							//
 							//<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
-						
-							
+
+
 							?>
 						</div>
 						<br> 
@@ -302,7 +305,7 @@ if (!empty($_POST)) {
 						<label class="control-label col-md-2">Día</label>
 						<div class="col-md-10">
 							<select class="form-control">
-							<?php
+								<?php
 								echo "<option>$Dia</option>";
 								?>
 							</select>
@@ -315,31 +318,30 @@ if (!empty($_POST)) {
 						<label class="control-label col-md-2">Hora</label>
 						<div class="col-md-10">
 							<select class="form-control">
-							<?php
-									$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
-									$result = mysqli_query($link,$query);
-									while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-										$idhorario=$row['idHorario'];
-										$query2 = "SELECT * FROM HoraPref WHERE idHorario='$idhorario'";
-										$result2=mysqli_query($link,$query2);
-										$rowarea = mysqli_fetch_assoc($result2);
-										echo "<option>".$rowarea['hinicio']."-".$rowarea['hfin']."</option>";
-									}
-							?>
-								
+								<?php
+								$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
+								$result = mysqli_query($link,$query);
+								while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+									$idhorario=$row['idHorario'];
+									$query2 = "SELECT * FROM HoraPref WHERE idHorario='$idhorario'";
+									$result2=mysqli_query($link,$query2);
+									$rowarea = mysqli_fetch_assoc($result2);
+									echo "<option>".$rowarea['hinicio']."-".$rowarea['hfin']."</option>";
+								}
+								?>
+
 							</select>
 						</div>
 						<br> 
 					</div>
-					
+
 					<!-- Botones -->
 					<div class="form-group text-right" style="padding-top: 9px;">
-						 <div class="col-md-10 col-md-offset-2">
-							 <button class="btn btn-success" type="reset" style="width: 150px;">CANCELAR</button>
-							 <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
+						<div class="col-md-10 col-md-offset-2">
+							<button class="btn btn-success" type="reset" style="width: 150px;">CANCELAR</button>
+							<button class="btn btn-success" type="submit" style="width: 150px;">ENVIAR</a>
 						</div>
 					</div>
-
 				</form>
 			</div>
 		</div>

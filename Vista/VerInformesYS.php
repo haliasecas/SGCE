@@ -162,49 +162,22 @@
 								<th></th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="solicitudes">
 							<script type="text/javascript">
 								function meetings() {
+									$("#solicitudes").text("");
 									$.ajax({
 										method: "POST",
 										url: "../Modelo/informes_filtro.php",
 										data: { value: $("[name='select']").val() }
 									}).done(function(msg){
-										console.log(msg);
+										$("#solicitudes").append(msg);
+										$("[name='EliminaIS']").click(function(){
+											
+										});
 									});
 								}
 							</script>
-							<tr id="eg1">
-								<td>Departamento A</td>
-								<td>ejemplo@dominio.com</td>
-								<td>Nombre encargado</td>
-								<td>PENDIENTE</td>
-								<td><p class="click-me text-success text-right"  style="text-decoration:underline;" id="1">Ver más</p></td>
-								<td><p class="click-me text-success text-right" style="text-decoration:underline;"  id="2">Eliminar</p></td>
-							</tr>
-							<tr id="eg2">
-								<td>Departamento B</td>
-								<td>ejemplo@dominio.com</td>
-								<td>Nombre encargado</td>
-								<td>APROBADO</td>
-								<td><p class="click-me text-success text-right"  style="text-decoration:underline;" id="1">Ver más</p></td>
-								<td><p class="click-me text-success text-right" style="text-decoration:underline;"  id="2">Eliminar</p></td>
-							</tr>
-							<script type="text/javascript">
-								$(".click-me").click(function() {
-									$idD = this.id;
-									$idP = $(this).parent().id;
-									$.ajax({
-										method: "POST",
-										url: "SolicitudCita.php",
-										data: { value: $idD, parent: $idP }
-									}).done(function(msg){
-										console.log(msg);
-									});
-								});
-							</script>
-							<?php
-							?>
 						</tbody>
 					</table>
 				</div>
@@ -241,6 +214,7 @@
 
 		<script type="text/javascript">
 			$(document).ready(function() {
+				meetings();
 				// Sticky bar plz
 				$(window).scroll(function() {
 					if ($(window).scrollTop() > $("#header").height()) {
