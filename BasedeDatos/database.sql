@@ -3,15 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
-<<<<<<< HEAD
--- Tiempo de generación: 10-05-2016 a las 21:31:54
-=======
-<<<<<<< HEAD
--- Tiempo de generación: 10-05-2016 a las 21:18:21
-=======
--- Tiempo de generación: 10-05-2016 a las 21:01:29
->>>>>>> e82e06fa842e87912d0ddf431ac6dbadf2c6aaad
->>>>>>> 882fad17052ae907e8833743569e52038a88f1fe
+-- Tiempo de generación: 11-05-2016 a las 01:19:49
 -- Versión del servidor: 10.1.10-MariaDB
 -- Versión de PHP: 7.0.4
 
@@ -46,7 +38,8 @@ CREATE TABLE `area` (
 
 INSERT INTO `area` (`idarea`, `nombre`, `iddepto`) VALUES
 (1, 'Area patito', 1),
-(2, 'Area patito2', 1);
+(2, 'Area patito2', 1),
+(3, 'Area de Difusion Cultural', 1);
 
 -- --------------------------------------------------------
 
@@ -80,7 +73,8 @@ CREATE TABLE `depto` (
 --
 
 INSERT INTO `depto` (`iddepto`, `nombre`) VALUES
-(1, 'Departamento patito');
+(1, 'Departamento de Reprobados'),
+(2, 'Departamento de Gaming');
 
 -- --------------------------------------------------------
 
@@ -177,7 +171,7 @@ CREATE TABLE `Mensaje` (
   `contenido` varchar(200) DEFAULT NULL,
   `estado` varchar(20) DEFAULT NULL,
   `fecha` varchar(20) NOT NULL,
-  `depto_iddepto` int(11) NOT NULL
+  `iddepto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -303,8 +297,8 @@ ALTER TABLE `interesado`
 -- Indices de la tabla `Mensaje`
 --
 ALTER TABLE `Mensaje`
-  ADD PRIMARY KEY (`idMensaje`,`depto_iddepto`),
-  ADD KEY `fk_Mensaje_depto1_idx` (`depto_iddepto`);
+  ADD PRIMARY KEY (`idMensaje`,`iddepto`),
+  ADD KEY `fk_Mensaje_depto1_idx` (`iddepto`);
 
 --
 -- Indices de la tabla `personal`
@@ -333,11 +327,6 @@ ALTER TABLE `SolicitudToken`
 --
 
 --
--- AUTO_INCREMENT de la tabla `DiaPref`
---
-ALTER TABLE `DiaPref`
-  MODIFY `idDia` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT de la tabla `Cita`
 --
 ALTER TABLE `Cita`
@@ -346,11 +335,6 @@ ALTER TABLE `Cita`
 -- AUTO_INCREMENT de la tabla `DiaPref`
 --
 ALTER TABLE `DiaPref`
-  MODIFY `idDia` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `DiaSol`
---
-ALTER TABLE `DiaSol`
   MODIFY `idDia` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `HoraPref`
@@ -403,7 +387,7 @@ ALTER TABLE `Cita`
 -- Filtros para la tabla `Mensaje`
 --
 ALTER TABLE `Mensaje`
-  ADD CONSTRAINT `fk_Mensaje_depto1` FOREIGN KEY (`depto_iddepto`) REFERENCES `depto` (`iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Mensaje_depto1` FOREIGN KEY (`iddepto`) REFERENCES `depto` (`iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `personal`

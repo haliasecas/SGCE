@@ -165,15 +165,15 @@
 							<select name="departamento" class="form-control">
 								<!--<option value="DepartamentoA">Departamento A</option> -->
 								<?php
-								include("abre_conexion.php");
+								include("../Modelo/abre_conexion.php");
 								$query = "SELECT * FROM depto";
-								$result2 = mysqli_query($link, $query);
-								$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-								while($row = mysqli_fetch_array($result2, MYSQLI_ASSOC)){
+								$result = mysqli_query($link, $query);
+								while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 									$nombredepto= $row['nombre'];
 									$iddepto = $row["iddepto"];
 									echo "<option value='$iddepto'>$nombredepto</option>";
 								}
+                                include("../Modelo/cierra_conexion.php")
 								?>
 							</select>
 						</div>                                                                       
