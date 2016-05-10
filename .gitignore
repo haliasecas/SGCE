@@ -1,5 +1,6 @@
 # Ignora things
 
+client_secret*
 Vista/abre_conexion.php
 composer.*
 quickstart.php
