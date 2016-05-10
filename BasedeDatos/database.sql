@@ -311,6 +311,11 @@ ALTER TABLE `SolicitudToken`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `DiaPref`
+--
+ALTER TABLE `DiaPref`
+  MODIFY `idDia` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `Cita`
 --
 ALTER TABLE `Cita`
