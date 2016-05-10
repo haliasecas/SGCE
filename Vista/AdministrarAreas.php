@@ -91,7 +91,7 @@
                                 </tr>-->
                                 <?php
                                 
-                                include("abre_conexion.php");
+                                include("../Modelo/abre_conexion.php");
                                 $query = "SELECT a.nombre as area,a.idarea as idarea,d.nombre as depto FROM area a, depto d WHERE idarea>0 and a.iddepto=d.iddepto ORDER BY a.nombre";
                                 $result = mysqli_query($link, $query);
                                 

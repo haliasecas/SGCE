@@ -70,7 +70,7 @@
         <?php 
             if(isset($_GET["id"]))
 	           $id = $_GET['id'];
-            include("abre_conexion.php");
+            include("../Modelo/abre_conexion.php");
             $query = "SELECT a.nombre as nombrearea FROM area a WHERE idarea = '$id'";
             $result = mysqli_query($link, $query);
             $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
