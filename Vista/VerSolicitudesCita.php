@@ -74,23 +74,52 @@
 				</div>
 			</div>
 		</nav>
-
 		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
 			<div class="container-fluid col-md-10 col-md-offset-1">
 				<h3><strong>Ver más</strong></h3>
 				<p>Una vez agendada la cita se enviará la confirmación directamente al correo electrónico
-					indicado y el estado de la solicitud pasará a "AGENDADA".<br> Si la cita es rechazada, 
+					indicado y el estado de la solicitud pasará a "AGENDADA".Si la cita es rechazada, 
 					se notificará automáticamente al correo electrónico indicado y el estado
 					de la solicitud parasá a "RECHAZADA"</p>
 				<br><br>
 				<form class="form-horizontal">
 					<h4 class="text-uppercase">Datos del interesado:</h4>
+					<?php
+							if(isset($_GET["id"]))
+								$idsol = $_GET['id'];
+							include("../Modelo/abre_conexion.php");
+							$query = "SELECT * FROM solicitud WHERE idsolicitud = '$idsol'";
+							$result = mysqli_query($link, $query);
+							$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+							$idinteresado=$row['idinteresado'];
 
+							$query = "SELECT * FROM interesado WHERE idinteresado='$idinteresado'";
+							$result2 = mysqli_query($link, $query);
+							$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
+
+							$idarea=$row['idarea'];
+							$query = "SELECT * FROM area WHERE idarea='$idarea'";
+							$result3 = mysqli_query($link, $query);
+							$row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+
+							
+
+							
+							$asunto=$row['asunto'];
+							$appaterno=$row2['appaterno'];
+							$nombre = $row2['nombre'];
+							$apmaterno=$row2['apmaterno'];
+							$correo = $row2['correo'];
+							$telefono = $row2['telefono'];
+							$area = $row3['nombre'];
+					?>
 					<!-- Correo electrónico -->
 					<div class="form-group has-feedback" id="Email01">                                                            
 						<label  class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
-							<p class="form-control-static" id="correoE01" name="email">ejemplo@dominio.com</p>	
+							<?php 
+								echo "<p class='form-control-static' id='correo' name='nombre'>$correo</p>";
+								?>
 						</div>
 						<br>
 					</div>
@@ -99,7 +128,9 @@
 					<div class="form-group has-feedback" id="Nombre">
 						<label class="control-label col-md-2">Nombre(s)</label>
 						<div class="col-md-10">
-							<p class="form-control-static" id="nombre" name="nombre">Francisco</p>
+						<?php 
+								echo "<p class='form-control-static' id='nombre' name='nombre'>$nombre</p>";
+								?>
 						</div>
 						<br>       
 					</div>
@@ -108,7 +139,9 @@
 					<div class="form-group has-feedback" id="ApellidoP">
 						<label  for="appat" class="control-label col-md-2">Apellido paterno</label>
 						<div class="col-md-10">
-							<p class="form-control-static" id="appat" name="appat">Pérez</p>
+							<?php 
+								echo "<p class='form-control-static' id='appat' name='nombre'>$appaterno</p>";
+								?>
 						</div>
 						<br>       
 					</div>
@@ -117,7 +150,9 @@
 					<div class="form-group has-feedback" id="ApellidoM">
 						<label  for="apmat" class="control-label col-md-2">Apellido materno</label>
 						<div class="col-md-10">
-							<p class="form-control-static" id="apmat" name="apmat">Pérez</p>
+							<?php 
+								echo "<p class='form-control-static' id='apmat' name='nombre'>$apmaterno</p>";
+								?>
 						</div>
 						<br>   
 					</div>
@@ -126,7 +161,9 @@
 					<div class="form-group has-feedback" id="Telefono">
 						<label  for="telefono" class="control-label col-md-2">Teléfono</label>
 						<div class="col-md-10">
-							<p class="form-control-static" id="telefono" name="telefono">55555555</p>
+							<?php 
+								echo "<p class='form-control-static' id='tel' name='nombre'>$telefono</p>";
+								?>
 							<br><br>
 						</div>
 					</div>
@@ -137,7 +174,9 @@
 					<div class="form-group">
 						<label class="control-label col-md-2">Área</label>        
 						<div class="col-md-10">                                        
-							<p class="form-control-static" id="area" name="area">Movilidad académica</p>
+							<?php 
+								echo "<p class='form-control-static' id='area' name='nombre'>$area</p>";
+								?>
 						</div>                        
 					</div>
 
@@ -145,7 +184,9 @@
 					<div class="form-group has-feedback" id="Asunto">
 						<label class="control-label col-md-2">Asunto</label>
 						<div class="col-md-10">
-							<p class="form-control-static" id="asunto" name="asunto">Breve descripción del asunto de la cita</p>
+							<?php 
+								echo "<p class='form-control-static'  name='asunto'>$asunto</p>";
+								?>
 						</div>
 						<br> 
 					</div>

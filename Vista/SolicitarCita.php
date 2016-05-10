@@ -112,6 +112,13 @@
 					$idsolicitud=$row[0]-1;
 					$tok=sprintf("INSERT INTO SolicitudToken (idtoken, idSolicitud, token) VALUES (NULL,'$idsolicitud','$string')");   
 					$result=mysqli_query($link,$tok);
+					if(!empty($_POST['hora01'])){
+				        foreach($_POST['hora01'] as $selected){
+				        	$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
+							$result=mysqli_query($link,$tok);
+				        }
+    				}
+
 					include("cierra_conexion.php");
 					if (mandarCorreoSolicitud($nombre,$appat,$apmat,$email,$string)) {
 						echo 

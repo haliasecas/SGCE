@@ -65,10 +65,10 @@
 			</div>
 		</nav>
 
-		<?php 
+		<?php
 		if(isset($_GET["id"]))
 			$id = $_GET['id'];
-		include("abre_conexion.php");
+		include("../Modelo/abre_conexion.php");
 		$query = "SELECT * FROM personal WHERE idpersonal = '$id'";
 		$result = mysqli_query($link, $query);
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
@@ -76,7 +76,6 @@
 		$nombre = $row['nombre'];
 		$apmaterno=$row['apmaterno'];
 		$correo = $row['correo'];
-
 		?>
 		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
 			<div class="container">

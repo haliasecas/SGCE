@@ -174,39 +174,9 @@
 									});
 								}
 							</script>
-							<tr id="eg1">
-								<td>Departamento A</td>
-								<td>ejemplo@dominio.com</td>
-								<td>Nombre encargado</td>
-								<td>PENDIENTE</td>
-								<td><p class="click-me text-success text-right"  style="text-decoration:underline;" id="1">Editar</p></td>
-								<td><p class="click-me text-success text-right" style="text-decoration:underline;"  id="2">Eliminar</p></td>
-							</tr>
-							<tr id="eg2">
-								<td>Departamento B</td>
-								<td>ejemplo@dominio.com</td>
-								<td>Nombre encargado</td>
-								<td>APROBADO</td>
-								<td><p class="click-me text-success text-right"  style="text-decoration:underline;" id="1">Editar</p></td>
-								<td><p class="click-me text-success text-right" style="text-decoration:underline;"  id="2">Eliminar</p></td>
-							</tr>
-							<script type="text/javascript">
-								$(".click-me").click(function() {
-									$idD = this.id;
-									$idP = $(this).parent().id;
-									$.ajax({
-										method: "POST",
-										url: "SolicitudCita.php",
-										data: { value: $idD, parent: $idP }
-									}).done(function(msg){
-										console.log(msg);
-									});
-								});
-							</script>
 							<?php
-
 							include("../Modelo/abre_conexion.php");
-							$query = "SELECT idSolicitud,idarea,dia,estado,idinteresado FROM solicitud";
+							$query = "SELECT idSolicitud,idarea,dia,estado,idinteresado FROM solicitud WHERE estado!=' '";
 							$result = mysqli_query($link, $query);
 							echo "<form action='prueba.php' method='post' name='testform'>";
 							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -225,21 +195,30 @@
 								$idsolicitud=$row['idSolicitud'];
 								echo "<tr>";
 								echo "<th>$area</th>";
-								echo "<th>$correo</th>";
-								echo "<th>$recibido</th>";
-								echo "<th>$estado</th>";
-								//echo "<input type='submit' name='data' value='M'.$idsolicitud>";
-								//echo "<a name='adios' href = '#'  id = 'solution2' onClick='submit';'>Solution1 </a>";
-								//echo "<a name='hola' href = '#'  id = 'solution1' onClick='submit';'>Solution1 </a>";
-								//echo "<input type='submit' name='data' value=$idsolicitud>";
-								//echo "<th><a class=' text-success text-right '  style = 'text-decoration:underline;' id=$idsolicitud' >Ver más</a></th>";
-								//echo "<th><a class=' text-success text-right delete-rod' style = 'text-decoration:underline;'  id=$idsolicitud' href=#>Eliminar</a></th> ";
+								echo "<td>$correo</td>";
+								echo "<td>$recibido</td>";
+								echo "<td>$estado</td>";
+								echo "<th><a class='text-success text-right'  style = 'text-decoration:underline;' href='VerSolicitudesCita.php?id=$idsolicitud'>Ver más</a></th>";
+								//echo "<td><p class='click-me text-success text-right'  style='text-decoration:underline;'' id='1'>Ver más</p></td>
+								//	<td><p class='click-me text-success text-right' style='text-decoration:underline;''  id='2'>Eliminar</p></td>";
 								echo "</tr>";
 							}
 							echo"</form>";
 							include("../Modelo/cierra_conexion.php");
 							?>
-
+							<script type="text/javascript">
+								$(".click-me").click(function() {
+									$idD = this.id;
+									$idP = $(this).parent().id;
+									$.ajax({
+										method: "POST",
+										url: "SolicitudCita.php",
+										data: { value: $idD, parent: $idP }
+									}).done(function(msg){
+										console.log(msg);
+									});
+								});
+							</script>
 						</tbody>
 					</table>
 				</div>

@@ -147,7 +147,7 @@
 
 							<?php
 
-							include("abre_conexion.php");
+							include("../Modelo/abre_conexion.php");
 							$query = "SELECT *  FROM personal  WHERE idpersonal>0 ORDER BY nombre";
 							$result = mysqli_query($link, $query);
 
