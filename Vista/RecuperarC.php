@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Modelo</title>
+		<title>SGCE</title>
 		<meta charset="utf-8">
 		<script type="text/javascript" src="../Scr/jquery-2.2.0.js"></script>
 		<script type="text/javascript" src="../Scr/moment.min.js"></script>
