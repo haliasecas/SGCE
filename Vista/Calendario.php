@@ -94,7 +94,7 @@
 						<a class="navbar-brand" href="https://plus.google.com/112263443520207638663/posts">
 							<img src="../Img/googleWhite.png" height="24px">
 						</a>
-					</ul>
+					</ul>        
 				</div>
 			</div>
 		</nav>
