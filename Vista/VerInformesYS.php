@@ -172,14 +172,27 @@
 										data: { value: $("[name='select']").val() }
 									}).done(function(msg){
 										$("#solicitudes").append(msg);
-										$("[name='EliminaIS']").click(function(){
-											
+										$("[name='EliminaIS']").click(function() {
+											var id = $(this).closest('tr').attr('id');
+											eliminar(id);
 										});
 									});
 								}
 							</script>
 						</tbody>
 					</table>
+					<script type="text/javascript">
+						function eliminar(str) {
+							var id = str.substring(2);
+							$.ajax({
+								method: "POST",
+								url: "../Modelo/elimina_informe.php",
+								data: { value: id }
+							}).done(function(msg){
+								if (msg == "hecho") meetings();
+							});
+						}
+					</script>
 				</div>
 			</div>                                                               
 		</div>
