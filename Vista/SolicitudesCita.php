@@ -165,7 +165,6 @@
 							<script type="text/javascript">
 								function meetings() {
 									$("[name='hola']").text("");
-									$idD = this.id;
 									$.ajax({
 										method: "POST",
 										url: "../Modelo/SolicitudesCitaFiltrado.php",
@@ -177,8 +176,8 @@
 							</script>
 							<script type="text/javascript">
 								$(".click-me").click(function() {
-									$idD = this.id;
-									$idP = $(this).parent().id;
+									var $idD = this.id;
+									var $idP = $(this).parent().id;
 									$.ajax({
 										method: "POST",
 										url: "SolicitudCita.php",

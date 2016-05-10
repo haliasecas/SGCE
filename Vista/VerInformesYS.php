@@ -154,7 +154,7 @@
 				<div class="table-responsive">          
 					<table class="table">
 						<thead>
-							<tr style="color: #FFF; background: #696969;">
+							<tr style="color: #FFF; background: #656565;">
 								<th>Asunto</th>
 								<th>Correo electrónico</th>
 								<th>Fecha</th>

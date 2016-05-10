@@ -31,7 +31,6 @@ if($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 		$idsolicitud=$row['idSolicitud'];
 		echo "<tr>";
 		echo "<th>$area</th>";
-		echo "<th>$value</th>";
 		echo "<td>$correo</td>";
 		echo "<td>$recibido</td>";
 		echo "<p><td>$estado</td></p>";
