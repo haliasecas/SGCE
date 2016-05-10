@@ -3,7 +3,7 @@ $value = htmlspecialchars($_POST["value"]);
 include("../Modelo/abre_conexion.php");
 switch($value){
 	case 1:
-		$query = "SELECT * FROM solicitud WHERE estado!=' ' order by estado ";
+		$query = "SELECT * FROM solicitud order by estado ";
 		break;
 	case 2:
 		$query = "SELECT * FROM solicitud WHERE estado='ACEPTADA'";
@@ -13,7 +13,7 @@ switch($value){
 		break;
 }
 $result = mysqli_query($link,$query);
-if($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+if($row = mysqli_fetch_array($result, MYSQLI_ASSOC)>0)
 {
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 		$idarea=$row['idarea'];
