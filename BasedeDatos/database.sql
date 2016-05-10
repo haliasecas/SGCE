@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 10-05-2016 a las 20:49:37
+-- Tiempo de generación: 10-05-2016 a las 21:01:29
 -- Versión del servidor: 10.1.10-MariaDB
 -- Versión de PHP: 7.0.4
 
@@ -154,7 +154,7 @@ CREATE TABLE `interesado` (
 --
 
 INSERT INTO `interesado` (`idinteresado`, `nombre`, `appaterno`, `apmaterno`, `correo`, `telefono`) VALUES
-(1, 'DODO', 'DEDE', 'UDU', NULL, NULL);
+(1, 'Idalia', 'Overkill', 'Minions', 'idalia@minions.com', '5562172501');
 
 -- --------------------------------------------------------
 
@@ -217,7 +217,7 @@ CREATE TABLE `solicitud` (
 --
 
 INSERT INTO `solicitud` (`idSolicitud`, `asunto`, `estado`, `idinteresado`, `dia`, `idarea`, `iddepto`) VALUES
-(0, 'Molestar a hali', 'ACEPTADA', 1, '2016-05-19', 2, 1);
+(0, 'Molestar a hali', 'ACEPTADA', 1, '2016-05-10', 2, 1);
 
 -- --------------------------------------------------------
 
