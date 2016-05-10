@@ -3,7 +3,7 @@ $value = htmlspecialchars($_POST["value"]);
 include("../Modelo/abre_conexion.php");
 switch($value){
 	case 1:
-		$query = "SELECT * FROM solicitud order by estado ";
+		$query = "SELECT * FROM solicitud WHERE estado!=' ' order by estado ";
 		break;
 	case 2:
 		$query = "SELECT * FROM solicitud WHERE estado='ACEPTADA'";
