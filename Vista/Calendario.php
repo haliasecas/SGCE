@@ -83,7 +83,7 @@
 
 						<?php }else{?> 
 
-						<! Personal administrativo -->                    
+						<!-- Personal administrativo -->                    
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Personal Administrativo<span class="caret"></span>
@@ -131,6 +131,7 @@
 		</nav>
         
         <?php    set_include_path(get_include_path() . PATH_SEPARATOR . '/google-api-php-client/src'); ?>   <!--API GOOGLE CALENDAR-->
+        <iframe src="https://calendar.google.com/calendar/embed?src=sgceescom%40gmail.com&ctz=America/Mexico_City" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
         
                                                   				                       
 		<!-- Nav de abajo -->
