@@ -7,6 +7,8 @@
 		<script type="text/javascript" src="../Scr/moment.min.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
+		<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+		<script type="text/javascript" src="../Scr/verificaInformes.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
 		<link type="text/css" rel="stylesheet" href="../Css/modals.css">	
@@ -38,14 +40,14 @@
 
 				<div class="collapse navbar-collapse" id="header-bar">
 					<ul class="nav navbar-nav navbar-right" style="padding-top:12px;">
-                         
-                        <?php
-                        if (isset($_COOKIE["cargo"])) {
-                        ?>
-                        <?php if($_COOKIE["cargo"]==1){ ?>
-                       
-                        <!--  Administrador -->
-                        <li class="dropdown">
+
+						<?php
+						if (isset($_COOKIE["cargo"])) {
+						?>
+						<?php if($_COOKIE["cargo"]==1){ ?>
+
+						<!--  Administrador -->
+						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Administrador<span class="caret"></span>
 							</a>
@@ -53,15 +55,15 @@
 								<li><a href="../Vista/AdministrarDepartamentos.php">
 									<span><img src="../Img/Admin_Dep.png" height="36px"></span>
 									Administrar departamentos
-								</a></li>
+									</a></li>
 								<li><a href="../Vista/AdministrarAreas.php">
 									<span><img src="../Img/Admin_Area.png" height="36px"></span>
 									Administrar areas
-								</a></li>
+									</a></li>
 								<li><a href="../Vista/AdministrarCuentas.php">
 									<span><img src="../Img/Admin_Cont.png" height="36px"></span>
 									Administrar cuentas
-								</a></li>
+									</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -72,19 +74,19 @@
 								<li><a href="../Vista/CambiarContrasena.php">
 									<span><img src="../Img/Edit2.png" height="36px"></span>
 									Cambiar contraseña
-								</a></li>
+									</a></li>
 								<li><a href="cierra_sesion.php">
 									<span><img src="../Img/Out.png" height="36px"></span>
 									Cerrar sesión
-								</a></li>
+									</a></li>
 							</ul>
 						</li>
-                        
-                        
-                        <?php }else{?> 
-                        
 
-                        <!-- Personal administrativo -->                    
+
+						<?php }else{?> 
+
+
+						<!-- Personal administrativo -->                    
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Personal Administrativo<span class="caret"></span>
@@ -93,15 +95,15 @@
 								<li><a href="../Vista/Calendario.php">
 									<span><img src="../Img/333.png" height="36px"></span>
 									Calendario
-								</a></li>
+									</a></li>
 								<li><a href="../Vista/VerInformesYS.php">
 									<span><img src="../Img/22.png" height="36px"></span>
 									Informes y Sugerencias
-								</a></li>
+									</a></li>
 								<li><a href="../Vista/SolicitudesCita.php">
 									<span><img src="../Img/11.png" height="36px"></span>
 									Solicitudes de citas
-								</a></li>
+									</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -112,24 +114,24 @@
 								<li><a href="../Vista/CambiarContrasena.php">
 									<span><img src="../Img/Edit2.png" height="36px"></span>
 									Cambiar contraseña
-								</a></li>
+									</a></li>
 								<li><a href="cierra_sesion.php">
 									<span><img src="../Img/Out.png" height="36px"></span>
 									Cerrar sesión
-								</a></li>
+									</a></li>
 							</ul>
 						</li>
-			
-                        
-                        
-                       <?php } ?>
-                        
 
-                        <?php
-                        }else{
-                        ?>
 
-                        <!--  Visitante -->
+
+						<?php } ?>
+
+
+						<?php
+						}else{
+						?>
+
+						<!--  Visitante -->
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
@@ -138,22 +140,22 @@
 								<li><a href="../Vista/SolicitarCita.php">
 									<span><img src="../Img/333.png" height="36px"></span>
 									Solicitar Cita
-								</a></li>
+									</a></li>
 								<li><a href="../Vista/InformesySugerencias.php">
 									<span><img src="../Img/22.png" height="36px"></span>
 									Informes y Sugerencias
-								</a></li>
+									</a></li>
 							</ul>
 						</li>
-                        <li class="">
+						<li class="">
 							<a href="../Vista/IniciarSesion.php">
 								<span><img src="../Img/loginiGreen.png" height="30px"></span> Iniciar sesión (Administrador)
 							</a>
 						</li>
-                        
-                        <?php
-                        }			
-                        ?>
+
+						<?php
+						}			
+						?>
 					</ul>
 				</div>
 			</div>
@@ -178,17 +180,27 @@
 					<p><strong class="text-success">Todos los campos son obligatorios.</strong>
 						La respuesta a su pregunta o sugerencia llegará directamente al correo que<br>nos proporcione.</p><br>
 
-					<div class="form-group">
+					<div class="form-group" id="Email01">
 						<label  for="email" class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" id="" placeholder="ejemplo@dominio.com">
+							<input type="text" class="form-control" id="correoE01" placeholder="ejemplo@dominio.com">
+							<span id="email01" class="hidden glyphicon form-control-feedback"></span>
 						</div>
 					</div>
 
-					<div class="form-group">
+					<div class="form-group" id="Email02">
 						<label  for="email" class="control-label col-md-2">Repetir correo electrónico</label>
 						<div class="col-md-10" style="padding-top: 6px;">
-							<input type="text" class="form-control" id="" placeholder="ejemplo@dominio.com">
+							<input type="text" class="form-control" id="correoE02" placeholder="ejemplo@dominio.com">
+							<span id="email02" style="padding-top: 6px;" class="hidden glyphicon form-control-feedback"></span>
+						</div>
+					</div>
+
+					<div class="form-group has-feedback has-error">
+						<div class="col-md-10 col-md-offset-2">
+							<span id="email03" class="text-center help-block hidden">
+								Formato de correo electrónico incorrecto
+							</span>
 						</div>
 					</div>
 
@@ -218,6 +230,13 @@
 						</div>
 					</div>
 
+					<div class="form-group text-right" id="recaptcha">
+						<label for="nombre" class="control-label col-md-4" style="padding-top: 18px;">
+							*Verifica que no eres un robot informático.
+						</label>
+						<div class="col-md-4" id="html_element" style="padding-top: 18px;"></div>
+					</div>
+
 					<div class="form-group">
 						<div class="col-lg-10 col-lg-offset-2" align="right">
 							<a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
@@ -225,9 +244,11 @@
 					</div>
 				</form>
 				<script type="text/javascript">
-					function enviarForm() {
-						$("#informe").submit();
-					}
+					var onloadCallback = function() {
+						grecaptcha.render('html_element', {
+							'sitekey' : '6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW'
+						});
+					};
 				</script>
 			</div>
 		</div>
