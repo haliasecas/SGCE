@@ -21,7 +21,8 @@
 			<img src="../Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
-
+		
+		<!-- Nueva nav -->
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
