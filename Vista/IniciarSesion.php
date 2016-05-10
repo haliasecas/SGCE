@@ -22,7 +22,7 @@
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
-					<a class="navbar-brand" href=".">
+					<a class="navbar-brand" href="..">
 						<img id="logoSGCE" src="../Img/logoSGCE.png">
 					</a>
 					<div style="padding-top:33px;">
@@ -132,22 +132,22 @@
                         <!--  Visitante -->
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-								<span><img src="./Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
+								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu dark">
 								<li><a href="./Vista/SolicitarCita.php">
-									<span><img src="./Img/333.png" height="36px"></span>
+									<span><img src="../Img/333.png" height="36px"></span>
 									Solicitar Cita
 								</a></li>
-								<li><a href="./Vista/InformesySugerencias.php">
-									<span><img src="./Img/22.png" height="36px"></span>
+								<li><a href="../Vista/InformesySugerencias.php">
+									<span><img src="../Img/22.png" height="36px"></span>
 									Informes y Sugerencias
 								</a></li>
 							</ul>
 						</li>
                         <li class="">
-							<a href="Vista/IniciarSesion.php">
-								<span><img src="./Img/loginiGreen.png" height="30px"></span> Iniciar sesión (Administrador)
+							<a href="IniciarSesion.php">
+								<span><img src="../Img/loginiGreen.png" height="30px"></span> Iniciar sesión (Administrador)
 							</a>
 						</li>
                         

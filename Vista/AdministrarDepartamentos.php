@@ -49,7 +49,7 @@
 									<span><img src="../Img/22.png" height="36px"></span>
 									Informes y Sugerencias
 								</a></li>
-								<li><a href="#">
+								<li><a href="../Vista/SolicitudesCita.php">
 									<span><img src="../Img/11.png" height="36px"></span>
 									Ver mis citas
 								</a></li>
@@ -90,7 +90,7 @@
                             </tr>-->
                             <?php
                                 
-                                include("abre_conexion.php");
+                                include("../Modelo/abre_conexion.php");
                                 $query = "SELECT nombre,iddepto  FROM area  WHERE idarea>0 ORDER BY nombre";
                                 $result = mysqli_query($link, $query);
                                 
