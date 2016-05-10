@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>SGCE</title>
@@ -7,22 +8,20 @@
 		<script type="text/javascript" src="../Scr/bootstrap.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
-		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
-	
+
 	<body>
 		<div class="container-fluid" style="padding-bottom:9px;" id="header">
 			<img src="../Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
-		
-		<!-- Nav de arriba -->
+
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
-					<a class="navbar-brand" href=".">
+					<a class="navbar-brand" href="../index.php">
 						<img id="logoSGCE" src="../Img/logoSGCE.png">
 					</a>
 					<div style="padding-top:33px;">
@@ -39,87 +38,103 @@
 					<ul class="nav navbar-nav navbar-right" style="padding-top:12px;">
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
+								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Personal Administrativo<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu dark">
 								<li><a href="../Vista/SolicitarCita.php">
 									<span><img src="../Img/333.png" height="36px"></span>
-									Solicitar Cita
-								</a></li>
-								<li><a href="../Vista/InformesySugerencias.php">
+									Calendario
+									</a></li>
+								<li><a href="./InformesySugerencias.php">
 									<span><img src="../Img/22.png" height="36px"></span>
 									Informes y Sugerencias
-								</a></li>
+									</a></li>
 								<li><a href="#">
 									<span><img src="../Img/11.png" height="36px"></span>
-									Ver mis citas
-								</a></li>
+									Solicitudes de citas
+									</a></li>
 							</ul>
 						</li>
-						<li class="">
-							<a href="../IniciarSesion.php">
-								<span><img src="../Img/loginiGreen.png" height="30px"></span> Iniciar sesión (Administrador)
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="../Img/loginiGreen.png" height="30px"></span> Bienvenido(a)<span class="caret"></span>
 							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="./CambiarContrasena.php">
+									<span><img src="../Img/Edit2.png" height="36px"></span>
+									Cambiar contraseña
+									</a></li>
+								<li><a href="../cierra_sesion.php">
+									<span><img src="../Img/Out.png" height="36px"></span>
+									Cerrar sesión
+									</a></li>
+							</ul>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
-		
-		<!-- Mensajes bajo el campo -->
-		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
-            <div class="container">
-                  <h3><strong>Administrar áreas</strong></h3>
-                  <p>En esta sección  podrás consultar los datos de las áreas existentes.También podrás registrar nuevas áreas.</p> 
-                   <br>
-                   <br>
-                     <div class="table-responsive">          
-                          <table class="table">
-                            <thead>
-                                <tr style="color: #FFF; background: #656565;">
-                                        <th>Áreas</th>
-                                        <th colspan="3">Departamento</th>      
-                                </tr>
-                            </thead>
 
-                            <tbody>
-                              <!--  <tr>
-                                        <th>Área A</th>
-                                        <th>Departamento A</th>
-                                        <th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
-                                        <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>                                        
-                                </tr>-->
-                                <?php
-                                
-                                include("abre_conexion.php");
-                                $query = "SELECT a.nombre as area,a.idarea as idarea,d.nombre as depto FROM area a, depto d WHERE idarea>0 and a.iddepto=d.iddepto ORDER BY a.nombre";
-                                $result = mysqli_query($link, $query);
-                                
-                                while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                                    $idarea=$row['idarea'];
-                                    $area = $row['area'];
-                                    $depto = $row['depto'];
-                                    echo "<tr>";
-                                        echo "<th>$area</th>";
-                                        echo "<th>$depto</th>";
-                                        echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarAreas.php?id=$idarea'>Editar</a></th>";   
-                                        echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='eliminar_area.php?id=$idarea'>Eliminar</a></th>  ";
-                                    echo "</tr>";
-                                }
-                                
-                                ?>
-                            </tbody>
-                          </table>
-                  </div>
-                  <div class="form-group text-right">
-                          <div class="col-md-8 col-md-offset-4">							                     
-                                     <a class="btn btn-success" href="AgregarArea.php" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
-                          </div>					                                                                               						                             
-               </div>
-        </div>                                                               
+		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
+			<div class="container-fluid col-md-10 col-md-offset-1">
+				<h3><strong>Ver más</strong></h3>
+				<p>La respuesta se enviará directamente al correo electrónico indicado y el estado del
+					mensaje pasará a "REVISADO".</p>
+				<br><br>
+				<form class="form-horizontal">
+					<h4 class="text-uppercase">Datos del mensaje:</h4>
+
+					<!-- Correo electrónico -->
+					<div class="form-group has-feedback" id="Email01">                                                            
+						<label  class="control-label col-md-2">Correo electrónico</label>
+						<div class="col-md-10">
+							<p class="form-control-static" id="correoE01" name="email">ejemplo@dominio.com</p>	
+						</div>
+						<br>
+					</div>
+
+					<!--Asunto-->
+					<div class="form-group has-feedback" id="Asunto">
+						<label class="control-label col-md-2">Asunto</label>
+						<div class="col-md-10">
+							<p class="form-control-static" id="asunto" name="asunto">Pedir informes</p>
+						</div>
+						<br> 
+					</div>
+
+					<!--Asunto-->
+					<div class="form-group has-feedback" id="Contenido">
+						<label class="control-label col-md-2">Contenido</label>
+						<div class="col-md-10">
+							<p class="form-control-static" id="asunto" name="asunto">
+								Todo el texto perteneciente al contenido del mensaje.</p>
+						</div>
+						<br><br><br>
+					</div>
+
+					<h4 class="text-uppercase">Responder:</h4>
+					<!-- Respuesta -->
+					<div class="form-group has-feedback" id="Contenido">
+						<label class="control-label col-md-2">Contenido</label>
+						<div class="col-md-10">
+							<textarea class="form-control" rows="3" id="contenido" name="contenido" 
+									  placeholder="Exponga la respuesta para este mensaje."></textarea>
+						</div>
+						<br> 
+					</div>
+
+					<!-- Botones -->
+					<div class="form-group text-right" style="padding-top: 9px;">
+						<div class="col-md-10 col-md-offset-2">
+							<button class="btn btn-success" type="reset" style="width: 150px;">CANCELAR</button>
+							<a class="btn btn-success" style="width: 150px;">ENVIAR</a>
+						</div>
+					</div>
+
+				</form>
+			</div>
 		</div>
-                        
-		<!-- Nav de abajo -->
+
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
@@ -147,7 +162,7 @@
 				</div>
 			</div>
 		</nav>
-		
+
 		<script type="text/javascript">
 			$(document).ready(function() {
 				// Sticky bar plz
@@ -161,7 +176,7 @@
 						$("#main-content").css({"padding-top":"0px"});
 					}
 				});
-					
+
 				if ($(window).width() <= 886) {
 					$("#top-bar").removeAttr("style");
 				}

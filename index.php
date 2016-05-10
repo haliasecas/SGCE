@@ -96,11 +96,11 @@
 									<span><img src="./Img/333.png" height="36px"></span>
 									Calendario
 								</a></li>
-								<li><a href="./Vista/InformesySugerencias.php">
+								<li><a href="./Vista/VerInformesYS.php">
 									<span><img src="./Img/22.png" height="36px"></span>
 									Informes y Sugerencias
 								</a></li>
-								<li><a href="#">
+								<li><a href="./Vista/SolicitudesCita.php">
 									<span><img src="./Img/11.png" height="36px"></span>
 									Solicitudes de citas
 								</a></li>

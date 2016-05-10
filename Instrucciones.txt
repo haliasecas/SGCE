@@ -1,4 +1,4 @@
 To Do
 
-1.- Agregar captcha a Informes y Sugerencias.
-2.-
+1.- Agregar captcha a informes y sugerencias.
+2.- Días preferentes -> Día preferente en solicitar cita.
