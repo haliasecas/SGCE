@@ -140,10 +140,9 @@
 				<br>
 				<form class="form-horizontal">
 					<div class="form-group">
-						<label class="control-label col-md-2">Selecciona</label>
+						<label class="control-label col-md-2">Selecciona el estado de citas</label>
 						<div class="col-md-10">
 							<select name="select" class="form-control" onChange="meetings();">
-								<option >Selecciona el estado de citas</option>
 								<option value="1" id="1">Todas</option>
 								<option value="2" id="2">Aceptadas</option>
 								<option value="3" id="3">Pendientes</option>
@@ -151,10 +150,10 @@
 						</div>                        
 					</div>
 				</form>
-				<div class="table-responsive" name="hola" >          
+				<div class="table-responsive">          
 					<table class="table">
 						<thead>
-							<tr style="color: #FFF; background: #696969;">
+							<tr style="color: #FFF; background: #656565;">
 								<th>Área</th>
 								<th>Correo electrónico</th>
 								<th>Recibido</th>
@@ -162,9 +161,10 @@
 								<th></th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody name="hola">
 							<script type="text/javascript">
 								function meetings() {
+									$("[name='hola']").text("");
 									$idD = this.id;
 									$.ajax({
 										method: "POST",
@@ -190,11 +190,6 @@
 							</script>
 						</tbody>
 					</table>
-				</div>
-				<div class="form-group text-right">
-					<div class="col-md-8 col-md-offset-4">							                     
-						<a class="btn btn-success" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
-					</div>           
 				</div>
 			</div>                                                               
 		</div>
@@ -229,6 +224,7 @@
 
 		<script type="text/javascript">
 			$(document).ready(function() {
+				meetings();
 				// Sticky bar plz
 				$(window).scroll(function() {
 					if ($(window).scrollTop() > $("#header").height()) {
