@@ -143,6 +143,7 @@
 						<label class="control-label col-md-2">Selecciona</label>
 						<div class="col-md-10">
 							<select name="select" class="form-control" onChange="meetings();">
+								<option >Selecciona el estado de citas</option>
 								<option value="1" id="1">Todas</option>
 								<option value="2" id="2">Aceptadas</option>
 								<option value="3" id="3">Pendientes</option>
@@ -167,7 +168,7 @@
 									$idD = this.id;
 									$.ajax({
 										method: "POST",
-										url: "SolicitudesCitaFiltrado.php",
+										url: "../Modelo/SolicitudesCitaFiltrado.php",
 										data: { value: $("[name='select']").val() }
 									}).done(function(msg){
 										$("[name='hola']").append(msg);

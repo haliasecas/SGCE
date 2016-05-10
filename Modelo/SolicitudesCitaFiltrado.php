@@ -1,6 +1,17 @@
 <?php
+							$value = htmlspecialchars($_POST["value"]);
 							include("../Modelo/abre_conexion.php");
-							$query = "SELECT idSolicitud,idarea,dia,estado,idinteresado FROM solicitud WHERE estado!=' '";
+							switch($value){
+								case 1:
+									$query = "SELECT idSolicitud,idarea,dia,estado,idinteresado FROM solicitud WHERE estado!=' '";
+								break;
+								case 2:
+									$query = "SELECT idSolicitud,idarea,dia,estado,idinteresado FROM solicitud WHERE estado='ACEPTADA'";
+								break;
+								case 3:
+									$query = "SELECT idSolicitud,idarea,dia,estado,idinteresado FROM solicitud WHERE estado='PENDIENTE'";
+								break;
+							}
 							$result = mysqli_query($link, $query);
 							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 								$idarea=$row['idarea'];
@@ -18,6 +29,7 @@
 								$idsolicitud=$row['idSolicitud'];
 								echo "<tr>";
 								echo "<th>$area</th>";
+								echo "<th>$value</th>";
 								echo "<td>$correo</td>";
 								echo "<td>$recibido</td>";
 								echo "<p><td>$estado</td></p>";
