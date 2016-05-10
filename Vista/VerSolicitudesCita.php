@@ -250,10 +250,31 @@
 					<div class="form-group has-feedback" id="Horarios">
 						<label class="control-label col-md-2">Horario(s) preferente(s)</label>
 						<div class="col-md-10">
-						<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
-							<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
-							<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
 						<?php
+							$busquedadia = sprintf("SELECT idDia FROM DiaSol WHERE idsolicitud='$idsol'");
+							$resultdia=mysqli_query($link, $busquedadia);
+							$row = mysqli_fetch_assoc($resultdia);
+							$Dia=$row["idDia"];
+
+							$busquedadia = sprintf("SELECT dia FROM DiaPref WHERE idDia='$Dia'");
+							$resultdia=mysqli_query($link, $busquedadia);
+							$row = mysqli_fetch_assoc($resultdia);
+							$Dia=$row["dia"];
+							$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
+							$result = mysqli_query($link,$query);
+							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+								$idhorario=$row['idHorario'];
+								$query2 = "SELECT * FROM HoraPref WHERE idHorario='$idhorario'";
+								$result2=mysqli_query($link,$query2);
+								$rowarea = mysqli_fetch_assoc($result2);
+								echo "<p class='form-control-static' id='horario' name='horario'>".$Dia." ".$rowarea['hinicio']."-".$rowarea['hfin']."</p>";
+						}
+							//$row_dia = mysqli_num_rows($resultdia);
+
+							//
+							//
+							//<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
+						
 							
 							?>
 						</div>
@@ -262,11 +283,11 @@
 
 					<!-- Acción -->
 					<div class="form-group has-feedback" id="Accion">
-						<label class="control-label col-md-2"><p class="text-success">Khé kiere PRRO?</p></label>
+						<label class="control-label col-md-2"><p class="text-success">¿QUÉ DESEA HACER?</p></label>
 						<div class="col-md-10">
 							<select class="form-control">
 								<option>Agendar</option>
-								<option>Nel PRRO</option>
+								<option>Rechazar</option>
 							</select>
 						</div>
 						<br> 
@@ -277,7 +298,9 @@
 						<label class="control-label col-md-2">Día</label>
 						<div class="col-md-10">
 							<select class="form-control">
-								<option>DD/MM/AAAA</option>
+							<?php
+								echo "<option>$Dia</option>";
+								?>
 							</select>
 						</div>
 						<br> 
@@ -288,7 +311,18 @@
 						<label class="control-label col-md-2">Hora</label>
 						<div class="col-md-10">
 							<select class="form-control">
-								<option>9:00 - 10:00 hrs.</option>
+							<?php
+									$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
+									$result = mysqli_query($link,$query);
+									while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+										$idhorario=$row['idHorario'];
+										$query2 = "SELECT * FROM HoraPref WHERE idHorario='$idhorario'";
+										$result2=mysqli_query($link,$query2);
+										$rowarea = mysqli_fetch_assoc($result2);
+										echo "<option>".$rowarea['hinicio']."-".$rowarea['hfin']."</option>";
+									}
+							?>
+								
 							</select>
 						</div>
 						<br> 
