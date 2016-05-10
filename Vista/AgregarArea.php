@@ -238,6 +238,7 @@
 
 >>>>>>> 578ade89fa5e795c9a090cdfff77b1128508524a
 		<!-- Nav de abajo -->
+
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
