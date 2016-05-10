@@ -115,7 +115,7 @@
                                                <br><br><br>                                                 
                                                <div class="form-group text-right">
 						                             <div class="col-md-8 col-md-offset-4">
-							                                 <a class="btn btn-success" style="width: 150px;" onclick="#">CANCELAR</a>							                                 
+							                                 <a class="btn btn-success" href="../" style="width: 150px;" onclick="#">CANCELAR</a>							                                 
 							                                 <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
 						                             </div>					                                                                               						                             
 					                           </div>
