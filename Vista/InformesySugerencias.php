@@ -204,16 +204,27 @@
 						</div>
 					</div>
 
-					<div class="form-group">
+					<div class="form-group" id="Departamento">
 						<label for="departamento" class="control-label col-md-2">Departamento</label>
 						<div class="col-md-10">
 							<select name="departamento" class="form-control">
-								<option value="UPIS">Unidad Politécnica de Integración Social</option>
+								<?php
+									include("../Modelo/abre_conexion.php"); 
+									$id = sprintf("SELECT * FROM depto");     
+									$resulta = mysqli_query($link,$id);
+									$numero = mysqli_num_rows($resulta);
+									while ($row = mysqli_fetch_array($resulta, MYSQLI_ASSOC)) {
+										$nombredepto= $row['nombre'];
+										$iddepto = $row["iddepto"];
+										echo "<option value='$iddepto'>$nombredepto</option>";
+									}
+									include("../Modelo/cierra_conexion.php"); 
+								?>
 							</select>
 						</div>
 					</div>
 
-					<div class="form-group">
+					<div class="form-group" id="Asunto">
 						<label for="asunto" class="control-label col-md-2">Asunto</label>
 						<div class="col-md-10">
 							<select name="asunto" class="form-control">
@@ -223,15 +234,15 @@
 						</div>
 					</div>
 
-					<div class="form-group">
-						<label for="comentarios" class="control-label col-md-2">Contenido</label>
+					<div class="form-group" id="Comentarios">
+						<label class="control-label col-md-2">Contenido</label>
 						<div class="col-md-10">
 							<textarea name="comentarios" class="form-control" cols="30" rows="15" placeholder="Exprese su sugerencia o problemática"></textarea>
 						</div>
 					</div>
 
 					<div class="form-group text-right" id="recaptcha">
-						<label for="nombre" class="control-label col-md-4" style="padding-top: 18px;">
+						<label id="captcha" class="control-label col-md-4" style="padding-top: 18px;">
 							*Verifica que no eres un robot informático.
 						</label>
 						<div class="col-md-4" id="html_element" style="padding-top: 18px;"></div>
