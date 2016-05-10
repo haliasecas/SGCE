@@ -6,6 +6,9 @@
 
     <body>  
         <?php  
+        // Recibimos por POST los datos procedentes del formulario  
+        $miemail = $_POST["miemail"]; 
+        $mipass = $_POST["mipass"]; 
             if(isset($_GET["id"]))
 	           $id = $_GET['id'];
             include("abre_conexion.php");

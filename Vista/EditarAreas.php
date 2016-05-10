@@ -136,10 +136,11 @@
 		if(isset($_GET["id"]))
 			$id = $_GET['id'];
 		include("../Modelo/abre_conexion.php");
-		$query = "SELECT a.nombre as nombrearea FROM area a WHERE idarea = '$id'";
+		$query = "SELECT a.nombre as nombrearea,a.idarea as idarea FROM area a WHERE idarea = '$id'";
 		$result = mysqli_query($link, $query);
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 		$nombrearea = $row['nombrearea'];
+        
 
 		?>
 
@@ -150,17 +151,17 @@
 				<p><strong class="text-success">Todos los campos son obligatorios.</strong>El nombre del departamento debe estar previamente registrado en el sistema.</p> 
 				<br>
 				<br>                                
-				<form action="" class="form-horizontal">
+				<form method="post" class="form-horizontal">
 					<div class="form-group">
 						<label  for="" class="control-label col-md-2">Nombre del área</label>
 						<div class="col-md-10">
-							<?php echo "<input type='text' class='form-control' value=$nombrearea >";	?>
+							<?php echo "<input type='text' class='form-control' value='$nombrearea' name='nombrearea'>";	?>
 
 						</div>
 						<br>              						                               
 						<br>              						                               
 						<br>              						                               
-						<label  for="" class="control-label col-md-2">Nombre del departamento</label>						                                                                
+						<label   class="control-label col-md-2">Nombre del departamento</label>						                                                                
 						<div class="col-md-10">                                        
 							<select name="departamento" class="form-control">
 								<!--<option value="DepartamentoA">Departamento A</option> -->
@@ -171,7 +172,7 @@
 								while($row = mysqli_fetch_array($result2, MYSQLI_ASSOC)){
 									$nombredepto= $row['nombre'];
 									$iddepto = $row["iddepto"];
-									echo "<option value='$iddepto'>$nombredepto</option>";
+									echo "<option value='$iddepto' name='iddepto'>$nombredepto</option>";
 								}
 								?>
 							</select>
@@ -179,10 +180,27 @@
 						<br><br><br>                                                 
 						<div class="form-group text-right">
 							<div class="col-md-8 col-md-offset-4">
-								<a class="btn btn-success" style="width: 150px;" onclick="#">CANCELAR</a>							                                 
-								<a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
+								<a class="btn btn-success" style="width: 150px;" onclick="#">CANCELAR</a>				<?php 
+                                echo "<a class='btn btn-success' href='../Modelo/edita_area.php?id=$id' style='width: 150px;' onclick='enviarForm();'>ENVIAR</a>"
+                                ?>			                                 
+								
 							</div>					                                                                               						                             
 						</div>
+                        <script>
+                        function logIn() {
+                            var iddepto = $("[name='iddepto']").val();
+                            var nombrearea = $("[name='nombrearea']").val();
+                            if (nombrearea == "") error("El nombre del area no puede estar vacio.");
+                            else error("Por favor, introduce un nombre al area");
+                            
+                            $.ajax({
+                                method: "POST",
+                                url: "'../Modelo/edita_area.php?id=$id'",
+                                data: { nombrearea: nombrearea, iddepto: iddepto }
+                            })
+                        }
+                        
+                        </script>
 					</div>
 				</form>   
 			</div>
