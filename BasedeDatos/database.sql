@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 08-05-2016 a las 22:02:50
+-- Tiempo de generación: 10-05-2016 a las 20:49:37
 -- Versión del servidor: 10.1.10-MariaDB
 -- Versión de PHP: 7.0.4
 
@@ -25,21 +25,21 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `area`
 --
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `mydb` ;
+
 CREATE TABLE `area` (
   `idarea` int(11) NOT NULL,
   `nombre` varchar(60) DEFAULT NULL,
   `iddepto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Volcado de datos para la tabla `area`
 --
 
-INSERT INTO `area` (`idarea`, `nombre`,`iddepto`) VALUES
-(1,'Area patito',1);
-INSERT INTO `area` (`idarea`, `nombre`,`iddepto`) VALUES
-(2,'Area patito2',1);
+INSERT INTO `area` (`idarea`, `nombre`, `iddepto`) VALUES
+(1, 'Area patito', 1),
+(2, 'Area patito2', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -107,16 +107,22 @@ CREATE TABLE `HoraPref` (
   `hinicio` time DEFAULT NULL,
   `hfin` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
- INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('1','09:00','10:00');
- INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('2','10:00','11:00');
- INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('3','11:00','12:00');
- INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('4','12:00','13:00');
- INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('5','13:00','14:00');
- INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('6','14:00','15:00');
- INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('7','18:00','19:00');
- INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('8','19:00','20:00');
- INSERT INTO `HoraPref` (`idHorario`, `hinicio`,`hfin`) VALUES('9','20:00','21:00');
- 
+
+--
+-- Volcado de datos para la tabla `HoraPref`
+--
+
+INSERT INTO `HoraPref` (`idHorario`, `hinicio`, `hfin`) VALUES
+(1, '09:00:00', '10:00:00'),
+(2, '10:00:00', '11:00:00'),
+(3, '11:00:00', '12:00:00'),
+(4, '12:00:00', '13:00:00'),
+(5, '13:00:00', '14:00:00'),
+(6, '14:00:00', '15:00:00'),
+(7, '18:00:00', '19:00:00'),
+(8, '19:00:00', '20:00:00'),
+(9, '20:00:00', '21:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -193,7 +199,7 @@ INSERT INTO `personal` (`idpersonal`, `nombre`, `appaterno`, `apmaterno`, `corre
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Solicitud`
+-- Estructura de tabla para la tabla `solicitud`
 --
 
 CREATE TABLE `solicitud` (
@@ -205,6 +211,13 @@ CREATE TABLE `solicitud` (
   `idarea` int(11) NOT NULL,
   `iddepto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `solicitud`
+--
+
+INSERT INTO `solicitud` (`idSolicitud`, `asunto`, `estado`, `idinteresado`, `dia`, `idarea`, `iddepto`) VALUES
+(0, 'Molestar a hali', 'ACEPTADA', 1, '2016-05-19', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -294,10 +307,9 @@ ALTER TABLE `personal`
 --
 -- Indices de la tabla `solicitud`
 --
-ALTER TABLE `Solicitud`
-  ADD PRIMARY KEY (`idSolicitud`,`idinteresado`,`idarea`,`iddepto`),
-  ADD KEY `fk_Solicitud_interesado1_idx` (`idinteresado`),
-  ADD KEY `fk_Solicitud_area1_idx` (`idarea`,`iddepto`);
+ALTER TABLE `solicitud`
+  ADD KEY `Solicitud_ibfk_1` (`idinteresado`),
+  ADD KEY `fk_Solicitud_area1` (`idarea`,`iddepto`);
 
 --
 -- Indices de la tabla `SolicitudToken`
@@ -331,20 +343,10 @@ ALTER TABLE `interesado`
 ALTER TABLE `personal`
   MODIFY `idpersonal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT de la tabla `solicitud`
---
-ALTER TABLE `solicitud`
-  MODIFY `idSolicitud` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT de la tabla `SolicitudToken`
 --
 ALTER TABLE `SolicitudToken`
   MODIFY `idtoken` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `interesado`
---
-ALTER TABLE `interesado`
-  MODIFY `idinteresado` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Restricciones para tablas volcadas
 --
@@ -361,20 +363,6 @@ ALTER TABLE `area`
 ALTER TABLE `Cita`
   ADD CONSTRAINT `Cita_ibfk_1` FOREIGN KEY (`idinteresado`) REFERENCES `interesado` (`idinteresado`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_Cita_area1` FOREIGN KEY (`idarea`,`iddepto`) REFERENCES `area` (`idarea`, `iddepto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `DiaSol`
---
-ALTER TABLE `DiaSol`
-  ADD CONSTRAINT `DiaSol_ibfk_1` FOREIGN KEY (`idSolicitud`) REFERENCES `solicitud` (`idSolicitud`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Dia_has_Solicitud_Dia1` FOREIGN KEY (`idDia`) REFERENCES `DiaPref` (`idDia`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `HoraSol`
---
-ALTER TABLE `HoraSol`
-  ADD CONSTRAINT `HoraSol_ibfk_1` FOREIGN KEY (`idSolicitud`) REFERENCES `solicitud` (`idSolicitud`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Horario_has_Solicitud_Horario1` FOREIGN KEY (`idHorario`) REFERENCES `HoraPref` (`idHorario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `Mensaje`
@@ -398,5 +386,3 @@ ALTER TABLE `solicitud`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-    
