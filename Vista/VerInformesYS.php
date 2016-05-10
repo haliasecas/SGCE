@@ -167,8 +167,8 @@
 								function meetings() {
 									$.ajax({
 										method: "POST",
-										url: "Informes.php",
-										data: { value: $idD, parent: $idP }
+										url: "../Modelo/informes_filtro.php",
+										data: { value: $("[name='select']").val() }
 									}).done(function(msg){
 										console.log(msg);
 									});

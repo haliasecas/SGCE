@@ -228,8 +228,8 @@
 						<label for="asunto" class="control-label col-md-2">Asunto</label>
 						<div class="col-md-10">
 							<select name="asunto" class="form-control">
-								<option value="informe" select>Pedir informe</option>
-								<option value="sugerencia">Sugerencia</option>
+								<option value="Informe" select>Pedir informe</option>
+								<option value="Sugerencia">Sugerencia</option>
 							</select>
 						</div>
 					</div>

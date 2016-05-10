@@ -3,7 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 10-05-2016 a las 20:49:37
+<<<<<<< HEAD
+-- Tiempo de generación: 10-05-2016 a las 21:18:21
+=======
+-- Tiempo de generación: 10-05-2016 a las 21:01:29
+>>>>>>> e82e06fa842e87912d0ddf431ac6dbadf2c6aaad
 -- Versión del servidor: 10.1.10-MariaDB
 -- Versión de PHP: 7.0.4
 
@@ -154,7 +158,7 @@ CREATE TABLE `interesado` (
 --
 
 INSERT INTO `interesado` (`idinteresado`, `nombre`, `appaterno`, `apmaterno`, `correo`, `telefono`) VALUES
-(1, 'DODO', 'DEDE', 'UDU', NULL, NULL);
+(1, 'Idalia', 'Overkill', 'Minions', 'idalia@minions.com', '5562172501');
 
 -- --------------------------------------------------------
 
@@ -168,6 +172,7 @@ CREATE TABLE `Mensaje` (
   `asunto` varchar(30) DEFAULT NULL,
   `contenido` varchar(200) DEFAULT NULL,
   `estado` varchar(20) DEFAULT NULL,
+  `fecha` varchar(20) NOT NULL,
   `depto_iddepto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -217,7 +222,7 @@ CREATE TABLE `solicitud` (
 --
 
 INSERT INTO `solicitud` (`idSolicitud`, `asunto`, `estado`, `idinteresado`, `dia`, `idarea`, `iddepto`) VALUES
-(0, 'Molestar a hali', 'ACEPTADA', 1, '2016-05-19', 2, 1);
+(0, 'Molestar a hali', 'ACEPTADA', 1, '2016-05-10', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -332,6 +337,26 @@ ALTER TABLE `DiaPref`
 --
 ALTER TABLE `Cita`
   MODIFY `idCita` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `DiaPref`
+--
+ALTER TABLE `DiaPref`
+  MODIFY `idDia` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `DiaSol`
+--
+ALTER TABLE `DiaSol`
+  MODIFY `idDia` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `HoraPref`
+--
+ALTER TABLE `HoraPref`
+  MODIFY `idHorario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT de la tabla `HoraSol`
+--
+ALTER TABLE `HoraSol`
+  MODIFY `idHorario` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `interesado`
 --
