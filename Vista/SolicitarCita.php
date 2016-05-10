@@ -329,8 +329,8 @@
 					<h4 class="text-uppercase">Datos de la cita:</h4>
 
 					<!--Departamento-->
-					<div class="form-group">
-						<label for="departamento" class="control-label col-md-2">Departamento</label>        
+					<div class="form-group" id="Departamento">
+						<label class="control-label col-md-2">Departamento</label>        
 						<div class="col-md-10">                                        
 							<select name="departamento" class="form-control" onChange="despAreas();">
 								<?php
@@ -350,7 +350,7 @@
 					</div>
 
 					<!--Area-->
-					<div class="form-group">
+					<div class="form-group" id="Area">
 						<label class="control-label col-md-2">Área</label>        
 						<div class="col-md-10">                                        
 							<select name="area" class="form-control">
@@ -361,8 +361,7 @@
 											method: "POST",
 											url: "../Modelo/getAreas.php",
 											data: { value: $("[name='departamento']").val() }
-										})
-											.done(function(msg){
+										}).done(function(msg){
 											$("[name='area']").append(msg);
 										});
 									}
