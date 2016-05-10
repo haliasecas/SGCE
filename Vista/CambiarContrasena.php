@@ -119,8 +119,12 @@
 							</ul>
 						</li>
 						<?php
-							} }
+							} } else {
 						?>
+						<script type="text/javascript">
+							window.location = "../";
+						</script>
+						<?php }?>
 					</ul>
 				</div>
 			</div>
