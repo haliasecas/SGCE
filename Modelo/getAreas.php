@@ -9,7 +9,7 @@ if (mysqli_num_rows($areas) > 0) {
 	$p = mysqli_query($link, $q);
 	while ($row = mysqli_fetch_array($p, MYSQLI_ASSOC)) {
 		$nombredepto= $row['nombre'];
-		$iddepto = $row["iddepto"];
+		$iddepto = $row["idarea"];
 		echo "<option value='$iddepto'>$nombredepto</option>";
 	}
 }

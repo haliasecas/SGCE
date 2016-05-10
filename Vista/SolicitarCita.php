@@ -200,6 +200,8 @@
 					$idint=$row["idinteresado"];
 					$iddept=$_POST["departamento"];
 					$idarea=$_POST["area"];
+					echo "$iddept";
+					//echo $_POST['datas'];
 					$timestamp = date('Y/m/d');
 					$soli = sprintf("INSERT INTO solicitud (idSolicitud, asunto, estado,idinteresado,dia,idarea,iddepto) VALUES (NULL,'$asunto',' ','$idint','$timestamp','$idarea','$iddept')");
 					$result=mysqli_query($link,$soli);
@@ -215,7 +217,6 @@
 							$result=mysqli_query($link,$tok);
 				        }
     				}
-
 					include("../Modelo/cierra_conexion.php");
 					if (mandarCorreoSolicitud($nombre, $appat, $apmat, $email, $string)) {
 						echo 
@@ -335,16 +336,16 @@
 						<div class="col-md-10">                                        
 							<select name="departamento" class="form-control" onChange="despAreas();">
 								<?php
-								include("../Modelo/abre_conexion.php"); 
-								$id = sprintf("SELECT * FROM depto");     
-								$resulta = mysqli_query($link,$id);
-								$numero = mysqli_num_rows($resulta); // obtenemos el número de filas
-								while ($row = mysqli_fetch_array($resulta, MYSQLI_ASSOC)) {
-									$nombredepto= $row['nombre'];
-									$iddepto = $row["iddepto"];
-									echo "<option value='$iddepto'>$nombredepto</option>";
-								}
-								include("../Modelo/cierra_conexion.php"); 
+									include("../Modelo/abre_conexion.php"); 
+									$id = sprintf("SELECT * FROM depto");     
+									$resulta = mysqli_query($link,$id);
+									$numero = mysqli_num_rows($resulta); // obtenemos el número de filas
+									while ($row = mysqli_fetch_array($resulta, MYSQLI_ASSOC)) {
+										$nombredepto= $row['nombre'];
+										$iddepto = $row["iddepto"];
+										echo "<option value='$iddepto'>$nombredepto</option>";
+									}
+									include("../Modelo/cierra_conexion.php"); 
 								?>
 							</select>
 						</div>                        
