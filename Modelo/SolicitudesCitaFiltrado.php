@@ -13,8 +13,7 @@ switch($value){
 		break;
 }
 $result = mysqli_query($link,$query);
-if($row = mysqli_fetch_array($result, MYSQLI_ASSOC)>0)
-{
+
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 		$idarea=$row['idarea'];
 		$id = sprintf("SELECT nombre FROM area WHERE idarea='$idarea'");
@@ -39,6 +38,6 @@ if($row = mysqli_fetch_array($result, MYSQLI_ASSOC)>0)
 		//	<td><p class='click-me text-success text-right' style='text-decoration:underline;''  id='2'>Eliminar</p></td>";
 		echo "</tr>";
 	}
-}
+
 include("../Modelo/cierra_conexion.php");
 ?>
