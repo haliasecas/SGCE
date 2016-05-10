@@ -1,5 +1,4 @@
 To Do
 
-1.- Agregar captcha a informes y sugerencias.
-2.- Días preferentes -> Día preferente en solicitar cita.
-3.- Editar y agregar departamento.
+1.- Días preferentes -> Día preferente 	SolicitarCita.php
+2.- Texto de captcha rojo				SolicitarCita.php
