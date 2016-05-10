@@ -1,4 +1,6 @@
 # Ignora things
+
+Vista/abre_conexion.php
 composer.*
 quickstart.php
 vendor/
