@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 10-05-2016 a las 21:01:29
+-- Tiempo de generación: 10-05-2016 a las 21:31:54
 -- Versión del servidor: 10.1.10-MariaDB
 -- Versión de PHP: 7.0.4
 
@@ -168,6 +168,7 @@ CREATE TABLE `Mensaje` (
   `asunto` varchar(30) DEFAULT NULL,
   `contenido` varchar(200) DEFAULT NULL,
   `estado` varchar(20) DEFAULT NULL,
+  `fecha` varchar(20) NOT NULL,
   `depto_iddepto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -217,7 +218,7 @@ CREATE TABLE `solicitud` (
 --
 
 INSERT INTO `solicitud` (`idSolicitud`, `asunto`, `estado`, `idinteresado`, `dia`, `idarea`, `iddepto`) VALUES
-(0, 'Molestar a hali', 'ACEPTADA', 1, '2016-05-10', 2, 1);
+(1, 'Molestar a hali', 'ACEPTADA', 1, '2016-05-10', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -308,6 +309,7 @@ ALTER TABLE `personal`
 -- Indices de la tabla `solicitud`
 --
 ALTER TABLE `solicitud`
+  ADD PRIMARY KEY (`idSolicitud`),
   ADD KEY `Solicitud_ibfk_1` (`idinteresado`),
   ADD KEY `fk_Solicitud_area1` (`idarea`,`iddepto`);
 
@@ -328,6 +330,26 @@ ALTER TABLE `SolicitudToken`
 ALTER TABLE `Cita`
   MODIFY `idCita` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT de la tabla `DiaPref`
+--
+ALTER TABLE `DiaPref`
+  MODIFY `idDia` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `DiaSol`
+--
+ALTER TABLE `DiaSol`
+  MODIFY `idDia` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `HoraPref`
+--
+ALTER TABLE `HoraPref`
+  MODIFY `idHorario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT de la tabla `HoraSol`
+--
+ALTER TABLE `HoraSol`
+  MODIFY `idHorario` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `interesado`
 --
 ALTER TABLE `interesado`
@@ -337,6 +359,11 @@ ALTER TABLE `interesado`
 --
 ALTER TABLE `personal`
   MODIFY `idpersonal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `solicitud`
+--
+ALTER TABLE `solicitud`
+  MODIFY `idSolicitud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `SolicitudToken`
 --
