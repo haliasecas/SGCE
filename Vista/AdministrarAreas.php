@@ -127,6 +127,7 @@
 
 		<!-- Mensajes bajo el campo -->
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
+<<<<<<< HEAD
 			<div class="container">
 				<h3><strong>Administrar áreas</strong></h3>
 				<p>En esta sección  podrás consultar los datos de las áreas existentes.También podrás registrar nuevas áreas.</p> 
@@ -176,6 +177,57 @@
 					</div>					                                                                               						                             
 				</div>
 			</div>                                                               
+=======
+            <div class="container">
+                  <h3><strong>Administrar áreas</strong></h3>
+                  <p>En esta sección  podrás consultar los datos de las áreas existentes.También podrás registrar nuevas áreas.</p> 
+                   <br>
+                   <br>
+                     <div class="table-responsive">          
+                          <table class="table">
+                            <thead>
+                                <tr style="color: #FFF; background: #656565;">
+                                        <th>Áreas</th>
+                                        <th colspan="3">Departamento</th>      
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                              <!--  <tr>
+                                        <th>Área A</th>
+                                        <th>Departamento A</th>
+                                        <th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
+                                        <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>                                        
+                                </tr>-->
+                                <?php
+                                
+                                include("../Modelo/abre_conexion.php");
+                                $query = "SELECT a.nombre as area,a.idarea as idarea,d.nombre as depto FROM area a, depto d WHERE idarea>0 and a.iddepto=d.iddepto ORDER BY a.nombre";
+                                $result = mysqli_query($link, $query);
+                                
+                                while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                                    $idarea=$row['idarea'];
+                                    $area = $row['area'];
+                                    $depto = $row['depto'];
+                                    echo "<tr>";
+                                        echo "<th>$area</th>";
+                                        echo "<th>$depto</th>";
+                                        echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarAreas.php?id=$idarea'>Editar</a></th>";   
+                                        echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='eliminar_area.php?id=$idarea'>Eliminar</a></th>  ";
+                                    echo "</tr>";
+                                }
+                                
+                                ?>
+                            </tbody>
+                          </table>
+                  </div>
+                  <div class="form-group text-right">
+                          <div class="col-md-8 col-md-offset-4">							                     
+                                     <a class="btn btn-success" href="AgregarArea.php" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
+                          </div>					                                                                               						                             
+               </div>
+        </div>                                                               
+>>>>>>> edc3d7bf1dec19732cc8a18c7820ca77cd2c3c2a
 		</div>
 
 		<!-- Nav de abajo -->
