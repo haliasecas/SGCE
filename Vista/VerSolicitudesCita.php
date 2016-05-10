@@ -21,7 +21,7 @@
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="../index.php">
+					<a class="navbar-brand" href="..">
 						<img id="logoSGCE" src="../Img/logoSGCE.png">
 					</a>
 					<div style="padding-top:33px;">
@@ -36,23 +36,32 @@
 
 				<div class="collapse navbar-collapse" id="header-bar">
 					<ul class="nav navbar-nav navbar-right" style="padding-top:12px;">
+
+						<?php
+						if (isset($_COOKIE["cargo"])) {
+						?>
+						<?php
+							if($_COOKIE["cargo"]==1){ 
+						?>
+
+						<!--  Administrador -->
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Personal Administrativo<span class="caret"></span>
+								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Administrador<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu dark">
-								<li><a href="../Vista/SolicitarCita.php">
-									<span><img src="../Img/333.png" height="36px"></span>
-									Calendario
-								</a></li>
-								<li><a href="./InformesySugerencias.php">
-									<span><img src="../Img/22.png" height="36px"></span>
-									Informes y Sugerencias
-								</a></li>
-								<li><a href="#">
-									<span><img src="../Img/11.png" height="36px"></span>
-									Solicitudes de citas
-								</a></li>
+								<li><a href="../Vista/AdministrarDepartamentos.php">
+									<span><img src="../Img/Admin_Dep.png" height="36px"></span>
+									Administrar departamentos
+									</a></li>
+								<li><a href="../Vista/AdministrarAreas.php">
+									<span><img src="../Img/Admin_Area.png" height="36px"></span>
+									Administrar areas
+									</a></li>
+								<li><a href="../Vista/AdministrarCuentas.php">
+									<span><img src="../Img/Admin_Cont.png" height="36px"></span>
+									Administrar cuentas
+									</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -60,16 +69,61 @@
 								<span><img src="../Img/loginiGreen.png" height="30px"></span> Bienvenido(a)<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu dark">
-								<li><a href="./CambiarContrasena.php">
+								<li><a href="../Vista/CambiarContrasena.php">
 									<span><img src="../Img/Edit2.png" height="36px"></span>
 									Cambiar contraseña
-								</a></li>
+									</a></li>
 								<li><a href="../cierra_sesion.php">
 									<span><img src="../Img/Out.png" height="36px"></span>
 									Cerrar sesión
-								</a></li>
+									</a></li>
 							</ul>
 						</li>
+
+						<?php }else{?> 
+
+						<! Personal administrativo -->                    
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Personal Administrativo<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="../Vista/Calendario.php">
+									<span><img src="../Img/333.png" height="36px"></span>
+									Calendario
+									</a></li>
+								<li><a href="../Vista/VerInformesYS.php">
+									<span><img src="../Img/22.png" height="36px"></span>
+									Informes y Sugerencias
+									</a></li>
+								<li><a href="../Vista/SolicitudesCita.php">
+									<span><img src="../Img/11.png" height="36px"></span>
+									Solicitudes de citas
+									</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="../Img/loginiGreen.png" height="30px"></span> Bienvenido(a)<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="../Vista/CambiarContrasena.php">
+									<span><img src="../Img/Edit2.png" height="36px"></span>
+									Cambiar contraseña
+									</a></li>
+								<li><a href="../cierra_sesion.php">
+									<span><img src="../Img/Out.png" height="36px"></span>
+									Cerrar sesión
+									</a></li>
+							</ul>
+						</li>
+						<?php
+							} } else {
+						?>
+						<script type="text/javascript">
+							window.location = "../";
+						</script>
+						<?php }?>
 					</ul>
 				</div>
 			</div>

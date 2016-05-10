@@ -12,13 +12,13 @@
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
-	
+
 	<body>
 		<div class="container-fluid" style="padding-bottom:9px;" id="header">
 			<img src="../Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
-		
+
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
@@ -129,65 +129,65 @@
 				</div>
 			</div>
 		</nav>
-            
-        
-        <?php 
-            if(isset($_GET["id"]))
-	           $id = $_GET['id'];
-            include("../Modelo/abre_conexion.php");
-            $query = "SELECT a.nombre as nombrearea FROM area a WHERE idarea = '$id'";
-            $result = mysqli_query($link, $query);
-            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-            $nombrearea = $row['nombrearea'];
-            
-        ?>
-        
-            <!-- Mensajes bajo el campo -->
+
+
+		<?php 
+		if(isset($_GET["id"]))
+			$id = $_GET['id'];
+		include("../Modelo/abre_conexion.php");
+		$query = "SELECT a.nombre as nombrearea FROM area a WHERE idarea = '$id'";
+		$result = mysqli_query($link, $query);
+		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+		$nombrearea = $row['nombrearea'];
+
+		?>
+
+		<!-- Mensajes bajo el campo -->
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
-                    <div class="container">
-                              <h3><strong>Editar área</strong></h3>
-                              <p><strong class="text-success">Todos los campos son obligatorios.</strong>El nombre del departamento debe estar previamente registrado en el sistema.</p> 
-                               <br>
-                               <br>                                
-                               <form action="" class="form-horizontal">
-                                    <div class="form-group">
-                                                <label  for="" class="control-label col-md-2">Nombre del área</label>
-						                        <div class="col-md-10">
-							                         <?php echo "<input type='text' class='form-control' value=$nombrearea >";	?>
-                                                    
-						                        </div>
-						                        <br>              						                               
-						                        <br>              						                               
-						                        <br>              						                               
-                                                <label  for="" class="control-label col-md-2">Nombre del departamento</label>						                                                                
-                                                        <div class="col-md-10">                                        
-                                                                <select name="departamento" class="form-control">
-                                                                    <!--<option value="DepartamentoA">Departamento A</option> -->
-                                                                    <?php
-                                                                    $query = "SELECT * FROM depto";
-                                                                    $result2 = mysqli_query($link, $query);
-                                                                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                                                                    while($row = mysqli_fetch_array($result2, MYSQLI_ASSOC)){
-                                                                        $nombredepto= $row['nombre'];
-                                                                        $iddepto = $row["iddepto"];
-                                                                        echo "<option value='$iddepto'>$nombredepto</option>";
-                                                                    }
-                                                                    ?>
-                                                                </select>
-                                                        </div>                                                                       
-                                               <br><br><br>                                                 
-                                               <div class="form-group text-right">
-						                             <div class="col-md-8 col-md-offset-4">
-							                                 <a class="btn btn-success" style="width: 150px;" onclick="#">CANCELAR</a>							                                 
-							                                 <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
-						                             </div>					                                                                               						                             
-					                           </div>
-                                    </div>
-                                </form>   
-                    </div>
-        </div>                                
-				
-			
+			<div class="container">
+				<h3><strong>Editar área</strong></h3>
+				<p><strong class="text-success">Todos los campos son obligatorios.</strong>El nombre del departamento debe estar previamente registrado en el sistema.</p> 
+				<br>
+				<br>                                
+				<form action="" class="form-horizontal">
+					<div class="form-group">
+						<label  for="" class="control-label col-md-2">Nombre del área</label>
+						<div class="col-md-10">
+							<?php echo "<input type='text' class='form-control' value=$nombrearea >";	?>
+
+						</div>
+						<br>              						                               
+						<br>              						                               
+						<br>              						                               
+						<label  for="" class="control-label col-md-2">Nombre del departamento</label>						                                                                
+						<div class="col-md-10">                                        
+							<select name="departamento" class="form-control">
+								<!--<option value="DepartamentoA">Departamento A</option> -->
+								<?php
+								$query = "SELECT * FROM depto";
+								$result2 = mysqli_query($link, $query);
+								$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+								while($row = mysqli_fetch_array($result2, MYSQLI_ASSOC)){
+									$nombredepto= $row['nombre'];
+									$iddepto = $row["iddepto"];
+									echo "<option value='$iddepto'>$nombredepto</option>";
+								}
+								?>
+							</select>
+						</div>                                                                       
+						<br><br><br>                                                 
+						<div class="form-group text-right">
+							<div class="col-md-8 col-md-offset-4">
+								<a class="btn btn-success" style="width: 150px;" onclick="#">CANCELAR</a>							                                 
+								<a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
+							</div>					                                                                               						                             
+						</div>
+					</div>
+				</form>   
+			</div>
+		</div>                                
+
+
 		<!-- Nav de abajo -->
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
@@ -216,7 +216,7 @@
 				</div>
 			</div>
 		</nav>
-		
+
 		<script type="text/javascript">
 			$(document).ready(function() {
 				// Sticky bar plz
@@ -230,7 +230,7 @@
 						$("#main-content").css({"padding-top":"0px"});
 					}
 				});
-					
+
 				if ($(window).width() <= 886) {
 					$("#top-bar").removeAttr("style");
 				}

@@ -25,7 +25,7 @@
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="../">
+					<a class="navbar-brand" href=".">
 						<img id="logoSGCE" src="../Img/logoSGCE.png">
 					</a>
 					<div style="padding-top:33px;">
@@ -40,6 +40,98 @@
 
 				<div class="collapse navbar-collapse" id="header-bar">
 					<ul class="nav navbar-nav navbar-right" style="padding-top:12px;">
+
+						<?php
+						if (isset($_COOKIE["cargo"])) {
+						?>
+						<?php if($_COOKIE["cargo"]==1){ ?>
+
+						<!--  Administrador -->
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Administrador<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="../Vista/AdministrarDepartamentos.php">
+									<span><img src="../Img/Admin_Dep.png" height="36px"></span>
+									Administrar departamentos
+									</a></li>
+								<li><a href="../Vista/AdministrarAreas.php">
+									<span><img src="../Img/Admin_Area.png" height="36px"></span>
+									Administrar areas
+									</a></li>
+								<li><a href="../Vista/AdministrarCuentas.php">
+									<span><img src="../Img/Admin_Cont.png" height="36px"></span>
+									Administrar cuentas
+									</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="../Img/loginiGreen.png" height="30px"></span> Bienvenido(a)<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="../Vista/CambiarContrasena.php">
+									<span><img src="../Img/Edit2.png" height="36px"></span>
+									Cambiar contraseña
+									</a></li>
+								<li><a href="cierra_sesion.php">
+									<span><img src="../Img/Out.png" height="36px"></span>
+									Cerrar sesión
+									</a></li>
+							</ul>
+						</li>
+
+
+						<?php }else{?> 
+
+
+						<!-- Personal administrativo -->                    
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Personal Administrativo<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="../Vista/Calendario.php">
+									<span><img src="../Img/333.png" height="36px"></span>
+									Calendario
+									</a></li>
+								<li><a href="../Vista/VerInformesYS.php">
+									<span><img src="../Img/22.png" height="36px"></span>
+									Informes y Sugerencias
+									</a></li>
+								<li><a href="../Vista/SolicitudesCita.php">
+									<span><img src="../Img/11.png" height="36px"></span>
+									Solicitudes de citas
+									</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span><img src="../Img/loginiGreen.png" height="30px"></span> Bienvenido(a)<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dark">
+								<li><a href="../Vista/CambiarContrasena.php">
+									<span><img src="../Img/Edit2.png" height="36px"></span>
+									Cambiar contraseña
+									</a></li>
+								<li><a href="cierra_sesion.php">
+									<span><img src="../Img/Out.png" height="36px"></span>
+									Cerrar sesión
+									</a></li>
+							</ul>
+						</li>
+
+
+
+						<?php } ?>
+
+
+						<?php
+						}else{
+						?>
+
+						<!--  Visitante -->
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
@@ -60,6 +152,10 @@
 								<span><img src="../Img/loginiGreen.png" height="30px"></span> Iniciar sesión (Administrador)
 							</a>
 						</li>
+
+						<?php
+						}			
+						?>
 					</ul>
 				</div>
 			</div>
@@ -231,18 +327,16 @@
 						<div class="col-md-10">                                        
 							<select name="departamento" class="form-control" onChange="despAreas();">
 								<?php
-								include("abre_conexion.php"); 
+								include("../Modelo/abre_conexion.php"); 
 								$id = sprintf("SELECT * FROM depto");     
 								$resulta = mysqli_query($link,$id);
 								$numero = mysqli_num_rows($resulta); // obtenemos el número de filas
-								for ($i = 1; $i <= $numero; $i++) {
-									$sql = sprintf("SELECT nombre FROM depto WHERE iddepto='$i'");
-									$result = mysqli_query($link, $sql);
-									$row = mysqli_fetch_assoc($result);
-									$nombre = $row["nombre"];
-									echo ("<option value=$i>$nombre</option>");
+								while ($row = mysqli_fetch_array($resulta, MYSQLI_ASSOC)) {
+									$nombredepto= $row['nombre'];
+									$iddepto = $row["iddepto"];
+									echo "<option value='$iddepto'>$nombredepto</option>";
 								}
-								include("cierra_conexion.php"); 
+								include("../Modelo/cierra_conexion.php"); 
 								?>
 							</select>
 						</div>                        
@@ -258,11 +352,11 @@
 										$("[name='area']").text("");
 										$.ajax({
 											method: "POST",
-											url: "getAreas.php",
+											url: "../Modelo/getAreas.php",
 											data: { value: $("[name='departamento']").val() }
 										})
 											.done(function(msg){
-											$("[name='area']").append("<option value=1>" + msg + "</option>");
+											$("[name='area']").append(msg);
 										});
 									}
 								</script>
@@ -351,7 +445,7 @@
 							});
 						});
 					</script>
-					
+
 					<div class="form-group text-right" id="recaptcha">
 						<label for="nombre" class="control-label col-md-4" style="padding-top: 18px;">
 							*Verifica que no eres un robot informático.
