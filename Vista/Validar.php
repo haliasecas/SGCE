@@ -21,11 +21,12 @@
 			<img src="../Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
-
+		
+		<!-- Nueva nav -->
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="..">
+					<a class="navbar-brand" href="../">
 						<img id="logoSGCE" src="../Img/logoSGCE.png">
 					</a>
 					<div style="padding-top:33px;">
@@ -132,9 +133,8 @@
 				</div>
 			</div>
 		</nav>
-				
-		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
 
+		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
 			<!--Contenedor principal-->
 			<div class="container-fluid col-md-10 col-md-offset-1">
 				<!--Formulario-->
@@ -204,38 +204,38 @@
 				</div>
 			</div>
 		</nav>
-			<?php
-				    include("abre_conexion.php"); 
-				    $token=$_GET['token'];
-				    $busqueda = sprintf("SELECT token FROM SolicitudToken WHERE token='$token'");
-				    $result=mysqli_query($link,$busqueda);
-				    $row_cnt = mysqli_num_rows($result);
-				    if($row_cnt>0){
-				        $id = sprintf("SELECT idSolicitud FROM SolicitudToken WHERE token='$token'");
-				        $result=mysqli_query($link,$id);
-				        $row = mysqli_fetch_assoc($result);
-				        $idSol=$row["idSolicitud"];
-				        $sql = sprintf("UPDATE solicitud SET estado='PENDIENTE' WHERE idSolicitud='$idSol'");
-				        $result=mysqli_query($link,$sql);
-				        echo 
-										"<script type='text/javascript'>
+		<?php
+		include("abre_conexion.php"); 
+		$token=$_GET['token'];
+		$busqueda = sprintf("SELECT token FROM SolicitudToken WHERE token='$token'");
+		$result=mysqli_query($link,$busqueda);
+		$row_cnt = mysqli_num_rows($result);
+		if($row_cnt>0){
+			$id = sprintf("SELECT idSolicitud FROM SolicitudToken WHERE token='$token'");
+			$result=mysqli_query($link,$id);
+			$row = mysqli_fetch_assoc($result);
+			$idSol=$row["idSolicitud"];
+			$sql = sprintf("UPDATE solicitud SET estado='PENDIENTE' WHERE idSolicitud='$idSol'");
+			$result=mysqli_query($link,$sql);
+			echo 
+				"<script type='text/javascript'>
 											$(document).ready(function() {
 												$('#MSGA_09').modal();
 											});
 										</script>";
-				        $sql = "DELETE FROM SolicitudToken WHERE token='$token'";
-				        $result=mysqli_query($link,$sql);
-				    }
-				    else{
-				        echo 
-										"<script type='text/javascript'>
+			$sql = "DELETE FROM SolicitudToken WHERE token='$token'";
+			$result=mysqli_query($link,$sql);
+		}
+		else{
+			echo 
+				"<script type='text/javascript'>
 											$(document).ready(function() {
 												$('#MSG_E06').modal();
 											});
 										</script>";    //echo $row_cnt;
-				    }
-			    		include("cierra_conexion.php");
-			?>
+		}
+		include("cierra_conexion.php");
+		?>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				despAreas();
