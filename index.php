@@ -58,7 +58,7 @@
 									<span><img src="./Img/Admin_Area.png" height="36px"></span>
 									Administrar areas
 								</a></li>
-								<li><a href="./Vista/EditarCuenta.php">
+								<li><a href="./Vista/AdministrarCuentas.php">
 									<span><img src="./Img/Admin_Cont.png" height="36px"></span>
 									Administrar cuentas
 								</a></li>

@@ -89,7 +89,7 @@
                                     <div class="form-group">
                                                 <label  for="" class="control-label col-md-2">Nombre del área</label>
 						                        <div class="col-md-10">
-							                         <?php echo "<input type='text' class='form-control' placeholder=$nombrearea >";	?>
+							                         <?php echo "<input type='text' class='form-control' value=$nombrearea >";	?>
                                                     
 						                        </div>
 						                        <br>              						                               
@@ -105,7 +105,8 @@
                                                                     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                                                                     while($row = mysqli_fetch_array($result2, MYSQLI_ASSOC)){
                                                                         $nombredepto= $row['nombre'];
-                                                                        echo "<option value='DepartamentoA'>$nombredepto</option>";
+                                                                        $iddepto = $row["iddepto"];
+                                                                        echo "<option value='$iddepto'>$nombredepto</option>";
                                                                     }
                                                                     ?>
                                                                 </select>
