@@ -165,7 +165,7 @@
 		<?php 
 		if (!empty($_POST)) {
 			if (($_POST["g-recaptcha-response"])) { 
-				if(!(empty($_POST))) {
+				if (!(empty($_POST))) {
 					$email = $_POST['email'];
 					$nombre = $_POST['nombre'];
 					$appat = $_POST['appat'];
@@ -175,7 +175,7 @@
 					$dpto = $_POST['departamento'];
 					$telefono = $_POST['telefono'];
 
-					include("abre_conexion.php"); 
+					include("../Modelo/abre_conexion.php"); 
 					require_once("../Modelo/enviarCorreo.php");
 					$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
 					$string = '';
@@ -184,7 +184,7 @@
 						$string .= $characters[rand(0, strlen($characters) - 1)];
 					}
 					$busqueda = sprintf("SELECT nombre,appaterno,apmaterno FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
-					$result=mysqli_query($link,$busqueda);
+					$result=mysqli_query($link, $busqueda);
 					$row_cnt = mysqli_num_rows($result);
 					if($row_cnt==1) {
 						$id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
@@ -216,8 +216,8 @@
 				        }
     				}
 
-					include("cierra_conexion.php");
-					if (mandarCorreoSolicitud($nombre,$appat,$apmat,$email,$string)) {
+					include("../Modelo/cierra_conexion.php");
+					if (mandarCorreoSolicitud($nombre, $appat, $apmat, $email, $string)) {
 						echo 
 							"<script type='text/javascript'>
 								$(document).ready(function() {
