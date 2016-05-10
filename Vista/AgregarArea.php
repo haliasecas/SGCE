@@ -22,7 +22,7 @@
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
-					<a class="navbar-brand" href=".">
+					<a class="navbar-brand" href="../index.php">
 						<img id="logoSGCE" src="../Img/logoSGCE.png">
 					</a>
 					<div style="padding-top:33px;">
@@ -65,60 +65,66 @@
 				</div>
 			</div>
 		</nav>
-		
-		<!-- Mensajes bajo el campo -->
+            
+        
+        <?php 
+           /* if(isset($_GET["id"]))
+	           $id = $_GET['id'];
+            include("abre_conexion.php");
+            $query = "SELECT a.nombre as nombrearea FROM area a WHERE idarea = '$id'";
+            $result = mysqli_query($link, $query);
+            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            $nombrearea = $row['nombrearea'];
+            */
+        ?>
+        
+            <!-- Mensajes bajo el campo -->
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
-            <div class="container">
-                  <h3><strong>Administrar áreas</strong></h3>
-                  <p>En esta sección  podrás consultar los datos de las áreas existentes.También podrás registrar nuevas áreas.</p> 
-                   <br>
-                   <br>
-                     <div class="table-responsive">          
-                          <table class="table">
-                            <thead>
-                                <tr style="color: #FFF; background: #221f1f;">
-                                        <th>Áreas</th>
-                                        <th colspan="3">Departamento</th>      
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                              <!--  <tr>
-                                        <th>Área A</th>
-                                        <th>Departamento A</th>
-                                        <th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
-                                        <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>                                        
-                                </tr>-->
-                                <?php
-                                
-                                include("abre_conexion.php");
-                                $query = "SELECT a.nombre as area,a.idarea as idarea,d.nombre as depto FROM area a, depto d WHERE idarea>0 and a.iddepto=d.iddepto ORDER BY a.nombre";
-                                $result = mysqli_query($link, $query);
-                                
-                                while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                                    $idarea=$row['idarea'];
-                                    $area = $row['area'];
-                                    $depto = $row['depto'];
-                                    echo "<tr>";
-                                        echo "<th>$area</th>";
-                                        echo "<th>$depto</th>";
-                                        echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarAreas.php?id=$idarea'>Editar</a></th>";   
-                                        echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='eliminar_area.php?id=$idarea'>Eliminar</a></th>  ";
-                                    echo "</tr>";
-                                }
-                                
-                                ?>
-                            </tbody>
-                          </table>
-                  </div>
-                  <div class="form-group text-right">
-                          <div class="col-md-8 col-md-offset-4">							                     
-                                     <a class="btn btn-success" href="AgregarArea.php" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
-                          </div>					                                                                               						                             
-               </div>
-        </div>                                                               
-		</div>
-                        
+                    <div class="container">
+                              <h3><strong>Agregar área</strong></h3>
+                              <p><strong class="text-success">Todos los campos son obligatorios.</strong>El nombre del departamento debe estar previamente registrado en el sistema.</p> 
+                               <br>
+                               <br>                                
+                               <form action="" class="form-horizontal">
+                                    <div class="form-group">
+                                                <label  for="" class="control-label col-md-2">Nombre del área</label>
+						                        <div class="col-md-10">
+							                         
+                                                    <input type='text' class='form-control' placeholder="Nombre del Area" >
+						                        </div>
+						                        <br>              						                               
+						                        <br>              						                               
+						                        <br>              						                               
+                                                <label  for="" class="control-label col-md-2">Nombre del departamento</label>						                                                                
+                                                        <div class="col-md-10">                                        
+                                                                <select name="departamento" class="form-control">
+                                                                    <!--<option value="DepartamentoA">Departamento A</option> -->
+                                                                    <?php
+                                                                     include("abre_conexion.php");
+                                                                    $query = "SELECT * FROM depto";
+                                                                    $result2 = mysqli_query($link, $query);
+                                                                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                                                                    while($row = mysqli_fetch_array($result2, MYSQLI_ASSOC)){
+                                                                        $nombredepto= $row['nombre'];
+                                                                        $iddepto = $row["iddepto"];
+                                                                        echo "<option value='$iddepto'>$nombredepto</option>";
+                                                                    }
+                                                                    ?>
+                                                                </select>
+                                                        </div>                                                                       
+                                               <br><br><br>                                                 
+                                               <div class="form-group text-right">
+						                             <div class="col-md-8 col-md-offset-4">
+							                                 <a class="btn btn-success" style="width: 150px;" onclick="#">CANCELAR</a>							                                 
+							                                 <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
+						                             </div>					                                                                               						                             
+					                           </div>
+                                    </div>
+                                </form>   
+                    </div>
+        </div>                                
+				
+			
 		<!-- Nav de abajo -->
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
