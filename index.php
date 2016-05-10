@@ -11,6 +11,7 @@
 		<link type="text/css" rel="stylesheet" href="./Css/letras.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
+	
 	<body>
 		<?php
 		include("Vista/abre_conexion.php");
@@ -83,13 +84,8 @@
                         
                         <?php }else{?> 
                         
-<<<<<<< HEAD
-                        <!-- Personal administrativo -->
-                        
-                        
-=======
+
                         <! Personal administrativo -->                    
->>>>>>> af427766b65d7c2c1db5ddc413df964b1343097b
                         
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -161,10 +157,6 @@
                         <?php
                         }			
                         ?>
-
-                        
-                        
-						
 					</ul>
 				</div>
 			</div>
@@ -263,7 +255,7 @@
 					if ($(window).width() > 886) {
 						$("#top-bar").attr({"style":"height:84px;"});
 					}
-					if ($(window).width() <= 886) {
+					else {
 						$("#top-bar").removeAttr("style");
 					}
 				}); 
