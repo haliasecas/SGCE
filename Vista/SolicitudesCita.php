@@ -149,7 +149,7 @@
 							</script>
 							<?php
 
-							include("abre_conexion.php");
+							include("../Modelo/abre_conexion.php");
 							$query = "SELECT idSolicitud,idarea,dia,estado,idinteresado FROM solicitud";
 							$result = mysqli_query($link, $query);
 							echo "<form action='prueba.php' method='post' name='testform'>";
@@ -175,12 +175,13 @@
 								//echo "<input type='submit' name='data' value='M'.$idsolicitud>";
 								//echo "<a name='adios' href = '#'  id = 'solution2' onClick='submit';'>Solution1 </a>";
 								//echo "<a name='hola' href = '#'  id = 'solution1' onClick='submit';'>Solution1 </a>";
-								echo "<input type='submit' name='data' value=$idsolicitud>";
+								//echo "<input type='submit' name='data' value=$idsolicitud>";
 								//echo "<th><a class=' text-success text-right '  style = 'text-decoration:underline;' id=$idsolicitud' >Ver más</a></th>";
 								//echo "<th><a class=' text-success text-right delete-rod' style = 'text-decoration:underline;'  id=$idsolicitud' href=#>Eliminar</a></th> ";
 								echo "</tr>";
 							}
 							echo"</form>";
+							include("../Modelo/cierra_conexion.php");
 							?>
 
 						</tbody>
