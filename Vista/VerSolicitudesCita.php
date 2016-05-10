@@ -129,7 +129,11 @@
 				</div>
 			</div>
 		</nav>
-		
+		<?php
+if (!empty($_POST)) {
+	echo "Hola";
+}
+		?>
 		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
 			<div class="container-fluid col-md-10 col-md-offset-1">
 				<h3><strong>Ver más</strong></h3>
@@ -138,7 +142,7 @@
 					se notificará automáticamente al correo electrónico indicado y el estado
 					de la solicitud parasá a "RECHAZADA"</p>
 				<br><br>
-				<form class="form-horizontal">
+				<form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 					<h4 class="text-uppercase">Datos del interesado:</h4>
 					<?php
 							if(isset($_GET["id"]))
@@ -332,7 +336,7 @@
 					<div class="form-group text-right" style="padding-top: 9px;">
 						 <div class="col-md-10 col-md-offset-2">
 							 <button class="btn btn-success" type="reset" style="width: 150px;">CANCELAR</button>
-							 <a class="btn btn-success" style="width: 150px;">ENVIAR</a>
+							 <a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
 						</div>
 					</div>
 
