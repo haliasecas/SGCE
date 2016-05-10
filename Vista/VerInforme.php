@@ -12,12 +12,22 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 
+	<?php
+	if (!($_GET["id"])) {
+	?>
+	<script type="text/javascript">
+		window.location = "../Vista/VerInformesYS.php";
+	</script>
+	<?php
+	} else {
+		$id = htmlspecialchars($_GET['id']);
+	?>
+
 	<body>
 		<div class="container-fluid" style="padding-bottom:9px;" id="header">
 			<img src="../Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
-
 		<!-- Nueva nav -->
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
@@ -39,10 +49,10 @@
 					<ul class="nav navbar-nav navbar-right" style="padding-top:12px;">
 
 						<?php
-						if (isset($_COOKIE["cargo"])) {
+		if (isset($_COOKIE["cargo"])) {
 						?>
 						<?php
-							if($_COOKIE["cargo"]==1){ 
+			if($_COOKIE["cargo"]==1){ 
 						?>
 
 						<!--  Administrador -->
@@ -119,7 +129,7 @@
 							</ul>
 						</li>
 						<?php
-							} } else {
+			} } else {
 						?>
 						<script type="text/javascript">
 							window.location = "../";
@@ -140,10 +150,20 @@
 					<h4 class="text-uppercase">Datos del mensaje:</h4>
 
 					<!-- Correo electrónico -->
+					<?php
+		include("../Modelo/abre_conexion.php");
+		$q = "SELECT * FROM Mensaje WHERE idMensaje = $id";
+		$ans = mysqli_query($link, $q);
+		$row = mysqli_fetch_array($ans, MYSQLI_ASSOC);
+					?>
 					<div class="form-group has-feedback" id="Email01">                                                            
 						<label  class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
-							<p class="form-control-static" id="correoE01" name="email">ejemplo@dominio.com</p>	
+							<p class="form-control-static" id="correoE01" name="email">
+								<?php
+		echo htmlspecialchars($row["correo"]);
+								?>
+							</p>	
 						</div>
 						<br>
 					</div>
@@ -152,7 +172,11 @@
 					<div class="form-group has-feedback" id="Asunto">
 						<label class="control-label col-md-2">Asunto</label>
 						<div class="col-md-10">
-							<p class="form-control-static" id="asunto" name="asunto">Pedir informes</p>
+							<p class="form-control-static" id="asunto" name="asunto">
+								<?php
+		echo htmlspecialchars($row["asunto"]);
+								?>
+							</p>
 						</div>
 						<br> 
 					</div>
@@ -161,31 +185,54 @@
 					<div class="form-group has-feedback" id="Contenido">
 						<label class="control-label col-md-2">Contenido</label>
 						<div class="col-md-10">
-							<p class="form-control-static" id="asunto" name="asunto">
-								Todo el texto perteneciente al contenido del mensaje.</p>
+							<p class="form-control-static" id="contenido" name="contenido">
+								<?php
+		echo htmlspecialchars($row["contenido"]);
+								?>
+							</p>
 						</div>
 						<br><br><br>
 					</div>
+					<?php
+		if ($row['estado'] == "PENDIENTE") {
+					?>
 
 					<h4 class="text-uppercase">Responder:</h4>
 					<!-- Respuesta -->
 					<div class="form-group has-feedback" id="Contenido">
 						<label class="control-label col-md-2">Contenido</label>
 						<div class="col-md-10">
-							<textarea class="form-control" rows="3" id="contenido" name="contenido" 
+							<textarea class="form-control" rows="3" id="respuesta" name="respuesta" 
 									  placeholder="Exponga la respuesta para este mensaje."></textarea>
 						</div>
 						<br> 
 					</div>
+					<!-- Botones -->
+					<div class="form-group text-right" style="padding-top: 9px;">
+						<div class="col-md-10 col-md-offset-2">
+							<a class="btn btn-success" style="width: 150px;" onClick="window.location='../Vista/VerInformesYS.php';">
+								CANCELAR
+							</a>
+							<a class="btn btn-success" style="width: 150px;">ENVIAR</a>
+						</div>
+					</div>
+					<?php
+		} else {
+					?>
 
 					<!-- Botones -->
 					<div class="form-group text-right" style="padding-top: 9px;">
 						<div class="col-md-10 col-md-offset-2">
-							<button class="btn btn-success" type="reset" style="width: 150px;">CANCELAR</button>
+							<a class="btn btn-success" style="width: 150px;" onClick="window.location='../Vista/VerInformesYS.php';">
+								CANCELAR
+							</a>
 							<a class="btn btn-success" style="width: 150px;">ENVIAR</a>
 						</div>
 					</div>
-
+					<?php
+		}
+		include("../Modelo/cierra_conexion.php");
+					?>
 				</form>
 			</div>
 		</div>
@@ -247,4 +294,7 @@
 			});
 		</script>
 	</body>
+	<?php
+	}
+	?>
 </html>
