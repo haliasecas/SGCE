@@ -3,17 +3,19 @@
 							include("../Modelo/abre_conexion.php");
 							switch($value){
 								case 1:
-									$query = "SELECT idSolicitud,idarea,dia,estado,idinteresado FROM solicitud WHERE estado!=' '";
+									$query = "SELECT * FROM solicitud order by estado ";
 								break;
 								case 2:
-									$query = "SELECT idSolicitud,idarea,dia,estado,idinteresado FROM solicitud WHERE estado='ACEPTADA'";
+									$query = "SELECT * FROM solicitud WHERE estado='ACEPTADA'";
 								break;
 								case 3:
-									$query = "SELECT idSolicitud,idarea,dia,estado,idinteresado FROM solicitud WHERE estado='PENDIENTE'";
+									$query = "SELECT * FROM solicitud WHERE estado='PENDIENTE'";
 								break;
 							}
-							$result = mysqli_query($link, $query);
-							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+							$result = mysqli_query($link,$query);
+                            if($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+							{
+                                while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 								$idarea=$row['idarea'];
 								$id = sprintf("SELECT nombre FROM area WHERE idarea='$idarea'");
 								$result2=mysqli_query($link,$id);
@@ -37,6 +39,7 @@
 								//echo "<td><p class='click-me text-success text-right'  style='text-decoration:underline;'' id='1'>Ver más</p></td>
 								//	<td><p class='click-me text-success text-right' style='text-decoration:underline;''  id='2'>Eliminar</p></td>";
 								echo "</tr>";
-							}
+				                }
+                            }
 							include("../Modelo/cierra_conexion.php");
 	?>
