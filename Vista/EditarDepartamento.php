@@ -7,8 +7,8 @@
 		<script type="text/javascript" src="../Scr/moment.min.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap.js"></script>
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
-		<script type="text/javascript" src="../Scr/validator.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
+		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
@@ -131,61 +131,65 @@
 			</div>
 		</nav>
 
+
+		<?php 
+		if(isset($_GET["id"]))
+			$id = $_GET['id'];
+		include("../Modelo/abre_conexion.php");
+		$query = "SELECT * FROM depto WHERE iddepto = '$id'";
+		$result = mysqli_query($link, $query);
+		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+		$nombredepto = $row['nombre'];
+        
+
+		?>
+
+		<!-- Mensajes bajo el campo -->
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
 			<div class="container">
-				<h3><strong>Administrar departamentos</strong></h3>
-				<p>En esta sección  podrás consultar los datos de los departamentos existentes.También podrás registrar nuevos departamentos.</p> 
+				<h3><strong>Editar departamento</strong></h3>
+				<p><strong class="text-success">Todos los campos son obligatorios.</strong></p> 
 				<br>
-				<br>
-				<div class="table-responsive">          
-					<table class="table">
-						<thead>
-							<tr style="color: #FFF; background: #656565;">
-								<th>Departamento</th>
-								<th>Correo electrónico</th>
-								<th colspan="4">Encargado</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!--<tr>
-<th>Departamento A</th>
-<th>ejemplo@dominio.com</th>
-<th>Nombre encargado</th>
-<th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
-<th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>        
-</tr>-->
-							<?php
+				<br>                                
+				<form method="post" class="form-horizontal">
+					<div class="form-group">
+						<label  for="" class="control-label col-md-2">Nombre del área</label>
+						<div class="col-md-10">
+							<?php echo "<input type='text' class='form-control' value='$nombredepto' name='nombrearea'>";	?>
 
-							include("../Modelo/abre_conexion.php");
-							$query = "SELECT nombre,iddepto  FROM area  WHERE idarea>0 ORDER BY nombre";
-							$result = mysqli_query($link, $query);
+						</div>
+						                                                                     
+						<br><br><br>                                                 
+						<div class="form-group text-right">
+							<div class="col-md-8 col-md-offset-4">
+								<a class="btn btn-success" style="width: 150px;" onclick="#">CANCELAR</a>				<?php 
+                                echo "<a class='btn btn-success' href='../Modelo/edita_area.php?id=$id' style='width: 150px;' onclick='enviarForm();'>ENVIAR</a>"
+                                ?>			                                 
+								
+							</div>					                                                                               						                             
+						</div>
+                        <script>
+                        function logIn() {
+                            var iddepto = $("[name='iddepto']").val();
+                            var nombrearea = $("[name='nombrearea']").val();
+                            if (nombrearea == "") error("El nombre del area no puede estar vacio.");
+                            else error("Por favor, introduce un nombre al area");
+                            
+                            $.ajax({
+                                method: "POST",
+                                url: "'../Modelo/edita_area.php?id=$id'",
+                                data: { nombrearea: nombrearea, iddepto: iddepto }
+                            })
+                        }
+                        
+                        </script>
+					</div>
+				</form>   
+			</div>
+		</div>                                
 
-							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-								$iddepto=$row['iddepto'];
-								$nombre = $row['nombre'];
 
-								echo "<tr>";
-								echo "<th>$nombre</th>";
-								echo "<th>ejemplo@dominio.com</th>";
-								echo "<th>Nombre encargado</th>";
-								echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarDepartamento.php?id=$iddepto'>Editar</a></th>";   
-								echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='#?id=$iddepto'>Eliminar</a></th>  ";
-								echo "</tr>";
-							}
-
-							?>
-
-						</tbody>
-					</table>
-				</div>
-				<div class="form-group text-right">
-					<div class="col-md-8 col-md-offset-4">							                     
-						<a class="btn btn-success" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
-					</div>           
-				</div>
-			</div>                                                               
-		</div>
-
+		<!-- Nav de abajo -->
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
@@ -200,10 +204,10 @@
 				<div class="collapse navbar-collapse" id="footer-bar">
 					<ul class="nav navbar-nav navbar-right">
 						<p class="navbar-text">@2016 Team Rocket Inc.</p>
-						<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/?fref=nf">
+						<a class="navbar-brand" href="https://www.facebook.com/escom.iscipn.9/">
 							<img src="../Img/facebookWhite.png" height="24px">
 						</a>
-						<a class="navbar-brand" href="https://twitter.com/escomunidad">
+						<a class="navbar-brand" href="https://twitter.com/escomunidad?ref_src=twsrc%5Etfw">
 							<img src="../Img/twitterWhite.png" height="24px">
 						</a>
 						<a class="navbar-brand" href="https://plus.google.com/112263443520207638663/posts">
@@ -213,7 +217,7 @@
 				</div>
 			</div>
 		</nav>
-		
+
 		<script type="text/javascript">
 			$(document).ready(function() {
 				// Sticky bar plz
@@ -240,19 +244,6 @@
 						$("#top-bar").removeAttr("style");
 					}
 				}); 
-				
-				$("#frmRestablecer").submit(function(event){
-					event.preventDefault();
-					$.ajax({
-						url:'validaremail.php',
-						type:'post',
-						dataType:'json',
-						data:$("#frmRestablecer").serializeArray()
-					}).done(function(respuesta){
-						$("#mensaje").html(respuesta.mensaje);
-						$("#email").val('');
-					});
-				});
 			});
 		</script>
 	</body>
