@@ -84,7 +84,7 @@
 
 						<?php }else{?> 
 
-						<! Personal administrativo -->                    
+						<!--Personal administrativo -->                    
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Personal Administrativo<span class="caret"></span>
