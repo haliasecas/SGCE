@@ -142,9 +142,7 @@
 					<div class="form-group" id="Vieja">
 						<label  for="" class="control-label col-md-2">Contraseña actual</label>
 						<div class="col-md-10">
-							<input type="password" class="form-control" placeholder="*************************" >
-							<span id="pass01" class=""></span>
-							<span id="pass02" class="text-center help-block hidden"></span>
+							<input type="password" id="vieja" class="form-control" placeholder="*************************" >
 						</div>
 					</div>
 					<div class="form-group" id="Nueva01">
@@ -158,8 +156,8 @@
 						<label  for="" class="control-label col-md-2">Repetir contraseña nueva</label>
 						<div class="col-md-10">
 							<input type="password" id="nueva02" class="form-control" placeholder="*************************" >
-							<span id="pass01" class=""></span>
-							<span id="pass02" class="text-center help-block hidden"></span>
+							<span id="pass02" class=""></span>
+							<span id="pass03" class="text-center help-block hidden">Las contraseñas no coinciden.</span>
 						</div>
 					</div>
 					<div class="form-group text-right">
@@ -170,15 +168,25 @@
 					<script type="text/javascript">
 						function cambiarPass() {
 							var ca = false, cn = false;
-							
+
 							if ($("#nueva02").val() === $("#nueva01").val()) {
-								
+								$("#Nueva01").attr("class", "form-group has-success has-feedback");
+								$("#Nueva02").attr("class", "form-group has-success has-feedback");
+								$("#pass01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+								$("#pass02").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+								$("#pass03").addClass("hidden");
 								cn = true;
 							}
 							else {
-								
+								$("#Nueva01").attr("class", "form-group has-error has-feedback");
+								$("#Nueva02").attr("class", "form-group has-error has-feedback");
+								$("#pass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+								$("#pass02").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+								$("#pass03").removeClass("hidden");
 								cn = false;
 							}
+							
+							// ca es para validar que la contraseña vieja sea la misma
 							
 							if (ca && cn) $("#Formulario").submit();
 							else {
