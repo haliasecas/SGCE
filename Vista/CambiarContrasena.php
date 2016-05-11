@@ -142,7 +142,7 @@
 					<div class="form-group">
 						<label  for="" class="control-label col-md-2">Contraseña actual</label>
 						<div class="col-md-10">
-							<input type="password" class="form-control" placeholder="***************" >
+							<input type="password" class="form-control" placeholder="*************************" >
 							<span id="pass01" class=""></span>
 							<span id="pass02" class="text-center help-block hidden"></span>
 						</div>
@@ -151,7 +151,7 @@
 						<br>              
 						<label  for="" class="control-label col-md-2">Contraseña nueva</label>
 						<div class="col-md-10">
-							<input type="password" class="form-control" placeholder="*************************" >
+							<input type="password" name="pass" class="form-control" placeholder="*************************" >
 							<span id="pass01" class=""></span>
 							<span id="pass02" class="text-center help-block hidden"></span>
 						</div>
