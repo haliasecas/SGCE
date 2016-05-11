@@ -93,10 +93,23 @@
 						<br>              						                               
 						<br>              						                               
 						<br>              						                               
-						<label  for="" class="control-label col-md-2">Correo electrónico del encargado</label>						                                                                
+						<label  for="" class="control-label col-md-2">Encargado</label>						                                                                
 						<div class="col-md-10">                                        
-							    	<input type='text' class='form-control' placeholder="ejemplo@dominio.com" >
-						</div>					       						                               					                                                                    
+							<select name="encargado" class="form-control">
+								<!--<option value="DepartamentoA">Departamento A</option> -->
+								<?php
+								include("../Modelo/abre_conexion.php");
+								$query = "SELECT * FROM personal where idpersonal=2";
+								$result = mysqli_query($link, $query);
+								while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+									$correo= $row['correo'];
+									$idpersona = $row["idpersonal"];
+									echo "<option value='$idpersonal'>$correo</option>";
+								}
+                                include("../Modelo/cierra_conexion.php")
+								?>
+							</select>
+						</div>    			       						                               					                                                                    
 						<br><br><br>                                                 
 						<div class="form-group text-right">
 							<div class="col-md-8 col-md-offset-4">
