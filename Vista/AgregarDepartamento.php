@@ -96,11 +96,7 @@
 						<label  for="" class="control-label col-md-2">Correo electrónico del encargado</label>						                                                                
 						<div class="col-md-10">                                        
 							    	<input type='text' class='form-control' placeholder="ejemplo@dominio.com" >
-						</div>
-						<br>              						                               
-						<br>              						                               
-						<br>              						                               
-						</div>                                                                       
+						</div>					       						                               					                                                                    
 						<br><br><br>                                                 
 						<div class="form-group text-right">
 							<div class="col-md-8 col-md-offset-4">
