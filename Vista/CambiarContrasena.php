@@ -182,6 +182,7 @@
                         
 						function cambiarPass() {
 							var ca = false, cn = false;
+							var passViejo = $("#vieja").val();
 
 							if ($("#nueva02").val() === $("#nueva01").val()) {
 								$("#Nueva01").attr("class", "form-group has-success has-feedback");
