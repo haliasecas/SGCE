@@ -165,6 +165,8 @@
 		if (!empty($_POST)) {
 			$correo = $_POST["correo"];
 			$idDepa = $_POST["departamento"];
+			$asunto = $_POST["asunto"];
+			$contenido = $_POST["contenido"];
 			include("../Modelo/abre_conexion.php");
 		?>
 		<script type='text/javascript'>
@@ -220,7 +222,8 @@
 								while ($row = mysqli_fetch_array($resulta, MYSQLI_ASSOC)) {
 									$nombredepto= $row['nombre'];
 									$iddepto = $row["iddepto"];
-									echo "<option value='$iddepto'>$nombredepto</option>";
+									if ($iddepto != 1)
+										echo "<option value='$iddepto'>$nombredepto</option>";
 								}
 								include("../Modelo/cierra_conexion.php"); 
 								?>
@@ -254,6 +257,9 @@
 
 					<div class="form-group">
 						<div class="col-lg-10 col-lg-offset-2" align="right">
+							<a class="btn btn-success" style="width: 150px;" onclick="window.location = '../';">
+								CANCELAR
+							</a>
 							<a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
 						</div>
 					</div>

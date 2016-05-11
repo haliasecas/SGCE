@@ -11,7 +11,7 @@
 		<link type="text/css" rel="stylesheet" href="./Css/letras.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
-	
+
 	<body>
 		<?php
 		include("Modelo/abre_conexion.php");
@@ -21,7 +21,7 @@
 			<img class="img-head" src="./Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
 
-		 <nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
+		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
 					<a class="navbar-brand" href=".">
@@ -39,14 +39,14 @@
 
 				<div class="collapse navbar-collapse" id="header-bar">
 					<ul class="nav navbar-nav navbar-right" style="padding-top:12px;">
-                         
-                        <?php
-                        if (isset($_COOKIE["cargo"])) {
-                        ?>
-                        <?php if($_COOKIE["cargo"]==1){ ?>
-                       
-                        <!--  Administrador -->
-                        <li class="dropdown">
+
+						<?php
+						if (isset($_COOKIE["cargo"])) {
+						?>
+						<?php if($_COOKIE["cargo"]==1){ ?>
+
+						<!--  Administrador -->
+						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="./Img/bookmarkGreen.png" height="30px"></span> Administrador<span class="caret"></span>
 							</a>
@@ -54,15 +54,15 @@
 								<li><a href="./Vista/AdministrarDepartamentos.php">
 									<span><img src="./Img/Admin_Dep.png" height="36px"></span>
 									Administrar departamentos
-								</a></li>
+									</a></li>
 								<li><a href="./Vista/AdministrarAreas.php">
 									<span><img src="./Img/Admin_Area.png" height="36px"></span>
 									Administrar areas
-								</a></li>
+									</a></li>
 								<li><a href="./Vista/AdministrarCuentas.php">
 									<span><img src="./Img/Admin_Cont.png" height="36px"></span>
 									Administrar cuentas
-								</a></li>
+									</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -73,20 +73,20 @@
 								<li><a href="./Vista/CambiarContrasena.php">
 									<span><img src="./Img/Edit2.png" height="36px"></span>
 									Cambiar contraseña
-								</a></li>
+									</a></li>
 								<li><a href="cierra_sesion.php">
 									<span><img src="./Img/Out.png" height="36px"></span>
 									Cerrar sesión
-								</a></li>
+									</a></li>
 							</ul>
 						</li>
-                        
-                        
-                        <?php }else{?> 
-                        
 
-                        <! Personal administrativo -->                    
-                        
+
+						<?php }else{?> 
+
+
+						<! Personal administrativo -->                    
+
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="./Img/bookmarkGreen.png" height="30px"></span> Personal Administrativo<span class="caret"></span>
@@ -95,15 +95,15 @@
 								<li><a href="./Vista/Calendario.php">
 									<span><img src="./Img/333.png" height="36px"></span>
 									Calendario
-								</a></li>
+									</a></li>
 								<li><a href="./Vista/VerInformesYS.php">
 									<span><img src="./Img/22.png" height="36px"></span>
 									Informes y Sugerencias
-								</a></li>
+									</a></li>
 								<li><a href="./Vista/SolicitudesCita.php">
 									<span><img src="./Img/11.png" height="36px"></span>
 									Solicitudes de citas
-								</a></li>
+									</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -114,24 +114,24 @@
 								<li><a href="./Vista/CambiarContrasena.php">
 									<span><img src="./Img/Edit2.png" height="36px"></span>
 									Cambiar contraseña
-								</a></li>
+									</a></li>
 								<li><a href="cierra_sesion.php">
 									<span><img src="./Img/Out.png" height="36px"></span>
 									Cerrar sesión
-								</a></li>
+									</a></li>
 							</ul>
 						</li>
-			
-                        
-                        
-                       <?php } ?>
-                        
 
-                        <?php
-                        }else{
-                        ?>
 
-                        <!--  Visitante -->
+
+						<?php } ?>
+
+
+						<?php
+						}else{
+						?>
+
+						<!--  Visitante -->
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="./Img/bookmarkGreen.png" height="30px"></span> Visitante<span class="caret"></span>
@@ -140,27 +140,27 @@
 								<li><a href="./Vista/SolicitarCita.php">
 									<span><img src="./Img/333.png" height="36px"></span>
 									Solicitar Cita
-								</a></li>
+									</a></li>
 								<li><a href="./Vista/InformesySugerencias.php">
 									<span><img src="./Img/22.png" height="36px"></span>
 									Informes y Sugerencias
-								</a></li>
+									</a></li>
 							</ul>
 						</li>
-                        <li class="">
+						<li class="">
 							<a href="Vista/IniciarSesion.php">
 								<span><img src="./Img/loginiGreen.png" height="30px"></span> Iniciar sesión (Administrador)
 							</a>
 						</li>
-                        
-                        <?php
-                        }			
-                        ?>
+
+						<?php
+						}			
+						?>
 					</ul>
 				</div>
 			</div>
 		</nav>
-		
+
 		<div id="main-content" class="container-fluid" align="center" style="padding-bottom: 50px;">
 			<div class="container col-md-12" style="margin-bottom: 20px;">
 				<img class="img-responsive" alt="Responsive image" src="./Img/IMG_20160306_153146.jpg">
@@ -193,14 +193,30 @@
 				<script>
 					function initMap() {
 						var mapDiv = document.getElementById('map');
-    					var map = new google.maps.Map(mapDiv, {
+						var map = new google.maps.Map(mapDiv, {
 							center: {lat: 19.5043238, lng: -99.146794},
-      						zoom: 17,
+							zoom: 17,
 						});
 					}
 				</script>
 				<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer>
 				</script>
+			</div>
+		</div>
+
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="bienvenido" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Bienvenido(a)</h4>
+					</div>
+					<div class="modal-body">
+						<p>Hola <?php echo htmlspecialchars($_COOKIE["name"]); ?> </p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Iniciar</button>
+					</div>
+				</div>
 			</div>
 		</div>
 
