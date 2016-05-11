@@ -153,7 +153,7 @@
 				<br>                                
 				<form method="post" class="form-horizontal">
 					<div class="form-group">
-						<label  for="" class="control-label col-md-2">Nombre del área</label>
+						<label  for="" class="control-label col-md-2">Nombre del departamento</label>
 						<div class="col-md-10">
 							<?php echo "<input type='text' class='form-control' value='$nombredepto' name='nombrearea'>";	?>
 

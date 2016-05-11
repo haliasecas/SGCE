@@ -141,9 +141,8 @@
 					<table class="table">
 						<thead>
 							<tr style="color: #FFF; background: #656565;">
-								<th>Departamento</th>
-								<th>Correo electrónico</th>
-								<th colspan="4">Encargado</th>
+								<th colspan="4">Departamento</th>
+								
 							</tr>
 						</thead>
 						<tbody>
@@ -155,9 +154,9 @@
 <th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>        
 </tr>-->
 							<?php
-
+                            
 							include("../Modelo/abre_conexion.php");
-							$query = "SELECT nombre,iddepto  FROM area  WHERE idarea>0 ORDER BY nombre";
+							$query = "SELECT *  FROM depto  WHERE iddepto>0";
 							$result = mysqli_query($link, $query);
 
 							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -166,8 +165,7 @@
 
 								echo "<tr>";
 								echo "<th>$nombre</th>";
-								echo "<th>ejemplo@dominio.com</th>";
-								echo "<th>Nombre encargado</th>";
+								
 								echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarDepartamento.php?id=$iddepto'>Editar</a></th>";   
 								echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='#?id=$iddepto'>Eliminar</a></th>  ";
 								echo "</tr>";
