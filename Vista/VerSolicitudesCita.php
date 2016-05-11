@@ -131,10 +131,13 @@
 		</nav>
 		<?php
 		if (!isset($_GET['id'])) {
+			echo $_POST['nombre'];
+
+
 		?>
-		<script type="text/javascript">
+		<!-- <script type="text/javascript">
 			window.location = "../Vista/VerInformesYS.php";
-		</script>
+		</script>-->
 		<?php
 		} else {
 		?>
@@ -309,7 +312,7 @@
 					<div class="form-group has-feedback" id="Horario">
 						<label class="control-label col-md-2">Hora</label>
 						<div class="col-md-10">
-							<select class="form-control">
+							<select class="form-control" name="hora">
 								<?php
 			$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
 			$result = mysqli_query($link,$query);
