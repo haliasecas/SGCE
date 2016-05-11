@@ -166,8 +166,12 @@
 			$correo = $_POST["correo"];
 			$idDepa = $_POST["departamento"];
 			$asunto = $_POST["asunto"];
-			$contenido = $_POST["contenido"];
+			$contenido = $_POST["comentarios"];
+			$fecha = strftime("%Y/%m/%d");
 			include("../Modelo/abre_conexion.php");
+			$q = "INSERT INTO mensaje(correo, asunto, contenido, estado, fecha, iddepto) VALUES
+			('$correo', '$asunto', '$contenido', 'PENDIENTE', '$fecha', '$idDepa')";
+			$query = mysqli_query($link, $q);
 		?>
 		<script type='text/javascript'>
 			$(document).ready(function() {
@@ -281,7 +285,7 @@
 						<h4 class="modal-title">Mensaje de alerta</h4>
 					</div>
 					<div class="modal-body">
-						<p>Operación realizada exitosamente.</p>
+						<p>Se ha enviado el correo exitosamente.</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
