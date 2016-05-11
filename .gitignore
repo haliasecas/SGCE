@@ -1,5 +1,6 @@
 # Ignore files
 
+BasedeDatos/taquitos.sql
 insertar.sql
 Modelo/abre_conexion.php
 client_secret*

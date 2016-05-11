@@ -177,7 +177,6 @@
                             }else{
                                 $pold=0;//si la contraseña no coincide
                             }
-                            
                         ?>
                         
 						function cambiarPass() {

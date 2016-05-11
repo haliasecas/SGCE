@@ -3,11 +3,11 @@ include("../Modelo/abre_conexion.php");
 
 $val = htmlspecialchars($_POST["value"]);
 switch ($val) {
-	case 1: $q = "SELECT * FROM Mensaje";
+	case 1: $q = "SELECT * FROM mensaje";
 		break;
-	case 2: $q = "SELECT * FROM Mensaje WHERE ESTADO = 'RESUELTO'";
+	case 2: $q = "SELECT * FROM mensaje WHERE ESTADO = 'RESUELTO'";
 		break;
-	case 3: $q = "SELECT * FROM Mensaje WHERE ESTADO = 'PENDIENTE'";
+	case 3: $q = "SELECT * FROM mensaje WHERE ESTADO = 'PENDIENTE'";
 		break;
 }
 

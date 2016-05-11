@@ -152,7 +152,7 @@
 					<!-- Correo electrónico -->
 					<?php
 		include("../Modelo/abre_conexion.php");
-		$q = "SELECT * FROM Mensaje WHERE idMensaje = $id";
+		$q = "SELECT * FROM mensaje WHERE idMensaje = $id";
 		$ans = mysqli_query($link, $q);
 		$row = mysqli_fetch_array($ans, MYSQLI_ASSOC);
 					?>
