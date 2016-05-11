@@ -162,20 +162,24 @@
 		</nav>
 
 		<?php
-		if (!empty($_GET)) {
-			echo ("
-				<script type='text/javascript'>
-					$(document).ready(function() {
-						$('#exitoso').modal();
-					});
-				</script>
-				");
+		if (!empty($_POST)) {
+			$correo = $_POST["correo"];
+			$idDepa = $_POST["departamento"];
+			include("../Modelo/abre_conexion.php");
+		?>
+		<script type='text/javascript'>
+			$(document).ready(function() {
+				$('#exitoso').modal();
+			});
+		</script>
+		<?php
+			include("../Modelo/cierra_conexion.php");
 		}
 		?>
 
 		<div class="container-fluid" style="padding-bottom: 57px;" id="main-content">
 			<div class="container-fluid col-md-offset-1 col-md-10">
-				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET" class="form-horizontal" id="informe">
+				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="form-horizontal" id="informe">
 					<h3><strong> Informes y sugerencias</strong></h3>
 					<p><strong class="text-success">Todos los campos son obligatorios.</strong>
 						La respuesta a su pregunta o sugerencia llegará directamente al correo que<br>nos proporcione.</p><br>
@@ -183,7 +187,7 @@
 					<div class="form-group" id="Email01">
 						<label  for="email" class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" id="correoE01" placeholder="ejemplo@dominio.com">
+							<input type="text" class="form-control" name="correo" id="correoE01" placeholder="ejemplo@dominio.com">
 							<span id="email01" class="hidden glyphicon form-control-feedback"></span>
 						</div>
 					</div>
@@ -209,16 +213,16 @@
 						<div class="col-md-10">
 							<select name="departamento" class="form-control">
 								<?php
-									include("../Modelo/abre_conexion.php"); 
-									$id = sprintf("SELECT * FROM depto");     
-									$resulta = mysqli_query($link,$id);
-									$numero = mysqli_num_rows($resulta);
-									while ($row = mysqli_fetch_array($resulta, MYSQLI_ASSOC)) {
-										$nombredepto= $row['nombre'];
-										$iddepto = $row["iddepto"];
-										echo "<option value='$iddepto'>$nombredepto</option>";
-									}
-									include("../Modelo/cierra_conexion.php"); 
+								include("../Modelo/abre_conexion.php"); 
+								$id = sprintf("SELECT * FROM depto");     
+								$resulta = mysqli_query($link,$id);
+								$numero = mysqli_num_rows($resulta);
+								while ($row = mysqli_fetch_array($resulta, MYSQLI_ASSOC)) {
+									$nombredepto= $row['nombre'];
+									$iddepto = $row["iddepto"];
+									echo "<option value='$iddepto'>$nombredepto</option>";
+								}
+								include("../Modelo/cierra_conexion.php"); 
 								?>
 							</select>
 						</div>
