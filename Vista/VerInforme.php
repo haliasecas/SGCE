@@ -154,14 +154,14 @@
 		include("../Modelo/abre_conexion.php");
 		$q = "SELECT * FROM mensaje WHERE idMensaje = $id";
 		$ans = mysqli_query($link, $q);
-		$row = mysqli_fetch_array($ans, MYSQLI_ASSOC);
+		if (($row = mysqli_fetch_array($ans, MYSQLI_ASSOC)) > 0) {
 					?>
 					<div class="form-group has-feedback" id="Email01">                                                            
 						<label  class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
 							<p class="form-control-static" id="correoE01" name="email">
 								<?php
-		echo htmlspecialchars($row["correo"]);
+			echo htmlspecialchars($row["correo"]);
 								?>
 							</p>	
 						</div>
@@ -174,7 +174,7 @@
 						<div class="col-md-10">
 							<p class="form-control-static" id="asunto" name="asunto">
 								<?php
-		echo htmlspecialchars($row["asunto"]);
+			echo htmlspecialchars($row["asunto"]);
 								?>
 							</p>
 						</div>
@@ -187,14 +187,14 @@
 						<div class="col-md-10">
 							<p class="form-control-static" id="contenido" name="contenido">
 								<?php
-		echo htmlspecialchars($row["contenido"]);
+			echo htmlspecialchars($row["contenido"]);
 								?>
 							</p>
 						</div>
 						<br><br><br>
 					</div>
 					<?php
-		if ($row['estado'] == "PENDIENTE") {
+			if ($row['estado'] == "PENDIENTE") {
 					?>
 
 					<h4 class="text-uppercase">Responder:</h4>
@@ -217,7 +217,7 @@
 						</div>
 					</div>
 					<?php
-		} else {
+			} else {
 					?>
 
 					<!-- Botones -->
@@ -230,8 +230,15 @@
 						</div>
 					</div>
 					<?php
+			}
+		} else {
+			include("../Modelo/cierra_conexion.php");
+					?>
+					<script type="text/javascript">
+						window.location = "../Vista/VerInformesYS.php";
+					</script>
+					<?php
 		}
-		include("../Modelo/cierra_conexion.php");
 					?>
 				</form>
 			</div>

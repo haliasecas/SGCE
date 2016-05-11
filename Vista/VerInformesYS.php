@@ -9,6 +9,7 @@
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
+		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 
@@ -184,17 +185,38 @@
 					<script type="text/javascript">
 						function eliminar(str) {
 							var id = str.substring(2);
-							$.ajax({
-								method: "POST",
-								url: "../Modelo/elimina_informe.php",
-								data: { value: id }
-							}).done(function(msg){
-								if (msg == "hecho") meetings();
+							$("#confirmacion").modal();
+							$("#eliminarT").click(function() {
+								$.ajax({
+									method: "POST",
+									url: "../Modelo/elimina_informe.php",
+									data: { value: id }
+								}).done(function(msg){
+									if (msg == "hecho") meetings();
+								});
 							});
 						}
 					</script>
 				</div>
 			</div>                                                               
+		</div>
+
+		<!-- Mensaje de confirmación -->
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-warning">
+						<h4 class="modal-title">Mensaje de confirmación</h4>
+					</div>
+					<div class="modal-body">
+						<p>¿Seguro que desea eliminar este mensaje?.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-warning" id="eliminarT" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
