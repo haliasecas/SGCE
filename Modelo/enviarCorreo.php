@@ -1,5 +1,5 @@
 <?php
-function mandarCorreoInforme($departamento,$asunto,$contenido,$email){
+function mandarCorreoInforme($departamento,$asunto,$contenido,$emailinforme){
     header("Content-Type: text/html;charset=utf-8");
     require 'PHPMailerAutoload.php';
     $mail = new PHPMailer();
@@ -40,7 +40,7 @@ function mandarCorreoInforme($departamento,$asunto,$contenido,$email){
         $msg=$msg."Se ha realizado una solicitud de pedir informe <br> En el departamento".$nombreDepto."<br>";
     else
         $msg=$msg."Se ha realizado una solicitud de sugerencia <br> En el departamento".$nombreDepto."<br>";
-    $msg=$msg."<b>Enviada desde el correo:."$email."</b><br>";
+    $msg=$msg."<b>Enviada desde el correo: ".$email."</b><br>";
     $msg=$msg."Asunto: ".$asunto."<br>";
     $msg=$msg."Contenido: ".$contenido."<br>";
     $msg=$msg."Preste mucha atención a esta solicitud, puesto que nuestro principal objetivo es la comodidad de nuestros clientes, y así prestar un mejor servicio.<br>";

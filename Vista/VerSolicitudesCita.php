@@ -173,6 +173,7 @@
 			$correo = $row2['correo'];
 			$telefono = $row2['telefono'];
 			$area = $row3['nombre'];
+			$dia = $row['dia'];
 					?>
 					<!-- Correo electrónico -->
 					<div class="form-group has-feedback" id="Email01">                                                            
@@ -257,15 +258,7 @@
 						<label class="control-label col-md-2">Horario(s) preferente(s)</label>
 						<div class="col-md-10">
 							<?php
-			$busquedadia = sprintf("SELECT idDia FROM DiaSol WHERE idsolicitud='$idsol'");
-			$resultdia=mysqli_query($link, $busquedadia);
-			$row = mysqli_fetch_assoc($resultdia);
-			$Dia=$row["idDia"];
 
-			$busquedadia = sprintf("SELECT dia FROM DiaPref WHERE idDia='$Dia'");
-			$resultdia=mysqli_query($link, $busquedadia);
-			$row = mysqli_fetch_assoc($resultdia);
-			$Dia=$row["dia"];
 			$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
 			$result = mysqli_query($link,$query);
 			while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -273,7 +266,7 @@
 				$query2 = "SELECT * FROM HoraPref WHERE idHorario='$idhorario'";
 				$result2=mysqli_query($link,$query2);
 				$rowarea = mysqli_fetch_assoc($result2);
-				echo "<p class='form-control-static' id='horario' name='horario'>".$Dia." ".$rowarea['hinicio']."-".$rowarea['hfin']."</p>";
+				echo "<p class='form-control-static' id='horario' name='horario'>".$dia." ".$rowarea['hinicio']."-".$rowarea['hfin']."</p>";
 			}
 			//$row_dia = mysqli_num_rows($resultdia);
 
@@ -300,12 +293,12 @@
 					</div>
 
 					<!-- Día -->
-					<div class="form-group has-feedback" id="Dia">
+					<div class="form-group has-feedback" id="dia">
 						<label class="control-label col-md-2">Día</label>
 						<div class="col-md-10">
 							<select class="form-control">
 								<?php
-			echo "<option>$Dia</option>";
+			echo "<option>$dia</option>";
 								?>
 							</select>
 						</div>

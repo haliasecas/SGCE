@@ -134,6 +134,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`horapref` (
   PRIMARY KEY (`idHorario`)  COMMENT '')
 ENGINE = InnoDB;
 
+INSERT INTO `HoraPref` (`idHorario`, `hinicio`, `hfin`) VALUES
+(NULL, '09:00:00', '10:00:00'),
+(NULL, '10:00:00', '11:00:00'),
+(NULL, '11:00:00', '12:00:00'),
+(NULL, '12:00:00', '13:00:00'),
+(NULL, '13:00:00', '14:00:00'),
+(NULL, '14:00:00', '15:00:00'),
+(NULL, '18:00:00', '19:00:00'),
+(NULL, '19:00:00', '20:00:00'),
+(NULL, '20:00:00', '21:00:00');
 
 -- -----------------------------------------------------
 -- Table `mydb`.`horasol`
@@ -177,7 +187,18 @@ CREATE TABLE IF NOT EXISTS `mydb`.`mensaje` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+INSERT INTO `depto` (`iddepto`, `nombre`,`idpersonal`) VALUES
+(NULL, 'Departamento de Reprobados',2),
+(NULL, 'Departamento de Gaming',2);
 
+INSERT INTO `area` (`idarea`, `nombre`, `iddepto`) VALUES
+(NULL, 'Area patito2', 1),
+(NULL, 'Area de Difusion Cultural', 1);
+
+
+INSERT INTO `personal` (`idpersonal`, `nombre`, `appaterno`, `apmaterno`, `correo`, `contrasena`, `cargo`) VALUES
+(NULL, 'Nathaniel', 'Cabrera', 'Herrera', 'nathaniel981@gmail.com', 0xca1f5daa97182bd802a026a132c8e8e4, 2),
+(NULL, 'Nathaniel', 'Cabrera', 'Herrera', 'nathaniel981@hotmail.com', 0xca1f5daa97182bd802a026a132c8e8e4, 1);
 -- -----------------------------------------------------
 -- Table `mydb`.`cita`
 -- -----------------------------------------------------

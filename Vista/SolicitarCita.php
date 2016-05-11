@@ -200,10 +200,11 @@
 					$idint=$row["idinteresado"];
 					$iddept=$_POST["departamento"];
 					$idarea=$_POST["area"];
-					echo "$iddept";
+					//echo "$iddept";
 					//echo $_POST['datas'];
 					$timestamp = date('Y/m/d');
-					$soli = sprintf("INSERT INTO solicitud (idSolicitud, asunto, estado,idinteresado,dia,idarea,iddepto) VALUES (NULL,'$asunto',' ','$idint','$timestamp','$idarea','$iddept')");
+					$dia=$_POST['date01'];
+					$soli = sprintf("INSERT INTO solicitud (idSolicitud, asunto, estado,dia,idinteresado,dia,idarea,iddepto) VALUES (NULL,'$asunto',' ','$dia','$idint','$timestamp','$idarea','$iddept')");
 					$result=mysqli_query($link,$soli);
 					$idSol = sprintf("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='mydb' and TABLE_NAME='solicitud'");
 					$result=mysqli_query($link,$idSol);
@@ -217,28 +218,6 @@
 							$result=mysqli_query($link,$tok);
 						}
 					}
-
-					$dia=$_POST['date01'];
-					$busquedadia = sprintf("SELECT dia FROM DiaPref WHERE dia='$dia'");
-					$resultdia=mysqli_query($link, $busquedadia);
-					$row_dia = mysqli_num_rows($resultdia);
-					if($row_dia==1) {
-						$id = sprintf("SELECT idDia FROM DiaPref WHERE dia='$dia'");
-						$resultiddia=mysqli_query($link,$id);
-					}
-					else{
-						$sql = sprintf("INSERT INTO DiaPref (idDia, dia) VALUES (NULL,'$dia')");
-						$resultiddia=mysqli_query($link,$sql);
-						$id = sprintf("SELECT idDia FROM DiaPref WHERE dia='$dia'");
-						$resultiddia=mysqli_query($link,$id);
-					}
-					$row = mysqli_fetch_assoc($resultiddia);
-					$idDiaa=$row["idDia"];
-
-					$resultDiaSol=sprintf("INSERT INTO DiaSol (idDia, idSolicitud) VALUES ('$idDiaa','$idsolicitud')");
-					$result=mysqli_query($link,$resultDiaSol);
-
-
 
 					$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
 					$result=mysqli_query($link,$tok);
@@ -473,7 +452,7 @@
 					<script type="text/javascript">
 						$(function () {
 							$('#datet1').datetimepicker({
-								format: 'YYYY/MM/DD',
+								format: 'DD/MM/YYYY',
 								minDate: moment().add(3, 'd'),
 								maxDate: moment().add(33, 'd'),
 								daysOfWeekDisabled: [0, 6]
