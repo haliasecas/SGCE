@@ -79,16 +79,16 @@
 
 		<?php
 		if (!empty($_POST)) {
-			$nombre = $_POST["nombreDepto"];
-			$idPers = $_POST["personal"];
+			$nombre = htmlspecialchars($_POST["nombreDepto"]);
+			$idPers = htmlspecialchars($_POST["personal"]);
 
 			include("../Modelo/abre_conexion.php");
 
 			$q = "INSERT INTO depto(nombre, idpersonal) VALUES ('$nombre', $idPers)";
 			$j = "UPDATE personal SET ocupado = 1 WHERE idpersonal = $idPers";
 
-			$uno = mysqli_query($link, $q);
-			$dos = mysqli_query($link, $j);
+			mysqli_query($link, $q);
+			mysqli_query($link, $j);
 		?>
 		<script type='text/javascript'>
 			$(document).ready(function() {
@@ -112,6 +112,7 @@
 						<div class="col-md-10">
 							<input type='text' class='form-control' name="nombreDepto" id="departamento" placeholder="Departamento D">
 							<span id="depa01" class="hidden glyphicon form-control-feedback"></span>
+							<span id="depa02" class="text-center help-block hidden"></span>
 						</div>           	
 					</div>
 
@@ -126,7 +127,7 @@
 								if (($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) > 0) {
 									$result = mysqli_query($link, $query);
 									while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-										$nombre= $row['nombre'];
+										$nombre= $row['correo'];
 										$idpersona = $row["idpersonal"];
 										echo "<option value='$idpersona'>$nombre</option>";
 									}
@@ -153,14 +154,26 @@
 					<script type="text/javascript">
 						function enviarForm() {
 							var a1 = false, a2 = false;
-							if ($("#departamento").val() == "") {
+							var depto = $("#departamento").val();
+							var ts = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð -]+$/u;
+							if (depto == "") {
 								$("#Departamento").attr("class", "form-group has-feedback has-error");
 								$("#depa01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+								$("#depa02").removeClass("hidden");
+								$("#depa02").text("El campo nombre del departamento no puede estar vacío.");
+								a1 = false;
+							}
+							else if (!ts.test(depto)) {
+								$("#Departamento").attr("class", "form-group has-feedback has-error");
+								$("#depa01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+								$("#depa02").removeClass("hidden");
+								$("#depa02").text("El formato del campo nombre del departamento es incorrecto.");
 								a1 = false;
 							}
 							else {
 								$("#Departamento").attr("class", "form-group has-feedback has-success");
 								$("#depa01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+								$("#depa02").addClass("hidden");
 								a1 = true;
 							}
 

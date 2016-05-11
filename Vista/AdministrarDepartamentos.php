@@ -152,20 +152,25 @@
 							include("../Modelo/abre_conexion.php");
 							$query = "SELECT *  FROM depto  WHERE iddepto > 1";
 							$result = mysqli_query($link, $query);
+							if ($hay = mysqli_fetch_array($result, MYSQLI_ASSOC) > 0) {
+								$result = mysqli_query($link, $query);
+								while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+									$iddepto=$row['iddepto'];
+									$nombre = $row['nombre'];
 
-							while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-								$iddepto=$row['iddepto'];
-								$nombre = $row['nombre'];
-
-								echo "<tr id='D$iddepto'>";
-								echo "<td>$nombre</td>";
-								echo "<td><a class='text-success text-right' style='text-decoration:underline;' href='EditarDepartamento.php?id=$iddepto'>Editar</a></td>";
-								echo "<td><a class='text-success text-right' name='EliminaD' style='text-decoration:underline; cursor:pointer;'>
+									echo "<tr id='D$iddepto'>";
+									echo "<td>$nombre</td>";
+									echo "<td><a class='text-success text-right' style='text-decoration:underline;' href='EditarDepartamento.php?id=$iddepto'>Editar</a></td>";
+									echo "<td><a class='text-success text-right' name='EliminaD' style='text-decoration:underline; cursor:pointer;'>
 								Eliminar
 								</a></td>";
-								echo "</tr>";
+									echo "</tr>";
+								}
 							}
-
+							else {
+								$jaja = "ALTER TABLE depto AUTO_INCREMENT = 2";
+								mysqli_query($link, $jaja);
+							}
 							?>
 
 						</tbody>

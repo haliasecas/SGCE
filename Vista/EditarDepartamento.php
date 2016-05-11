@@ -177,7 +177,7 @@
 								   if (($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) > 0) {
 									   $result = mysqli_query($link, $query);
 									   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-										   $nombre= $row['nombre'];
+										   $nombre= $row['correo'];
 										   $idpersona = $row["idpersonal"];
 										   $ocup = $row["ocupado"];
 										   if ($idpersona == $idPer or $ocup == 0)
@@ -224,11 +224,15 @@
 
 						function editarDepto() {
 							var a1 = false, a2 = false;
+							var ts = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð -]+$/u;
 							var personal = $("[name='personal']").val();
 							var nombrearea = $("[name='nombreArea']").val();
 							if (nombrearea == "") {
-								error("#Nombre", "El nombre del area no puede estar vacio.");
+								error("#Nombre", "El campo nombre del departamento no puede estar vacio.");
 								a1 = false;
+							}
+							else if (!ts.test(nombrearea)) {
+								error("#Nombre", "El formato del campo nombre del departamento es incorrecto.");
 							}
 							else {
 								nohayerror("#Nombre");
