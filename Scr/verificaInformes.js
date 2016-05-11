@@ -17,6 +17,10 @@ function enviarForm() {
 		if ($("#correoE01").val() !== $("#correoE02").val()) {
 			$("#email03").text("Correos proporcionados no coinciden");
 		}
+		else {
+			$("#email03").text("Por favor, introduce una dirección de correo electrónico válida. \
+							   Por ejemplo usuario@dominio.com");
+		}
 		v1 = false;
 	}
 	else {

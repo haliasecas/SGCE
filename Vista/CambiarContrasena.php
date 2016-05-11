@@ -138,41 +138,54 @@
 				<p><strong class="text-success">Todos los campos son obligatorios.</strong>Ingresa los campos correspondientespara cambiar contraseña.</p> 
 				<br>
 				<br>                                
-				<form action="" class="form-horizontal">
-					<div class="form-group">
+				<form action="POST" class="form-horizontal" id="Formulario">
+					<div class="form-group" id="Vieja">
 						<label  for="" class="control-label col-md-2">Contraseña actual</label>
 						<div class="col-md-10">
 							<input type="password" class="form-control" placeholder="*************************" >
 							<span id="pass01" class=""></span>
 							<span id="pass02" class="text-center help-block hidden"></span>
 						</div>
-						<br>              
-						<br>              
-						<br>              
+					</div>
+					<div class="form-group" id="Nueva01">
 						<label  for="" class="control-label col-md-2">Contraseña nueva</label>
 						<div class="col-md-10">
-							<input type="password" name="pass" class="form-control" placeholder="*************************" >
+							<input type="password" id="nueva01" class="form-control" placeholder="*************************" >
 							<span id="pass01" class=""></span>
-							<span id="pass02" class="text-center help-block hidden"></span>
-						</div>
-						<br>          
-						<br>          
-						<br>          
-						<label  for="" class="control-label col-md-2">Repetir contraseña nueva</label>
-						<div class="col-md-10">
-							<input type="password" class="form-control" placeholder="*************************" >
-							<span id="pass01" class=""></span>
-							<span id="pass02" class="text-center help-block hidden"></span>
-						</div>
-						<br>          
-						<br>          
-						<br>          
-						<div class="form-group text-right">
-							<div class="col-md-10 col-md-offset-2">
-								<a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
-							</div>
 						</div>
 					</div>
+					<div class="form-group" id="Nueva02">
+						<label  for="" class="control-label col-md-2">Repetir contraseña nueva</label>
+						<div class="col-md-10">
+							<input type="password" id="nueva02" class="form-control" placeholder="*************************" >
+							<span id="pass01" class=""></span>
+							<span id="pass02" class="text-center help-block hidden"></span>
+						</div>
+					</div>
+					<div class="form-group text-right">
+						<div class="col-md-10 col-md-offset-2">
+							<a class="btn btn-success" style="width: 150px;" onclick="cambiarPass();">ENVIAR</a>
+						</div>
+					</div>
+					<script type="text/javascript">
+						function cambiarPass() {
+							var ca = false, cn = false;
+							
+							if ($("#nueva02").val() === $("#nueva01").val()) {
+								
+								cn = true;
+							}
+							else {
+								
+								cn = false;
+							}
+							
+							if (ca && cn) $("#Formulario").submit();
+							else {
+								console.log("Error o algo");
+							}
+						}
+					</script>
 				</form>   
 			</div>
 		</div>                                    							
