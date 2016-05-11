@@ -20,7 +20,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 	$contenido = $row['contenido'];
 	$estado = $row['estado'];
 	$fecha = $row['fecha'];
-	$idDepto = $row['depto_iddepto'];
+	$idDepto = $row['iddepto'];
 
 	echo "<tr id='IS$idMensaje'>";
 	echo "<td>$asunto</td>";
