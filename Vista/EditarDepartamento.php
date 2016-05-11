@@ -140,7 +140,7 @@
 			$result = mysqli_query($link, $query);
 			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 			$nombredepto = $row['nombre'];
-			$idPer = $row['idpersonal'];
+			$idPer = $row['iddepto'];
 		} else {
 		?>
 		<script type="text/javascript">
