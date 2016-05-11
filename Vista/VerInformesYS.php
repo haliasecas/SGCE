@@ -209,7 +209,7 @@
 						<h4 class="modal-title">Mensaje de confirmación</h4>
 					</div>
 					<div class="modal-body">
-						<p>¿Seguro que desea eliminar este mensaje?.</p>
+						<p>¿Seguro que desea eliminar este mensaje?</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>

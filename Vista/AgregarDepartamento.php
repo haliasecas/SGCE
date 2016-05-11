@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Modelo</title>
+		<title>SGCE</title>
 		<meta charset="utf-8">
 		<script type="text/javascript" src="../Scr/jquery-2.2.0.js"></script>
 		<script type="text/javascript" src="../Scr/moment.min.js"></script>
@@ -80,11 +80,15 @@
 		<?php
 		if (!empty($_POST)) {
 			$nombre = $_POST["nombreDepto"];
-			$idPers = $_POST["encargado"];
+			$idPers = $_POST["personal"];
+
 			include("../Modelo/abre_conexion.php");
 
-			$q = "INSERT INTO depto(nombre, idencargado) VALUES
-			('$nombre', $idPers)";
+			$q = "INSERT INTO depto(nombre, idpersonal) VALUES ('$nombre', $idPers)";
+			$j = "UPDATE personal SET ocupado = 1 WHERE idpersonal = $idPers";
+
+			$uno = mysqli_query($link, $q);
+			$dos = mysqli_query($link, $j);
 		?>
 		<script type='text/javascript'>
 			$(document).ready(function() {
@@ -113,16 +117,22 @@
 
 					<div class="form-group" id="Encargado">
 						<label  for="" class="control-label col-md-2">Encargado</label>                     
-						<div class="col-md-10">                                        
-							<select name="encargado" class="form-control">
+						<div class="col-md-10">                                    
+							<select name="personal" class="form-control">
 								<?php
 								include("../Modelo/abre_conexion.php");
-								$query = "SELECT * FROM personal where idpersonal=2";
+								$query = "SELECT * FROM personal WHERE ocupado = 0";
 								$result = mysqli_query($link, $query);
-								while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-									$correo= $row['correo'];
-									$idpersona = $row["idpersonal"];
-									echo "<option value='$idpersonal'>$correo</option>";
+								if (($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) > 0) {
+									$result = mysqli_query($link, $query);
+									while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+										$nombre= $row['nombre'];
+										$idpersona = $row["idpersonal"];
+										echo "<option value='$idpersona'>$nombre</option>";
+									}
+								}
+								else {
+									echo "<option value='-1'>No hay personal disponible</option>";
 								}
 								include("../Modelo/cierra_conexion.php")
 								?>
@@ -154,7 +164,7 @@
 								a1 = true;
 							}
 
-							if ($("[name='encargado']").val() == -1){
+							if ($("[name='personal']").val() == -1){
 								$("#Encargado").attr("class", "form-group has-feedback has-error");
 								a2 = false;
 							}
@@ -184,7 +194,10 @@
 						<p>El departamento ha sido registrado exitosamente.</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+						<button type="button" class="btn btn-success" data-dismiss="modal"
+								onClick="window.location = 'AdministrarDepartamentos.php';">
+							Aceptar
+						</button>
 					</div>
 				</div>
 			</div>

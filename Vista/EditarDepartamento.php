@@ -133,60 +133,152 @@
 
 
 		<?php 
-		if(isset($_GET["id"]))
+		if(isset($_GET["id"])) {
 			$id = $_GET['id'];
-		include("../Modelo/abre_conexion.php");
-		$query = "SELECT * FROM depto WHERE iddepto = '$id'";
-		$result = mysqli_query($link, $query);
-		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-		$nombredepto = $row['nombre'];
-        
-
+			include("../Modelo/abre_conexion.php");
+			$query = "SELECT * FROM depto WHERE iddepto = $id";
+			$result = mysqli_query($link, $query);
+			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+			$nombredepto = $row['nombre'];
+			$idPer = $row['idpersonal'];
+		} else {
+		?>
+		<script type="text/javascript">
+			window.location = "AdministrarDepartamentos.php";
+		</script>
+		<?php 
+		}
 		?>
 
-		<!-- Mensajes bajo el campo -->
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
 			<div class="container">
 				<h3><strong>Editar departamento</strong></h3>
 				<p><strong class="text-success">Todos los campos son obligatorios.</strong></p> 
 				<br>
-				<br>                                
-				<form method="post" class="form-horizontal">
-					<div class="form-group">
+				<br>                  
+				<form method="POST" class="form-horizontal" id="Formulario">
+					<div class="form-group" id="Nombre">
 						<label  for="" class="control-label col-md-2">Nombre del departamento</label>
 						<div class="col-md-10">
-							<?php echo "<input type='text' class='form-control' value='$nombredepto' name='nombrearea'>";	?>
-
+							<input type="text" class="form-control" value="<?php echo htmlspecialchars($nombredepto) ?>" name="nombreArea">
+							<span id="nombre01" class=""></span>
+							<span id="nombre02" class="text-center help-block hidden"></span>
 						</div>
-						                                                                     
-						<br><br><br>                                                 
-						<div class="form-group text-right">
-							<div class="col-md-8 col-md-offset-4">
-								<a class="btn btn-success" style="width: 150px;" onclick="#">CANCELAR</a>				<?php 
-                                echo "<a class='btn btn-success' href='../Modelo/edita_area.php?id=$id' style='width: 150px;' onclick='enviarForm();'>ENVIAR</a>"
-                                ?>			                                 
-								
-							</div>					                                                                               						                             
-						</div>
-                        <script>
-                        function logIn() {
-                            var iddepto = $("[name='iddepto']").val();
-                            var nombrearea = $("[name='nombrearea']").val();
-                            if (nombrearea == "") error("El nombre del area no puede estar vacio.");
-                            else error("Por favor, introduce un nombre al area");
-                            
-                            $.ajax({
-                                method: "POST",
-                                url: "'../Modelo/edita_area.php?id=$id'",
-                                data: { nombrearea: nombrearea, iddepto: iddepto }
-                            })
-                        }
-                        
-                        </script>
 					</div>
+
+					<div class="form-group" id="Personal">
+						<label  for="" class="control-label col-md-2">Nombre del departamento</label>
+						<div class="col-md-10">
+							<select id="personal" class="form-control">
+								<?php
+	include("../Modelo/abre_conexion.php");
+								   $query = "SELECT * FROM personal";
+								   $result = mysqli_query($link, $query);
+								   if (($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) > 0) {
+									   $result = mysqli_query($link, $query);
+									   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+										   $nombre= $row['nombre'];
+										   $idpersona = $row["idpersonal"];
+										   $ocup = $row["ocupado"];
+										   if ($idpersona == $idPer or $ocup == 0)
+											   echo "<option value='$idpersona'>$nombre</option>";
+									   }
+								   }
+								   else {
+									   echo "<option value='-1'>No hay personal disponible</option>";
+								   }
+								   include("../Modelo/cierra_conexion.php")
+								?>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group text-right">
+						<div class="col-md-8 col-md-offset-4">
+							<a class="btn btn-success" style="width: 150px;" onclick="window.location = 'AdministrarDepartamentos.php'">
+								CANCELAR
+							</a>
+							<?php 
+									   echo "<a class='btn btn-success' style='width: 150px; cursor: pointer;' onclick='editarDepto();'>ENVIAR</a>"
+							?>
+						</div>                       
+					</div>
+					<script>
+						function error(donde, str) {
+							$(donde).addClass("has-error has-feedback");
+							if (donde == "#Nombre") {
+								$("#nombre01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+								$("#nombre02").removeClass("hidden");
+								$("#nombre02").text(str);
+							}
+						}
+
+						function nohayerror(donde) {
+							$(donde).removeClass("has-error has-feedback");
+							$(donde).addClass("has-success has-feedback");
+							if (donde == "#Nombre") {
+								$("#nombre01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+								$("#nombre02").addClass("hidden");
+							}
+						}
+
+						function editarDepto() {
+							var a1 = false, a2 = false;
+							var personal = $("[name='personal']").val();
+							var nombrearea = $("[name='nombreArea']").val();
+							if (nombrearea == "") {
+								error("#Nombre", "El nombre del area no puede estar vacio.");
+								a1 = false;
+							}
+							else {
+								nohayerror("#Nombre");
+								a1 = true;
+							}
+							if (personal == "-1") {
+								error("#Personal", "El nombre personal no puede estar vacio.");
+								a2 = false;
+							}
+							else {
+								nohayerror("#Personal");
+								a2 = true;
+							}
+
+							if (a1 && a2) {
+								$("#confirmacion").modal();
+								$("#Neta").click(function() {
+									$.ajax({
+										url: "../Modelo/editar_depto.php",
+										method: "POST",
+										data: { value: "<?php echo htmlspecialchars($id); ?>", nombre: nombrearea }
+									}).done(function(msg){
+										if (msg == "hecho") window.location = "AdministrarDepartamentos.php";
+									});
+								});
+							}
+						}
+
+					</script>
 				</form>   
 			</div>
-		</div>                                
+		</div>
+
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-warning">
+						<h4 class="modal-title">Mensaje de confirmación</h4>
+					</div>
+					<div class="modal-body">
+						<p>¿Seguro que desea cambiar el nombre de este departamento?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-warning" onclick="window.location = 'AdministrarDepartamentos.php';"
+								data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-warning" id="Neta" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
 		<!-- Nav de abajo -->

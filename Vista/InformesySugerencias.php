@@ -169,6 +169,7 @@
 			$contenido = $_POST["comentarios"];
 			$fecha = strftime("%Y/%m/%d");
 			include("../Modelo/abre_conexion.php");
+			
 			$q = "INSERT INTO mensaje(correo, asunto, contenido, estado, fecha, iddepto) VALUES
 			('$correo', '$asunto', '$contenido', 'PENDIENTE', '$fecha', '$idDepa')";
 			$query = mysqli_query($link, $q);

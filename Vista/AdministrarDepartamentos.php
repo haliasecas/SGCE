@@ -10,6 +10,7 @@
 		<script type="text/javascript" src="../Scr/validator.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
+		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 
@@ -142,39 +143,54 @@
 						<thead>
 							<tr style="color: #FFF; background: #656565;">
 								<th colspan="4">Departamento</th>
-								
+
 							</tr>
 						</thead>
 						<tbody>
-							<!--<tr>
-<th>Departamento A</th>
-<th>ejemplo@dominio.com</th>
-<th>Nombre encargado</th>
-<th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
-<th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>        
-</tr>-->
 							<?php
-                            
+
 							include("../Modelo/abre_conexion.php");
-							$query = "SELECT *  FROM depto  WHERE iddepto>0";
+							$query = "SELECT *  FROM depto  WHERE iddepto > 1";
 							$result = mysqli_query($link, $query);
 
-							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+							while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 								$iddepto=$row['iddepto'];
 								$nombre = $row['nombre'];
 
-								echo "<tr>";
-								echo "<th>$nombre</th>";
-								
-								echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarDepartamento.php?id=$iddepto'>Editar</a></th>";   
-								echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='#?id=$iddepto'>Eliminar</a></th>  ";
+								echo "<tr id='D$iddepto'>";
+								echo "<td>$nombre</td>";
+								echo "<td><a class='text-success text-right' style='text-decoration:underline;' href='EditarDepartamento.php?id=$iddepto'>Editar</a></td>";
+								echo "<td><a class='text-success text-right' name='EliminaD' style='text-decoration:underline; cursor:pointer;'>
+								Eliminar
+								</a></td>";
 								echo "</tr>";
 							}
 
 							?>
 
 						</tbody>
+						<script type="text/javascript">
+							$("[name='EliminaD']").click(function() {
+								var id = $(this).closest('tr').attr('id');
+								eliminar(id);
+							});
+						</script>
 					</table>
+					<script type="text/javascript">
+						function eliminar(str) {
+							var id = str.substring(1);
+							$("#confirmacion").modal();
+							$("#eliminarT").click(function() {
+								$.ajax({
+									method: "POST",
+									url: "../Modelo/elimina_depto.php",
+									data: { value: id }
+								}).done(function(msg){
+									if (msg == "hecho") location.reload();
+								});
+							});
+						}
+					</script>
 				</div>
 				<div class="form-group text-right">
 					<div class="col-md-8 col-md-offset-4">							                     
@@ -182,6 +198,23 @@
 					</div>           
 				</div>
 			</div>                                                               
+		</div>
+
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-warning">
+						<h4 class="modal-title">Mensaje de confirmación</h4>
+					</div>
+					<div class="modal-body">
+						<p>¿Seguro que desea eliminar este departamento?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-warning" id="eliminarT" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
@@ -211,7 +244,7 @@
 				</div>
 			</div>
 		</nav>
-		
+
 		<script type="text/javascript">
 			$(document).ready(function() {
 				// Sticky bar plz
@@ -238,7 +271,7 @@
 						$("#top-bar").removeAttr("style");
 					}
 				}); 
-				
+
 				$("#frmRestablecer").submit(function(event){
 					event.preventDefault();
 					$.ajax({
