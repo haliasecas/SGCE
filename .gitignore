@@ -2,6 +2,7 @@
 
 BasedeDatos/taquitos.sql
 insertar.*
+*insertar.*
 Modelo/abre_conexion.php
 client_secret*
 composer.*
