@@ -166,8 +166,6 @@
 			$result3 = mysqli_query($link, $query);
 			$row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
 
-
-
 			$asunto=$row['asunto'];
 			$appaterno=$row2['appaterno'];
 			$nombre = $row2['nombre'];

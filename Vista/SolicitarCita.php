@@ -21,7 +21,7 @@
 			<img src="../Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
-		
+
 		<!-- Nueva nav -->
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
@@ -212,14 +212,14 @@
 					$tok=sprintf("INSERT INTO SolicitudToken (idtoken, idSolicitud, token) VALUES (NULL,'$idsolicitud','$string')");   
 					$result=mysqli_query($link,$tok);
 					if(!empty($_POST['hora01'])){
-				        foreach($_POST['hora01'] as $selected){
-				        	$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
+						foreach($_POST['hora01'] as $selected){
+							$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
 							$result=mysqli_query($link,$tok);
-				        }
-    				}
+						}
+					}
 
-    				$dia=$_POST['date01'];
-    				$busquedadia = sprintf("SELECT dia FROM DiaPref WHERE dia='$dia'");
+					$dia=$_POST['date01'];
+					$busquedadia = sprintf("SELECT dia FROM DiaPref WHERE dia='$dia'");
 					$resultdia=mysqli_query($link, $busquedadia);
 					$row_dia = mysqli_num_rows($resultdia);
 					if($row_dia==1) {
@@ -236,12 +236,12 @@
 					$idDiaa=$row["idDia"];
 
 					$resultDiaSol=sprintf("INSERT INTO DiaSol (idDia, idSolicitud) VALUES ('$idDiaa','$idsolicitud')");
-    				$result=mysqli_query($link,$resultDiaSol);
+					$result=mysqli_query($link,$resultDiaSol);
 
 
 
-    				$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
-    				$result=mysqli_query($link,$tok);
+					$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
+					$result=mysqli_query($link,$tok);
 					include("../Modelo/cierra_conexion.php");
 					if (mandarCorreoSolicitud($nombre, $appat, $apmat, $email, $string)) {
 						echo 
@@ -267,7 +267,6 @@
 		?>
 
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
-
 			<!--Contenedor principal-->
 			<div class="container-fluid col-md-10 col-md-offset-1">
 				<h3><strong>Solicitar Cita</strong></h3>
@@ -296,7 +295,7 @@
 						</div>
 						<br>                                
 					</div>
-					
+
 					<div class="form-group has-feedback has-error">
 						<div class="col-md-10 col-md-offset-2">
 							<span id="email03" class="text-center help-block hidden">
@@ -362,16 +361,16 @@
 						<div class="col-md-10">                                        
 							<select name="departamento" class="form-control" onChange="despAreas();">
 								<?php
-									include("../Modelo/abre_conexion.php"); 
-									$id = sprintf("SELECT * FROM depto");     
-									$resulta = mysqli_query($link,$id);
-									$numero = mysqli_num_rows($resulta); // obtenemos el número de filas
-									while ($row = mysqli_fetch_array($resulta, MYSQLI_ASSOC)) {
-										$nombredepto= $row['nombre'];
-										$iddepto = $row["iddepto"];
-										echo "<option value='$iddepto'>$nombredepto</option>";
-									}
-									include("../Modelo/cierra_conexion.php"); 
+								include("../Modelo/abre_conexion.php"); 
+								$id = sprintf("SELECT * FROM depto");     
+								$resulta = mysqli_query($link,$id);
+								$numero = mysqli_num_rows($resulta); // obtenemos el número de filas
+								while ($row = mysqli_fetch_array($resulta, MYSQLI_ASSOC)) {
+									$nombredepto= $row['nombre'];
+									$iddepto = $row["iddepto"];
+									echo "<option value='$iddepto'>$nombredepto</option>";
+								}
+								include("../Modelo/cierra_conexion.php"); 
 								?>
 							</select>
 						</div>                        
@@ -407,19 +406,24 @@
 						<br> 
 					</div>
 
-					<!--Dias preferentes-->
-					<div class="form-group" id="checkboxes01">
-						<label for="diapref" class="control-label col-md-2">
-							Día(s) preferentes<br><small>(seleccione al<br>menos uno)</small>
-						</label>        
+					<div class="form-group has-feedback" id="fecha">
+						<label for="diapref" class="control-label col-md-2">Día preferente</label>
 						<div class="col-md-10">
 							<div class='input-group date' id='datet1'>
-								<input type='text' class="form-control" id="date01" name="date01">
+								<input type='text' class="form-control" placeholder="Haga clic aquí" id="date01" name="date01">
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-calendar" id="icon01"></span>
 								</span>
 							</div>
+						</div>
+					</div>
 
+					<!-- Horario preferentes-->
+					<div class="form-group" id="checkboxes01">
+						<label for="diapref" class="control-label col-md-2">
+							Horario preferente<br><small>(seleccione al<br>menos uno)</small>
+						</label>        
+						<div class="col-md-10">
 							<div class="checkbox col-md-3">
 								<label >
 									<input type="checkbox" class="hora01" value="1" name="hora01[]">9:00-10:00 hrs.
@@ -481,7 +485,7 @@
 					</script>
 
 					<div class="form-group text-right" id="recaptcha">
-						<label for="nombre" class="control-label col-md-4" style="padding-top: 18px;">
+						<label id="recaptcha" class="control-label col-md-4" style="padding-top: 18px;">
 							*Verifica que no eres un robot informático.
 						</label>
 						<div class="col-md-4" id="html_element" style="padding-top: 18px;"></div>

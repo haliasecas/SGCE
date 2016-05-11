@@ -15,7 +15,7 @@ function valphone(phone) {
 
 function enviarForm() {
 	var vn = false, vm = false, vcap = false, vt = false, vs = false, vcb = false;
-	var vda = false;
+	var vda = false, vfe = false;
 	if (!validate($("#correoE01").val()) || ($("#correoE01").val() !== $("#correoE02").val())) {								
 		$("#Email01").attr("class", "form-group has-feedback has-error");
 		$("#Email02").attr("class", "form-group has-feedback has-error");
@@ -104,10 +104,29 @@ function enviarForm() {
 		vs = true;
 	}
 
-	if (grecaptcha.getResponse()) vcap = true;
-	else vcap = false;
+	if (grecaptcha.getResponse()) {
+		$("#recaptcha").addClass("text-success");
+		$("#recaptcha").removeClass("text-danger");
+		vcap = true;
+	}
+	else {
+		$("#recaptcha").addClass("text-danger");
+		$("#recaptcha").removeClass("text-success");
+		vcap = false;
+	}
+	
+	if ($("#date01").val()) {
+		$("#fecha").removeClass("has-error");
+		$("#fecha").addClass("has-success");
+		vfe = true;		
+	}
+	else {
+		$("#fecha").removeClass("has-success");
+		$("#fecha").addClass("has-error");
+		vfe = false;
+	}
 
-	if ($(".hora01:checkbox:checked").length > 0 && $("#date01").val()) {
+	if ($(".hora01:checkbox:checked").length > 0) {
 		$("#checkboxes01").removeClass("has-error");
 		$("#checkboxes01").addClass("has-success");
 		vcb = true;		
@@ -135,7 +154,7 @@ function enviarForm() {
 		vda = true;
 	}
 
-	if (vcap && vm && vn && vs && vt && vcb && vda) {
+	if (vcap && vm && vn && vs && vt && vcb && vda && vfe) {
 		$("#formCita").submit();
 	}
 	else {
