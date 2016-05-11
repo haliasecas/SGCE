@@ -105,6 +105,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`solicitud` (
   `asunto` VARCHAR(60) NULL COMMENT '',
   `estado` VARCHAR(20) NULL COMMENT '',
   `dia` VARCHAR(20) NULL COMMENT '',
+  `diaSol` VARCHAR(20) NULL COMMENT '',
   `idinteresado` INT NOT NULL COMMENT '',
   `idarea` INT NOT NULL COMMENT '',
   `iddepto` INT NOT NULL COMMENT '',

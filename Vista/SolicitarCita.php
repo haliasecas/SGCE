@@ -204,7 +204,7 @@
 					//echo $_POST['datas'];
 					$timestamp = date('Y/m/d');
 					$dia=$_POST['date01'];
-					$soli = sprintf("INSERT INTO solicitud (idSolicitud, asunto, estado,dia,idinteresado,dia,idarea,iddepto) VALUES (NULL,'$asunto',' ','$dia','$idint','$timestamp','$idarea','$iddept')");
+					$soli = sprintf("INSERT INTO solicitud (idSolicitud, asunto, estado,dia,diaSol,idinteresado,idarea,iddepto) VALUES (NULL,'$asunto',' ','$dia','$timestamp','$idint','$idarea','$iddept')");
 					$result=mysqli_query($link,$soli);
 					$idSol = sprintf("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='mydb' and TABLE_NAME='solicitud'");
 					$result=mysqli_query($link,$idSol);
@@ -452,7 +452,7 @@
 					<script type="text/javascript">
 						$(function () {
 							$('#datet1').datetimepicker({
-								format: 'DD/MM/YYYY',
+								format: 'YYYY/MM/DD',
 								minDate: moment().add(3, 'd'),
 								maxDate: moment().add(33, 'd'),
 								daysOfWeekDisabled: [0, 6]
