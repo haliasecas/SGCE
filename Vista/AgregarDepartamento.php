@@ -12,14 +12,14 @@
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
-	
+
 	<body>
 		<div class="container-fluid" style="padding-bottom:9px;" id="header">
 			<img src="../Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
-		
-<!--		 Nav arriba Administrador -->
+
+		<!-- Nav arriba Administrador -->
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
 				<div class="navbar-header">
@@ -46,15 +46,15 @@
 								<li><a href="../Vista/AdministrarDepartamentos.php">
 									<span><img src="../Img/Admin_Dep.png" height="36px"></span>
 									Administrar departamentos
-								</a></li>
+									</a></li>
 								<li><a href="../Vista/AdministrarAreas.php">
 									<span><img src="../Img/Admin_Area.png" height="36px"></span>
 									Administrar areas
-								</a></li>
+									</a></li>
 								<li><a href="../Vista/EditarCuenta.php">
 									<span><img src="../Img/Admin_Cont.png" height="36px"></span>
 									Administrar cuentas
-								</a></li>
+									</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -65,38 +65,56 @@
 								<li><a href="../Vista/CambiarContrasena.php">
 									<span><img src="../Img/Edit2.png" height="36px"></span>
 									Cambiar contraseña
-								</a></li>
+									</a></li>
 								<li><a href="../Vista/cierra_conexion.php">
 									<span><img src="../Img/Out.png" height="36px"></span>
 									Cerrar sesión
-								</a></li>
+									</a></li>
 							</ul>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>    		        
-        
-        <div class="container-fluid" style="padding-bottom:57px;" id="main-content">
+
+		<?php
+		if (!empty($_POST)) {
+			$nombre = $_POST["nombreDepto"];
+			$idPers = $_POST["encargado"];
+			include("../Modelo/abre_conexion.php");
+
+			$q = "INSERT INTO depto(nombre, idencargado) VALUES
+			('$nombre', $idPers)";
+		?>
+		<script type='text/javascript'>
+			$(document).ready(function() {
+				$('#exitoso').modal();
+			});
+		</script>
+		<?php
+			include("../Modelo/cierra_conexion.php");
+		}
+		?>
+
+		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
 			<div class="container">
 				<h3><strong>Agregar departamento</strong></h3>
-				<p><strong class="text-success">Todos los campos son obligatorios.</strong>El correo electrónico debe estar previamente registrado en el sistema.</p> 
-				<br>
-				<br>                                
-				<form action="" class="form-horizontal">
-					<div class="form-group">
-						<label  for="" class="control-label col-md-2">Nombre del departamento</label>
+				<p><strong class="text-success">Todos los campos son obligatorios.</strong> El correo electrónico 
+					debe estar previamente registrado en el sistema.</p> 
+				<br><br>
+				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="form-horizontal" id="Formulario">
+					<div class="form-group" id="Departamento">
+						<label class="control-label col-md-2">Nombre del departamento</label>
 						<div class="col-md-10">
+							<input type='text' class='form-control' name="nombreDepto" id="departamento" placeholder="Departamento D">
+							<span id="depa01" class="hidden glyphicon form-control-feedback"></span>
+						</div>           	
+					</div>
 
-							<input type='text' class='form-control' placeholder="Departamento D" >
-						</div>
-						<br>              						                               
-						<br>              						                               
-						<br>              						                               
-						<label  for="" class="control-label col-md-2">Encargado</label>						                                                                
+					<div class="form-group" id="Encargado">
+						<label  for="" class="control-label col-md-2">Encargado</label>                     
 						<div class="col-md-10">                                        
 							<select name="encargado" class="form-control">
-								<!--<option value="DepartamentoA">Departamento A</option> -->
 								<?php
 								include("../Modelo/abre_conexion.php");
 								$query = "SELECT * FROM personal where idpersonal=2";
@@ -106,24 +124,88 @@
 									$idpersona = $row["idpersonal"];
 									echo "<option value='$idpersonal'>$correo</option>";
 								}
-                                include("../Modelo/cierra_conexion.php")
+								include("../Modelo/cierra_conexion.php")
 								?>
 							</select>
-						</div>    			       						                               					                                                                    
-						<br><br><br>                                                 
+						</div>    			       						                               					                              
+					</div>
+
+					<div class="form-group">
 						<div class="form-group text-right">
 							<div class="col-md-8 col-md-offset-4">
-								<a class="btn btn-success" style="width: 150px;" onclick="#">CANCELAR</a>							                                 
+								<a class="btn btn-success" style="width: 150px;" onclick="window.location = './AdministrarDepartamentos.php'">
+									CANCELAR
+								</a>
 								<a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
-							</div>					                                                                               						                             
+							</div>	                             
 						</div>
 					</div>
+					<script type="text/javascript">
+						function enviarForm() {
+							var a1 = false, a2 = false;
+							if ($("#departamento").val() == "") {
+								$("#Departamento").attr("class", "form-group has-feedback has-error");
+								$("#depa01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+								a1 = false;
+							}
+							else {
+								$("#Departamento").attr("class", "form-group has-feedback has-success");
+								$("#depa01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+								a1 = true;
+							}
+
+							if ($("[name='encargado']").val() == -1){
+								$("#Encargado").attr("class", "form-group has-feedback has-error");
+								a2 = false;
+							}
+							else {
+								$("#Encargado").attr("class", "form-group has-feedback has-success");
+								a2 = true;
+							}
+
+							if (a1 && a2) $("#Formulario").submit();
+							else {
+								$(window).scrollTop(0);
+								$("#error").modal();
+							}
+						}
+					</script>
 				</form>   
 			</div>
-		</div>                                                 
-                                        
-                  		
-		
+		</div>
+
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="exitoso" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Mensaje de alerta</h4>
+					</div>
+					<div class="modal-body">
+						<p>El departamento ha sido registrado exitosamente.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" data-keyboard="false" id="error" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Mensaje de error</h4>
+					</div>
+					<div class="modal-body">
+						<p>Falta al menos un dato obligatorio para efectuar la operación solicitada.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<!-- Nav de abajo -->
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
@@ -152,7 +234,7 @@
 				</div>
 			</div>
 		</nav>
-		
+
 		<script type="text/javascript">
 			$(document).ready(function() {
 				// Sticky bar plz
@@ -166,7 +248,7 @@
 						$("#main-content").css({"padding-top":"0px"});
 					}
 				});
-					
+
 				if ($(window).width() <= 886) {
 					$("#top-bar").removeAttr("style");
 				}
