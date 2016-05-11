@@ -142,7 +142,7 @@
 					<div class="form-group" id="Vieja">
 						<label  for="" class="control-label col-md-2">Contraseña actual</label>
 						<div class="col-md-10">
-							<input type="password" id="vieja" class="form-control" placeholder="*************************" >
+							<input type="password" id="vieja" class="form-control" name="passold" placeholder="*************************" >
 						</div>
 					</div>
 					<div class="form-group" id="Nueva01">
@@ -166,6 +166,20 @@
 						</div>
 					</div>
 					<script type="text/javascript">
+                        <?php
+                            //guarda la contraseña vieja en una variable llamada pold
+                            $pold=pold
+                            include("../Modelo/abre_conexion.php");
+                            $query = "SELECT * FROM personal WHERE idpersonal = '$id' and contrasena=aes_encrypt('$pold','C1r4l3t1890')";
+                            $result = mysqli_query($link, $query);
+                            if(mysqli_fetch_array($result, MYSQLI_ASSOC)>0){
+                                $pold=1;//si la contraseña coincide
+                            }else{
+                                $pold=0;//si la contraseña no coincide
+                            }
+                            
+                        ?>
+                        
 						function cambiarPass() {
 							var ca = false, cn = false;
 
