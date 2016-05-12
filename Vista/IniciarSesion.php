@@ -10,6 +10,7 @@
 		<script type="text/javascript" src="../Scr/validator.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
+		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 
@@ -102,7 +103,8 @@
 					$("#contra").addClass("has-error has-feedback");
 					$("#pass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 					$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-					$("#pass02").removeClass("hidden");
+					if (str != "")
+						$("#pass02").removeClass("hidden");
 					$("#pass02").text(str);
 				}
 
@@ -119,7 +121,10 @@
 				function logIn() {
 					var mail = $("[name='miemail']").val();
 					var ps = $("[name='mipass']").val();
-					if (ps == "") error("El correo electrónico y la contraseña que ingresaste no coinciden.");
+					if (mail == "" || ps == "") {
+						error("");
+						$("#error").modal();
+					}
 					else if (validate(mail)) logIn2();
 					else error("Por favor, introduce una dirección de correo electrónico válida. Por ejemplo usuario@dominio.com");
 				}
@@ -142,6 +147,22 @@
 					});
 				}
 			</script>
+		</div>
+		
+		<div class="modal fade" data-keyboard="false" id="error" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Mensaje de error</h4>
+					</div>
+					<div class="modal-body">
+						<p>Falta al menos un dato obligatorio para efectuar la operación solicitada.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">

@@ -34,19 +34,23 @@ function enviarForm() {
 
 	if ($("[name='departamento']").val() == -1){
 		$("#Departamento").attr("class", "form-group has-feedback has-error");
+		$("#depto01").removeClass("hidden");
 		v2 = false;
 	}
 	else {
 		$("#Departamento").attr("class", "form-group has-feedback has-success");
+		$("#depto01").addClass("hidden");
 		v2 = true;
 	}
 
 	if ($("[name='asunto']").val() == -1){
 		$("#Asunto").attr("class", "form-group has-feedback has-error");
+		$("#asunto01").removeClass("hidden");
 		v3 = false;
 	}
 	else {
 		$("#Asunto").attr("class", "form-group has-feedback has-success");
+		$("#asunto01").addClass("hidden");
 		v3 = true;
 	}
 

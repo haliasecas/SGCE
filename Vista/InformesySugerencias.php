@@ -169,7 +169,7 @@
 			$contenido = $_POST["comentarios"];
 			$fecha = strftime("%Y/%m/%d");
 			include("../Modelo/abre_conexion.php");
-			
+
 			$q = "INSERT INTO mensaje(correo, asunto, contenido, estado, fecha, iddepto) VALUES
 			('$correo', '$asunto', '$contenido', 'PENDIENTE', '$fecha', '$idDepa')";
 			$query = mysqli_query($link, $q);
@@ -204,11 +204,6 @@
 						<div class="col-md-10" style="padding-top: 6px;">
 							<input type="text" class="form-control" id="correoE02" placeholder="ejemplo@dominio.com">
 							<span id="email02" style="padding-top: 6px;" class="hidden glyphicon form-control-feedback"></span>
-						</div>
-					</div>
-
-					<div class="form-group has-feedback has-error">
-						<div class="col-md-10 col-md-offset-2">
 							<span id="email03" class="text-center help-block hidden">
 								Formato de correo electrónico incorrecto
 							</span>
@@ -219,6 +214,7 @@
 						<label for="departamento" class="control-label col-md-2">Departamento</label>
 						<div class="col-md-10">
 							<select name="departamento" class="form-control">
+								<option value="-1">Selecciona un elemento de la lista</option>
 								<?php
 								include("../Modelo/abre_conexion.php"); 
 								$id = sprintf("SELECT * FROM depto");     
@@ -233,6 +229,7 @@
 								include("../Modelo/cierra_conexion.php"); 
 								?>
 							</select>
+							<span id="depto01" class="text-center help-block hidden">Por favor seleccione una opción en este campo</span>
 						</div>
 					</div>
 
@@ -240,9 +237,11 @@
 						<label for="asunto" class="control-label col-md-2">Asunto</label>
 						<div class="col-md-10">
 							<select name="asunto" class="form-control">
+								<option value="-1">Selecciona un elemento de la lista</option>
 								<option value="Informe" select>Pedir informe</option>
 								<option value="Sugerencia">Sugerencia</option>
 							</select>
+							<span id="asunto01" class="text-center help-block hidden">Por favor seleccione una opción en este campo</span>
 						</div>
 					</div>
 
@@ -262,7 +261,7 @@
 
 					<div class="form-group">
 						<div class="col-lg-10 col-lg-offset-2" align="right">
-							<a class="btn btn-success" style="width: 150px;" onclick="window.location = '../';">
+							<a class="btn btn-success" style="width: 150px; cursor: pointer;" onclick="$('#confirmacion').modal();">
 								CANCELAR
 							</a>
 							<a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
@@ -276,6 +275,23 @@
 						});
 					};
 				</script>
+			</div>
+		</div>
+		
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-warning">
+						<h4 class="modal-title">Mensaje de confirmación</h4>
+					</div>
+					<div class="modal-body">
+						<p>¿Esta seguro de que desea cancelar Enviar informe o sugerencia?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
+						<button type="button" class="btn btn-warning" onclick="window.location = '../';" data-dismiss="modal">Sí</button>
+					</div>
+				</div>
 			</div>
 		</div>
 
