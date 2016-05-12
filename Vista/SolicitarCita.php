@@ -183,6 +183,7 @@
 					for ($i = 0; $i < $random_string_length; $i++) {
 						$string .= $characters[rand(0, strlen($characters) - 1)];
 					}
+					if (mandarCorreoSolicitud($nombre, $appat, $apmat, $email, $string)) {
 					$busqueda = sprintf("SELECT nombre,appaterno,apmaterno FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
 					$result=mysqli_query($link, $busqueda);
 					$row_cnt = mysqli_num_rows($result);
@@ -202,7 +203,7 @@
 					$idarea=$_POST["area"];
 					//echo "$iddept";
 					//echo $_POST['datas'];
-					$timestamp = date('Y/m/d');
+					$timestamp = date('d/m/Y');
 					$dia=$_POST['date01'];
 					$soli = sprintf("INSERT INTO solicitud (idSolicitud, asunto, estado,dia,diaSol,idinteresado,idarea,iddepto) VALUES (NULL,'$asunto',' ','$dia','$timestamp','$idint','$idarea','$iddept')");
 					$result=mysqli_query($link,$soli);
@@ -222,7 +223,6 @@
 					$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
 					$result=mysqli_query($link,$tok);
 					include("../Modelo/cierra_conexion.php");
-					if (mandarCorreoSolicitud($nombre, $appat, $apmat, $email, $string)) {
 						echo 
 							"<script type='text/javascript'>
 								$(document).ready(function() {
@@ -452,7 +452,7 @@
 					<script type="text/javascript">
 						$(function () {
 							$('#datet1').datetimepicker({
-								format: 'YYYY/MM/DD',
+								format: 'DD/MM/YYYY',
 								minDate: moment().add(3, 'd'),
 								maxDate: moment().add(33, 'd'),
 								daysOfWeekDisabled: [0, 6]

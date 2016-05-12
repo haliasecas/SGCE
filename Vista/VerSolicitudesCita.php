@@ -131,9 +131,11 @@
 		</nav>
 		<?php
 		if (!isset($_GET['id'])) {
-			echo $_POST['nombre'];
-
-
+			 $dom = new domDocument('1.0', 'utf-8'); 
+			  $dom->loadHTML($html); 
+			  $dom->preserveWhiteSpace = false; 
+ 			$hTwo= $dom->getElementsByTagName('p'); // here u use your desired tag
+ 			echo $hTwo->item(0)->nodeValue; 
 		?>
 		<!-- <script type="text/javascript">
 			window.location = "../Vista/VerInformesYS.php";
@@ -152,38 +154,38 @@
 				<form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" id="Formulario" method="POST">
 					<h4 class="text-uppercase">Datos del interesado:</h4>
 					<?php
-			if(isset($_GET["id"]))
-				$idsol = $_GET['id'];
-			include("../Modelo/abre_conexion.php");
-			$query = "SELECT * FROM solicitud WHERE idsolicitud = '$idsol'";
-			$result = mysqli_query($link, $query);
-			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-			$idinteresado=$row['idinteresado'];
+						if(isset($_GET["id"]))
+							$idsol = $_GET['id'];
+						include("../Modelo/abre_conexion.php");
+						$query = "SELECT * FROM solicitud WHERE idsolicitud = '$idsol'";
+						$result = mysqli_query($link, $query);
+						$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+						$idinteresado=$row['idinteresado'];
 
-			$query = "SELECT * FROM interesado WHERE idinteresado='$idinteresado'";
-			$result2 = mysqli_query($link, $query);
-			$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
+						$query = "SELECT * FROM interesado WHERE idinteresado='$idinteresado'";
+						$result2 = mysqli_query($link, $query);
+						$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
 
-			$idarea=$row['idarea'];
-			$query = "SELECT * FROM area WHERE idarea='$idarea'";
-			$result3 = mysqli_query($link, $query);
-			$row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+						$idarea=$row['idarea'];
+						$query = "SELECT * FROM area WHERE idarea='$idarea'";
+						$result3 = mysqli_query($link, $query);
+						$row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
 
-			$asunto=$row['asunto'];
-			$appaterno=$row2['appaterno'];
-			$nombre = $row2['nombre'];
-			$apmaterno=$row2['apmaterno'];
-			$correo = $row2['correo'];
-			$telefono = $row2['telefono'];
-			$area = $row3['nombre'];
-			$dia = $row['dia'];
+						$asunto=$row['asunto'];
+						$appaterno=$row2['appaterno'];
+						$nombre = $row2['nombre'];
+						$apmaterno=$row2['apmaterno'];
+						$correo = $row2['correo'];
+						$telefono = $row2['telefono'];
+						$area = $row3['nombre'];
+						$dia = $row['dia'];
 					?>
 					<!-- Correo electrónico -->
 					<div class="form-group has-feedback" id="Email01">                                                            
 						<label  class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
 							<?php 
-			echo "<p class='form-control-static' id='correo' name='nombre'>$correo</p>";
+								echo "<p class='form-control-static' id='correo' name='nombre'>$correo</p>";
 							?>
 						</div>
 						<br>
@@ -194,7 +196,7 @@
 						<label class="control-label col-md-2">Nombre(s)</label>
 						<div class="col-md-10">
 							<?php 
-			echo "<p class='form-control-static' id='nombre' name='nombre'>$nombre</p>";
+								echo "<p class='form-control-static' id='nombre' name='nombre'>$nombre</p>";
 							?>
 						</div>
 						<br>       
@@ -205,7 +207,7 @@
 						<label  for="appat" class="control-label col-md-2">Apellido paterno</label>
 						<div class="col-md-10">
 							<?php 
-			echo "<p class='form-control-static' id='appat' name='nombre'>$appaterno</p>";
+								echo "<p class='form-control-static' id='appat' name='nombre'>$appaterno</p>";
 							?>
 						</div>
 						<br>       
@@ -216,7 +218,7 @@
 						<label  for="apmat" class="control-label col-md-2">Apellido materno</label>
 						<div class="col-md-10">
 							<?php 
-			echo "<p class='form-control-static' id='apmat' name='nombre'>$apmaterno</p>";
+								echo "<p class='form-control-static' id='apmat' name='nombre'>$apmaterno</p>";
 							?>
 						</div>
 						<br>   
@@ -227,7 +229,7 @@
 						<label  for="telefono" class="control-label col-md-2">Teléfono</label>
 						<div class="col-md-10">
 							<?php 
-			echo "<p class='form-control-static' id='tel' name='nombre'>$telefono</p>";
+								echo "<p class='form-control-static' id='tel' name='nombre'>$telefono</p>";
 							?>
 							<br><br>
 						</div>
@@ -240,7 +242,7 @@
 						<label class="control-label col-md-2">Área</label>        
 						<div class="col-md-10">                                        
 							<?php 
-			echo "<p class='form-control-static' id='area' name='nombre'>$area</p>";
+								echo "<p class='form-control-static' id='area' name='nombre'>$area</p>";
 							?>
 						</div>                        
 					</div>
@@ -250,7 +252,7 @@
 						<label class="control-label col-md-2">Asunto</label>
 						<div class="col-md-10">
 							<?php 
-			echo "<p class='form-control-static'  name='asunto'>$asunto</p>";
+								echo "<p class='form-control-static'  name='asunto'>$asunto</p>";
 							?>
 						</div>
 						<br> 
@@ -261,28 +263,19 @@
 						<label class="control-label col-md-2">Horario(s) preferente(s)</label>
 						<div class="col-md-10">
 							<?php
-
-			$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
-			$result = mysqli_query($link,$query);
-			while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-				$idhorario=$row['idHorario'];
-				$query2 = "SELECT * FROM HoraPref WHERE idHorario='$idhorario'";
-				$result2=mysqli_query($link,$query2);
-				$rowarea = mysqli_fetch_assoc($result2);
-				echo "<p class='form-control-static' id='horario' name='horario'>".$dia." ".$rowarea['hinicio']."-".$rowarea['hfin']."</p>";
-			}
-			//$row_dia = mysqli_num_rows($resultdia);
-
-			//
-			//
-			//<p class="form-control-static" id="horario" name="horario">DD/MM/AAAA HoraIni - HoraFin</p>
-
-
+								$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
+								$result = mysqli_query($link,$query);
+								while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+									$idhorario=$row['idHorario'];
+									$query2 = "SELECT * FROM HoraPref WHERE idHorario='$idhorario'";
+									$result2=mysqli_query($link,$query2);
+									$rowarea = mysqli_fetch_assoc($result2);
+									echo "<p class='form-control-static' id='horario' name='horario'>".$dia." ".$rowarea['hinicio']."-".$rowarea['hfin']."</p>";
+								}
 							?>
 						</div>
 						<br> 
 					</div>
-
 					<!-- Acción -->
 					<div class="form-group has-feedback" id="Accion">
 						<label class="control-label col-md-2"><p class="text-success">¿QUÉ DESEA HACER?</p></label>
@@ -299,9 +292,9 @@
 					<div class="form-group has-feedback" id="dia">
 						<label class="control-label col-md-2">Día</label>
 						<div class="col-md-10">
-							<select class="form-control">
+							<select class="form-control" name='diaselect'>
 								<?php
-			echo "<option>$dia</option>";
+									echo "<option>$dia</option>";
 								?>
 							</select>
 						</div>
@@ -314,15 +307,15 @@
 						<div class="col-md-10">
 							<select class="form-control" name="hora">
 								<?php
-			$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
-			$result = mysqli_query($link,$query);
-			while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-				$idhorario=$row['idHorario'];
-				$query2 = "SELECT * FROM HoraPref WHERE idHorario='$idhorario'";
-				$result2=mysqli_query($link,$query2);
-				$rowarea = mysqli_fetch_assoc($result2);
-				echo "<option>".$rowarea['hinicio']."-".$rowarea['hfin']."</option>";
-			}
+									$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
+									$result = mysqli_query($link,$query);
+									while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+										$idhorario=$row['idHorario'];
+										$query2 = "SELECT * FROM HoraPref WHERE idHorario='$idhorario'";
+										$result2=mysqli_query($link,$query2);
+										$rowarea = mysqli_fetch_assoc($result2);
+										echo "<option>".$rowarea['hinicio']."-".$rowarea['hfin']."</option>";
+									}
 								?>
 
 							</select>
