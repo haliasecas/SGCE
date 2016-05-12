@@ -252,7 +252,7 @@
 						<label class="control-label col-md-2">Asunto</label>
 						<div class="col-md-10">
 							<?php 
-								echo "<p class='form-control-static'  name='asunto'>$asunto</p>";
+								echo "<p class='form-control-static' name='asunto'>$asunto</p>";
 							?>
 						</div>
 						<br> 
@@ -322,10 +322,17 @@
 						</div>
 						<br> 
 					</div>
+					
+					<script type="text/javascript">
+						function alerta() {
+							alert($("#area").text());
+						}
+					</script>
 
 					<!-- Botones -->
 					<div class="form-group text-right" style="padding-top: 9px;">
 						<div class="col-md-10 col-md-offset-2">
+							<a class="btn btn-primary" style="cursor:pointer;" onclick="alerta();">Alert con p</a>
 							<button class="btn btn-success" type="reset" style="width: 150px;">CANCELAR</button>
 							<button class="btn btn-success" type="submit" style="width: 150px;">ENVIAR</a>
 						</div>

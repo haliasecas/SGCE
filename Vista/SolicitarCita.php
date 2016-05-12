@@ -452,7 +452,7 @@
 					<script type="text/javascript">
 						$(function () {
 							$('#datet1').datetimepicker({
-								format: 'DD/MM/YYYY',
+								format: 'YYYY/MM/DD',
 								minDate: moment().add(3, 'd'),
 								maxDate: moment().add(33, 'd'),
 								daysOfWeekDisabled: [0, 6]

@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`horapref` (
   PRIMARY KEY (`idHorario`)  COMMENT '')
 ENGINE = InnoDB;
 
-INSERT INTO `HoraPref` (`idHorario`, `hinicio`, `hfin`) VALUES
+INSERT INTO `horapref` (`idHorario`, `hinicio`, `hfin`) VALUES
 (NULL, '09:00:00', '10:00:00'),
 (NULL, '10:00:00', '11:00:00'),
 (NULL, '11:00:00', '12:00:00'),
