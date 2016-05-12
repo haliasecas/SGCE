@@ -139,28 +139,36 @@ function enviarForm() {
 
 	if ($("[name='departamento']").val() == -1){
 		$("#Departamento").attr("class", "form-group has-feedback has-error");
+		$("#depto01").removeClass("hidden");
 		vda = false;
 	}
 	else {
 		$("#Departamento").attr("class", "form-group has-feedback has-success");
+		$("#depto01").addClass("hidden");
 	}
 
 	if ($("[name='area']").val() == -1) {
 		$("#Area").attr("class", "form-group has-feedback has-error");
+		$("#area01").removeClass("hidden");
 		vda = false;
 	}
 	else {
 		$("#Area").attr("class", "form-group has-feedback has-success");
+		$("#area01").addClass("hidden");
 		vda = true;
 	}
 
 	if (vcap && vm && vn && vs && vt && vcb && vda && vfe) {
 		$("#formCita").submit();
 	}
+	else if (!vcap && vm && vn && vs && vt && vcb && vda && vfe) {
+		window.location = '../';
+	}
 	else {
 		$(window).scrollTop(0);
-		$("#error").modal();
+		$("#error").modal();		
 	}
+	
 }
 
 $("#date01").focus(function() {

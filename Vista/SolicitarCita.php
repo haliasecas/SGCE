@@ -271,16 +271,11 @@
 						<div class="col-md-10" style="padding-top: 6px;">
 							<input type="text" class="form-control" placeholder="ejemplo@dominio.com" id="correoE02">
 							<span id="email02" style="padding-top: 6px;" class="hidden glyphicon form-control-feedback"></span>
-						</div>
-						<br>                                
-					</div>
-
-					<div class="form-group has-feedback has-error">
-						<div class="col-md-10 col-md-offset-2">
 							<span id="email03" class="text-center help-block hidden">
 								Formato de correo electrónico incorrecto
 							</span>
 						</div>
+						<br>                                
 					</div>
 
 					<!--Nombre-->
@@ -309,13 +304,9 @@
 						<div class="col-md-10">
 							<input type="text" class="form-control" placeholder="Pérez" id="apmat" name="apmat">
 							<span id="apm01" class="hidden glyphicon form-control-feedback"></span>
-						</div>
-						<br>   
-					</div>
-					<div class="form-group has-feedback has-error">
-						<div class="col-md-10 col-md-offset-2">
 							<span id="apm02" class="text-center help-block hidden"></span>
 						</div>
+						<br>   
 					</div>
 
 					<!--Teléfono-->
@@ -324,14 +315,10 @@
 						<div class="col-md-10">
 							<input type="text" class="form-control" placeholder="55555555" id="telefono" name="telefono">
 							<span id="phone01" class="hidden glyphicon form-control-feedback"></span>
+														<span id="phone02" class="text-center help-block hidden"></span>
 						</div>
 					</div>
-					<div class="form-group has-feedback has-error">
-						<div class="col-md-10 col-md-offset-2">
-							<span id="phone02" class="text-center help-block hidden"></span>
-						</div> 
-						<br>
-					</div>
+					
 					<h4 class="text-uppercase">Datos de la cita:</h4>
 
 					<!--Departamento-->
@@ -339,6 +326,7 @@
 						<label class="control-label col-md-2">Departamento</label>        
 						<div class="col-md-10">                                        
 							<select name="departamento" class="form-control" onChange="despAreas();">
+								<option value='-1'>Selecciona un departamento</option>
 								<?php
 								include("../Modelo/abre_conexion.php"); 
 								$id = sprintf("SELECT * FROM depto WHERE iddepto > 1");     
@@ -355,6 +343,7 @@
 								include("../Modelo/cierra_conexion.php"); 
 								?>
 							</select>
+							<span id="depto01" class="text-center help-block hidden">Por favor seleccione una opción en este campo</span>
 						</div>                        
 					</div>
 
@@ -376,8 +365,10 @@
 									}
 								</script>
 							</select>
+							<span id="area01" class="text-center help-block hidden">Por favor seleccione una opción en este campo</span>
 						</div>                        
 					</div>
+
 					<!--Asunto-->
 					<div class="form-group has-feedback" id="Asunto">
 						<label  for="asunto" class="control-label col-md-2">Asunto</label>
@@ -476,8 +467,8 @@
 					<!--Boton-->
 					<div class="form-group text-right" style="padding-top: 9px;">
 						<div class="col-md-10 col-md-offset-2">
-							<button class="btn btn-success" type="reset" style="width: 150px;">CANCELAR</button>
-							<a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
+							<a class="btn btn-success" style="width: 150px; cursor: pointer;" onclick="$('#confirmacion').modal();">CANCELAR</a>
+							<a class="btn btn-success" style="width: 150px; cursor: pointer;" onclick="enviarForm();">ENVIAR</a>
 						</div>
 					</div>
 				</form>
@@ -488,6 +479,23 @@
 						});
 					};
 				</script>
+			</div>
+		</div>
+
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-warning">
+						<h4 class="modal-title">Mensaje de confirmación</h4>
+					</div>
+					<div class="modal-body">
+						<p>¿Esta seguro de que desea cancelar Solicitar cita?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
+						<button type="button" class="btn btn-warning" onclick="window.location = '../';" data-dismiss="modal">Sí</button>
+					</div>
+				</div>
 			</div>
 		</div>
 
