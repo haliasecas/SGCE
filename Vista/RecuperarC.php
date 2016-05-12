@@ -9,7 +9,7 @@
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
 		<script type="text/javascript" src="../Scr/validator.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
-		<link type="text/css" rel="stylesheet" href="../Css/style.css">
+		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
@@ -167,26 +167,55 @@
 						<h2>Recuperar contraseña</h2>
 						<h5>Ingresa los campos correspondientes a tu cuenta para recuperar tu contraseña</h5>
 						<br><br>
-						<div class="form-group">
+						<div class="form-group" id="Email">
 							<label class="control-label col-sm-2" for="email">Correo electrónico</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" name="email" placeholder="ejemplo@dominio.com">
+								<span id="email01" class="hidden glyphicon form-control-feedback"></span>
+								<span id="email03" class="text-center help-block hidden">
+									Por favor, introduce una dirección de correo electrónico válida. Por ejemplo usuario@dominio.com
+								</span>
 							</div>
 						</div>
 						<div class="form-group text-right">
 							<div class="col-md-offset-2 col-md-10 ">
-
-								<a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
-								<!--
-<button type="button" class="btn btn-success button medium-btn" style="float: right;" onclick="validar($('#email').val());">
-Enviar
-</button>
--->
+								<a class="btn btn-success" style="width: 150px;" onclick="recuperarC();">ENVIAR</a>
 							</div>
 						</div>
 					</div>
-					<div id="mensaje">
-					</div>
+					<script type="text/javascript">
+						function recuperarC() {
+							var mail = $("[name='email']").val();
+							if (mail == "") {
+								$("#error").modal();
+								$("#Email").attr("class", "form-group has-error has-feedback");
+								$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+								$("#email03").addClass("hidden");
+							}
+							else if (!validate(mail)) {
+								$("#Email").attr("class", "form-group has-error has-feedback");
+								$("#email03").removeClass("hidden");
+							}
+							else {
+								$.ajax({
+									url: "../sesion_in.php",
+									method: "POST",
+									data: { miemail: mail, mipass: "." }
+								}).done(function(msg){
+									if (msg != 1) {
+										$("#Email").attr("class", "form-group has-error has-feedback");
+										$("#email03").removeClass("hidden");
+										$("#email03").text("Correo no registrado, por favor revise que haya escrito el correo correctamente");
+									}
+									else {
+										$("#Email").attr("class", "form-group has-success has-feedback");
+										$("#email01").addClass("hidden");
+										$("#email03").addClass("hidden");
+									}
+								});
+							}
+						}
+					</script>
 				</div>
 			</form>
 			<script type="text/javascript">
@@ -223,9 +252,25 @@ Enviar
 				</div>
 			</div>
 		</nav>
-		<script>
-			echo
-			$(document).ready(function(){
+
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="error" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Mensaje de error</h4>
+					</div>
+					<div class="modal-body">
+						<p>Falta un dato obligatorio para efectuar la operación solicitada.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
 				$("#frmRestablecer").submit(function(event){
 					event.preventDefault();
 					$.ajax({
@@ -238,17 +283,14 @@ Enviar
 						$("#email").val('');
 					});
 				});
-			});
-		</script>
-		<script type="text/javascript">
-			$(document).ready(function() {
+
 				// Sticky bar plz
 				$(window).scroll(function() {
 					if ($(window).scrollTop() > $("#header").height()) {
 						$("#top-bar").addClass("navbar-fixed-top");
 						$("#main-content").css({"padding-top":"90px"});
 					}
-					if ($(window).scrollTop() < $("#header").height()) {
+					else {
 						$("#top-bar").removeClass("navbar-fixed-top");
 						$("#main-content").css({"padding-top":"0px"});
 					}
@@ -262,7 +304,7 @@ Enviar
 					if ($(window).width() > 886) {
 						$("#top-bar").attr({"style":"height:84px;"});
 					}
-					if ($(window).width() <= 886) {
+					else {
 						$("#top-bar").removeAttr("style");
 					}
 				}); 

@@ -272,7 +272,7 @@
 							<input type="text" class="form-control" placeholder="ejemplo@dominio.com" id="correoE02">
 							<span id="email02" style="padding-top: 6px;" class="hidden glyphicon form-control-feedback"></span>
 							<span id="email03" class="text-center help-block hidden">
-								Formato de correo electrónico incorrecto
+								Por favor, introduce una dirección de correo electrónico válida. Por ejemplo usuario@dominio.com
 							</span>
 						</div>
 						<br>                                
