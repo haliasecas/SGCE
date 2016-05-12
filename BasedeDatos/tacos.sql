@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`personal` (
   `correo` VARCHAR(60) NULL COMMENT '',
   `contrasena` BLOB NULL COMMENT '',
   `cargo` INT(5) NULL COMMENT '',
+  `ocupado` INT(1) COMMENT '' DEFAULT 0,
   PRIMARY KEY (`idpersonal`)  COMMENT '')
 ENGINE = InnoDB;
 
