@@ -131,11 +131,7 @@
 		</nav>
 		<?php
 		if (!isset($_GET['id'])) {
-			 $dom = new domDocument('1.0', 'utf-8'); 
-			  $dom->loadHTML($html); 
-			  $dom->preserveWhiteSpace = false; 
- 			$hTwo= $dom->getElementsByTagName('p'); // here u use your desired tag
- 			echo $hTwo->item(0)->nodeValue; 
+			$regex = '#<\s*?code\b[^>]*>(.*?)</code\b[^>]*>#s';
 		?>
 		<!-- <script type="text/javascript">
 			window.location = "../Vista/VerInformesYS.php";
