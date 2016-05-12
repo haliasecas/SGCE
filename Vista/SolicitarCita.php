@@ -184,45 +184,45 @@
 						$string .= $characters[rand(0, strlen($characters) - 1)];
 					}
 					if (mandarCorreoSolicitud($nombre, $appat, $apmat, $email, $string)) {
-					$busqueda = sprintf("SELECT nombre,appaterno,apmaterno FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
-					$result=mysqli_query($link, $busqueda);
-					$row_cnt = mysqli_num_rows($result);
-					if($row_cnt==1) {
-						$id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
-						$result=mysqli_query($link,$id);
-					}
-					else{
-						$sql = sprintf("INSERT INTO interesado (idinteresado, nombre, appaterno,apmaterno,correo,telefono) VALUES (NULL,'$nombre','$appat','$apmat','$email','$telefono')");
-						$result=mysqli_query($link,$sql);
-						$id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
-						$result=mysqli_query($link,$id);
-					}
-					$row = mysqli_fetch_assoc($result);
-					$idint=$row["idinteresado"];
-					$iddept=$_POST["departamento"];
-					$idarea=$_POST["area"];
-					//echo "$iddept";
-					//echo $_POST['datas'];
-					$timestamp = date('d/m/Y');
-					$dia=$_POST['date01'];
-					$soli = sprintf("INSERT INTO solicitud (idSolicitud, asunto, estado,dia,diaSol,idinteresado,idarea,iddepto) VALUES (NULL,'$asunto',' ','$dia','$timestamp','$idint','$idarea','$iddept')");
-					$result=mysqli_query($link,$soli);
-					$idSol = sprintf("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='mydb' and TABLE_NAME='solicitud'");
-					$result=mysqli_query($link,$idSol);
-					$row= mysqli_fetch_array($result);
-					$idsolicitud=$row[0]-1;
-					$tok=sprintf("INSERT INTO SolicitudToken (idtoken, idSolicitud, token) VALUES (NULL,'$idsolicitud','$string')");   
-					$result=mysqli_query($link,$tok);
-					if(!empty($_POST['hora01'])){
-						foreach($_POST['hora01'] as $selected){
-							$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
-							$result=mysqli_query($link,$tok);
+						$busqueda = sprintf("SELECT nombre,appaterno,apmaterno FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
+						$result=mysqli_query($link, $busqueda);
+						$row_cnt = mysqli_num_rows($result);
+						if($row_cnt==1) {
+							$id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
+							$result=mysqli_query($link,$id);
 						}
-					}
+						else{
+							$sql = sprintf("INSERT INTO interesado (idinteresado, nombre, appaterno,apmaterno,correo,telefono) VALUES (NULL,'$nombre','$appat','$apmat','$email','$telefono')");
+							$result=mysqli_query($link,$sql);
+							$id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
+							$result=mysqli_query($link,$id);
+						}
+						$row = mysqli_fetch_assoc($result);
+						$idint=$row["idinteresado"];
+						$iddept=$_POST["departamento"];
+						$idarea=$_POST["area"];
+						//echo "$iddept";
+						//echo $_POST['datas'];
+						$timestamp = date('d/m/Y');
+						$dia=$_POST['date01'];
+						$soli = sprintf("INSERT INTO solicitud (idSolicitud, asunto, estado,dia,diaSol,idinteresado,idarea,iddepto) VALUES (NULL,'$asunto',' ','$dia','$timestamp','$idint','$idarea','$iddept')");
+						$result=mysqli_query($link,$soli);
+						$idSol = sprintf("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='mydb' and TABLE_NAME='solicitud'");
+						$result=mysqli_query($link,$idSol);
+						$row= mysqli_fetch_array($result);
+						$idsolicitud=$row[0]-1;
+						$tok=sprintf("INSERT INTO SolicitudToken (idtoken, idSolicitud, token) VALUES (NULL,'$idsolicitud','$string')");   
+						$result=mysqli_query($link,$tok);
+						if(!empty($_POST['hora01'])){
+							foreach($_POST['hora01'] as $selected){
+								$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
+								$result=mysqli_query($link,$tok);
+							}
+						}
 
-					$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
-					$result=mysqli_query($link,$tok);
-					include("../Modelo/cierra_conexion.php");
+						$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
+						$result=mysqli_query($link,$tok);
+						include("../Modelo/cierra_conexion.php");
 						echo 
 							"<script type='text/javascript'>
 								$(document).ready(function() {
@@ -341,14 +341,17 @@
 							<select name="departamento" class="form-control" onChange="despAreas();">
 								<?php
 								include("../Modelo/abre_conexion.php"); 
-								$id = sprintf("SELECT * FROM depto");     
+								$id = sprintf("SELECT * FROM depto WHERE iddepto > 1");     
 								$resulta = mysqli_query($link,$id);
 								$numero = mysqli_num_rows($resulta); // obtenemos el número de filas
-								while ($row = mysqli_fetch_array($resulta, MYSQLI_ASSOC)) {
-									$nombredepto= $row['nombre'];
-									$iddepto = $row["iddepto"];
-									echo "<option value='$iddepto'>$nombredepto</option>";
+								if ($numero > 0) {
+									while ($row = mysqli_fetch_array($resulta, MYSQLI_ASSOC)) {
+										$nombredepto= $row['nombre'];
+										$iddepto = $row["iddepto"];
+										echo "<option value='$iddepto'>$nombredepto</option>";
+									}
 								}
+								else echo "<option value='-1'>No hay departamentos disponibles</option>";
 								include("../Modelo/cierra_conexion.php"); 
 								?>
 							</select>
