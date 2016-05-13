@@ -183,6 +183,7 @@
 					for ($i = 0; $i < $random_string_length; $i++) {
 						$string .= $characters[rand(0, strlen($characters) - 1)];
 					}
+
 					if (mandarCorreoSolicitud($nombre, $appat, $apmat, $email, $string)) {
 						$busqueda = sprintf("SELECT nombre,appaterno,apmaterno FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
 						$result=mysqli_query($link, $busqueda);
@@ -226,6 +227,7 @@
 						echo 
 							"<script type='text/javascript'>
 								$(document).ready(function() {
+									$('#process').modal('hide');
 									$('#MSGA_09').modal();
 								});
 							</script>";
@@ -234,6 +236,7 @@
 						echo 
 							"<script type='text/javascript'>
 								$(document).ready(function() {
+									$('#process').modal('hide');
 									$('#MSG_E06').modal();
 								});
 							</script>";
@@ -315,10 +318,10 @@
 						<div class="col-md-10">
 							<input type="text" class="form-control" placeholder="55555555" id="telefono" name="telefono">
 							<span id="phone01" class="hidden glyphicon form-control-feedback"></span>
-														<span id="phone02" class="text-center help-block hidden"></span>
+							<span id="phone02" class="text-center help-block hidden"></span>
 						</div>
 					</div>
-					
+
 					<h4 class="text-uppercase">Datos de la cita:</h4>
 
 					<!--Departamento-->
@@ -499,6 +502,22 @@
 			</div>
 		</div>
 
+		<div class="modal fade" id="process" role="dialog" data-keyboard="false" data-backdrop="static">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Espera</h4>
+					</div>
+					<div class="modal-body">
+						<p>Tu solicitud está siendo procesada</p>
+						<div class="progress progress-striped active">
+							<div class="progress-bar progress-bar-success" style="width: 100%"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="modal fade" id="MSGA_09" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -506,8 +525,8 @@
 						<h4 class="modal-title">Enlace de validación de correo</h4>
 					</div>
 					<div class="modal-body">
-						<p>Se le ha enviado un correo con instrucciones para continuar el proceso de solicitud de cita.
-							Verifique que ha recibido el correo, de lo contrario vuelva a llenar la solicitud.</p>
+						<p>Se te ha enviado un correo con instrucciones para continuar el proceso de solicitud de cita.
+							Verifica que has recibido el correo, de lo contrario vuelve a llenar la solicitud.</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>

@@ -114,7 +114,7 @@ function enviarForm() {
 		$("#recaptcha").removeClass("text-success");
 		vcap = false;
 	}
-	
+
 	if ($("#date01").val()) {
 		$("#fecha").removeClass("has-error");
 		$("#fecha").addClass("has-success");
@@ -159,6 +159,8 @@ function enviarForm() {
 	}
 
 	if (vcap && vm && vn && vs && vt && vcb && vda && vfe) {
+		$(window).scrollTop(0);
+		$('#process').modal();
 		$("#formCita").submit();
 	}
 	else if (!vcap && vm && vn && vs && vt && vcb && vda && vfe) {
@@ -168,7 +170,7 @@ function enviarForm() {
 		$(window).scrollTop(0);
 		$("#error").modal();		
 	}
-	
+
 }
 
 $("#date01").focus(function() {
