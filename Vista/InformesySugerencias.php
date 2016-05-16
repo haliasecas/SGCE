@@ -252,7 +252,7 @@ echo
 					<div class="form-group" id="Email01">
 						<label class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" id="correoE01" placeholder="ejemplo@dominio.com">
+							<input type="text" class="form-control" name="correoE01" placeholder="ejemplo@dominio.com">
 							<span id="email01" class="hidden glyphicon form-control-feedback"></span>
 						</div>
 					</div>
@@ -260,7 +260,7 @@ echo
 					<div class="form-group" id="Email02">
 						<label class="control-label col-md-2">Repetir correo electrónico</label>
 						<div class="col-md-10" style="padding-top: 6px;">
-							<input type="text" class="form-control" id="correoE02" placeholder="ejemplo@dominio.com">
+							<input type="text" class="form-control" name="correoE02" placeholder="ejemplo@dominio.com">
 							<span id="email02" style="padding-top: 6px;" class="hidden glyphicon form-control-feedback"></span>
 							<span id="email03" class="text-center help-block hidden">
 								Formato de correo electrónico incorrecto
@@ -271,7 +271,7 @@ echo
 					<div class="form-group" id="Departamento">
 						<label for="departamento" class="control-label col-md-2">Departamento</label>
 						<div class="col-md-10">
-							<select id="depto" class="form-control">
+							<select name="departamento" class="form-control">
 								<option value="-1">Selecciona un elemento de la lista</option>
 								<?php
 								include("../Modelo/abre_conexion.php"); 
@@ -294,7 +294,7 @@ echo
 					<div class="form-group" id="Asunto">
 						<label for="asunto" class="control-label col-md-2">Asunto</label>
 						<div class="col-md-10">
-							<select id="asunto" class="form-control">
+							<select name="asunto" class="form-control">
 								<option value="-1">Selecciona un elemento de la lista</option>
 								<option value="Informe" select>Pedir informe</option>
 								<option value="Sugerencia">Sugerencia</option>
@@ -306,7 +306,7 @@ echo
 					<div class="form-group" id="Comentarios">
 						<label class="control-label col-md-2">Contenido</label>
 						<div class="col-md-10">
-							<textarea id="comentarios" class="form-control" cols="30" rows="15" placeholder="Exprese su sugerencia o problemática"></textarea>
+							<textarea name="comentarios" class="form-control" cols="30" rows="15" placeholder="Exprese su sugerencia o problemática"></textarea>
 						</div>
 					</div>
 
