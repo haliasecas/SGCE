@@ -26,24 +26,20 @@
 			if (($_POST["g-recaptcha-response"])) { 
 				if (!(empty($_POST))) {
 					$email = $_POST['email'];
-					$nombre = $_POST['nombre'];
-					$appat = $_POST['appat'];
-					$apmat = $_POST['apmat'];
 					$asunto = $_POST['asunto'];
-					$area = $_POST['area'];
 					$dpto = $_POST['departamento'];
-					$telefono = $_POST['telefono'];
 
 					include("../Modelo/abre_conexion.php"); 
 					require_once("../Modelo/enviarCorreo.php");
-					$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-					$string = '';
-					$random_string_length = 20;	//GENERAMOS EL TOKEN
-					for ($i = 0; $i < $random_string_length; $i++) {
-						$string .= $characters[rand(0, strlen($characters) - 1)];
-					}
-
-					$ans = mandarCorreoInforme($departamento, $asunto, $contenido, $emailinforme);
+					echo $_POST['iddepto'];
+echo 
+							"<script type='text/javascript'>
+								$(document).ready(function() {
+									$('#process').modal('hide');
+									$('#MSGA_09').modal();
+								});
+							</script>";
+					/*$ans = mandarCorreoInforme($departamento, $asunto, $contenido, $emailinforme);
 					if (ans) {
 						$busqueda = sprintf("SELECT nombre,appaterno,apmaterno FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
 						$result=mysqli_query($link, $busqueda);
@@ -100,7 +96,7 @@
 									$('#MSG_E06').modal();
 								});
 							</script>";
-					} 
+					}*/
 				}
 			}
 		}
@@ -326,29 +322,11 @@
 							<a class="btn btn-success" style="width: 150px; cursor: pointer;" onclick="$('#confirmacion').modal();">
 								CANCELAR
 							</a>
-							<a class="btn btn-success" style="width: 150px;" onclick="listo();">ENVIAR</a>
+							<a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
 						</div>
 					</div>
 				</form>
 				<script type="text/javascript">
-					function listo(){
-						if (enviarForm()) {
-							$.ajax({
-								url: "../Modelo/envia_informe.php",
-								method: "POST",
-								data: { 
-									mail: $("#correoE01").val(),
-									depto: $("#depto").val(), 
-									cont: $("#comentarios").val(),
-									subj: $("#asunto").val()
-								}
-							}).done(function(msg) {
-								console.log(msg);
-//								$("#exitoso").modal();
-							});
-						}
-					}
-
 					var onloadCallback = function() {
 						grecaptcha.render('html_element', {
 							'sitekey' : '6Lc_3h8TAAAAABVp2WYPRtTdy4wkZeL2w_vgazih'
