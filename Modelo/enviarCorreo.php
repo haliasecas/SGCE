@@ -166,37 +166,3 @@ function mandarCorreoRechazada($nombre,$appat,$apmat,$email){
 		return 1;
 	}
 }
-
-function correin($nombre, $appat, $apmat, $email) {
-	header("Content-Type: text/html;charset=utf-8");
-	require 'PHPMailerAutoload.php';
-	$mail = new PHPMailer();
-	$mail->IsSMTP();
-	$mail->SMTPAuth = true;
-	$mail->SMTPSecure = "ssl";
-	$mail->Host = "smtp.gmail.com";
-	$mail->Port = 465;
-	$mail->SMTPKeepAlive = true;
-	$mail->Username = "sgceescom@gmail.com";
-	$mail->Password = "sgceescom10";
-	$mail->CharSet = 'UTF-8';
-	$mail->From = $email;
-	$mail->FromName = "Estimado ".$nombre." ".$appat." ".$apmat;
-	$mail->Subject = "Cita Rechazada";
-	$msg="<div class=\"container-fluid\" style=\"padding-bottom:9px;\" id=\"header\">
-            <img src=\"../Img/SEP.png\" height=\"64px\" style=\"float:left; padding-left:15px;\">
-            <img class=\"img-head\" src=\"../Img/logoIPNGris.png\" style=\"float:right; padding-top:15px; padding-right:15px;\">
-        </div><br><br><br><br> <br> ";
-	$msg=$msg."<b>Buen día </b> <br>".$nombre." ".$appat." ".$apmat."<br>";
-	$msg=$msg."Le informamos que su cita fue <b>Rechazada</b><br>";
-	$msg=$msg."Lamentamos mucho la perdida de su tiempo y le agradecemos que realice su solicitud nuevamente en un día distinto<br>";
-	$msg=$msg."Gracias por utilizar el sistema generador de citas de ESCOM <br>";
-	$mail->MsgHTML($msg);
-	$mail->AddAddress($email, $nombre);
-	$mail->IsHTML(true);
-	if(!$mail->Send()) {
-		return 0;
-	} else {
-		return 1;
-	}	
-}

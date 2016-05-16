@@ -322,7 +322,9 @@
 							<input type="text" class="form-control" placeholder="55555555" id="telefono" name="telefono"
 								   value="<?php if(!ans) echo $telefono ?>">
 							<span id="phone01" class="hidden glyphicon form-control-feedback"></span>
-							<span id="phone02" class="text-center help-block hidden"></span>
+							<span id="phone02" class="text-center help-block hidden">En este campo sólo se pueden escribir números.
+								Evite los espacios en blanco u otros caracteres,
+								como los puntos o las comas, por ejemplo.</span>
 						</div>
 					</div>
 
@@ -335,19 +337,19 @@
 							<select name="departamento" class="form-control" onChange="despAreas();">
 								<option value='-1'>Selecciona un departamento</option>
 								<?php
-								include("../Modelo/abre_conexion.php"); 
-								$id = sprintf("SELECT * FROM depto WHERE iddepto > 1");     
-								$resulta = mysqli_query($link,$id);
-								$numero = mysqli_num_rows($resulta); // obtenemos el número de filas
-								if ($numero > 0) {
-									while ($row = mysqli_fetch_array($resulta, MYSQLI_ASSOC)) {
-										$nombredepto= $row['nombre'];
-										$iddepto = $row["iddepto"];
-										echo "<option value='$iddepto'>$nombredepto</option>";
-									}
-								}
-								else echo "<option value='-1'>No hay departamentos disponibles</option>";
-								include("../Modelo/cierra_conexion.php"); 
+	include("../Modelo/abre_conexion.php"); 
+								   $id = sprintf("SELECT * FROM depto WHERE iddepto > 1");     
+								   $resulta = mysqli_query($link,$id);
+								   $numero = mysqli_num_rows($resulta); // obtenemos el número de filas
+								   if ($numero > 0) {
+									   while ($row = mysqli_fetch_array($resulta, MYSQLI_ASSOC)) {
+										   $nombredepto= $row['nombre'];
+										   $iddepto = $row["iddepto"];
+										   echo "<option value='$iddepto'>$nombredepto</option>";
+									   }
+								   }
+								   else echo "<option value='-1'>No hay departamentos disponibles</option>";
+								   include("../Modelo/cierra_conexion.php"); 
 								?>
 							</select>
 							<span id="depto01" class="text-center help-block hidden">Por favor seleccione una opción en este campo</span>
@@ -383,6 +385,7 @@
 							<input type="text" class="form-control" placeholder="Breve descripción del asunto de la cita" id="asunto" name="asunto"
 								   value="<?php if(!ans) echo $asunto ?>">
 							<span id="sub01" class="hidden glyphicon form-control-feedback"></span>
+							<span id="sub02" class="text-center help-block hidden"></span>
 						</div>
 						<br> 
 					</div>
@@ -396,6 +399,7 @@
 									<span class="glyphicon glyphicon-calendar" id="icon01"></span>
 								</span>
 							</div>
+							<span id="fecha02" class="text-center help-block hidden"></span>
 						</div>
 					</div>
 
@@ -406,48 +410,54 @@
 						</label>        
 						<div class="col-md-10">
 							<div class="checkbox col-md-3">
-								<label >
+								<label>
 									<input type="checkbox" class="hora01" value="1" name="hora01[]">9:00-10:00 hrs.
 								</label>
 
-								<label >
+								<label>
+									<input type="checkbox" class="hora01" value="4" name="hora01[]">10:00-11:00 hrs.
+								</label>
+
+								<label>
+									<input type="checkbox" class="hora01" value="6" name="hora01[]">11:00-12:00 hrs.
+								</label>
+							</div>
+
+							<div class="checkbox col-md-3">
+								<label>
+									<input type="checkbox" class="hora01" value="8" name="hora01[]">12:00-13:00 hrs.
+								</label>
+
+								<label>
 									<input type="checkbox" class="hora01" value="2" name="hora01[]">13:00-14:00 hrs.
+								</label>
+							</div>
+
+							<div class="checkbox col-md-3">	
+								<label >
+									<input type="checkbox" class="hora01" value="5" name="hora01[]">14:00-15:00 hrs.
+								</label>
+
+								<label>
+									<input type="checkbox" class="hora01" value="7" name="hora01[]">18:00-19:00 hrs.
+								</label>
+							</div>
+
+							<div class="checkbox col-md-3">
+								<label>
+									<input type="checkbox" class="hora01" value="9" name="hora01[]">19:00-20:00 hrs.
 								</label>
 
 								<label>
 									<input type="checkbox" class="hora01" value="3" name="hora01[]">20:00-21:00 hrs.
 								</label>
 							</div>
+						</div>
+					</div>
 
-							<div class="checkbox col-md-3">
-								<label >
-									<input type="checkbox" class="hora01" value="4" name="hora01[]">10:00-11:00 hrs.
-								</label>
-
-								<label >
-									<input type="checkbox" class="hora01" value="5" name="hora01[]">14:00-15:00 hrs.
-								</label>
-							</div>
-
-							<div class="checkbox col-md-3">
-								<label >
-									<input type="checkbox" class="hora01" value="6" name="hora01[]">11:00-12:00 hrs.
-								</label>
-
-								<label >
-									<input type="checkbox" class="hora01" value="7" name="hora01[]">18:00-19:00 hrs.
-								</label>
-							</div>
-
-							<div class="checkbox col-md-3">
-								<label >
-									<input type="checkbox" class="hora01" value="8" name="hora01[]">12:00-13:00 hrs.
-								</label>
-
-								<label >
-									<input type="checkbox" class="hora01" value="9" name="hora01[]">19:00-20:00 hrs.
-								</label>
-							</div>
+					<div class="form-group has-feedback has-error" id="fecha">
+						<div class="col-md-10 col-md-offset-2">
+							<span id="hora02" class="text-center help-block hidden"></span>
 						</div>
 					</div>
 
@@ -483,13 +493,14 @@
 				<script type="text/javascript">
 					var onloadCallback = function() {
 						grecaptcha.render('html_element', {
-							'sitekey' : '6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW'
+							'sitekey' : '6Lc_3h8TAAAAABVp2WYPRtTdy4wkZeL2w_vgazih'
 						});
 					};
 				</script>
 			</div>
 		</div>
 
+		/* MSGC 02 */
 		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -497,7 +508,7 @@
 						<h4 class="modal-title">Mensaje de confirmación</h4>
 					</div>
 					<div class="modal-body">
-						<p>¿Esta seguro de que desea cancelar Solicitar cita?</p>
+						<p>¿Está seguro de que desea cancelar solicitar cita?</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
@@ -511,7 +522,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header modal-has-success">
-						<h4 class="modal-title">Espera</h4>
+						<h4 class="modal-title">Mensaje de alerta</h4>
 					</div>
 					<div class="modal-body">
 						<p>Tu solicitud está siendo procesada</p>
@@ -527,7 +538,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header modal-has-success">
-						<h4 class="modal-title">Enlace de validación de correo</h4>
+						<h4 class="modal-title">Mensaje de alerta</h4>
 					</div>
 					<div class="modal-body">
 						<p>Se te ha enviado un correo con instrucciones para continuar el proceso de solicitud de cita.
@@ -544,7 +555,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header modal-has-error">
-						<h4 class="modal-title">Error al enviar el correo electrónico</h4>
+						<h4 class="modal-title">Mensaje de error</h4>
 					</div>
 					<div class="modal-body">
 						<p>Ocurrió un error interno al enviar el correo electrónico, por favor intente de nuevo.</p>

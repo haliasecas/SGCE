@@ -22,7 +22,10 @@ function enviarForm() {
 		$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 		$("#email02").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 		$("#email03").attr("class", "text-center help-block");
-		if ($("#correoE01").val() !== $("#correoE02").val()) {
+		if (!validate($("#correoE01").val())) {
+			$("#email03").text("El formato del campo correo es incorrecto");
+		}
+		else if ($("#correoE01").val() !== $("#correoE02").val()) {
 			$("#email03").text("Correos proporcionados no coinciden");
 		}
 		vm = false;
@@ -65,7 +68,7 @@ function enviarForm() {
 		}
 
 		$("#apm02").attr("class", "text-center help-block");
-		$("#apm02").text("Formato de nombre o apellido incorrecto");
+		$("#apm02").text("El formato del campo nombre o apellido son incorrectos");
 		vn = false;
 	}
 	else {
@@ -83,7 +86,6 @@ function enviarForm() {
 		$("#Telefono").attr("class", "form-group has-feedback has-error");
 		$("#phone01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 		$("#phone02").attr("class", "text-center help-block");
-		$("#phone02").text("Formato de numero de teléfono incorrecto");
 		vt = false;
 	}
 	else {
@@ -96,11 +98,14 @@ function enviarForm() {
 	if ($("#asunto").val() === "") {
 		$("#Asunto").attr("class", "form-group has-feedback has-error");
 		$("#sub01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+		$("#sub02").removeClass("hidden");
+		$("#sub02").text("El formato del campo asunto es incorrecto");
 		vs = false;
 	}
 	else {
 		$("#Asunto").attr("class", "form-group has-feedback has-success");
 		$("#sub01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+		$("#sub02").addClass("hidden");
 		vs = true;
 	}
 
@@ -118,22 +123,28 @@ function enviarForm() {
 	if ($("#date01").val()) {
 		$("#fecha").removeClass("has-error");
 		$("#fecha").addClass("has-success");
+		$("#fecha02").addClass("hidden");
 		vfe = true;		
 	}
 	else {
 		$("#fecha").removeClass("has-success");
 		$("#fecha").addClass("has-error");
+		$("#fecha02").text("Por favor seleccione una opción en este campo");
+		$("#fecha02").removeClass("hidden");
 		vfe = false;
 	}
 
 	if ($(".hora01:checkbox:checked").length > 0) {
 		$("#checkboxes01").removeClass("has-error");
 		$("#checkboxes01").addClass("has-success");
+		$("#hora02").addClass("hidden");
 		vcb = true;		
 	}
 	else {
 		$("#checkboxes01").removeClass("has-success");
 		$("#checkboxes01").addClass("has-error");
+		$("#hora02").removeClass("hidden");
+		$("#hora02").text("Por favor seleccione una opción en este campo");
 		vcb = false;
 	}
 
@@ -162,9 +173,6 @@ function enviarForm() {
 		$(window).scrollTop(0);
 		$('#process').modal();
 		$("#formCita").submit();
-	}
-	else if (!vcap && vm && vn && vs && vt && vcb && vda && vfe) {
-		window.location = '../';
 	}
 	else {
 		$(window).scrollTop(0);

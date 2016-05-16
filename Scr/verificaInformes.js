@@ -75,9 +75,10 @@ function enviarForm() {
 	}
 
 	if (v1 && v2 && v3 && v4 && v5)
-		$("#informe").submit();
+		return true;
 	else {
 		$(window).scrollTop(0);
 		$("#error").modal();
+		return false;
 	}
 }

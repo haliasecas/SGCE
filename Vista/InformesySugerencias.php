@@ -21,6 +21,91 @@
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
 
+		<?php 
+		if (!empty($_POST)) {
+			if (($_POST["g-recaptcha-response"])) { 
+				if (!(empty($_POST))) {
+					$email = $_POST['email'];
+					$nombre = $_POST['nombre'];
+					$appat = $_POST['appat'];
+					$apmat = $_POST['apmat'];
+					$asunto = $_POST['asunto'];
+					$area = $_POST['area'];
+					$dpto = $_POST['departamento'];
+					$telefono = $_POST['telefono'];
+
+					include("../Modelo/abre_conexion.php"); 
+					require_once("../Modelo/enviarCorreo.php");
+					$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+					$string = '';
+					$random_string_length = 20;	//GENERAMOS EL TOKEN
+					for ($i = 0; $i < $random_string_length; $i++) {
+						$string .= $characters[rand(0, strlen($characters) - 1)];
+					}
+
+					$ans = mandarCorreoInforme($departamento, $asunto, $contenido, $emailinforme);
+					if (ans) {
+						$busqueda = sprintf("SELECT nombre,appaterno,apmaterno FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
+						$result=mysqli_query($link, $busqueda);
+						$row_cnt = mysqli_num_rows($result);
+						if($row_cnt==1) {
+							$id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
+							$result=mysqli_query($link,$id);
+						}
+						else{
+							$sql = sprintf("INSERT INTO interesado (idinteresado, nombre, appaterno,apmaterno,correo,telefono) VALUES (NULL,'$nombre','$appat','$apmat','$email','$telefono')");
+							$result=mysqli_query($link,$sql);
+							$id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
+							$result=mysqli_query($link,$id);
+						}
+						$row = mysqli_fetch_assoc($result);
+						$idint=$row["idinteresado"];
+						$iddept=$_POST["departamento"];
+						$idarea=$_POST["area"];
+						//echo "$iddept";
+						//echo $_POST['datas'];
+						$timestamp = date('d/m/Y');
+						$dia=$_POST['date01'];
+						$soli = sprintf("INSERT INTO solicitud (idSolicitud, asunto, estado,dia,diaSol,idinteresado,idarea,iddepto) VALUES (NULL,'$asunto',' ','$dia','$timestamp','$idint','$idarea','$iddept')");
+						$result=mysqli_query($link,$soli);
+						$idSol = sprintf("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='mydb' and TABLE_NAME='solicitud'");
+						$result=mysqli_query($link,$idSol);
+						$row= mysqli_fetch_array($result);
+						$idsolicitud=$row[0]-1;
+						$tok=sprintf("INSERT INTO SolicitudToken (idtoken, idSolicitud, token) VALUES (NULL,'$idsolicitud','$string')");   
+						$result=mysqli_query($link,$tok);
+						if(!empty($_POST['hora01'])){
+							foreach($_POST['hora01'] as $selected){
+								$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
+								$result=mysqli_query($link,$tok);
+							}
+						}
+
+						$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
+						$result=mysqli_query($link,$tok);
+						include("../Modelo/cierra_conexion.php");
+						echo 
+							"<script type='text/javascript'>
+								$(document).ready(function() {
+									$('#process').modal('hide');
+									$('#MSGA_09').modal();
+								});
+							</script>";
+					}
+					else {
+						echo 
+							"<script type='text/javascript'>
+								$(document).ready(function() {
+									$('#process').modal('hide');
+									$('#MSG_E06').modal();
+								});
+							</script>";
+					} 
+				}
+			}
+		}
+		?>
+		
 		<!-- Nueva nav -->
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
@@ -161,29 +246,6 @@
 			</div>
 		</nav>
 
-		<?php
-		if (!empty($_POST)) {
-			$correo = $_POST["correo"];
-			$idDepa = $_POST["departamento"];
-			$asunto = $_POST["asunto"];
-			$contenido = $_POST["comentarios"];
-			$fecha = strftime("%Y/%m/%d");
-			include("../Modelo/abre_conexion.php");
-
-			$q = "INSERT INTO mensaje(correo, asunto, contenido, estado, fecha, iddepto) VALUES
-			('$correo', '$asunto', '$contenido', 'PENDIENTE', '$fecha', '$idDepa')";
-			$query = mysqli_query($link, $q);
-		?>
-		<script type='text/javascript'>
-			$(document).ready(function() {
-				$('#exitoso').modal();
-			});
-		</script>
-		<?php
-			include("../Modelo/cierra_conexion.php");
-		}
-		?>
-
 		<div class="container-fluid" style="padding-bottom: 57px;" id="main-content">
 			<div class="container-fluid col-md-offset-1 col-md-10">
 				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="form-horizontal" id="informe">
@@ -192,15 +254,15 @@
 						La respuesta a su pregunta o sugerencia llegará directamente al correo que<br>nos proporcione.</p><br>
 
 					<div class="form-group" id="Email01">
-						<label  for="email" class="control-label col-md-2">Correo electrónico</label>
+						<label class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" name="correo" id="correoE01" placeholder="ejemplo@dominio.com">
+							<input type="text" class="form-control" id="correoE01" placeholder="ejemplo@dominio.com">
 							<span id="email01" class="hidden glyphicon form-control-feedback"></span>
 						</div>
 					</div>
 
 					<div class="form-group" id="Email02">
-						<label  for="email" class="control-label col-md-2">Repetir correo electrónico</label>
+						<label class="control-label col-md-2">Repetir correo electrónico</label>
 						<div class="col-md-10" style="padding-top: 6px;">
 							<input type="text" class="form-control" id="correoE02" placeholder="ejemplo@dominio.com">
 							<span id="email02" style="padding-top: 6px;" class="hidden glyphicon form-control-feedback"></span>
@@ -213,7 +275,7 @@
 					<div class="form-group" id="Departamento">
 						<label for="departamento" class="control-label col-md-2">Departamento</label>
 						<div class="col-md-10">
-							<select name="departamento" class="form-control">
+							<select id="depto" class="form-control">
 								<option value="-1">Selecciona un elemento de la lista</option>
 								<?php
 								include("../Modelo/abre_conexion.php"); 
@@ -236,7 +298,7 @@
 					<div class="form-group" id="Asunto">
 						<label for="asunto" class="control-label col-md-2">Asunto</label>
 						<div class="col-md-10">
-							<select name="asunto" class="form-control">
+							<select id="asunto" class="form-control">
 								<option value="-1">Selecciona un elemento de la lista</option>
 								<option value="Informe" select>Pedir informe</option>
 								<option value="Sugerencia">Sugerencia</option>
@@ -248,7 +310,7 @@
 					<div class="form-group" id="Comentarios">
 						<label class="control-label col-md-2">Contenido</label>
 						<div class="col-md-10">
-							<textarea name="comentarios" class="form-control" cols="30" rows="15" placeholder="Exprese su sugerencia o problemática"></textarea>
+							<textarea id="comentarios" class="form-control" cols="30" rows="15" placeholder="Exprese su sugerencia o problemática"></textarea>
 						</div>
 					</div>
 
@@ -264,20 +326,38 @@
 							<a class="btn btn-success" style="width: 150px; cursor: pointer;" onclick="$('#confirmacion').modal();">
 								CANCELAR
 							</a>
-							<a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
+							<a class="btn btn-success" style="width: 150px;" onclick="listo();">ENVIAR</a>
 						</div>
 					</div>
 				</form>
 				<script type="text/javascript">
+					function listo(){
+						if (enviarForm()) {
+							$.ajax({
+								url: "../Modelo/envia_informe.php",
+								method: "POST",
+								data: { 
+									mail: $("#correoE01").val(),
+									depto: $("#depto").val(), 
+									cont: $("#comentarios").val(),
+									subj: $("#asunto").val()
+								}
+							}).done(function(msg) {
+								console.log(msg);
+//								$("#exitoso").modal();
+							});
+						}
+					}
+
 					var onloadCallback = function() {
 						grecaptcha.render('html_element', {
-							'sitekey' : '6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW'
+							'sitekey' : '6Lc_3h8TAAAAABVp2WYPRtTdy4wkZeL2w_vgazih'
 						});
 					};
 				</script>
 			</div>
 		</div>
-		
+
 		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
