@@ -21,6 +21,49 @@
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
 		</div>
 
+		<?php 
+		if (!empty($_POST)) {
+			if (($_POST["g-recaptcha-response"])) { 
+				if (!(empty($_POST))) {
+					$email = $_POST['correoE01'];
+					$asunto = $_POST['asunto'];
+					$dpto = $_POST['departamento'];
+					$contenido = $_POST['comentarios'];
+
+					include("../Modelo/abre_conexion.php"); 
+					require_once("../Modelo/enviarCorreo.php");
+					$ans = mandarCorreoInforme($dpto, $asunto, $contenido, $email);
+					if (ans) {
+						$timestamp = date('d/m/Y');
+						$sql = sprintf("INSERT INTO mensaje (idMensaje, correo, asunto,contenido,estado,fecha,iddepto) VALUES (NULL,'$email','$asunto','$contenido','PENDIENTE','$timestamp','$dpto')");
+							$result=mysqli_query($link,$sql);
+							
+
+
+
+
+
+
+							echo "<script type='text/javascript'>
+								$(document).ready(function() {
+									$('#process').modal('hide');
+									$('#MSGA_09').modal();
+								});
+							</script>";
+					}
+					else {
+							echo "<script type='text/javascript'>
+								$(document).ready(function() {
+									$('#process').modal('hide');
+									$('#MSG_E06').modal();
+								});
+							</script>";
+					}
+				}
+			}
+		}
+		?>
+		
 		<!-- Nueva nav -->
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
@@ -161,29 +204,6 @@
 			</div>
 		</nav>
 
-		<?php
-		if (!empty($_POST)) {
-			$correo = $_POST["correo"];
-			$idDepa = $_POST["departamento"];
-			$asunto = $_POST["asunto"];
-			$contenido = $_POST["comentarios"];
-			$fecha = strftime("%Y/%m/%d");
-			include("../Modelo/abre_conexion.php");
-
-			$q = "INSERT INTO mensaje(correo, asunto, contenido, estado, fecha, iddepto) VALUES
-			('$correo', '$asunto', '$contenido', 'PENDIENTE', '$fecha', '$idDepa')";
-			$query = mysqli_query($link, $q);
-		?>
-		<script type='text/javascript'>
-			$(document).ready(function() {
-				$('#exitoso').modal();
-			});
-		</script>
-		<?php
-			include("../Modelo/cierra_conexion.php");
-		}
-		?>
-
 		<div class="container-fluid" style="padding-bottom: 57px;" id="main-content">
 			<div class="container-fluid col-md-offset-1 col-md-10">
 				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="form-horizontal" id="informe">
@@ -192,17 +212,17 @@
 						La respuesta a su pregunta o sugerencia llegará directamente al correo que<br>nos proporcione.</p><br>
 
 					<div class="form-group" id="Email01">
-						<label  for="email" class="control-label col-md-2">Correo electrónico</label>
+						<label class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" name="correo" id="correoE01" placeholder="ejemplo@dominio.com">
+							<input type="text" class="form-control" name="correoE01" placeholder="ejemplo@dominio.com">
 							<span id="email01" class="hidden glyphicon form-control-feedback"></span>
 						</div>
 					</div>
 
 					<div class="form-group" id="Email02">
-						<label  for="email" class="control-label col-md-2">Repetir correo electrónico</label>
+						<label class="control-label col-md-2">Repetir correo electrónico</label>
 						<div class="col-md-10" style="padding-top: 6px;">
-							<input type="text" class="form-control" id="correoE02" placeholder="ejemplo@dominio.com">
+							<input type="text" class="form-control" name="correoE02" placeholder="ejemplo@dominio.com">
 							<span id="email02" style="padding-top: 6px;" class="hidden glyphicon form-control-feedback"></span>
 							<span id="email03" class="text-center help-block hidden">
 								Formato de correo electrónico incorrecto
@@ -238,8 +258,8 @@
 						<div class="col-md-10">
 							<select name="asunto" class="form-control">
 								<option value="-1">Selecciona un elemento de la lista</option>
-								<option value="Informe" select>Pedir informe</option>
-								<option value="Sugerencia">Sugerencia</option>
+								<option value="1" select>Pedir informe</option>
+								<option value="2">Sugerencia</option>
 							</select>
 							<span id="asunto01" class="text-center help-block hidden">Por favor seleccione una opción en este campo</span>
 						</div>
@@ -271,13 +291,13 @@
 				<script type="text/javascript">
 					var onloadCallback = function() {
 						grecaptcha.render('html_element', {
-							'sitekey' : '6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW'
+							'sitekey' : '6Lc_3h8TAAAAABVp2WYPRtTdy4wkZeL2w_vgazih'
 						});
 					};
 				</script>
 			</div>
 		</div>
-		
+
 		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">

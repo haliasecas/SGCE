@@ -75,6 +75,7 @@
 					<div class="col-lg-10">
 						<input type="text" class="form-control" name="miemail" placeholder="ejemplo@dominio.com">
 						<span id="email01" class=""></span>
+						<span id="email02" class="text-center help-block hidden">El formato del campo correo es incorrecto</span>
 					</div>
 				</div>
 
@@ -83,7 +84,7 @@
 					<div class="col-lg-10">
 						<input type="password" class="form-control" name="mipass" placeholder="***************">
 						<span id="pass01" class=""></span>
-						<span id="pass02" class="text-center help-block hidden"></span>
+						<span id="pass02" class="text-center help-block hidden">El formato del campo contraseña es incorrecto</span>
 					</div>
 				</div>
 
@@ -98,9 +99,8 @@
 				</div>
 			</form>
 			<script type="text/javascript">
-				function error(str) {
-					$("#correo").addClass("has-error has-feedback");
-					$("#contra").addClass("has-error has-feedback");
+				function error(donde, str) {
+					$(donde).addClass("has-error has-feedback");
 					$("#pass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 					$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 					if (str != "")
@@ -119,14 +119,46 @@
 				}
 
 				function logIn() {
+					var tm = false, tp = false;
 					var mail = $("[name='miemail']").val();
 					var ps = $("[name='mipass']").val();
-					if (mail == "" || ps == "") {
-						error("");
+					if (mail == "") {
+						$("#pass02").addClass("hidden");
+						$("#contra").attr("class", "form-group has-error has-feedback");
+						$("#correo").attr("class", "form-group has-error has-feedback");
+						$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+						$("#pass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+					}
+					else if (!validate(mail)) {
+						$("#email02").text("Por favor, introduce una dirección de correo electrónico válida. Por ejemplo usuario@dominio.com");
+						$("#contra").attr("class", "form-group has-error has-feedback");
+						$("#correo").attr("class", "form-group has-error has-feedback");
+						$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+						$("#pass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+						$("#email02").removeClass("hidden");
+						$("#pass02").addClass("hidden");
+					}
+					else {
+						$("#correo").attr("class", "form-group has-success has-feedback");
+						$("#email01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+						$("#email02").addClass("hidden");
+						$("#pass02").addClass("hidden");
+						tm = true;
+						if (ps == "") {
+							$("#contra").attr("class", "form-group has-error has-feedback");
+							$("#pass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+						}
+						else {
+							$("#contra").attr("class", "form-group");
+							$("#pass01").addClass("hidden");
+							tp = true;
+						}
+					}
+
+					if (tm && tp) logIn2();
+					else {
 						$("#error").modal();
 					}
-					else if (validate(mail)) logIn2();
-					else error("Por favor, introduce una dirección de correo electrónico válida. Por ejemplo usuario@dominio.com");
 				}
 
 				function logIn2() {
@@ -137,16 +169,52 @@
 						url: "../sesion_in.php",
 						data: { miemail: m, mipass: p }
 					}).done(function(msg) {
-						if (msg == 1) error("Usuario y/o contraseña incorrectos.");
-						else if (msg == 2) error("Correo no registrado, por favor revise que haya escrito el correo correctamente.");
+						if (msg == 1) {
+							$("#correo").attr("class", "form-group has-error has-feedback");
+							$("#contra").attr("class", "form-group has-error has-feedback");
+							$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+							$("#pass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+							$("#pass02").removeClass("hidden");
+							$("#pass02").text("Usuario y/o contraseña incorrectos.");
+						}
+						else if (msg == 2) {
+							$("#correo").attr("class", "form-group has-error has-feedback");
+							$("#contra").attr("class", "form-group has-error has-feedback");
+							$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+							$("#pass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+							$("#pass02").removeClass("hidden");
+							$("#pass02").text("Correo no registrado, por favor revise que haya escrito el correo correctamente.");
+						}
 						else {
-							//console.log(msg);
-							nohayerror();
-							window.location = "../";
+							$("#correo").attr("class", "form-group has-feedback");
+							$("#contra").attr("class", "form-group has-feedback");
+							$("#pass01").addClass("hidden");
+							$("#pass02").addClass("hidden");
+							$("#email01").addClass("hidden");
+							$("#email02").addClass("hidden");
+							$("#bienvenido").modal();
 						}
 					});
 				}
 			</script>
+		</div>
+
+		<div class="modal fade" data-keyboard="false" id="bienvenido" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Mensaje de alerta</h4>
+					</div>
+					<div class="modal-body">
+						<p>Bienvenido(a) al sistema generador de citas de ESCOM</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../';">
+							Aceptar
+						</button>
+					</div>
+				</div>
+			</div>
 		</div>
 		
 		<div class="modal fade" data-keyboard="false" id="error" role="dialog">

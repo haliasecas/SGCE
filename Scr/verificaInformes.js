@@ -1,4 +1,4 @@
-function validateMail(email) {
+function validate(email) {
 	var ts = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})$/;
 	return ts.test(email);
 }
@@ -7,21 +7,24 @@ function enviarForm() {
 	var v1 = false, v2 = false,
 		v3 = false, v4 = false,
 		v5 = false;
+	
+	var email = $("[name='correoE01']").val();
 
-	if (!validateMail($("#correoE01").val()) || ($("#correoE01").val() !== $("#correoE02").val())) {								
+	if (!validate(email)) {
+		$("#email03").text("El formato del campo correo es incorrecto");
 		$("#Email01").attr("class", "form-group has-feedback has-error");
 		$("#Email02").attr("class", "form-group has-feedback has-error");
 		$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 		$("#email02").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 		$("#email03").attr("class", "text-center help-block");
-		if ($("#correoE01").val() !== $("#correoE02").val()) {
-			$("#email03").text("Correos proporcionados no coinciden");
-		}
-		else {
-			$("#email03").text("Por favor, introduce una dirección de correo electrónico válida. \
-							   Por ejemplo usuario@dominio.com");
-		}
-		v1 = false;
+	}
+	else if (email !== $("[name='correoE02']").val()) {
+		$("#Email01").attr("class", "form-group has-feedback has-error");
+		$("#Email02").attr("class", "form-group has-feedback has-error");
+		$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+		$("#email02").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+		$("#email03").attr("class", "text-center help-block");
+		$("#email03").text("Correos proporcionados no coinciden");
 	}
 	else {
 		$("#Email01").attr("class", "form-group has-feedback has-success");
