@@ -93,7 +93,7 @@ function mandarCorreoSolicitud($nombre,$appat,$apmat,$email,$stringtoken) {
 	$msg=$msg."<b>Enlace para confirmación: <a href='$enlace'>Validar Cita</a></b> <br>";
 	$msg=$msg."Recibirás un correo electrónico a esta misma dirección sobre la confirmación o negación de tu cita en menos de 24 horas, de lo contrario favor de comunicarte al 57296000<br>";
 	$msg=$msg."Gracias por utilizar el sistema generador de citas de ESCOM <br>";
-	$msg=$msg."<br><br><b>Si desconoce esta solicitud, por favor haga caso omiso de este mensaje.</b>";
+	$msg=$msg."<br><br><b>Si no has sido tú el que agendó la cita en el sistema, por favor haga caso omiso de este correo electrónico.</b>";
 	$mail->MsgHTML($msg);
 	$mail->AddAddress($email, $nombre);
 	$mail->IsHTML(true);
