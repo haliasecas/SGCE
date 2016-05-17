@@ -45,9 +45,8 @@ function mandarCorreoInforme($departamento,$asunto,$contenido,$emailinforme){
 	if($asunto=='1')
 		$msg=$msg."Se ha realizado una solicitud de <b>pedir informe</b> <br> En el departamento: ".$nombredepto."<br>";
 	else
-		$msg=$msg."Se ha realizado una solicitud de <b> sugerencia</b> <br> En el departamento".$nombredepto."<br>";
+		$msg=$msg."Se ha realizado una solicitud de <b> sugerencia</b> <br> En el departamento: ".$nombredepto."<br>";
 	$msg=$msg."<b>Enviada desde el correo: ".$emailinforme."</b><br>";
-	$msg=$msg."Asunto: ".$asunto."<br>";
 	$msg=$msg."Contenido: ".$contenido."<br>";
 	$msg=$msg."Preste mucha atención a esta solicitud, puesto que nuestro principal objetivo es la comodidad de nuestros clientes, y así prestar un mejor servicio.<br>";
 	$mail->MsgHTML($msg);
