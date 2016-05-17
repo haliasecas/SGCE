@@ -48,7 +48,7 @@ function mandarCorreoInforme($departamento,$asunto,$contenido,$emailinforme){
 		$msg=$msg."Se ha realizado una solicitud de <b> sugerencia</b> <br> En el departamento: ".$nombredepto."<br>";
 	$msg=$msg."<b>Enviada desde el correo: ".$emailinforme."</b><br>";
 	$msg=$msg."Contenido: ".$contenido."<br>";
-	$msg=$msg."Preste mucha atención a esta solicitud, puesto que nuestro principal objetivo es la comodidad de nuestros clientes, y así prestar un mejor servicio.<br>";
+	$msg=$msg."Preste mucha atención a esta solicitud, puesto que nuestro principal objetivo es la comodidad de nuestros clientes y esto nos ayudaría a prestar un mejor servicio.<br>";
 	$mail->MsgHTML($msg);
 	$mail->AddAddress($correoEncargado, "Holaaaaaaaa");
 	$mail->IsHTML(true);
@@ -79,7 +79,7 @@ function mandarCorreoSolicitud($nombre,$appat,$apmat,$email,$stringtoken) {
 	$msg="<div class=\"container-fluid\" style=\"padding-bottom:9px;\" id=\"header\">
 			<img src=\"../Img/SEP.png\" height=\"64px\" style=\"float:left; padding-left:15px;\">
 			<img class=\"img-head\" src=\"../Img/logoIPNGris.png\" style=\"float:right; padding-top:15px; padding-right:15px;\">
-		</div><br><br><br><br> <br> <b>Buen día </b> <br> ".$nombre." ".$appat." ".$apmat."<br> <b>Has pedido agendar una cita el/los día(s)</b><br>El dia: ".$_POST['date01']."<br>Con horarios:<br>";
+		</div><br><br><br><br> <br> <b>Buen día </b> <br> ".$nombre." ".$appat." ".$apmat."<br> <b>Has solicitado agendar una cita el día</b><br> ".$_POST['date01']."<br>En un horario:<br>";
 	$horarios = array(' ','9:00-10:00','13:00-14:00','20:00-21:00','10:00-11:00','14:00-15:00','11:00-12:00','18:00-19:00','12:00-13:00','19:00-20:00');
 	if(!empty($_POST['hora01'])){
 		foreach($_POST['hora01'] as $selected){
@@ -89,7 +89,8 @@ function mandarCorreoSolicitud($nombre,$appat,$apmat,$email,$stringtoken) {
 	else
 		$msg = $msg."(S/N)";
 	$enlace = $_SERVER['SERVER_NAME']."/SGCE/Vista/Validar.php?token=".$stringtoken;
-	$msg=$msg."<b>Da click en el siguiente enlace: <a href='$enlace'>Validar Cita</a></b> <br>";
+	$msg=$msg."Debes acceder al siguiente enlace para continuar con el proceso<br>"
+	$msg=$msg."<b>Enlace para confirmación: <a href='$enlace'>Validar Cita</a></b> <br>";
 	$msg=$msg."Recibirás un correo electrónico a esta misma dirección sobre la confirmación o negación de tu cita en menos de 24 horas, de lo contrario favor de comunicarte al 57296000<br>";
 	$msg=$msg."Gracias por utilizar el sistema generador de citas de ESCOM <br>";
 	$msg=$msg."<br><br><b>Si desconoce esta solicitud, por favor haga caso omiso de este mensaje.</b>";
