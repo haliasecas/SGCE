@@ -150,7 +150,7 @@
 							<?php
 
 							include("../Modelo/abre_conexion.php");
-							$query = "SELECT *  FROM depto  WHERE iddepto > 1";
+							$query = "SELECT *  FROM depto ";
 							$result = mysqli_query($link, $query);
 							if ($hay = mysqli_fetch_array($result, MYSQLI_ASSOC) > 0) {
 								$result = mysqli_query($link, $query);
