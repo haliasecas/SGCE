@@ -272,7 +272,7 @@
 						<label  for="email" class="control-label col-md-2">Repetir correo electrónico</label>
 						<div class="col-md-10" style="padding-top: 6px;">
 							<input type="text" class="form-control" placeholder="ejemplo@dominio.com" id="correoE02"
-								   value="<?php if(!ans) echo $email ?>">
+								   value="<?php if(!ans) echo $email; ?>">
 							<span id="email02" style="padding-top: 6px;" class="hidden glyphicon form-control-feedback"></span>
 							<span id="email03" class="text-center help-block hidden">
 								Por favor, introduce una dirección de correo electrónico válida. Por ejemplo usuario@dominio.com

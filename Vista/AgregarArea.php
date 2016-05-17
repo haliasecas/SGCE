@@ -144,7 +144,6 @@
 
 		<!-- Mensajes bajo el campo -->
 		<div class="container-fluid" style="padding-bottom:57px;" id="main-content">
-
 			<div class="container">
 				<h3><strong>Agregar área</strong></h3>
 				<p><strong class="text-success">Todos los campos son obligatorios.</strong>El nombre del departamento debe estar previamente registrado en el sistema.</p> 
