@@ -2,6 +2,26 @@
 function mandarCorreoInforme($departamento,$asunto,$contenido,$emailinforme){
 	header("Content-Type: text/html;charset=utf-8");
 	require 'PHPMailerAutoload.php';
+
+		include("abre_conexion.php"); 
+
+	$id = sprintf("SELECT * FROM depto WHERE iddepto='$departamento'");     
+	$resulta = mysqli_query($link,$id);
+	$numero = mysqli_num_rows($resulta); // obtenemos el número de filas
+	$row = mysqli_fetch_array($resulta, MYSQLI_ASSOC);
+	$nombredepto= $row['nombre'];
+	$idpersonal = $row["idpersonal"];
+
+
+	$id = sprintf("SELECT * FROM personal WHERE idpersonal='$idpersonal'");     
+	$resulta = mysqli_query($link,$id);
+	$numero = mysqli_num_rows($resulta); // obtenemos el número de filas
+	$row = mysqli_fetch_array($resulta, MYSQLI_ASSOC);
+	$nombreEncargado = $row['nombre'];
+	$appatEncargado = $row['appaterno'];
+	$apmatEncargado = $row['apmaterno'];
+	$correoEncargado = $row['correo'];
+
 	$mail = new PHPMailer();
 	$mail->IsSMTP();
 	$mail->SMTPAuth = true;
@@ -12,35 +32,21 @@ function mandarCorreoInforme($departamento,$asunto,$contenido,$emailinforme){
 	$mail->Username = "sgceescom@gmail.com";
 	$mail->Password = "sgceescom10";
 	$mail->CharSet = 'UTF-8';
-	$mail->From = $email;
+	$mail->From = $emailinforme;
 	$mail->FromName = "Estimado ".$nombreEncargado." ".$appatEncargado." ".$apmatEncargado;
 	$mail->Subject = "Informe o sugerencia";
 	$msg="<div class=\"container-fluid\" style=\"padding-bottom:9px;\" id=\"header\">
             <img src=\"../Img/SEP.png\" height=\"64px\" style=\"float:left; padding-left:15px;\">
             <img class=\"img-head\" src=\"../Img/logoIPNGris.png\" style=\"float:right; padding-top:15px; padding-right:15px;\">
         </div><br><br><br><br> <br> ";
-	include("abre_conexion.php"); 
 
-	$id = sprintf("SELECT nombre,appaterno,apmaterno,correo FROM area WHERE idepto='$departamento'");
-	$result=mysqli_query($link,$id);
-	$rowpersonal = mysqli_fetch_assoc($result);
-	$nombreEncargado = $rowpersonal['nombre'];
-	$appatEncargado = $rowpersonal['appaterno'];
-	$apmatEncargado = $rowpersonal['apmaterno'];
-	$correoEncargado = $rowpersonal['correo'];
-
-	$id = sprintf("SELECT nombre FROM depto WHERE idepto='$departamento'");
-	$result2=mysqli_query($link,$id);
-	$rowdepto = mysqli_fetch_assoc($result2);
-	$nombreDepto = $rowdepto['nombre'];
-
-	$msg=$msg."<b>Buen día </b> <br>".$nombre." ".$appatEncargado." ".$apmatEncargado."<br>";
+	$msg=$msg."<b>Buen día </b> <br>".$nombreEncargado." ".$appatEncargado." ".$apmatEncargado."<br>";
 	include("cierra_conexion.php"); 
 	if($asunto=='1')
-		$msg=$msg."Se ha realizado una solicitud de pedir informe <br> En el departamento".$nombreDepto."<br>";
+		$msg=$msg."Se ha realizado una solicitud de <b>pedir informe</b> <br> En el departamento: ".$nombredepto."<br>";
 	else
-		$msg=$msg."Se ha realizado una solicitud de sugerencia <br> En el departamento".$nombreDepto."<br>";
-	$msg=$msg."<b>Enviada desde el correo: ".$email."</b><br>";
+		$msg=$msg."Se ha realizado una solicitud de <b> sugerencia</b> <br> En el departamento".$nombredepto."<br>";
+	$msg=$msg."<b>Enviada desde el correo: ".$emailinforme."</b><br>";
 	$msg=$msg."Asunto: ".$asunto."<br>";
 	$msg=$msg."Contenido: ".$contenido."<br>";
 	$msg=$msg."Preste mucha atención a esta solicitud, puesto que nuestro principal objetivo es la comodidad de nuestros clientes, y así prestar un mejor servicio.<br>";

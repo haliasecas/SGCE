@@ -25,63 +25,26 @@
 		if (!empty($_POST)) {
 			if (($_POST["g-recaptcha-response"])) { 
 				if (!(empty($_POST))) {
-					$email = $_POST['email'];
+					$email = $_POST['correoE01'];
 					$asunto = $_POST['asunto'];
 					$dpto = $_POST['departamento'];
+					$contenido = $_POST['comentarios'];
 
 					include("../Modelo/abre_conexion.php"); 
 					require_once("../Modelo/enviarCorreo.php");
-					echo $_POST['iddepto'];
-echo 
-							"<script type='text/javascript'>
-								$(document).ready(function() {
-									$('#process').modal('hide');
-									$('#MSGA_09').modal();
-								});
-							</script>";
-					/*$ans = mandarCorreoInforme($departamento, $asunto, $contenido, $emailinforme);
+					$ans = mandarCorreoInforme($dpto, $asunto, $contenido, $email);
 					if (ans) {
-						$busqueda = sprintf("SELECT nombre,appaterno,apmaterno FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
-						$result=mysqli_query($link, $busqueda);
-						$row_cnt = mysqli_num_rows($result);
-						if($row_cnt==1) {
-							$id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
-							$result=mysqli_query($link,$id);
-						}
-						else{
-							$sql = sprintf("INSERT INTO interesado (idinteresado, nombre, appaterno,apmaterno,correo,telefono) VALUES (NULL,'$nombre','$appat','$apmat','$email','$telefono')");
-							$result=mysqli_query($link,$sql);
-							$id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
-							$result=mysqli_query($link,$id);
-						}
-						$row = mysqli_fetch_assoc($result);
-						$idint=$row["idinteresado"];
-						$iddept=$_POST["departamento"];
-						$idarea=$_POST["area"];
-						//echo "$iddept";
-						//echo $_POST['datas'];
 						$timestamp = date('d/m/Y');
-						$dia=$_POST['date01'];
-						$soli = sprintf("INSERT INTO solicitud (idSolicitud, asunto, estado,dia,diaSol,idinteresado,idarea,iddepto) VALUES (NULL,'$asunto',' ','$dia','$timestamp','$idint','$idarea','$iddept')");
-						$result=mysqli_query($link,$soli);
-						$idSol = sprintf("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='mydb' and TABLE_NAME='solicitud'");
-						$result=mysqli_query($link,$idSol);
-						$row= mysqli_fetch_array($result);
-						$idsolicitud=$row[0]-1;
-						$tok=sprintf("INSERT INTO SolicitudToken (idtoken, idSolicitud, token) VALUES (NULL,'$idsolicitud','$string')");   
-						$result=mysqli_query($link,$tok);
-						if(!empty($_POST['hora01'])){
-							foreach($_POST['hora01'] as $selected){
-								$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
-								$result=mysqli_query($link,$tok);
-							}
-						}
+						$sql = sprintf("INSERT INTO mensaje (idMensaje, correo, asunto,contenido,estado,fecha,iddepto) VALUES (NULL,'$email','$asunto','$contenido','PENDIENTE','$timestamp','$dpto')");
+							$result=mysqli_query($link,$sql);
+							
 
-						$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
-						$result=mysqli_query($link,$tok);
-						include("../Modelo/cierra_conexion.php");
-						echo 
-							"<script type='text/javascript'>
+
+
+
+
+
+							echo "<script type='text/javascript'>
 								$(document).ready(function() {
 									$('#process').modal('hide');
 									$('#MSGA_09').modal();
@@ -89,14 +52,13 @@ echo
 							</script>";
 					}
 					else {
-						echo 
-							"<script type='text/javascript'>
+							echo "<script type='text/javascript'>
 								$(document).ready(function() {
 									$('#process').modal('hide');
 									$('#MSG_E06').modal();
 								});
 							</script>";
-					}*/
+					}
 				}
 			}
 		}
@@ -296,8 +258,8 @@ echo
 						<div class="col-md-10">
 							<select name="asunto" class="form-control">
 								<option value="-1">Selecciona un elemento de la lista</option>
-								<option value="Informe" select>Pedir informe</option>
-								<option value="Sugerencia">Sugerencia</option>
+								<option value="1" select>Pedir informe</option>
+								<option value="2">Sugerencia</option>
 							</select>
 							<span id="asunto01" class="text-center help-block hidden">Por favor seleccione una opción en este campo</span>
 						</div>
