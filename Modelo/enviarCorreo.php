@@ -48,7 +48,7 @@ function mandarCorreoInforme($departamento,$asunto,$contenido,$emailinforme){
 		$msg=$msg."Se ha realizado una solicitud de <b> sugerencia</b> <br> En el departamento: ".$nombredepto."<br>";
 	$msg=$msg."<b>Enviada desde el correo: ".$emailinforme."</b><br>";
 	$msg=$msg."Contenido: ".$contenido."<br>";
-	$msg=$msg."Preste mucha atención a esta solicitud, puesto que nuestro principal objetivo es la comodidad de nuestros clientes y esto nos ayudaría a prestar un mejor servicio.<br>";
+	$msg=$msg."Preste mucha atención a esta solicitud, puesto que nuestro principal objetivo es la comodidad de nuestros clientes y esto nos ayudaría a prestar un mejor servicio. <br>";
 	$mail->MsgHTML($msg);
 	$mail->AddAddress($correoEncargado, "Holaaaaaaaa");
 	$mail->IsHTML(true);
