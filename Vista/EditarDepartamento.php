@@ -167,11 +167,11 @@
 					</div>
 
 					<div class="form-group" id="Personal">
-						<label  for="" class="control-label col-md-2">Nombre del departamento</label>
+						<label  for="" class="control-label col-md-2">Correo electrónico del encargado</label>
 						<div class="col-md-10">
 							<select id="personal" class="form-control">
 								<?php
-	include("../Modelo/abre_conexion.php");
+	                               include("../Modelo/abre_conexion.php");
 								   $query = "SELECT * FROM personal";
 								   $result = mysqli_query($link, $query);
 								   if (($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) > 0) {

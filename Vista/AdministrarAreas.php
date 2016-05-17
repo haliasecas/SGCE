@@ -157,9 +157,10 @@
 						<?php
 
 						include("../Modelo/abre_conexion.php");
-						$query = "SELECT a.nombre as area,a.idarea as idarea,d.nombre as depto FROM area a, depto d WHERE idarea>0 and a.iddepto=d.iddepto ORDER BY a.nombre";
+						$query = "SELECT a.nombre as area,a.idarea as idarea,d.nombre as depto FROM area a, depto d WHERE idarea>0 and a.iddepto=d.iddepto ORDER BY a.nombre";                        
 						$result = mysqli_query($link, $query);
-
+                    if ($hay = mysqli_fetch_array($result, MYSQLI_ASSOC) > 0) {
+				            $result = mysqli_query($link, $query);
 						while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 							$idarea=$row['idarea'];
 							$area = $row['area'];
@@ -168,13 +169,38 @@
 							echo "<th>$area</th>";
 							echo "<th>$depto</th>";
 							echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarAreas.php?id=$idarea'>Editar</a></th>";   
-							echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='../Modelo/eliminar_area.php?id=$idarea'>Eliminar</a></th>  ";
+							echo "<th><a class=' text-success text-right' name='EliminaA' style = 'text-decoration:underline; cursor:pointer;'>Eliminar</a></th>  ";
 							echo "</tr>";
 						}
+                    }else{
+				            $jaja = "ALTER TABLE area AUTO_INCREMENT = 2";
+								mysqli_query($link, $jaja);
+							}
 
 						?>
 					</tbody>
-				</table>
+					<script type="text/javascript">
+							$("[name='EliminaA']").click(function() {
+								var id = $(this).closest('tr').attr('id');
+								eliminar(id);
+							});
+						</script>
+					</table>
+					<script type="text/javascript">
+						function eliminar(str) {
+							var id = str.substring(1);
+							$("#confirmacion").modal();
+							$("#eliminarT").click(function() {
+								$.ajax({
+									method: "POST",
+									url: "../Modelo/eliminar_area.php",
+									data: { value: id }
+								}).done(function(msg){
+									if (msg == "hecho") location.reload();
+								});
+							});
+						}
+					</script>			
 			</div>
 			<div class="form-group text-right">
 				<div class="col-md-8 col-md-offset-4">							                     
@@ -182,6 +208,23 @@
 				</div>					                                                                               						                             
 			</div>
 		</div>                                                               
+		</div>
+    
+    <div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-warning">
+						<h4 class="modal-title">Mensaje de confirmación</h4>
+					</div>
+					<div class="modal-body">
+						<p>¿Seguro que desea eliminar este departamento?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-warning" id="eliminarT" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	<!-- Nav de abajo -->

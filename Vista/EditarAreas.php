@@ -161,7 +161,7 @@
 						<br>              						                               
 						<br>              						                               
 						<br>              						                               
-						<label   class="control-label col-md-2">Nombre del departamento</label>						                                                                
+						<label   class="control-label col-md-2" id="Depa">Nombre del departamento</label>						                                                                
 						<div class="col-md-10">                                        
 							<select name="departamento" class="form-control">
 								<!--<option value="DepartamentoA">Departamento A</option> -->
@@ -180,32 +180,93 @@
 						<br><br><br>                                                 
 						<div class="form-group text-right">
 							<div class="col-md-8 col-md-offset-4">
-								<a class="btn btn-success" style="width: 150px;" onclick="#">CANCELAR</a>				<?php 
-                                echo "<a class='btn btn-success' href='../Modelo/edita_area.php?id=$id' style='width: 150px;' onclick='enviarForm();'>ENVIAR</a>"
-                                ?>			                                 
-								
+                                <a class="btn btn-success" style="width: 150px;" onclick="window.location = 'AdministrarAreas.php'">CANCELAR</a>                
+                                <?php 
+									   echo "<a class='btn btn-success' style='width: 150px; cursor: pointer;' onclick='editarArea();'>ENVIAR</a>"
+							     ?>
 							</div>					                                                                               						                             
 						</div>
-                        <script>
-                        function logIn() {
-                            var iddepto = $("[name='iddepto']").val();
-                            var nombrearea = $("[name='nombrearea']").val();
-                            if (nombrearea == "") error("El nombre del area no puede estar vacio.");
-                            else error("Por favor, introduce un nombre al area");
-                            
-                            $.ajax({
-                                method: "POST",
-                                url: "'../Modelo/edita_area.php?id=$id'",
-                                data: { nombrearea: nombrearea, iddepto: iddepto }
-                            })
-                        }
-                        
-                        </script>
+                       	<script>
+						function error(donde, str) {
+							$(donde).addClass("has-error has-feedback");
+							if (donde == "#Nombre") {
+								$("#nombre01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+								$("#nombre02").removeClass("hidden");
+								$("#nombre02").text(str);
+							}
+						}
+
+						function nohayerror(donde) {
+							$(donde).removeClass("has-error has-feedback");
+							$(donde).addClass("has-success has-feedback");
+							if (donde == "#Nombre") {
+								$("#nombre01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+								$("#nombre02").addClass("hidden");
+							}
+						}
+
+						function editarArea() {
+							var a1 = false, a2 = false;
+							var ts = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð -]+$/u;
+							var nombredepartamento = $("[name='departamento']").val();
+							var nombrearea = $("[name='nombreArea']").val();
+							if (nombrearea == "") {
+								error("#Nombre", "El campo nombre del área no puede estar vacio.");
+								a1 = false;
+							}
+							else if (!ts.test(nombrearea)) {
+								error("#Nombre", "El formato del campo nombre del área es incorrecto.");
+							}
+							else {
+								nohayerror("#Nombre");
+								a1 = true;
+							}
+							if (nombredepartamento== "-1") {
+								error("#Depa", "El nombre del departamento no puede estar vacio.");
+								a2 = false;
+							}
+							else {
+								nohayerror("#Depa");
+								a2 = true;
+							}
+
+							if (a1 && a2) {
+								$("#confirmacion").modal();
+								$("#Neta").click(function() {
+									$.ajax({
+										url: "../Modelo/edita_area.php",
+										method: "POST",
+										data: { value: "<?php echo htmlspecialchars($id); ?>", nombre: nombrearea }
+									}).done(function(msg){
+										if (msg == "hecho") window.location = "AdministrarAreas.php";
+									});
+								});
+							}
+						}
+
+					</script>
 					</div>
 				</form>   
 			</div>
 		</div>                                
-
+        
+        	<div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-warning">
+						<h4 class="modal-title">Mensaje de confirmación</h4>
+					</div>
+					<div class="modal-body">
+						<p>¿Seguro que desea cambiar el nombre de esta área ?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-warning" onclick="window.location = 'AdministrarAreas.php';"
+								data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-warning" id="Neta" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<!-- Nav de abajo -->
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
