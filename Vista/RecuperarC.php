@@ -159,9 +159,13 @@
 				</div>
 			</div>
 		</nav>
-
+		<?php 
+		if (!empty($_POST)) {
+				echo "Hola";
+			}
+		?>
 		<div style="padding-bottom:57px;" id="main-content">
-			<form class="form-horizontal" role="form" id="frmRestablecer" action="../Modelo/restablecer1.php" method="post">
+			<form class="form-horizontal" role="form" id="frmRestablecer" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 				<div class="container">
 					<div class="container">
 						<h2>Recuperar contraseña</h2>
@@ -179,43 +183,10 @@
 						</div>
 						<div class="form-group text-right">
 							<div class="col-md-offset-2 col-md-10 ">
-								<a class="btn btn-success" style="width: 150px;" onclick="recuperarC();">ENVIAR</a>
+								<a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
 							</div>
 						</div>
 					</div>
-					<script type="text/javascript">
-						function recuperarC() {
-							var mail = $("[name='email']").val();
-							if (mail == "") {
-								$("#error").modal();
-								$("#Email").attr("class", "form-group has-error has-feedback");
-								$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-								$("#email03").addClass("hidden");
-							}
-							else if (!validate(mail)) {
-								$("#Email").attr("class", "form-group has-error has-feedback");
-								$("#email03").removeClass("hidden");
-							}
-							else {
-								$.ajax({
-									url: "../sesion_in.php",
-									method: "POST",
-									data: { miemail: mail, mipass: "." }
-								}).done(function(msg){
-									if (msg != 1) {
-										$("#Email").attr("class", "form-group has-error has-feedback");
-										$("#email03").removeClass("hidden");
-										$("#email03").text("Correo no registrado, por favor revise que haya escrito el correo correctamente");
-									}
-									else {
-										$("#Email").attr("class", "form-group has-success has-feedback");
-										$("#email01").addClass("hidden");
-										$("#email03").addClass("hidden");
-									}
-								});
-							}
-						}
-					</script>
 				</div>
 			</form>
 			<script type="text/javascript">
