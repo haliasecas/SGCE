@@ -43,17 +43,23 @@
 		
 		<div id="main-content" class="container-fluid" align="center" style="padding-bottom: 50px;">
 			<div class="jumbotron">
+				<p class='avisos' id="aviso">Se ha cerrado sesion. Será redirigido automáticamente en 3 segundos</p>
 				<?php 
 				setcookie("cargo", "", time()-3600);			
 				setcookie("id", "", time()-3600);
 				setcookie("first", "", time()-3600);			
 				setcookie("name", "", time()-3600);
 
-				echo "<p class='avisos'>Se ha cerrado sesion. Será redirigido automáticamente en 3 segundos</p>"; 
 				header("refresh: 3; url = ./");
 
-				?></div>
+				?>
+			</div>
 		</div>
+		<script type="text/javascript">
+			$(document).ready(function (){
+				$("#aviso").text("Se ha cerrado sesion. Será redirigido automáticamente en 2 segundos").delay(10000).text("Se ha cerrado sesion. Será redirigido automáticamente en 1 segundo");
+			});
+		</script>
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
