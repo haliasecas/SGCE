@@ -14,7 +14,24 @@
 							
 					}*/
 					include("../Modelo/abre_conexion.php"); 
-					$busqueda = sprintf("SELECT dia FROM cita WHERE dia='2016/05/20'");
+					$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+					$contrasena = '';
+					$random_string_length = 10;	//GENERAMOS EL TOKEN
+					for ($i = 0; $i < $random_string_length; $i++) {
+						$contrasena .= $characters[rand(0, strlen($characters) - 1)];
+					}
+					echo $contrasena;
+					$sql = sprintf("UPDATE personal SET contrasena=aes_encrypt('admin123','C1r4l3t1890') WHERE correo='nathaniel981@gmail.com'");
+					$result=mysqli_query($link,$sql);
+					echo mysqli_error($link);
+					//$nueva=aes_encrypt('$contrasena','C1r4l3t1890');
+					//echo $nueva;
+					/*$busqueda = sprintf("SELECT * FROM personal WHERE correo='nathaniel981@gmail.com'");
+					$result=mysqli_query($link, $busqueda);
+					$row_cnt = mysqli_num_rows($result);
+					$row = mysqli_fetch_assoc($result);
+					echo $row['apmaterno'];*/
+					/*$busqueda = sprintf("SELECT dia FROM cita WHERE dia='2016/05/20'");
 			$result=mysqli_query($link, $busqueda);
 			$row_cnt = mysqli_num_rows($result);
 
@@ -23,7 +40,7 @@
 			$result2=mysqli_query($link, $busqueda2);
 			$row_cnt2 = mysqli_num_rows($result2);
 			echo $row_cnt2;
-			echo $row_cnt;
+			echo $row_cnt;*/
 					//$sql = sprintf("INSERT INTO cita (idCita,hinicio,hfin,dia,idarea,iddepto,idinteresado) VALUES (NULL,'09:00:00','09:30:00','2016/05/20','1','1','1')");
 					//	$result=mysqli_query($link,$sql);
 					//		echo mysqli_error($link);

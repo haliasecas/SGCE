@@ -160,7 +160,39 @@
 			</div>
 		</nav>
 		<?php 
+			if (!empty($_POST)) {
+				include("../Modelo/abre_conexion.php"); 
+				$email=$_POST['email'];
+				$busqueda = sprintf("SELECT * FROM personal WHERE correo='$email'");
+				$result=mysqli_query($link, $busqueda);
+				$row_cnt = mysqli_num_rows($result);
+				$row = mysqli_fetch_assoc($result);
+				$nombre=$row['nombre'];
+				$appaterno=$row['appaterno'];
+				$apmaterno=$row['apmaterno'];
 
+				$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+				$contrasena = '';
+				$random_string_length = 10;	//GENERAMOS EL TOKEN
+				for ($i = 0; $i < $random_string_length; $i++) {
+					$contrasena .= $characters[rand(0, strlen($characters) - 1)];
+				}
+				if($row_cnt > 0){
+					require_once("../Modelo/enviarCorreo.php");
+					if(mandarCorreoRecuperar($nombre,$appaterno,$apmaterno,$email,$contrasena)){
+						//MSGA_04 "ENVIO DE CONTRASEÑA REALIZADO EXITOSAMENTE"
+						$sql = sprintf("UPDATE personal SET contrasena=aes_encrypt('$contrasena','C1r4l3t1890') WHERE correo='$email'");
+						$result=mysqli_query($link,$sql);
+					}
+					else{
+						//MSGE_06 "ERROR AL ENVIAR EL CORREO ELECTRÓNICO"
+					}	
+				}
+				else{
+					//MSGE_13 "CORREO ELECTRONICO NO REGISTRADO"
+				}
+
+			}
 		?>
 		<div style="padding-bottom:57px;" id="main-content">
 			<form class="form-horizontal" role="form" id="frmRestablecer" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

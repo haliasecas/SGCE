@@ -172,3 +172,37 @@ function mandarCorreoRechazada($nombre,$appaterno,$apmaterno,$correo){
 		return 1;
 	}
 }
+function mandarCorreoRecuperar($nombre,$appaterno,$apmaterno,$correo,$contrasena){
+	header("Content-Type: text/html;charset=utf-8");
+	require 'PHPMailerAutoload.php';
+	$mail = new PHPMailer();
+	$mail->IsSMTP();
+	$mail->SMTPAuth = true;
+	$mail->SMTPSecure = "ssl";
+	$mail->Host = "smtp.gmail.com";
+	$mail->Port = 465;
+	$mail->SMTPKeepAlive = true;
+	$mail->Username = "sgceescom@gmail.com";
+	$mail->Password = "sgceescom10";
+	$mail->CharSet = 'UTF-8';
+	$mail->From = $correo;
+	$mail->FromName = "Estimado ".$nombre." ".$appaterno." ".$apmaterno;
+	$mail->Subject = "Cambio de contraseña";
+	$msg="<div class=\"container-fluid\" style=\"padding-bottom:9px;\" id=\"header\">
+            <img src=\"../Img/SEP.png\" height=\"64px\" style=\"float:left; padding-left:15px;\">
+            <img class=\"img-head\" src=\"../Img/logoIPNGris.png\" style=\"float:right; padding-top:15px; padding-right:15px;\">
+        </div><br><br><br><br> <br> ";
+	$msg=$msg."<b>Buen día </b> <br>".$nombre." ".$appaterno." ".$apmaterno."<br>";
+	$msg=$msg."Usted ha solicitado recuperar su contraseña, su nueva contraseña es: <br><br> ";
+	$msg=$msg."<b>".$contrasena."</b><br>";
+	$msg=$msg."Se le recomienda que una vez acceda al sistema cambie su contraseña a una más segura.<br>";
+	$mail->MsgHTML($msg);
+	$mail->AddAddress($correo, $nombre);
+	$mail->IsHTML(true);
+	if(!$mail->Send()) {
+		return 0;
+	} else {
+		return 1;
+	}
+}
+?>
