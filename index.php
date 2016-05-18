@@ -204,22 +204,6 @@
 			</div>
 		</div>
 
-		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="bienvenido" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header modal-has-success">
-						<h4 class="modal-title">Bienvenido(a)</h4>
-					</div>
-					<div class="modal-body">
-						<p>Hola <?php echo htmlspecialchars($_COOKIE["name"]); ?> </p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-success" data-dismiss="modal">Iniciar</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
