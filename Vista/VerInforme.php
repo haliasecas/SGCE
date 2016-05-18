@@ -16,7 +16,7 @@
 	if (!isset($_GET["id"])) {
 	?>
 	<script type="text/javascript">
-		window.location = "../Vista/VerInformesYS.php";
+		window.location = "../";
 	</script>
 	<?php
 	} else {
