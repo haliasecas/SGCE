@@ -207,20 +207,30 @@
 						$dia=$_POST['date01'];
 						$soli = sprintf("INSERT INTO solicitud (asunto, estado,dia,diaSol,idinteresado,idarea,iddepto) VALUES ('$asunto',' ','$dia','$timestamp','$idint','$idarea','$iddept')");
 						$result=mysqli_query($link,$soli);
-						$idSol = sprintf("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='mydb' and TABLE_NAME='solicitud'");
-						$result=mysqli_query($link,$idSol);
-						$row= mysqli_fetch_array($result);
-						$idsolicitud=$row[0]-1;
-						$tok=sprintf("INSERT INTO SolicitudToken (idSolicitud, token) VALUES ('$idsolicitud','$string')");   
+                        //----------------------
+                        $queryNa = "SELECT * FROM solicitud";
+                                $resultNa = mysqli_query($link, $queryNa);
+                        $idNa=0;
+                                while($rowNa = mysqli_fetch_array($resultNa, MYSQLI_ASSOC)){
+                                    if($rowNa['idSolicitud'] > $idNa )
+                                    {$idNa= $rowNa['idSolicitud'];}
+                                }
+                        echo $idNa;
+                        //-----------------------
+						//$idSol = sprintf("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='mydb' and TABLE_NAME='solicitud'");
+						//$result=mysqli_query($link,$idSol);
+						//$row= mysqli_fetch_array($result);
+						//$idsolicitud=$row[0]-1;
+						$tok=sprintf("INSERT INTO solicitudtoken (idSolicitud, token) VALUES ($idNa,'$string')");   
 						$result=mysqli_query($link,$tok);
 						if(!empty($_POST['hora01'])){
 							foreach($_POST['hora01'] as $selected){
-								$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
+								$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ($selected,$idNa)");
 								$result=mysqli_query($link,$tok);
 							}
 						}
 
-						$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ('$selected','$idsolicitud')");
+						$tok=sprintf("INSERT INTO HoraSol (idHorario, idSolicitud) VALUES ($selected,$idNa)");
 						$result=mysqli_query($link,$tok);
 						include("../Modelo/cierra_conexion.php");
 						echo 

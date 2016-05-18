@@ -14,7 +14,16 @@
 							
 					}*/
 					include("../Modelo/abre_conexion.php"); 
-					$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+                    $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+					$string = '';
+					$random_string_length = 20;	//GENERAMOS EL TOKEN
+					for ($i = 0; $i < $random_string_length; $i++) {
+						$string .= $characters[rand(0, strlen($characters) - 1)];
+					}
+                    $tok=sprintf("INSERT INTO solicitudtoken (idSolicitud, token) VALUES (2,'$string')");   
+						$result=mysqli_query($link,$tok);
+echo mysqli_error($link);
+					/*$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
 					$contrasena = '';
 					$random_string_length = 10;	//GENERAMOS EL TOKEN
 					for ($i = 0; $i < $random_string_length; $i++) {
@@ -23,7 +32,7 @@
 					echo $contrasena;
 					$sql = sprintf("UPDATE personal SET contrasena=aes_encrypt('admin123','C1r4l3t1890') WHERE correo='nathaniel981@gmail.com'");
 					$result=mysqli_query($link,$sql);
-					echo mysqli_error($link);
+					echo mysqli_error($link);*/
 					//$nueva=aes_encrypt('$contrasena','C1r4l3t1890');
 					//echo $nueva;
 					/*$busqueda = sprintf("SELECT * FROM personal WHERE correo='nathaniel981@gmail.com'");

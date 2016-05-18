@@ -198,9 +198,9 @@ INSERT INTO `area` (`idarea`, `nombre`, `iddepto`) VALUES
 (NULL, 'Area de Difusion Cultural', 2);
 
 
-INSERT INTO `personal` (`idpersonal`, `nombre`, `appaterno`, `apmaterno`, `correo`, `contrasena`, `cargo`) VALUES
-(NULL, 'Nathaniel', 'Cabrera', 'Herrera', 'nathaniel981@gmail.com', 0xca1f5daa97182bd802a026a132c8e8e4, 2),
-(NULL, 'Nathaniel', 'Cabrera', 'Herrera', 'nathaniel981@hotmail.com', 0xca1f5daa97182bd802a026a132c8e8e4, 1);
+INSERT INTO `personal` (`idpersonal`, `nombre`, `appaterno`, `apmaterno`, `correo`, `contrasena`, `cargo`,`ocupado`) VALUES
+(NULL, 'Nathaniel', 'Cabrera', 'Herrera', 'nathaniel981@gmail.com', 0xca1f5daa97182bd802a026a132c8e8e4, 2,1),
+(NULL, 'Nathaniel', 'Cabrera', 'Herrera', 'nathaniel981@hotmail.com', 0xca1f5daa97182bd802a026a132c8e8e4, 1,1);
 -- -----------------------------------------------------
 -- Table `mydb`.`cita`
 -- -----------------------------------------------------
