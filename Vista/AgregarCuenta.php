@@ -10,6 +10,7 @@
         <script type="text/javascript" src="../Scr/validator.js"></script>
         <link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
         <link type="text/css" rel="stylesheet" href="../Css/letras.css">
+        <link type="text/css" rel="stylesheet" href="../Css/modals.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
@@ -150,84 +151,77 @@
                 <p><strong class="text-success">Todos los campos son obligatorios.</strong> El nombre del departamento debe estar previamente registrado en el sistema.</p> 
                 <br>
                 <br>                                
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="Formulario">
                     <div class="form-group" id="Nombre">
                         <label  for="" class="control-label col-md-2">Nombre(s)</label>
                         <div class="col-md-10">
                             <input type='text' id="nombre" class='form-control' placeholder="Rodrigo">
+                            <span id="nombre01" class="hidden glyphicon form-control-feedback"></span>
+							<span id="nombre02" class="text-center help-block hidden"></span>
                         </div>
                     </div>
                     <div class="form-group" id="Appaterno">
                         <label  for="" class="control-label col-md-2">Apellido paterno</label>
                         <div class="col-md-10">
                             <input type='text' id="appat" class='form-control' placeholder="Perez">
+                             <span id="appat01" class="hidden glyphicon form-control-feedback"></span>
+							<span id="appat02" class="text-center help-block hidden"></span>
                         </div>
                     </div>
                     <div class="form-group" id="Apmaterno">
                         <label  for="" class="control-label col-md-2">Apellido materno</label>
                         <div class="col-md-10">
                             <input type='text' id="apmat" class='form-control' placeholder="Perez">
+                             <span id="apmat01" class="hidden glyphicon form-control-feedback"></span>
+							<span id="apmat02" class="text-center help-block hidden"></span>
                         </div>
                     </div>
                     <div class="form-group" id="Correo">
                         <label  for="" class="control-label col-md-2">Correo electrónico</label>
                         <div class="col-md-10">
                             <input type='correo' id="correo" class='form-control' placeholder="ejemplo@dominio.com">
+                             <span id="correo01" class="hidden glyphicon form-control-feedback"></span>
+							<span id="correo02" class="text-center help-block hidden"></span>
                         </div>
                     </div>
-                    <!-- <br>
-<br>
-<br>
-<label  for="" class="control-label col-md-2">Nombre del departamento</label>
-<div class="col-md-10">                                        
-<select name="departamento" class="form-control">
-<!-- <option value="DepartamentoA">Departamento A</option> 
-<?php/*
-                                    include("../Modelo/abre_conexion.php");
-                                    $query = "SELECT * FROM depto";
-                                    $result = mysqli_query($link, $query);
-                                    while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                                        $nombredepto = $row['nombre'];
-                                        $iddepto = $row['iddepto'];
-                                        echo "<option value='$iddepto'>$nombredepto</option>";
-                                    }
-                                    include("../Modelo/cierra_conexion.php");*/
-?>
-</select>
-</div>-->
                     <div class="form-group" id="Pass1">
                         <label class="control-label col-md-2">Contraseña</label>
                         <div class="col-md-10">
                             <input type='password' id="pass1" class='form-control' placeholder="***************">
+                             <span id="pass01" class="hidden glyphicon form-control-feedback"></span>
+							<span id="pass02" class="text-center help-block hidden"></span>
                         </div>
                     </div>
                     <div class="form-group" id="Pass2">
                         <label  for="" class="control-label col-md-2">Repetir contraseña</label>
                         <div class="col-md-10">
                             <input type='password' id="pass2" class='form-control' placeholder="***************">
+                             <span id="repass01" class="hidden glyphicon form-control-feedback"></span>
+							<span id="repass02" class="text-center help-block hidden"></span>
                         </div>
                     </div>
                     <div class="form-group" id="Cargo">
                         <label class="control-label col-md-2">Cargo</label>
                         <div class="col-md-10">                                        
                             <select id="cargo" class="form-control">
+                                <option value="-1"></option>                                 		     
                                 <option value="1">Administrador</option> 
-                                <option value="2">Personal Administrativo</option> 
+                                <option value="2">Personal Administrativo</option>                                 
                             </select>
                         </div>
                     </div>
                     <div class="form-group" id="Botones">                                             
                         <div class="form-group text-right">
                             <div class="col-md-8 col-md-offset-4">
-                                <a class="btn btn-success" style="width: 150px;" onclick="#" href="../">CANCELAR</a>
-                                <a class="btn btn-success" style="width: 150px;" onclick="lol();">ENVIAR</a>
+                                <a class="btn btn-success" style="width: 150px;" onclick="window.location = './AdministrarCuentas.php'">CANCELAR</a>
+                                <a class="btn btn-success" style="width: 150px;" onclick="ingresacuenta();">ENVIAR</a>
                             </div>
                         </div>
                     </div>
                 </form>
                 <script type="text/javascript">
-                    function lol(){
-                        var nombres = false, correos = false, contrasenas = false;
+                    function ingresacuenta(){
+                        var nombres = false, correos = false, contrasenas = false,cargos = false;
                         var p1 = $("#pass1").val();
                         var p2 = $("#pass2").val();
                         var nombre = $("#nombre").val();
@@ -235,24 +229,126 @@
                         var apmat = $("#apmat").val();
                         var correo = $("#correo").val();
                         var cargo = $("#cargo").val();
-                        console.log(p1);
-                        if (p1 === p2 && p1 != "") {
-                            contrasenas = true;
+                        console.log(p1); //No es seguro pero bueno!
+                         // Validando el nombre,apellido paterno y materno                
+                            if (nombre == "" ) {
+								$("#Nombre").attr("class", "form-group has-feedback has-error");
+								$("#nombre01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+								$("#nombre02").removeClass("hidden");
+								$("#nombre02").text("El campo Nombre no puede estar vacío.");
+                                nombres = false;
+                            }else if(!valname(nombre)){
+								$("#Nombre").attr("class", "form-group has-feedback has-error");
+								$("#nombre01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+								$("#nombre02").removeClass("hidden");
+								$("#nombre02").text("El formato del campo Nombre  es incorrecto.");                                
+                                nombres = false;
+                            }else{
+								$("#Nombre").attr("class", "form-group has-feedback has-success");
+								$("#nombre01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+								$("#nombre02").addClass("hidden");                                
+                                nombres = true;
+                            }
+                            //Apellido Paterno
+                            if (appat == "" ) {
+								$("#Appaterno").attr("class", "form-group has-feedback has-error");
+                                $("#appat01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+								$("#appat02").removeClass("hidden");
+								$("#appat02").text("El campo Apellido Paterno no puede estar vacío.");
+                                nombres = false;
+                            }else if(!valname(appat)){
+								$("#Appaterno").attr("class", "form-group has-feedback has-error");
+                                $("#appat01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+								$("#appat02").removeClass("hidden");
+								$("#appat02").text("El formato del campo Apellido Paterno es incorrecto.");                        
+                                nombres = false;
+                            }else{
+								$("#Appaterno").attr("class", "form-group has-feedback has-success");
+								$("#appat01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+								$("#appat02").addClass("hidden");                   
+                                nombres = true;
+                            }
+                            //Apellido Materno
+                            if(apmat == ""){
+                                $("#Apmaterno").attr("class", "form-group has-feedback has-error");
+                                $("#apmat01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+								$("#apmat02").removeClass("hidden");
+								$("#apmat02").text("El campo Apellido Materno no puede estar vacío.");
+								nombres = false;
+							}else if (!valname(apmat)) {                            
+                                $("#Apmaterno").attr("class", "form-group has-feedback has-error");
+                                $("#apmat01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+								$("#apmat02").removeClass("hidden");
+								$("#apmat02").text("El formato del campo Apellido Materno es incorrecto.");
+								nombres = false;
+							}else {                              
+                                $("#Apmaterno").attr("class", "form-group has-feedback has-success");
+								$("#apmat01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+								$("#apmat02").addClass("hidden");
+								nombres = true;
+							}
+                        //Validando Correo
+                        if(correo == ""){
+                              $("#Correo").attr("class", "form-group has-feedback has-error");
+                              $("#correo01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+				              $("#correo02").removeClass("hidden");
+				              $("#correo02").text("El campo Correo Electrónico no puede estar vacío.");
+                            correos = false;
+                        }else if (!validate(correo)) {
+                              $("#Correo").attr("class", "form-group has-feedback has-error");
+                              $("#correo01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+				              $("#correo02").removeClass("hidden");
+				              $("#correo02").text("El formato del campo Correo Electrónico es incorrecto.");
+				            correos  = false;
+                        }else {
+                                $("#Correo").attr("class", "form-group has-feedback has-success");
+								$("#correo01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+								$("#correo02").addClass("hidden");
+								correos = true;
+                        }                       
+                        //Validando contraseñas y que no este vacio
+                        if(p1 == ""){
+                              $("#Pass1").attr("class", "form-group has-feedback has-error");
+                              $("#pass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+				              $("#pass02").removeClass("hidden");				            
+                              contrasenas = false;
+                        }if(p2 == ""){
+                              $("#Pass2").attr("class", "form-group has-feedback has-error");
+                              $("#repass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+				              $("#repass02").removeClass("hidden");
+				              $("#repass02").text("El campo Contraseña  no puede estar vacío.");
+                              contrasenas = false;                        
+                        }else if(p1 != p2){
+                              $("#Pass1").attr("class", "form-group has-feedback has-error");
+                              $("#pass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+				              $("#pass02").removeClass("hidden");		
+                              $("#Pass2").attr("class", "form-group has-feedback has-error");
+                              $("#repass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+				              $("#repass02").removeClass("hidden");
+				              $("#repass02").text("Las contraseñas no coinciden");
+                            contrasenas = false;
+                        }else{
+                                $("#Pass1").attr("class", "form-group has-feedback has-success");
+								$("#pass01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+								$("#pass02").addClass("hidden");
+                                $("#Pass2").attr("class", "form-group has-feedback has-success");
+								$("#repass01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+								$("#repass02").addClass("hidden");
+								contrasenas= true;
                         }
-                        else {
-                            $("#Pass1").attr("class", "form-group has-error has-feedback");
-                            $("#Pass2").attr("class", "form-group has-error has-feedback");
+                        //Validando el cargo
+                        if(cargo == -1){
+                              $("#Cargo").attr("class", "form-group has-feedback has-error");                              
+				              $("#cargo02").removeClass("hidden");						              	
+                              cargos = false;
+                        }else{
+                                $("#Cargo").attr("class", "form-group has-feedback has-success");
+								$("#cargo01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+								$("#cargo02").addClass("hidden");
+                                cargos = true;
                         }
-                        if (validate(correo)) {
-                            correos = true;
-                        }
-                        else {
-                            
-                        }
-                        if (valname(nombre) && valname(appat) && valname(apmat)) {
-                            nombres = true;
-                        }
-                        if(nombres && correos && contrasenas){
+                        // Si los cuatro fueron correctos
+                        if(nombres && correos && contrasenas && cargos){
                             $.ajax({
                                 url: "../Modelo/agrega_cuenta.php",
                                 method: "POST",
@@ -264,54 +360,53 @@
                                     correo: correo,
                                     cargo: cargo
                                 }
-                            }).done(function(msg){
-                                if (msg == "Ya") $("whathever").modal();
-                                else $("erroneo").modal();
+                            }).done(function(){
+                                $("#Formulario").submit();                                
                             });   
-                        }
-                        
+                        }else{
+                                $(window).scrollTop(0);
+								$("#error").modal();
+                        }                        
                     }
-
                 </script>
             </div>
         </div>
-        
-        <div class="modal fade" data-keyboard="false" data-backdrop="static" id="whathever" role="dialog">
+        <div class="modal fade" data-keyboard="false" data-backdrop="static" id="exitoso" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header modal-has-success">
 						<h4 class="modal-title">Mensaje de alerta</h4>
 					</div>
 					<div class="modal-body">
-						<p>Algo ha sido exitoso.</p>
+						<p>La cuenta se ha creado exitosamente.</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success" 
-                                onclic="window.location = ../Vista/AdministrarCuentas.php" 
-                                data-dismiss="modal">
-                            Aceptar
-                        </button>
+						<button type="button" class="btn btn-success" data-dismiss="modal"
+								onClick="window.location = 'AdministrarCuentas.php';">
+							Aceptar
+						</button>
 					</div>
 				</div>
 			</div>
 		</div>
-
-        <div class="modal fade" data-keyboard="false" data-backdrop="static" id="erroneo" role="dialog">
+        
+        <div class="modal fade" data-keyboard="false" id="error" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header modal-has-error">
 						<h4 class="modal-title">Mensaje de error</h4>
 					</div>
 					<div class="modal-body">
-						<p>Algo salió mal.</p>
+						<p>Falta al menos un dato obligatorio para efectuar la operación solicitada.</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>		
         
+
         <nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
             <div class="container-fluid" style="padding-right:51px;">
                 <div class="navbar-header">
