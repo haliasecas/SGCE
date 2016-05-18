@@ -1,10 +1,4 @@
-<html>  
-
-    <head>  
-        <title> Cambia contraseña</title>  
-    </head>  
-
-    <body>  
+ 
         <?php  
         // Recibimos por POST los datos procedentes del formulario  
         $pass = $_POST["pass"]; 
@@ -17,7 +11,5 @@
             
             include("cierra_conexion.php");
        
-                header("refresh: 1; url = ../");//Linea de reedirección
+                //header("refresh: 1; url = ../");//Linea de reedirección
         ?>  
-    </body>  
-</html> 
