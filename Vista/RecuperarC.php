@@ -188,7 +188,7 @@
 				</div>
 			</form>
 			<script type="text/javascript">
-				function enviarForm() {
+				function enviarRecuperar() {
 					$("#frmRestablecer").submit();
 				}
 			</script>
