@@ -136,15 +136,16 @@
 		if(isset($_GET["id"])) {
 			$id = $_GET['id'];
 			include("../Modelo/abre_conexion.php");
-			$query = "SELECT * FROM depto WHERE iddepto = $id";
+			$query = "SELECT d.nombre, d.idpersonal, p.correo FROM depto AS d, personal AS p WHERE iddepto = $id AND p.idpersonal = d.idpersonal";
 			$result = mysqli_query($link, $query);
 			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 			$nombredepto = $row['nombre'];
-			$idPer = $row['iddepto'];
+			$idper = $row['idpersonal'];
+			$correo = $row['correo'];
 		} else {
 		?>
 		<script type="text/javascript">
-			window.location = "AdministrarDepartamentos.php";
+			window.location = "../";
 		</script>
 		<?php 
 		}
@@ -170,24 +171,21 @@
 						<label  for="" class="control-label col-md-2">Correo electrónico del encargado</label>
 						<div class="col-md-10">
 							<select id="personal" class="form-control">
+								<option value="<?php echo $idper; ?>"><?php echo $correo; ?></option>
 								<?php
-	                               include("../Modelo/abre_conexion.php");
-								   $query = "SELECT * FROM personal";
-								   $result = mysqli_query($link, $query);
-								   if (($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) > 0) {
-									   $result = mysqli_query($link, $query);
-									   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-										   $nombre= $row['correo'];
-										   $idpersona = $row["idpersonal"];
-										   $ocup = $row["ocupado"];
-										   if ($idpersona == $idPer or $ocup == 0)
-											   echo "<option value='$idpersona'>$nombre</option>";
-									   }
-								   }
-								   else {
-									   echo "<option value='-1'>No hay personal disponible</option>";
-								   }
-								   include("../Modelo/cierra_conexion.php")
+								include("../Modelo/abre_conexion.php");
+								$query = "SELECT * FROM personal WHERE ocupado == 0";
+								$result = mysqli_query($link, $query);
+								if (($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) > 0) {
+									$result = mysqli_query($link, $query);
+									while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+										$nombre = $row['correo'];
+										$idpersona = $row["idpersonal"];
+										$ocup = $row["ocupado"];
+										echo "<option value='$idpersona'>$nombre</option>";
+									}
+								}
+								include("../Modelo/cierra_conexion.php")
 								?>
 							</select>
 						</div>
@@ -199,7 +197,7 @@
 								CANCELAR
 							</a>
 							<?php 
-									   echo "<a class='btn btn-success' style='width: 150px; cursor: pointer;' onclick='editarDepto();'>ENVIAR</a>"
+									echo "<a class='btn btn-success' style='width: 150px; cursor: pointer;' onclick='editarDepto();'>ENVIAR</a>"
 							?>
 						</div>                       
 					</div>
