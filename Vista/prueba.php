@@ -14,6 +14,16 @@
 							
 					}*/
 					include("../Modelo/abre_conexion.php"); 
+					$busqueda = sprintf("SELECT dia FROM cita WHERE dia='2016/05/20'");
+			$result=mysqli_query($link, $busqueda);
+			$row_cnt = mysqli_num_rows($result);
+
+
+			$busqueda2 = sprintf("SELECT hinicio FROM cita WHERE hinicio='09:00:00'");
+			$result2=mysqli_query($link, $busqueda2);
+			$row_cnt2 = mysqli_num_rows($result2);
+			echo $row_cnt2;
+			echo $row_cnt;
 					//$sql = sprintf("INSERT INTO cita (idCita,hinicio,hfin,dia,idarea,iddepto,idinteresado) VALUES (NULL,'09:00:00','09:30:00','2016/05/20','1','1','1')");
 					//	$result=mysqli_query($link,$sql);
 					//		echo mysqli_error($link);
@@ -30,11 +40,11 @@
 
 					if($row_cnt=='1' && $row_cnt2=='1')
 						echo "Hola";*/
-					$query = "SELECT * FROM horapref WHERE idHorario='1'";
-					$result = mysqli_query($link, $query);
-					$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-					$hinicio=$row['hinicio'];
-					echo $hinicio;
+					//$query = "SELECT * FROM horapref WHERE idHorario='1'";
+					//$result = mysqli_query($link, $query);
+					//$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+					//$hinicio=$row['hinicio'];
+					//echo $hinicio;
 						/*if($row_cnt==1) {
 							$id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
 							$result=mysqli_query($link,$id);

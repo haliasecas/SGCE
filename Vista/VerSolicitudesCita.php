@@ -153,9 +153,7 @@
 			$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
 
 			$idarea=$row['idarea'];
-			$query = "SELECT * FROM area WHERE idarea='$idarea'";
-			$result3 = mysqli_query($link, $query);
-			$row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+			$iddepto=$row['iddepto'];
 
 			$asunto=$row['asunto'];
 			$appaterno=$row2['appaterno'];
@@ -163,20 +161,19 @@
 			$apmaterno=$row2['apmaterno'];
 			$correo = $row2['correo'];
 			$telefono = $row2['telefono'];
-			$area = $row3['nombre'];
 			$dia = $row['dia'];
+
 			$horasel=$_POST['hora'];
 
 			$query = "SELECT * FROM horapref WHERE idHorario='$horasel'";
 			$result = mysqli_query($link, $query);
 			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 			$hinicio=$row['hinicio'];
-
+			$hfin=$row['hfin'];
 
 			$busqueda = sprintf("SELECT dia FROM cita WHERE dia='$dia'");
 			$result=mysqli_query($link, $busqueda);
 			$row_cnt = mysqli_num_rows($result);
-
 
 
 			$busqueda2 = sprintf("SELECT hinicio FROM cita WHERE hinicio='$hinicio'");
@@ -185,13 +182,23 @@
 
 
 			if($row_cnt=='1' && $row_cnt2=='1'){
-						
+						//MENSAJE DE FECHAS QUE COINCIDEN CON CITAS ANTERIORES
 			}
 			else{
-
+				$sql = sprintf("INSERT INTO cita (idCita,hinicio,hfin,dia,idarea,iddepto,idinteresado) VALUES (NULL,'$hinicio','$hfin','$dia','$idarea','$iddepto','$idinteresado')");
+				$result=mysqli_query($link,$sql);
+				$sql = sprintf("UPDATE solicitud SET estado='AGENDADA' WHERE idSolicitud='$idsol'");
+				$result=mysqli_query($link,$sql);
+				require_once("../Modelo/enviarCorreo.php");
+				if (mandarCorreoAceptada($nombre,$appaterno,$apmaterno,$correo,$dia,$hinicio,$hfin)){
+					echo "Hola";
+				}
+				//else{
+					//ERROR AL MANDAR CORREO
+				//}
+				//MENSAJE DE ACEPTACION DE CITAS
 			}
-
-		}
+}
 		?>
 		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
 			<div class="container-fluid col-md-10 col-md-offset-1">
