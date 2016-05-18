@@ -9,6 +9,7 @@
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
+		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 
@@ -16,6 +17,55 @@
 		<div class="container-fluid" style="padding-bottom:9px;" id="header">
 			<img src="../Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
+		</div>
+		
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="MSGE17" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Mensaje de error</h4>
+					</div>
+					<div class="modal-body">
+						<p>Ya existe una cita en esa área programada en el mismo horario.
+							Por favor, pruebe con otro día u otro horario</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" data-backdrop="static" data-keyboard="false" id="MSGE06" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Mensaje de error</h4>
+					</div>
+					<div class="modal-body">
+						<p>Ocurrió un error interno al enviar el correo electrónico, por favor intente de nuevo.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="MSGA05" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Mensaje de alerta</h4>
+					</div>
+					<div class="modal-body">
+						<p>La cita fue programada de manera exitosa</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<!-- Nueva nav -->
@@ -179,7 +229,11 @@
 
 
 					if($row_cnt=='1' && $row_cnt2=='1'){
-						//MENSAJE DE FECHAS QUE COINCIDEN CON CITAS ANTERIORES
+		?>
+		<script type="text/javascript">
+			$("#MSGE17").modal();
+		</script>
+		<?php
 					}
 					else{
 						$sql = sprintf("INSERT INTO cita (idCita,hinicio,hfin,dia,idarea,iddepto,idinteresado) VALUES (NULL,'$hinicio','$hfin','$dia','$idarea','$iddepto','$idinteresado')");
@@ -188,12 +242,24 @@
 						$result=mysqli_query($link,$sql);
 						require_once("../Modelo/enviarCorreo.php");
 						if (mandarCorreoAceptada($nombre,$appaterno,$apmaterno,$correo,$dia,$hinicio,$hfin)){
-							echo "Hola";
+		?>
+		<script type="text/javascript">
+			$("#MSGA05").modal();
+		</script>
+		<?php
 						}
-						//else{
-						//ERROR AL MANDAR CORREO
-						//}
-						//MENSAJE DE ACEPTACION DE CITAS
+						else{
+		?>
+		<script type="text/javascript">
+			$("#MSGE06").modal();
+		</script>
+		<?php
+						}
+		?>
+		<script type="text/javascript">
+			$("#MSGA05").modal();
+		</script>
+		<?php
 					}
 				}
 				else{
