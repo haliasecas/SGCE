@@ -142,7 +142,7 @@
                     <table class="table">
                         <thead>
                             <tr style="color: #FFF; background: #656565;">
-                                <th>Áreas</th>
+                                <th>Área</th>
                                 <th colspan="3">Departamento</th>      
                             </tr>
                         </thead>
