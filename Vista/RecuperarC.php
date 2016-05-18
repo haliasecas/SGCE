@@ -160,9 +160,7 @@
 			</div>
 		</nav>
 		<?php 
-		if (!empty($_POST)) {
-				echo "Hola";
-			}
+
 		?>
 		<div style="padding-bottom:57px;" id="main-content">
 			<form class="form-horizontal" role="form" id="frmRestablecer" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -183,14 +181,14 @@
 						</div>
 						<div class="form-group text-right">
 							<div class="col-md-offset-2 col-md-10 ">
-								<a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
+								<a class="btn btn-success" style="width: 150px;" onclick="enviarRecuperar();">ENVIAR</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</form>
 			<script type="text/javascript">
-				function enviarForm() {
+				function enviarRecuperar() {
 					$("#frmRestablecer").submit();
 				}
 			</script>
@@ -242,19 +240,6 @@
 
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$("#frmRestablecer").submit(function(event){
-					event.preventDefault();
-					$.ajax({
-						url:'validaremail.php',
-						type:'post',
-						dataType:'json',
-						data:$("#frmRestablecer").serializeArray()
-					}).done(function(respuesta){
-						$("#mensaje").html(respuesta.mensaje);
-						$("#email").val('');
-					});
-				});
-
 				// Sticky bar plz
 				$(window).scroll(function() {
 					if ($(window).scrollTop() > $("#header").height()) {

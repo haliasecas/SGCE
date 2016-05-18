@@ -206,8 +206,10 @@
 							$(donde).addClass("has-error has-feedback");
 							if (donde == "#Nombre") {
 								$("#nombre01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-								$("#nombre02").removeClass("hidden");
-								$("#nombre02").text(str);
+								if (str != "") {
+									$("#nombre02").removeClass("hidden");
+									$("#nombre02").text(str);
+								}
 							}
 						}
 
@@ -226,18 +228,18 @@
 							var personal = $("[name='personal']").val();
 							var nombrearea = $("[name='nombreArea']").val();
 							if (nombrearea == "") {
-								error("#Nombre", "El campo nombre del departamento no puede estar vacio.");
+								error("#Nombre", "El campo nombre del departamento no puede estar vacio");
 								a1 = false;
 							}
 							else if (!ts.test(nombrearea)) {
-								error("#Nombre", "El formato del campo nombre del departamento es incorrecto.");
+								error("#Nombre", "El formato del campo nombre del departamento es incorrecto");
 							}
 							else {
 								nohayerror("#Nombre");
 								a1 = true;
 							}
 							if (personal == "-1") {
-								error("#Personal", "El nombre personal no puede estar vacio.");
+								error("#Personal", "El nombre personal no puede estar vacio");
 								a2 = false;
 							}
 							else {
@@ -254,6 +256,10 @@
 										data: { value: "<?php echo htmlspecialchars($id); ?>", nombre: nombrearea }
 									}).done(function(msg){
 										if (msg == "hecho") window.location = "AdministrarDepartamentos.php";
+										else {
+											error("#Nombre", "");
+											$("#MSGE16").modal();
+										}
 									});
 								});
 							}
@@ -282,6 +288,21 @@
 			</div>
 		</div>
 
+		<div class="modal fade" data-keyboard="false" id="MSGE16" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Mensaje de error</h4>
+					</div>
+					<div class="modal-body">
+						<p>El nombre de este departamento ya existe en el sistema.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<!-- Nav de abajo -->
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
