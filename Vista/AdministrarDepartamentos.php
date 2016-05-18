@@ -142,7 +142,7 @@
 					<table class="table">
 						<thead>
 							<tr style="color: #FFF; background: #656565;">
-								<th colspan="3">Departamento</th>
+								<th colspan="4">Departamento</th>
 								<th>Correo electrónico</th>
 								<th>Encargado</th>
 								<th colspan="2"></th>
@@ -162,7 +162,7 @@
 									$nombreE = $row['nombreP'];
 
 									echo "<tr id='D$iddepto'>";
-									echo "<td colspan='3'>$nombre</td>";
+									echo "<td colspan='4'>$nombre</td>";
 									echo "<td>$correoE</td>";
 									echo "<td>$nombreE</td>";
 									echo "<td><a class='text-success text-right' style='text-decoration:underline;' href='EditarDepartamento.php?id=$iddepto'>Editar</a></td>";
