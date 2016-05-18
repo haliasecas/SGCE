@@ -9,6 +9,7 @@
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
+		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 
@@ -16,6 +17,55 @@
 		<div class="container-fluid" style="padding-bottom:9px;" id="header">
 			<img src="../Img/SEP.png" height="64px" style="float:left; padding-left:15px;">
 			<img class="img-head" src="../Img/logoIPNGris.png" style="float:right; padding-top:15px; padding-right:15px;">
+		</div>
+		
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="MSGE17" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Mensaje de error</h4>
+					</div>
+					<div class="modal-body">
+						<p>Ya existe una cita en esa área programada en el mismo horario.
+							Por favor, pruebe con otro día u otro horario</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" data-backdrop="static" data-keyboard="false" id="MSGE06" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Mensaje de error</h4>
+					</div>
+					<div class="modal-body">
+						<p>Ocurrió un error interno al enviar el correo electrónico, por favor intente de nuevo.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="MSGA05" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Mensaje de alerta</h4>
+					</div>
+					<div class="modal-body">
+						<p>La cita fue programada de manera exitosa</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<!-- Nueva nav -->
@@ -134,64 +184,92 @@
 			echo "<script type='text/javascript'>
 							window.location = '../';
 						</script>";
-		?>
-		<!-- <script type="text/javascript">
-			window.location = "../Vista/VerInformesYS.php";
-		</script>-->
-		<?php
 		} else {
 			if(isset($_GET["id"]) && isset($_POST['diaselect'])){
 				$idsol = $_GET['id'];
-			include("../Modelo/abre_conexion.php");
-			$query = "SELECT * FROM solicitud WHERE idsolicitud = '$idsol'";
-			$result = mysqli_query($link, $query);
-			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-			$idinteresado=$row['idinteresado'];
-			
-			$query = "SELECT * FROM interesado WHERE idinteresado='$idinteresado'";
-			$result2 = mysqli_query($link, $query);
-			$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
+				$opcion=$_POST['opcionSelect'];
+				include("../Modelo/abre_conexion.php");
+				if($opcion=='Agendar'){
+					$query = "SELECT * FROM solicitud WHERE idsolicitud = '$idsol'";
+					$result = mysqli_query($link, $query);
+					$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+					$idinteresado=$row['idinteresado'];
 
-			$idarea=$row['idarea'];
-			$query = "SELECT * FROM area WHERE idarea='$idarea'";
-			$result3 = mysqli_query($link, $query);
-			$row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+					$query = "SELECT * FROM interesado WHERE idinteresado='$idinteresado'";
+					$result2 = mysqli_query($link, $query);
+					$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
 
-			$asunto=$row['asunto'];
-			$appaterno=$row2['appaterno'];
-			$nombre = $row2['nombre'];
-			$apmaterno=$row2['apmaterno'];
-			$correo = $row2['correo'];
-			$telefono = $row2['telefono'];
-			$area = $row3['nombre'];
-			$dia = $row['dia'];
-			$horasel=$_POST['hora'];
+					$idarea=$row['idarea'];
+					$iddepto=$row['iddepto'];
 
-			$query = "SELECT * FROM horapref WHERE idHorario='$horasel'";
-			$result = mysqli_query($link, $query);
-			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-			$hinicio=$row['hinicio'];
+					$asunto=$row['asunto'];
+					$appaterno=$row2['appaterno'];
+					$nombre = $row2['nombre'];
+					$apmaterno=$row2['apmaterno'];
+					$correo = $row2['correo'];
+					$telefono = $row2['telefono'];
+					$dia = $row['dia'];
 
+					$horasel=$_POST['hora'];
 
-			$busqueda = sprintf("SELECT dia FROM cita WHERE dia='$dia'");
-			$result=mysqli_query($link, $busqueda);
-			$row_cnt = mysqli_num_rows($result);
+					$query = "SELECT * FROM horapref WHERE idHorario='$horasel'";
+					$result = mysqli_query($link, $query);
+					$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+					$hinicio=$row['hinicio'];
+					$hfin=$row['hfin'];
 
-
-
-			$busqueda2 = sprintf("SELECT hinicio FROM cita WHERE hinicio='$hinicio'");
-			$result2=mysqli_query($link, $busqueda2);
-			$row_cnt2 = mysqli_num_rows($result2);
+					$busqueda = sprintf("SELECT dia FROM cita WHERE dia='$dia'");
+					$result=mysqli_query($link, $busqueda);
+					$row_cnt = mysqli_num_rows($result);
 
 
-			if($row_cnt=='1' && $row_cnt2=='1'){
-						
+					$busqueda2 = sprintf("SELECT hinicio FROM cita WHERE hinicio='$hinicio'");
+					$result2=mysqli_query($link, $busqueda2);
+					$row_cnt2 = mysqli_num_rows($result2);
+
+
+					if($row_cnt=='1' && $row_cnt2=='1'){
+		?>
+		<script type="text/javascript">
+			$("#MSGE17").modal();
+		</script>
+		<?php
+					}
+					else{
+						$sql = sprintf("INSERT INTO cita (idCita,hinicio,hfin,dia,idarea,iddepto,idinteresado) VALUES (NULL,'$hinicio','$hfin','$dia','$idarea','$iddepto','$idinteresado')");
+						$result=mysqli_query($link,$sql);
+						$sql = sprintf("UPDATE solicitud SET estado='AGENDADA' WHERE idSolicitud='$idsol'");
+						$result=mysqli_query($link,$sql);
+						require_once("../Modelo/enviarCorreo.php");
+						if (mandarCorreoAceptada($nombre,$appaterno,$apmaterno,$correo,$dia,$hinicio,$hfin)){
+		?>
+		<script type="text/javascript">
+			$("#MSGA05").modal();
+		</script>
+		<?php
+						}
+						else{
+		?>
+		<script type="text/javascript">
+			$("#MSGE06").modal();
+		</script>
+		<?php
+						}
+		?>
+		<script type="text/javascript">
+			$("#MSGA05").modal();
+		</script>
+		<?php
+					}
+				}
+				else{
+					$sql = sprintf("UPDATE solicitud SET estado='RECHAZADA' WHERE idSolicitud='$idsol'");
+					$result=mysqli_query($link,$sql);
+					if (mandarCorreoRechazada($nombre,$appaterno,$apmaterno,$correo)){
+						echo "Hola";
+					}
+				}
 			}
-			else{
-
-			}
-
-		}
 		?>
 		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
 			<div class="container-fluid col-md-10 col-md-offset-1">
@@ -204,40 +282,40 @@
 				<form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?id='.$_GET['id']; ?>" id="Formulario" method="POST">
 					<h4 class="text-uppercase">Datos del interesado:</h4>
 					<?php
-						if(isset($_GET["id"]))
-							$idsol = $_GET['id'];
-						include("../Modelo/abre_conexion.php");
-						$query = "SELECT * FROM solicitud WHERE idsolicitud = '$idsol'";
-						$result = mysqli_query($link, $query);
-						$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-						$idinteresado=$row['idinteresado'];
+			if(isset($_GET["id"]))
+				$idsol = $_GET['id'];
+			include("../Modelo/abre_conexion.php");
+			$query = "SELECT * FROM solicitud WHERE idsolicitud = '$idsol'";
+			$result = mysqli_query($link, $query);
+			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+			$idinteresado=$row['idinteresado'];
 
-						$query = "SELECT * FROM interesado WHERE idinteresado='$idinteresado'";
-						$result2 = mysqli_query($link, $query);
-						$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
+			$query = "SELECT * FROM interesado WHERE idinteresado='$idinteresado'";
+			$result2 = mysqli_query($link, $query);
+			$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
 
-						$idarea=$row['idarea'];
-						$query = "SELECT * FROM area WHERE idarea='$idarea'";
-						$result3 = mysqli_query($link, $query);
-						$row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+			$idarea=$row['idarea'];
+			$query = "SELECT * FROM area WHERE idarea='$idarea'";
+			$result3 = mysqli_query($link, $query);
+			$row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
 
 
 
-						$asunto=$row['asunto'];
-						$appaterno=$row2['appaterno'];
-						$nombre = $row2['nombre'];
-						$apmaterno=$row2['apmaterno'];
-						$correo = $row2['correo'];
-						$telefono = $row2['telefono'];
-						$area = $row3['nombre'];
-						$dia = $row['dia'];
+			$asunto=$row['asunto'];
+			$appaterno=$row2['appaterno'];
+			$nombre = $row2['nombre'];
+			$apmaterno=$row2['apmaterno'];
+			$correo = $row2['correo'];
+			$telefono = $row2['telefono'];
+			$area = $row3['nombre'];
+			$dia = $row['dia'];
 					?>
 					<!-- Correo electrónico -->
 					<div class="form-group has-feedback" id="Email01">                                                            
 						<label  class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
 							<?php 
-								echo "<p class='form-control-static' id='correo' name='nombre'>$correo</p>";
+			echo "<p class='form-control-static' id='correo' name='nombre'>$correo</p>";
 							?>
 						</div>
 						<br>
@@ -248,7 +326,7 @@
 						<label class="control-label col-md-2">Nombre(s)</label>
 						<div class="col-md-10">
 							<?php 
-								echo "<p class='form-control-static' id='nombre' name='nombre'>$nombre</p>";
+			echo "<p class='form-control-static' id='nombre' name='nombre'>$nombre</p>";
 							?>
 						</div>
 						<br>       
@@ -259,7 +337,7 @@
 						<label  for="appat" class="control-label col-md-2">Apellido paterno</label>
 						<div class="col-md-10">
 							<?php 
-								echo "<p class='form-control-static' id='appat' name='nombre'>$appaterno</p>";
+			echo "<p class='form-control-static' id='appat' name='nombre'>$appaterno</p>";
 							?>
 						</div>
 						<br>       
@@ -270,7 +348,7 @@
 						<label  for="apmat" class="control-label col-md-2">Apellido materno</label>
 						<div class="col-md-10">
 							<?php 
-								echo "<p class='form-control-static' id='apmat' name='nombre'>$apmaterno</p>";
+			echo "<p class='form-control-static' id='apmat' name='nombre'>$apmaterno</p>";
 							?>
 						</div>
 						<br>   
@@ -281,7 +359,7 @@
 						<label  for="telefono" class="control-label col-md-2">Teléfono</label>
 						<div class="col-md-10">
 							<?php 
-								echo "<p class='form-control-static' id='tel' name='nombre'>$telefono</p>";
+			echo "<p class='form-control-static' id='tel' name='nombre'>$telefono</p>";
 							?>
 							<br><br>
 						</div>
@@ -294,7 +372,7 @@
 						<label class="control-label col-md-2">Área</label>        
 						<div class="col-md-10">                                        
 							<?php 
-								echo "<p class='form-control-static' id='area' name='nombre'>$area</p>";
+			echo "<p class='form-control-static' id='area' name='nombre'>$area</p>";
 							?>
 						</div>                        
 					</div>
@@ -304,7 +382,7 @@
 						<label class="control-label col-md-2">Asunto</label>
 						<div class="col-md-10">
 							<?php 
-								echo "<p class='form-control-static' name='asunto'>$asunto</p>";
+			echo "<p class='form-control-static' name='asunto'>$asunto</p>";
 							?>
 						</div>
 						<br> 
@@ -315,15 +393,15 @@
 						<label class="control-label col-md-2">Horario(s) preferente(s)</label>
 						<div class="col-md-10">
 							<?php
-								$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
-								$result = mysqli_query($link,$query);
-								while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-									$idhorario=$row['idHorario'];
-									$query2 = "SELECT * FROM HoraPref WHERE idHorario='$idhorario'";
-									$result2=mysqli_query($link,$query2);
-									$rowarea = mysqli_fetch_assoc($result2);
-									echo "<p class='form-control-static' id='horario' name='horario'>".$dia." ".$rowarea['hinicio']."-".$rowarea['hfin']."</p>";
-								}
+			$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
+			$result = mysqli_query($link,$query);
+			while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+				$idhorario=$row['idHorario'];
+				$query2 = "SELECT * FROM HoraPref WHERE idHorario='$idhorario'";
+				$result2=mysqli_query($link,$query2);
+				$rowarea = mysqli_fetch_assoc($result2);
+				echo "<p class='form-control-static' id='horario' name='horario'>".$dia." ".$rowarea['hinicio']."-".$rowarea['hfin']."</p>";
+			}
 							?>
 						</div>
 						<br> 
@@ -332,7 +410,7 @@
 					<div class="form-group has-feedback" id="Accion">
 						<label class="control-label col-md-2"><p class="text-success">¿QUÉ DESEA HACER?</p></label>
 						<div class="col-md-10">
-							<select class="form-control">
+							<select class="form-control" name='opcionSelect'>
 								<option>Agendar</option>
 								<option>Rechazar</option>
 							</select>
@@ -346,7 +424,7 @@
 						<div class="col-md-10">
 							<select class="form-control" name='diaselect'>
 								<?php
-									echo "<option>$dia</option>";
+			echo "<option>$dia</option>";
 								?>
 							</select>
 						</div>
@@ -359,25 +437,25 @@
 						<div class="col-md-10">
 							<select class="form-control" name="hora">
 								<?php
-								$k=1;
-									$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
-									$result = mysqli_query($link,$query);
-									while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-										$idhorario=$row['idHorario'];
-										$query2 = "SELECT * FROM HoraPref WHERE idHorario='$idhorario'";
-										$result2=mysqli_query($link,$query2);
-										$rowarea = mysqli_fetch_assoc($result2);
+			$k=1;
+			$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
+			$result = mysqli_query($link,$query);
+			while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+				$idhorario=$row['idHorario'];
+				$query2 = "SELECT * FROM HoraPref WHERE idHorario='$idhorario'";
+				$result2=mysqli_query($link,$query2);
+				$rowarea = mysqli_fetch_assoc($result2);
 
-										echo "<option value='$idhorario'>".$rowarea['hinicio']."-".$rowarea['hfin']."</option>";
-										$k=$k+1;
-									}
+				echo "<option value='$idhorario'>".$rowarea['hinicio']."-".$rowarea['hfin']."</option>";
+				$k=$k+1;
+			}
 								?>
 
 							</select>
 						</div>
 						<br> 
 					</div>
-					
+
 
 					<!-- Botones -->
 					<div class="form-group text-right" style="padding-top: 9px;">

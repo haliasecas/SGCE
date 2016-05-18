@@ -168,7 +168,7 @@
 					<script type="text/javascript">
                         <?php
                             //guarda la contraseña vieja en una variable llamada pold
-                            $pold=pold
+                            $pold=pold;
                             include("../Modelo/abre_conexion.php");
                             $query = "SELECT * FROM personal WHERE idpersonal = '$id' and contrasena=aes_encrypt('$pold','C1r4l3t1890')";
                             $result = mysqli_query($link, $query);
@@ -202,7 +202,7 @@
 							
 							// ca es para validar que la contraseña vieja sea la misma
 							
-							if (ca && cn) $("#Formulario").submit();
+							if (ca && cn) $("../Modelo/cambiar_contrasena.php").submit();
 							else {
 								console.log("Error o algo");
 							}
