@@ -160,9 +160,7 @@
 			</div>
 		</nav>
 		<?php 
-		if (!empty($_POST)) {
-				echo "Hola";
-			}
+
 		?>
 		<div style="padding-bottom:57px;" id="main-content">
 			<form class="form-horizontal" role="form" id="frmRestablecer" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
