@@ -331,7 +331,7 @@
 								<option value='-1'>Selecciona un departamento</option>
 								<?php
 	                               include("../Modelo/abre_conexion.php"); 
-								   $id = sprintf("SELECT * FROM depto");     
+								   $id = sprintf("SELECT * FROM depto WHERE iddepto > 1");     
 								   $resulta = mysqli_query($link,$id);
 								   $numero = mysqli_num_rows($resulta); // obtenemos el número de filas
 								   if ($numero > 0) {
@@ -370,8 +370,8 @@
 								   else echo "<option value='-1'>No hay areas disponibles</option>";
 								   include("../Modelo/cierra_conexion.php"); 
 								?>
-                                <!-- <script type="text/javascript">
-								/*	function despAreas() {
+                                <script type="text/javascript">
+									function despAreas() {
 										$("[name='area']").text("");
 										$.ajax({
 											method: "POST",
@@ -380,8 +380,8 @@
 										}).done(function(msg){
 											$("[name='area']").append(msg);
 										});
-									}*/
-								</script>-->
+									}
+								</script>
 							</select>
 							<span id="area01" class="text-center help-block hidden">Por favor seleccione una opción en este campo</span>
 						</div>                        

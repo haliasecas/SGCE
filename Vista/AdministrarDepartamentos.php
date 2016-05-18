@@ -143,14 +143,14 @@
 						<thead>
 							<tr style="color: #FFF; background: #656565;">
 								<th colspan="4">Departamento</th>
-
+								<th>Correo electrónico</th>
+								<th>Encargado</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
-
 							include("../Modelo/abre_conexion.php");
-							$query = "SELECT *  FROM depto ";
+							$query = "SELECT *  FROM depto WHERE iddepto > 1";
 							$result = mysqli_query($link, $query);
 							if ($hay = mysqli_fetch_array($result, MYSQLI_ASSOC) > 0) {
 								$result = mysqli_query($link, $query);
@@ -159,7 +159,9 @@
 									$nombre = $row['nombre'];
 
 									echo "<tr id='D$iddepto'>";
-									echo "<td>$nombre</td>";
+									echo "<td colspan='4'>$nombre</td>";
+									echo "<td>$correoE</td>";
+									echo "<td>$nombreE</td>";
 									echo "<td><a class='text-success text-right' style='text-decoration:underline;' href='EditarDepartamento.php?id=$iddepto'>Editar</a></td>";
 									echo "<td><a class='text-success text-right' name='EliminaD' style='text-decoration:underline; cursor:pointer;'>
 								Eliminar
@@ -199,7 +201,8 @@
 				</div>
 				<div class="form-group text-right">
 					<div class="col-md-8 col-md-offset-4">							                     
-						<a class="btn btn-success" style="width: 80px; height:40px;" href="AgregarDepartamento.php" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
+						<a class="btn btn-success" style="width: 80px; height:40px;" href="AgregarDepartamento.php" onclick="enviarForm();">
+							<span class="glyphicon glyphicon-plus" style="color:#FFF; padding-top:5px;"></span></a>
 					</div>           
 				</div>
 			</div>                                                               
@@ -215,8 +218,8 @@
 						<p>¿Seguro que desea eliminar este departamento?</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
-						<button type="button" class="btn btn-warning" id="eliminarT" data-dismiss="modal">Aceptar</button>
+						<button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
+						<button type="button" class="btn btn-warning" id="eliminarT" data-dismiss="modal">Si</button>
 					</div>
 				</div>
 			</div>

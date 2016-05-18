@@ -186,12 +186,11 @@
 							$("#pass02").text("Correo no registrado, por favor revise que haya escrito el correo correctamente.");
 						}
 						else {
-							$("#correo").attr("class", "form-group has-feedback");
-							$("#contra").attr("class", "form-group has-feedback");
-							$("#pass01").addClass("hidden");
-							$("#pass02").addClass("hidden");
-							$("#email01").addClass("hidden");
-							$("#email02").addClass("hidden");
+							$("#correo").attr("class", "form-group has-success has-feedback");
+							$("#contra").attr("class", "form-group has-success has-feedback");
+							$("#pass01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+							$("#email01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+							$("#email02").addClass("hidden"); $("#pass02").addClass("hidden");
 							$("#bienvenido").modal();
 						}
 					});
@@ -199,7 +198,7 @@
 			</script>
 		</div>
 
-		<div class="modal fade" data-keyboard="false" id="bienvenido" role="dialog">
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="bienvenido" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header modal-has-success">
@@ -217,7 +216,7 @@
 			</div>
 		</div>
 		
-		<div class="modal fade" data-keyboard="false" id="error" role="dialog">
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="error" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header modal-has-error">
