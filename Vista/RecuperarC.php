@@ -160,9 +160,7 @@
 			</div>
 		</nav>
 		<?php 
-		if (!empty($_POST)) {
-				echo "Hola";
-			}
+
 		?>
 		<div style="padding-bottom:57px;" id="main-content">
 			<form class="form-horizontal" role="form" id="frmRestablecer" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -183,14 +181,22 @@
 						</div>
 						<div class="form-group text-right">
 							<div class="col-md-offset-2 col-md-10 ">
+<<<<<<< HEAD
 								<a class="btn btn-success" style="width: 150px;" onclick="enviarFor();">ENVIAR</a>
+=======
+								<a class="btn btn-success" style="width: 150px;" onclick="enviarRecuperar();">ENVIAR</a>
+>>>>>>> 6f15deb2d9bff63253916d49f6eaaa598d523fa9
 							</div>
 						</div>
 					</div>
 				</div>
 			</form>
 			<script type="text/javascript">
+<<<<<<< HEAD
 				function enviarFor() {
+=======
+				function enviarRecuperar() {
+>>>>>>> 6f15deb2d9bff63253916d49f6eaaa598d523fa9
 					$("#frmRestablecer").submit();
 				}
 			</script>
