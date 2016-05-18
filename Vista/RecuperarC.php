@@ -181,7 +181,7 @@
 						</div>
 						<div class="form-group text-right">
 							<div class="col-md-offset-2 col-md-10 ">
-								<a class="btn btn-success" style="width: 150px;" onclick="enviarForm();">ENVIAR</a>
+								<a class="btn btn-success" style="width: 150px;" onclick="enviarRecuperar();">ENVIAR</a>
 							</div>
 						</div>
 					</div>
