@@ -348,7 +348,7 @@
                                 }
                             }).done(function(msg){
                                 if(msg == "Insertado") $("#exitoso").modal();
-                                
+								console.log(msg);                                
                             });   
                         }else{
                                 $(window).scrollTop(0);
