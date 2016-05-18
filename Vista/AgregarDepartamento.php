@@ -84,11 +84,22 @@
 
 			include("../Modelo/abre_conexion.php");
 
-			$q = "INSERT INTO depto(nombre, idpersonal) VALUES ('$nombre', $idPers)";
-			$j = "UPDATE personal SET ocupado = 1 WHERE idpersonal = $idPers";
+			$ex = mysqli_query("SELECT * FROM depto WHERE nombre = $nombre");
+			if (mysqli_num_rows($ex) > 0) {
+		?>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#MSGE16').modal();
+			});
+		</script>
+		<?php
+			}
+			else {
+				$q = "INSERT INTO depto(nombre, idpersonal) VALUES ('$nombre', $idPers)";
+				$j = "UPDATE personal SET ocupado = 1 WHERE idpersonal = $idPers";
 
-			mysqli_query($link, $q);
-			mysqli_query($link, $j);
+				mysqli_query($link, $q);
+				mysqli_query($link, $j);
 		?>
 		<script type='text/javascript'>
 			$(document).ready(function() {
@@ -96,7 +107,8 @@
 			});
 		</script>
 		<?php
-			include("../Modelo/cierra_conexion.php");
+				include("../Modelo/cierra_conexion.php");
+			}
 		}
 		?>
 
@@ -215,7 +227,23 @@
 				</div>
 			</div>
 		</div>
-
+		
+		<div class="modal fade" data-keyboard="false" id="MSGE16" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Mensaje de error</h4>
+					</div>
+					<div class="modal-body">
+						<p>El nombre de este departamento ya existe en el sistema</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<div class="modal fade" data-keyboard="false" id="error" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -223,7 +251,7 @@
 						<h4 class="modal-title">Mensaje de error</h4>
 					</div>
 					<div class="modal-body">
-						<p>Falta al menos un dato obligatorio para efectuar la operación solicitada.</p>
+						<p>Falta al menos un dato obligatorio para efectuar la operación solicitada</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
