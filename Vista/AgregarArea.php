@@ -166,7 +166,8 @@
                                 <option value='-1'>Selecciona un departamento</option>
                                 <?php
                                 include("../Modelo/abre_conexion.php");
-                                $query = "SELECT * FROM depto";
+								// El depto 1 es Admins y no se muestra
+                                $query = "SELECT * FROM depto WHERE iddepto > 1";
                                 $result = mysqli_query($link, $query);
                                 while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                                     $nombredepto= $row['nombre'];
