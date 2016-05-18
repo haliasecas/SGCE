@@ -2,3 +2,4 @@ To Do
 
 1.- Días preferentes -> Día preferente 	SolicitarCita.php
 2.- Texto de captcha rojo				SolicitarCita.php
+3.- No modificar las solicitudes aceptadas VerSolicitudesCita.php
