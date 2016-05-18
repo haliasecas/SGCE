@@ -521,7 +521,7 @@
 						<h4 class="modal-title">Mensaje de confirmación</h4>
 					</div>
 					<div class="modal-body">
-						<p>¿Está seguro de que desea cancelar solicitar cita?</p>
+						<p>¿Está seguro de que desea cancelar la solicitud de cita?</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
