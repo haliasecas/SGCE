@@ -2,7 +2,7 @@
         <?php  
         // Recibimos por POST los datos procedentes del formulario  
         $pass = $_POST["pass"]; 
-            if(isset($_GET["id"]))r
+            if(isset($_GET["id"]))
 	           $id = $_GET['id'];
         
             include("abre_conexion.php");

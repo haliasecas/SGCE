@@ -131,20 +131,6 @@
                 </div>
             </div>
         </nav>
-
-        <?php 
-        /* if(isset($_GET["id"]))
-	           $id = $_GET['id'];
-            include("abre_conexion.php");
-            $query = "SELECT * FROM personal WHERE idpersonal = '$id'";
-            $result = mysqli_query($link, $query);
-            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-            $appaterno=$row['appaterno'];
-            $nombre = $row['nombre'];
-            $apmaterno=$row['apmaterno'];
-            $correo = $row['correo'];*/
-
-        ?>
         <div class="container-fluid" style="padding-bottom:81px;" id="main-content">
             <div class="container">
                 <h3><strong>Agregar cuenta</strong></h3>
@@ -235,13 +221,13 @@
 								$("#Nombre").attr("class", "form-group has-feedback has-error");
 								$("#nombre01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 								$("#nombre02").removeClass("hidden");
-								$("#nombre02").text("El campo Nombre no puede estar vacío.");
+								$("#nombre02").text("El campo nombre no puede estar vacío.");
                                 nombres = false;
                             }else if(!valname(nombre)){
 								$("#Nombre").attr("class", "form-group has-feedback has-error");
 								$("#nombre01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 								$("#nombre02").removeClass("hidden");
-								$("#nombre02").text("El formato del campo Nombre  es incorrecto.");                                
+								$("#nombre02").text("El formato del campo nombre  es incorrecto.");                                
                                 nombres = false;
                             }else{
 								$("#Nombre").attr("class", "form-group has-feedback has-success");
@@ -254,13 +240,13 @@
 								$("#Appaterno").attr("class", "form-group has-feedback has-error");
                                 $("#appat01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 								$("#appat02").removeClass("hidden");
-								$("#appat02").text("El campo Apellido Paterno no puede estar vacío.");
+								$("#appat02").text("El campo apellido paterno no puede estar vacío.");
                                 nombres = false;
                             }else if(!valname(appat)){
 								$("#Appaterno").attr("class", "form-group has-feedback has-error");
                                 $("#appat01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 								$("#appat02").removeClass("hidden");
-								$("#appat02").text("El formato del campo Apellido Paterno es incorrecto.");                        
+								$("#appat02").text("El formato del campo apellido paterno es incorrecto.");                        
                                 nombres = false;
                             }else{
 								$("#Appaterno").attr("class", "form-group has-feedback has-success");
@@ -273,13 +259,13 @@
                                 $("#Apmaterno").attr("class", "form-group has-feedback has-error");
                                 $("#apmat01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 								$("#apmat02").removeClass("hidden");
-								$("#apmat02").text("El campo Apellido Materno no puede estar vacío.");
+								$("#apmat02").text("El campo apellido materno no puede estar vacío.");
 								nombres = false;
 							}else if (!valname(apmat)) {                            
                                 $("#Apmaterno").attr("class", "form-group has-feedback has-error");
                                 $("#apmat01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 								$("#apmat02").removeClass("hidden");
-								$("#apmat02").text("El formato del campo Apellido Materno es incorrecto.");
+								$("#apmat02").text("El formato del campo apellido materno es incorrecto.");
 								nombres = false;
 							}else {                              
                                 $("#Apmaterno").attr("class", "form-group has-feedback has-success");
@@ -292,13 +278,13 @@
                               $("#Correo").attr("class", "form-group has-feedback has-error");
                               $("#correo01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 				              $("#correo02").removeClass("hidden");
-				              $("#correo02").text("El campo Correo Electrónico no puede estar vacío.");
+				              $("#correo02").text("El campo correo electrónico no puede estar vacío.");
                             correos = false;
                         }else if (!validate(correo)) {
                               $("#Correo").attr("class", "form-group has-feedback has-error");
                               $("#correo01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 				              $("#correo02").removeClass("hidden");
-				              $("#correo02").text("El formato del campo Correo Electrónico es incorrecto.");
+				              $("#correo02").text("El formato del campo correo electrónico es incorrecto.");
 				            correos  = false;
                         }else {
                                 $("#Correo").attr("class", "form-group has-feedback has-success");
@@ -316,7 +302,7 @@
                               $("#Pass2").attr("class", "form-group has-feedback has-error");
                               $("#repass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 				              $("#repass02").removeClass("hidden");
-				              $("#repass02").text("El campo Contraseña  no puede estar vacío.");
+				              $("#repass02").text("El campo contraseña  no puede estar vacío.");
                               contrasenas = false;                        
                         }else if(p1 != p2){
                               $("#Pass1").attr("class", "form-group has-feedback has-error");
@@ -360,8 +346,9 @@
                                     correo: correo,
                                     cargo: cargo
                                 }
-                            }).done(function(){
-                                $("#Formulario").submit();                                
+                            }).done(function(msg){
+                                if(msg == "Insertado") $("#exitoso").modal();
+                                
                             });   
                         }else{
                                 $(window).scrollTop(0);
