@@ -89,7 +89,7 @@ function mandarCorreoSolicitud($nombre,$appat,$apmat,$email,$stringtoken) {
 	else
 		$msg = $msg."(S/N)";
 	$enlace = $_SERVER['SERVER_NAME']."/SGCE/Vista/Validar.php?token=".$stringtoken;
-	$msg=$msg."Debes acceder al siguiente enlace para continuar con el proceso<br>"
+	$msg=$msg."Debes acceder al siguiente enlace para continuar con el proceso<br>";
 	$msg=$msg."<b>Enlace para confirmación: <a href='$enlace'>Validar Cita</a></b> <br>";
 	$msg=$msg."Recibirás un correo electrónico a esta misma dirección sobre la confirmación o negación de tu cita en menos de 24 horas, de lo contrario favor de comunicarte al 57296000<br>";
 	$msg=$msg."Gracias por utilizar el sistema generador de citas de ESCOM <br>";

@@ -183,9 +183,7 @@
 					for ($i = 0; $i < $random_string_length; $i++) {
 						$string .= $characters[rand(0, strlen($characters) - 1)];
 					}
-
-					$ans = mandarCorreoSolicitud($nombre, $appat, $apmat, $email, $string);
-					if (ans) {
+					if (mandarCorreoSolicitud($nombre, $appat, $apmat, $email, $string)) {
 						$busqueda = sprintf("SELECT nombre,appaterno,apmaterno FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
 						$result=mysqli_query($link, $busqueda);
 						$row_cnt = mysqli_num_rows($result);
@@ -271,8 +269,7 @@
 					<div class="form-group has-feedback" id="Email02">                                                            
 						<label  for="email" class="control-label col-md-2">Repetir correo electrónico</label>
 						<div class="col-md-10" style="padding-top: 6px;">
-							<input type="text" class="form-control" placeholder="ejemplo@dominio.com" id="correoE02"
-								   value="<?php if(!ans) echo $email; ?>">
+							<input type="text" class="form-control" placeholder="ejemplo@dominio.com" id="correoE02">
 							<span id="email02" style="padding-top: 6px;" class="hidden glyphicon form-control-feedback"></span>
 							<span id="email03" class="text-center help-block hidden">
 								Por favor, introduce una dirección de correo electrónico válida. Por ejemplo usuario@dominio.com
@@ -285,8 +282,7 @@
 					<div class="form-group has-feedback" id="Nombre">
 						<label for="nombre" class="control-label col-md-2">Nombre(s)</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" placeholder="Francisco" id="nombre" name="nombre"
-								   value="<?php if(!ans) echo $nombre ?>">
+							<input type="text" class="form-control" placeholder="Francisco" id="nombre" name="nombre">
 							<span id="name01" class="hidden glyphicon form-control-feedback"></span>
 						</div>
 						<br>       
@@ -296,8 +292,7 @@
 					<div class="form-group has-feedback" id="ApellidoP">
 						<label  for="appat" class="control-label col-md-2">Apellido paterno</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" placeholder="Pérez" id="appat" name="appat"
-								   value="<?php if(!ans) echo $appat ?>">
+							<input type="text" class="form-control" placeholder="Pérez" id="appat" name="appat">
 							<span id="app01" class="hidden glyphicon form-control-feedback"></span>
 						</div>
 						<br>       
@@ -307,8 +302,7 @@
 					<div class="form-group has-feedback" id="ApellidoM">
 						<label  for="apmat" class="control-label col-md-2">Apellido materno</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" placeholder="Pérez" id="apmat" name="apmat"
-								   value="<?php if(!ans) echo $apmat ?>">
+							<input type="text" class="form-control" placeholder="Pérez" id="apmat" name="apmat">
 							<span id="apm01" class="hidden glyphicon form-control-feedback"></span>
 							<span id="apm02" class="text-center help-block hidden"></span>
 						</div>
@@ -319,8 +313,7 @@
 					<div class="form-group has-feedback" id="Telefono">
 						<label  for="telefono" class="control-label col-md-2">Teléfono</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" placeholder="55555555" id="telefono" name="telefono"
-								   value="<?php if(!ans) echo $telefono ?>">
+							<input type="text" class="form-control" placeholder="55555555" id="telefono" name="telefono">
 							<span id="phone01" class="hidden glyphicon form-control-feedback"></span>
 							<span id="phone02" class="text-center help-block hidden">En este campo sólo se pueden escribir números.
 								Evite los espacios en blanco u otros caracteres,
@@ -398,8 +391,7 @@
 					<div class="form-group has-feedback" id="Asunto">
 						<label  for="asunto" class="control-label col-md-2">Asunto</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" placeholder="Breve descripción del asunto de la cita" id="asunto" name="asunto"
-								   value="<?php if(!ans) echo $asunto ?>">
+							<input type="text" class="form-control" placeholder="Breve descripción del asunto de la cita" id="asunto" name="asunto">
 							<span id="sub01" class="hidden glyphicon form-control-feedback"></span>
 							<span id="sub02" class="text-center help-block hidden"></span>
 						</div>

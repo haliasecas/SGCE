@@ -131,13 +131,67 @@
 		</nav>
 		<?php
 		if (!isset($_GET['id'])) {
-			$regex = '#<\s*?code\b[^>]*>(.*?)</code\b[^>]*>#s';
+			echo "<script type='text/javascript'>
+							window.location = '../';
+						</script>";
 		?>
 		<!-- <script type="text/javascript">
 			window.location = "../Vista/VerInformesYS.php";
 		</script>-->
 		<?php
 		} else {
+			if(isset($_GET["id"]) && isset($_POST['diaselect'])){
+				$idsol = $_GET['id'];
+			include("../Modelo/abre_conexion.php");
+			$query = "SELECT * FROM solicitud WHERE idsolicitud = '$idsol'";
+			$result = mysqli_query($link, $query);
+			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+			$idinteresado=$row['idinteresado'];
+			
+			$query = "SELECT * FROM interesado WHERE idinteresado='$idinteresado'";
+			$result2 = mysqli_query($link, $query);
+			$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
+
+			$idarea=$row['idarea'];
+			$query = "SELECT * FROM area WHERE idarea='$idarea'";
+			$result3 = mysqli_query($link, $query);
+			$row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+
+			$asunto=$row['asunto'];
+			$appaterno=$row2['appaterno'];
+			$nombre = $row2['nombre'];
+			$apmaterno=$row2['apmaterno'];
+			$correo = $row2['correo'];
+			$telefono = $row2['telefono'];
+			$area = $row3['nombre'];
+			$dia = $row['dia'];
+			$horasel=$_POST['hora'];
+
+			$query = "SELECT * FROM horapref WHERE idHorario='$horasel'";
+			$result = mysqli_query($link, $query);
+			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+			$hinicio=$row['hinicio'];
+
+
+			$busqueda = sprintf("SELECT dia FROM cita WHERE dia='$dia'");
+			$result=mysqli_query($link, $busqueda);
+			$row_cnt = mysqli_num_rows($result);
+
+
+
+			$busqueda2 = sprintf("SELECT hinicio FROM cita WHERE hinicio='$hinicio'");
+			$result2=mysqli_query($link, $busqueda2);
+			$row_cnt2 = mysqli_num_rows($result2);
+
+
+			if($row_cnt=='1' && $row_cnt2=='1'){
+						
+			}
+			else{
+
+			}
+
+		}
 		?>
 		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
 			<div class="container-fluid col-md-10 col-md-offset-1">
@@ -147,7 +201,7 @@
 					se notificará automáticamente al correo electrónico indicado y el estado
 					de la solicitud parasá a "RECHAZADA"</p>
 				<br><br>
-				<form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" id="Formulario" method="POST">
+				<form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?id='.$_GET['id']; ?>" id="Formulario" method="POST">
 					<h4 class="text-uppercase">Datos del interesado:</h4>
 					<?php
 						if(isset($_GET["id"]))
@@ -166,6 +220,8 @@
 						$query = "SELECT * FROM area WHERE idarea='$idarea'";
 						$result3 = mysqli_query($link, $query);
 						$row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+
+
 
 						$asunto=$row['asunto'];
 						$appaterno=$row2['appaterno'];
@@ -303,6 +359,7 @@
 						<div class="col-md-10">
 							<select class="form-control" name="hora">
 								<?php
+								$k=1;
 									$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
 									$result = mysqli_query($link,$query);
 									while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -310,7 +367,9 @@
 										$query2 = "SELECT * FROM HoraPref WHERE idHorario='$idhorario'";
 										$result2=mysqli_query($link,$query2);
 										$rowarea = mysqli_fetch_assoc($result2);
-										echo "<option>".$rowarea['hinicio']."-".$rowarea['hfin']."</option>";
+
+										echo "<option value='$idhorario'>".$rowarea['hinicio']."-".$rowarea['hfin']."</option>";
+										$k=$k+1;
 									}
 								?>
 
@@ -319,16 +378,10 @@
 						<br> 
 					</div>
 					
-					<script type="text/javascript">
-						function alerta() {
-							alert($("#area").text());
-						}
-					</script>
 
 					<!-- Botones -->
 					<div class="form-group text-right" style="padding-top: 9px;">
 						<div class="col-md-10 col-md-offset-2">
-							<a class="btn btn-primary" style="cursor:pointer;" onclick="alerta();">Alert con p</a>
 							<button class="btn btn-success" type="reset" style="width: 150px;">CANCELAR</button>
 							<button class="btn btn-success" type="submit" style="width: 150px;">ENVIAR</a>
 						</div>
