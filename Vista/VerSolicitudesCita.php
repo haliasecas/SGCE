@@ -142,62 +142,72 @@
 		} else {
 			if(isset($_GET["id"]) && isset($_POST['diaselect'])){
 				$idsol = $_GET['id'];
-			include("../Modelo/abre_conexion.php");
-			$query = "SELECT * FROM solicitud WHERE idsolicitud = '$idsol'";
-			$result = mysqli_query($link, $query);
-			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-			$idinteresado=$row['idinteresado'];
-			
-			$query = "SELECT * FROM interesado WHERE idinteresado='$idinteresado'";
-			$result2 = mysqli_query($link, $query);
-			$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
+				$opcion=$_POST['opcionSelect'];
+				include("../Modelo/abre_conexion.php");
+				if($opcion=='Agendar'){
+						$query = "SELECT * FROM solicitud WHERE idsolicitud = '$idsol'";
+						$result = mysqli_query($link, $query);
+						$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+						$idinteresado=$row['idinteresado'];
+						
+						$query = "SELECT * FROM interesado WHERE idinteresado='$idinteresado'";
+						$result2 = mysqli_query($link, $query);
+						$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
 
-			$idarea=$row['idarea'];
-			$iddepto=$row['iddepto'];
+						$idarea=$row['idarea'];
+						$iddepto=$row['iddepto'];
 
-			$asunto=$row['asunto'];
-			$appaterno=$row2['appaterno'];
-			$nombre = $row2['nombre'];
-			$apmaterno=$row2['apmaterno'];
-			$correo = $row2['correo'];
-			$telefono = $row2['telefono'];
-			$dia = $row['dia'];
+						$asunto=$row['asunto'];
+						$appaterno=$row2['appaterno'];
+						$nombre = $row2['nombre'];
+						$apmaterno=$row2['apmaterno'];
+						$correo = $row2['correo'];
+						$telefono = $row2['telefono'];
+						$dia = $row['dia'];
 
-			$horasel=$_POST['hora'];
+						$horasel=$_POST['hora'];
 
-			$query = "SELECT * FROM horapref WHERE idHorario='$horasel'";
-			$result = mysqli_query($link, $query);
-			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-			$hinicio=$row['hinicio'];
-			$hfin=$row['hfin'];
+						$query = "SELECT * FROM horapref WHERE idHorario='$horasel'";
+						$result = mysqli_query($link, $query);
+						$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+						$hinicio=$row['hinicio'];
+						$hfin=$row['hfin'];
 
-			$busqueda = sprintf("SELECT dia FROM cita WHERE dia='$dia'");
-			$result=mysqli_query($link, $busqueda);
-			$row_cnt = mysqli_num_rows($result);
-
-
-			$busqueda2 = sprintf("SELECT hinicio FROM cita WHERE hinicio='$hinicio'");
-			$result2=mysqli_query($link, $busqueda2);
-			$row_cnt2 = mysqli_num_rows($result2);
+						$busqueda = sprintf("SELECT dia FROM cita WHERE dia='$dia'");
+						$result=mysqli_query($link, $busqueda);
+						$row_cnt = mysqli_num_rows($result);
 
 
-			if($row_cnt=='1' && $row_cnt2=='1'){
-						//MENSAJE DE FECHAS QUE COINCIDEN CON CITAS ANTERIORES
-			}
-			else{
-				$sql = sprintf("INSERT INTO cita (idCita,hinicio,hfin,dia,idarea,iddepto,idinteresado) VALUES (NULL,'$hinicio','$hfin','$dia','$idarea','$iddepto','$idinteresado')");
-				$result=mysqli_query($link,$sql);
-				$sql = sprintf("UPDATE solicitud SET estado='AGENDADA' WHERE idSolicitud='$idsol'");
-				$result=mysqli_query($link,$sql);
-				require_once("../Modelo/enviarCorreo.php");
-				if (mandarCorreoAceptada($nombre,$appaterno,$apmaterno,$correo,$dia,$hinicio,$hfin)){
-					echo "Hola";
+						$busqueda2 = sprintf("SELECT hinicio FROM cita WHERE hinicio='$hinicio'");
+						$result2=mysqli_query($link, $busqueda2);
+						$row_cnt2 = mysqli_num_rows($result2);
+
+
+						if($row_cnt=='1' && $row_cnt2=='1'){
+									//MENSAJE DE FECHAS QUE COINCIDEN CON CITAS ANTERIORES
+						}
+						else{
+							$sql = sprintf("INSERT INTO cita (idCita,hinicio,hfin,dia,idarea,iddepto,idinteresado) VALUES (NULL,'$hinicio','$hfin','$dia','$idarea','$iddepto','$idinteresado')");
+							$result=mysqli_query($link,$sql);
+							$sql = sprintf("UPDATE solicitud SET estado='AGENDADA' WHERE idSolicitud='$idsol'");
+							$result=mysqli_query($link,$sql);
+							require_once("../Modelo/enviarCorreo.php");
+							if (mandarCorreoAceptada($nombre,$appaterno,$apmaterno,$correo,$dia,$hinicio,$hfin)){
+								echo "Hola";
+							}
+							//else{
+								//ERROR AL MANDAR CORREO
+							//}
+							//MENSAJE DE ACEPTACION DE CITAS
+						}
+					}
+				else{
+					$sql = sprintf("UPDATE solicitud SET estado='RECHAZADA' WHERE idSolicitud='$idsol'");
+					$result=mysqli_query($link,$sql);
+					if (mandarCorreoRechazada($nombre,$appaterno,$apmaterno,$correo)){
+								echo "Hola";
+							}
 				}
-				//else{
-					//ERROR AL MANDAR CORREO
-				//}
-				//MENSAJE DE ACEPTACION DE CITAS
-			}
 }
 		?>
 		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
@@ -339,7 +349,7 @@
 					<div class="form-group has-feedback" id="Accion">
 						<label class="control-label col-md-2"><p class="text-success">¿QUÉ DESEA HACER?</p></label>
 						<div class="col-md-10">
-							<select class="form-control">
+							<select class="form-control" name='opcionSelect'>
 								<option>Agendar</option>
 								<option>Rechazar</option>
 							</select>
