@@ -192,7 +192,7 @@
 							$result=mysqli_query($link,$id);
 						}
 						else{
-							$sql = sprintf("INSERT INTO interesado (idinteresado, nombre, appaterno,apmaterno,correo,telefono) VALUES (NULL,'$nombre','$appat','$apmat','$email','$telefono')");
+							$sql = sprintf("INSERT INTO interesado ( nombre, appaterno,apmaterno,correo,telefono) VALUES ('$nombre','$appat','$apmat','$email','$telefono')");
 							$result=mysqli_query($link,$sql);
 							$id = sprintf("SELECT idinteresado FROM interesado WHERE nombre='$nombre' AND appaterno='$appat' AND apmaterno='$apmat'");
 							$result=mysqli_query($link,$id);
@@ -205,13 +205,13 @@
 						//echo $_POST['datas'];
 						$timestamp = date('d/m/Y');
 						$dia=$_POST['date01'];
-						$soli = sprintf("INSERT INTO solicitud (idSolicitud, asunto, estado,dia,diaSol,idinteresado,idarea,iddepto) VALUES (NULL,'$asunto',' ','$dia','$timestamp','$idint','$idarea','$iddept')");
+						$soli = sprintf("INSERT INTO solicitud (asunto, estado,dia,diaSol,idinteresado,idarea,iddepto) VALUES ('$asunto',' ','$dia','$timestamp','$idint','$idarea','$iddept')");
 						$result=mysqli_query($link,$soli);
 						$idSol = sprintf("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='mydb' and TABLE_NAME='solicitud'");
 						$result=mysqli_query($link,$idSol);
 						$row= mysqli_fetch_array($result);
 						$idsolicitud=$row[0]-1;
-						$tok=sprintf("INSERT INTO SolicitudToken (idtoken, idSolicitud, token) VALUES (NULL,'$idsolicitud','$string')");   
+						$tok=sprintf("INSERT INTO SolicitudToken (idSolicitud, token) VALUES ('$idsolicitud','$string')");   
 						$result=mysqli_query($link,$tok);
 						if(!empty($_POST['hora01'])){
 							foreach($_POST['hora01'] as $selected){

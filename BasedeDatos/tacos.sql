@@ -190,12 +190,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`mensaje` (
 ENGINE = InnoDB;
 
 INSERT INTO `depto` (`iddepto`, `nombre`,`idpersonal`) VALUES
-(NULL, 'Departamento de Reprobados',2),
+(NULL, 'Administrador',1),
 (NULL, 'Departamento de Gaming',2);
 
 INSERT INTO `area` (`idarea`, `nombre`, `iddepto`) VALUES
-(NULL, 'Area patito2', 1),
-(NULL, 'Area de Difusion Cultural', 1);
+(NULL, 'Area patito2', 2),
+(NULL, 'Area de Difusion Cultural', 2);
 
 
 INSERT INTO `personal` (`idpersonal`, `nombre`, `appaterno`, `apmaterno`, `correo`, `contrasena`, `cargo`) VALUES
