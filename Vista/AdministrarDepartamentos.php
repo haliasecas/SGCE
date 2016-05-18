@@ -145,18 +145,21 @@
 								<th colspan="4">Departamento</th>
 								<th>Correo electrónico</th>
 								<th>Encargado</th>
+								<th colspan="2"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
 							include("../Modelo/abre_conexion.php");
-							$query = "SELECT *  FROM depto WHERE iddepto > 1";
+							$query = "SELECT d.iddepto, d.nombre, p.nombre AS nombreP, p.correo FROM depto AS d, personal AS p WHERE d.idpersonal = p.idpersonal and d.iddepto > 1;";
 							$result = mysqli_query($link, $query);
 							if ($hay = mysqli_fetch_array($result, MYSQLI_ASSOC) > 0) {
 								$result = mysqli_query($link, $query);
 								while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 									$iddepto=$row['iddepto'];
 									$nombre = $row['nombre'];
+									$correoE = $row['correo'];
+									$nombreE = $row['nombreP'];
 
 									echo "<tr id='D$iddepto'>";
 									echo "<td colspan='4'>$nombre</td>";

@@ -331,7 +331,7 @@
 								<option value='-1'>Selecciona un departamento</option>
 								<?php
 	                               include("../Modelo/abre_conexion.php"); 
-								   $id = sprintf("SELECT * FROM depto");     
+								   $id = sprintf("SELECT * FROM depto WHERE iddepto > 1");     
 								   $resulta = mysqli_query($link,$id);
 								   $numero = mysqli_num_rows($resulta); // obtenemos el número de filas
 								   if ($numero > 0) {

@@ -29,22 +29,21 @@
 					$asunto = $_POST['asunto'];
 					$dpto = $_POST['departamento'];
 					$contenido = $_POST['comentarios'];
-
+		?>
+		<script type='text/javascript'>
+			$(document).ready(function() {
+				$('#process').modal();
+			});
+		</script>
+		<?php
 					include("../Modelo/abre_conexion.php"); 
 					require_once("../Modelo/enviarCorreo.php");
 					$ans = mandarCorreoInforme($dpto, $asunto, $contenido, $email);
 					if (ans) {
 						$timestamp = date('d/m/Y');
 						$sql = sprintf("INSERT INTO mensaje (idMensaje, correo, asunto,contenido,estado,fecha,iddepto) VALUES (NULL,'$email','$asunto','$contenido','PENDIENTE','$timestamp','$dpto')");
-							$result=mysqli_query($link,$sql);
-							
-
-
-
-
-
-
-							echo "<script type='text/javascript'>
+						$result=mysqli_query($link,$sql);
+						echo "<script type='text/javascript'>
 								$(document).ready(function() {
 									$('#process').modal('hide');
 									$('#MSGA_09').modal();
@@ -52,7 +51,7 @@
 							</script>";
 					}
 					else {
-							echo "<script type='text/javascript'>
+						echo "<script type='text/javascript'>
 								$(document).ready(function() {
 									$('#process').modal('hide');
 									$('#MSG_E06').modal();
@@ -63,7 +62,7 @@
 			}
 		}
 		?>
-		
+
 		<!-- Nueva nav -->
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
 			<div class="container-fluid" style="padding-left:51px; padding-right:51px;">
@@ -314,18 +313,18 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="modal fade" id="exitoso" role="dialog">
+		
+		<div class="modal fade" data-keyboard="false" id="MSG_E06" data-backdrop="static" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<div class="modal-header modal-has-success">
-						<h4 class="modal-title">Mensaje de alerta</h4>
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Mensaje de error</h4>
 					</div>
 					<div class="modal-body">
-						<p>Se ha enviado el correo exitosamente.</p>
+						<p>Ocurrió un error interno al enviar el correo electrónico, por favor intente de nuevo.</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
 					</div>
 				</div>
 			</div>
@@ -342,6 +341,39 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="process" role="dialog" data-keyboard="false" data-backdrop="static">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Mensaje de alerta</h4>
+					</div>
+					<div class="modal-body">
+						<p>Tu solicitud está siendo procesada</p>
+						<div class="progress progress-striped active">
+							<div class="progress-bar progress-bar-success" style="width: 100%"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="MSGA_09" role="dialog" data-backdrop="static">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Mensaje de alerta</h4>
+					</div>
+					<div class="modal-body">
+						<p>Se te ha enviado un correo con instrucciones para continuar el proceso de solicitud de cita.
+							Verifica que has recibido el correo, de lo contrario vuelve a llenar la solicitud.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
 					</div>
 				</div>
 			</div>

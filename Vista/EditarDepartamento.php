@@ -277,8 +277,8 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-warning" onclick="window.location = 'AdministrarDepartamentos.php';"
-								data-dismiss="modal">Cancelar</button>
-						<button type="button" class="btn btn-warning" id="Neta" data-dismiss="modal">Aceptar</button>
+								data-dismiss="modal">No</button>
+						<button type="button" class="btn btn-warning" id="Neta" data-dismiss="modal">Si</button>
 					</div>
 				</div>
 			</div>

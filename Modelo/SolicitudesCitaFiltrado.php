@@ -6,7 +6,7 @@ switch($value){
 		$query = "SELECT * FROM solicitud WHERE estado!=' ' order by estado ";
 		break;
 	case 2:
-		$query = "SELECT * FROM solicitud WHERE estado='ACEPTADA'";
+		$query = "SELECT * FROM solicitud WHERE estado='AGENDADA'";
 		break;
 	case 3:
 		$query = "SELECT * FROM solicitud WHERE estado='PENDIENTE'";

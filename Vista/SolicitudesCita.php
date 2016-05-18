@@ -144,7 +144,7 @@
 						<div class="col-md-10">
 							<select name="select" class="form-control" onChange="meetings();">
 								<option value="1" id="1">Todas</option>
-								<option value="2" id="2">Aceptadas</option>
+								<option value="2" id="2">Agendadas</option>
 								<option value="3" id="3">Pendientes</option>
 							</select>
 						</div>                        
