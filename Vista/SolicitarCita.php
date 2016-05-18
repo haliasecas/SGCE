@@ -354,7 +354,7 @@
 						<label class="control-label col-md-2">Área</label>        
 						<div class="col-md-10">                                        
 							<select name="area" class="form-control">
-								<option value='-1'>Selecciona un area</option>
+								<option value='-1'>Selecciona un área</option>
 								<?php
 	                               include("../Modelo/abre_conexion.php"); 
 								   $id = sprintf("SELECT * FROM area");     
