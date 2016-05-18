@@ -207,11 +207,11 @@
 		<?php
 		include("../Modelo/abre_conexion.php"); 
 		$token=$_GET['token'];
-		$busqueda = sprintf("SELECT token FROM SolicitudToken WHERE token='$token'");
+		$busqueda = sprintf("SELECT token FROM solicitudtoken WHERE token='$token'");
 		$result=mysqli_query($link,$busqueda);
 		$row_cnt = mysqli_num_rows($result);
 		if($row_cnt>0){
-			$id = sprintf("SELECT idSolicitud FROM SolicitudToken WHERE token='$token'");
+			$id = sprintf("SELECT idSolicitud FROM solicitudtoken WHERE token='$token'");
 			$result=mysqli_query($link,$id);
 			$row = mysqli_fetch_assoc($result);
 			$idSol=$row["idSolicitud"];
