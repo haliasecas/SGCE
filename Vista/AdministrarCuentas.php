@@ -170,19 +170,40 @@
 								echo "<th>$appaterno</th>";
 								echo "<th>$apmaterno</th>";
 								echo "<th>$correo</th>";   
-								if($cargo==2)
+								
+                                if($cargo==2)
 									echo "<th>Personal Administrativo</th>  ";
 								else
 									echo "<th>Administrador</th>  ";
-								echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarCuenta.php?id=$idpersonal'>Editar</a></th>";   
-								echo "<th><a class=' text-success text-right' style = 'text-decoration:underline;'  href='#?id=$idpersonal'>Eliminar</a></th>  ";
+								
+                                echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarCuenta.php?id=$idpersonal'>Editar</a></th>";   
+							    echo "<td><a class='text-success text-right' name='EliminaC' style='text-decoration:underline; cursor:pointer;'>Eliminar</a></td>";
 								echo "</tr>";
 							}
-
 							?>
-
 						</tbody>
+							<script type="text/javascript">
+                                    $("[name='EliminaC']").click(function() {        
+                                        var id = $(this).closest('tr').attr('id');
+                                        eliminar(id);
+                                    });
+						    </script>    
 					</table>
+					        <script type="text/javascript">
+                                        function eliminar(str) {
+                                            var id = str.substring(1);
+                                            $("#confirmacion").modal();
+                                            $("#eliminarT").click(function() {
+                                                $.ajax({
+                                                    method: "POST",
+                                                    url: "../Modelo/elimina_cuenta.php",
+                                                    data: { value: id }
+                                                }).done(function(msg){
+                                                    if (msg == "hecho") location.reload();
+                                                });
+                                            });
+                                        }
+					        </script>
 				</div>
 				<div class="form-group text-right">
 					<div class="col-md-8 col-md-offset-4">							                     
@@ -190,6 +211,23 @@
 					</div>           
 				</div>
 			</div>                                                               
+		</div>
+		
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-warning">
+						<h4 class="modal-title">Mensaje de confirmación</h4>
+					</div>
+					<div class="modal-body">
+						<p>¿Seguro que desea eliminar este departamento?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
+						<button type="button" class="btn btn-warning" id="eliminarT" data-dismiss="modal">Si</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
@@ -234,7 +272,7 @@
 					});
 				});
 			});
-		</script>
+		</script>						
 		<script type="text/javascript">
 			$(document).ready(function() {
 				// Sticky bar plz

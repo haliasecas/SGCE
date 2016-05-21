@@ -201,7 +201,7 @@
 						<div class="form-group text-right">
 							<div class="col-md-10 col-md-offset-2">
 								<a class="btn btn-success" style="width: 150px;" onclick="window.location = './AdministrarCuentas.php';">CANCELAR</a>
-								<a class="btn btn-success" style="width: 150px;" onclick="ingresacuenta();">ENVIAR</a>
+								<a class="btn btn-success" style="width: 150px;" onclick="ingresacuenta()">ENVIAR</a>
 							</div>
 						</div>
 					</div>

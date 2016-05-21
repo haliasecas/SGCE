@@ -85,7 +85,7 @@
 
 						<?php }else{?> 
 
-						<! Personal administrativo -->                    
+						<!--Personal administrativo -->                    
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Personal Administrativo<span class="caret"></span>
@@ -153,7 +153,7 @@
 							include("../Modelo/abre_conexion.php");
 							$query = "SELECT d.iddepto, d.nombre, p.nombre AS nombreP, p.correo FROM depto AS d, personal AS p WHERE d.idpersonal = p.idpersonal and d.iddepto > 1;";
 							$result = mysqli_query($link, $query);
-							if ($hay = mysqli_fetch_array($result, MYSQLI_ASSOC) > 0) {
+							if ($hay = mysqli_fetch_array($result, MYSQLI_ASSOC) > 0 ) {
 								$result = mysqli_query($link, $query);
 								while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 									$iddepto=$row['iddepto'];
@@ -171,8 +171,7 @@
 								</a></td>";
 									echo "</tr>";
 								}
-							}
-							else {
+							}else {
 								$jaja = "ALTER TABLE depto AUTO_INCREMENT = 2";
 								mysqli_query($link, $jaja);
 							}
