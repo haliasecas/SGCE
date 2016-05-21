@@ -156,7 +156,7 @@
 							include("../Modelo/abre_conexion.php");
 							$query = "SELECT *  FROM personal  WHERE idpersonal>0 ORDER BY nombre";
 							$result = mysqli_query($link, $query);
-
+                            
 							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 								$appaterno=$row['appaterno'];
 								$nombre = $row['nombre'];

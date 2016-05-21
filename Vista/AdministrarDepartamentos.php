@@ -153,7 +153,7 @@
 							include("../Modelo/abre_conexion.php");
 							$query = "SELECT d.iddepto, d.nombre, p.nombre AS nombreP, p.correo FROM depto AS d, personal AS p WHERE d.idpersonal = p.idpersonal and d.iddepto > 1;";
 							$result = mysqli_query($link, $query);
-							if ($hay = mysqli_fetch_array($result, MYSQLI_ASSOC) > 0 ) {
+							if (mysqli_num_rows($result) > 0 ) {
 								$result = mysqli_query($link, $query);
 								while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 									$iddepto=$row['iddepto'];
