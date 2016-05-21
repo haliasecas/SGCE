@@ -25,21 +25,20 @@
         <div class="modal fade" data-keyboard="false" data-backdrop="static" id="dropfail" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header modal-has-warning">
+                    <div class="modal-header modal-has-error">
                         <h4 class="modal-title">Mensaje de alerta</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Algunas solicitudes dependendientes de esta área seran eliminadas tambien. 
-                            ¿Esta seguro de que desea eliminar el registro?</p>
+                        <p>El área seleccionada tiene solicitudes de citas asociadad. Error al eliminar</p>
                     </div>
                     <div class="modal-footer">
-
-                        <button type='button' class='btn btn-warning' data-dismiss='modal' onclick="window.location =<?php echo"'../Modelo/eliminar_area.php?id=$id&lol=1'" ?>;">
+                        <!--
+                        <button type='button' class='btn btn-warning' data-dismiss='modal' onclick="window.location =<?php //echo"'../Modelo/eliminar_area.php?id=$id&lol=1'" ?>;">
                             Si
                         </button>
-
-                        <button type="button" class="btn btn-warning" data-dismiss="modal" onclick="window.location = '../Vista/AdministrarAreas.php';">
-                            No
+                        -->
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location = '../Vista/AdministrarAreas.php';">
+                            Aceptar
                         </button>
                     </div>
                 </div>
@@ -53,7 +52,7 @@
                         <h4 class="modal-title">Mensaje de notificación</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Se han eliminado los registros exitosamente</p>
+                        <p>Se han eliminado el área exitosamente</p>
                     </div>
                     <div class="modal-footer">
 
