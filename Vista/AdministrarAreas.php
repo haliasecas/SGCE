@@ -148,13 +148,7 @@
                         </thead>
 
                         <tbody>
-                            <!--  <tr>
-<th>Área A</th>
-<th>Departamento A</th>
-<th><a class=" text-success text-right"  style = "text-decoration:underline;" href="#">Editar</a></th>
-<th><a class=" text-success text-right" style = "text-decoration:underline;"  href="#">Eliminar</a></th>                                        
-</tr>-->
-                            <?php
+                <?php
 
                             include("../Modelo/abre_conexion.php");
                             $query = "SELECT a.nombre as area,a.idarea as idarea,d.nombre as depto FROM area a, depto d WHERE idarea>0 and a.iddepto=d.iddepto ORDER BY a.nombre";                        
@@ -169,7 +163,7 @@
                                     echo "<th>$area</th>";
                                     echo "<th>$depto</th>";
                                     echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarAreas.php?id=$idarea'>Editar</a></th>";   
-                                    echo "<th><a class=' text-success text-right' onclick=''  name='EliminaA' style = 'text-decoration:underline; cursor:pointer;'>Eliminar</a></th>  ";
+                                    echo "<th><a class=' text-success text-right' onclick=''  name='EliminaA' style = 'text-decoration:underline; cursor:pointer;' href='../Modelo/eliminar_area.php?id=$idarea'>Eliminar</a></th>  ";
                                     echo "</tr>";
                                 }
                             }else{
@@ -209,7 +203,7 @@
                 </div>
             </div>                                                               
         </div>
-
+        
         <div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
