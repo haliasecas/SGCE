@@ -584,7 +584,7 @@
 						<p>Ocurrió un error interno al enviar el correo electrónico, por favor intente de nuevo.</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
 					</div>
 				</div>
 			</div>

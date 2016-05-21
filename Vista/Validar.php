@@ -154,7 +154,7 @@
 						<h4 class="modal-title">Token Válido</h4>
 					</div>
 					<div class="modal-body">
-						<p>Su cita ha pasado al estado de Pendiente</p>
+						<p>Dirección de correo electrónico validada. Su solicitud de cita ha sido enviada y se esta procesando.</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
