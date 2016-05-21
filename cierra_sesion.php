@@ -40,7 +40,7 @@
 				</div>
 			</div>
 		</nav>
-		
+
 		<div id="main-content" class="container-fluid" align="center" style="padding-bottom: 50px;">
 			<div class="jumbotron">
 				<p class='avisos' id="aviso">Se ha cerrado sesion. Será redirigido automáticamente en 3 segundos</p>
@@ -57,7 +57,12 @@
 		</div>
 		<script type="text/javascript">
 			$(document).ready(function (){
-				$("#aviso").text("Se ha cerrado sesion. Será redirigido automáticamente en 2 segundos").delay(10000).text("Se ha cerrado sesion. Será redirigido automáticamente en 1 segundo");
+				setTimeout(function(){
+					$("#aviso").text("Se ha cerrado sesion. Será redirigido automáticamente en 2 segundos")
+					setTimeout(function(){
+						$("#aviso").text("Se ha cerrado sesion. Será redirigido automáticamente en 1 segundo");
+					}, 1000);
+				}, 1000);
 			});
 		</script>
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">

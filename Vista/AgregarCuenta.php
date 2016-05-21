@@ -131,7 +131,7 @@
 				</div>
 			</div>
 		</nav>
-		
+
 		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
 			<div class="container">
 				<h3><strong>Agregar cuenta</strong></h3>
@@ -160,6 +160,10 @@
 						<div class="col-md-10">
 							<input type='text' id="apmat" class='form-control' placeholder="Perez">
 							<span id="apmat01" class="hidden glyphicon form-control-feedback"></span>
+						</div>
+					</div>
+					<div class="form-group has-error has-feedback">
+						<div class="col-md-10 col-md-offset-2">
 							<span id="apmat02" class="text-center help-block hidden"></span>
 						</div>
 					</div>
@@ -208,7 +212,8 @@
 				</form>
 				<script type="text/javascript">
 					function ingresacuenta(){
-						var nombres = false, correos = false, contrasenas = false,cargos = false;
+						var nombres = false, correos = false, contrasenas = false, cargos = false;
+						var nomb = false, app = false, apm = false;
 						var p1 = $("#pass1").val();
 						var p2 = $("#pass2").val();
 						var nombre = $("#nombre").val();
@@ -216,76 +221,51 @@
 						var apmat = $("#apmat").val();
 						var correo = $("#correo").val();
 						var cargo = $("#cargo").val();
-						console.log(p1); //No es seguro pero bueno!
-						// Validando el nombre,apellido paterno y materno                
-						if (nombre == "" ) {
+						// Validando el nombre,apellido paterno y materno
+						$("#apmat02").text("El formato del campo nombre o apellido es incorrecto");
+						if(!valname(nombre) || nombre == "") {
 							$("#Nombre").attr("class", "form-group has-feedback has-error");
-							$("#nombre01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-							$("#nombre02").removeClass("hidden");
-							$("#nombre02").text("El campo nombre no puede estar vacío.");
-							nombres = false;
-						}else if(!valname(nombre)){
-							$("#Nombre").attr("class", "form-group has-feedback has-error");
-							$("#nombre01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-							$("#nombre02").removeClass("hidden");
-							$("#nombre02").text("El formato del campo nombre  es incorrecto.");                                
-							nombres = false;
+							$("#nombre01").attr("class", "glyphicon glyphicon-remove form-control-feedback");							
 						}else{
 							$("#Nombre").attr("class", "form-group has-feedback has-success");
 							$("#nombre01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
-							$("#nombre02").addClass("hidden");                                
-							nombres = true;
+							nomb = true;
 						}
 						//Apellido Paterno
-						if (appat == "" ) {
+						if(!valname(appat) || appat == "") {
 							$("#Appaterno").attr("class", "form-group has-feedback has-error");
 							$("#appat01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-							$("#appat02").removeClass("hidden");
-							$("#appat02").text("El campo apellido paterno no puede estar vacío.");
-							nombres = false;
-						}else if(!valname(appat)){
-							$("#Appaterno").attr("class", "form-group has-feedback has-error");
-							$("#appat01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-							$("#appat02").removeClass("hidden");
-							$("#appat02").text("El formato del campo apellido paterno es incorrecto.");                        
-							nombres = false;
 						}else{
 							$("#Appaterno").attr("class", "form-group has-feedback has-success");
 							$("#appat01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
-							$("#appat02").addClass("hidden");                   
-							nombres = true;
+							app = true;
 						}
 						//Apellido Materno
-						if(apmat == ""){
+						if (!valname(apmat) || apmat == "") {   
 							$("#Apmaterno").attr("class", "form-group has-feedback has-error");
 							$("#apmat01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 							$("#apmat02").removeClass("hidden");
-							$("#apmat02").text("El campo apellido materno no puede estar vacío.");
-							nombres = false;
-						}else if (!valname(apmat)) {                            
-							$("#Apmaterno").attr("class", "form-group has-feedback has-error");
-							$("#apmat01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-							$("#apmat02").removeClass("hidden");
-							$("#apmat02").text("El formato del campo apellido materno es incorrecto.");
-							nombres = false;
 						}else {                              
 							$("#Apmaterno").attr("class", "form-group has-feedback has-success");
 							$("#apmat01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
-							$("#apmat02").addClass("hidden");
-							nombres = true;
+							apm = true;
 						}
+
+						nombres = nomb && apm && app;
+						if (nombres) $("#apmat02").addClass("hidden");
+						else $("#apmat02").removeClass("hidden");
 						//Validando Correo
 						if(correo == ""){
 							$("#Correo").attr("class", "form-group has-feedback has-error");
 							$("#correo01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 							$("#correo02").removeClass("hidden");
-							$("#correo02").text("El campo correo electrónico no puede estar vacío.");
+							$("#correo02").text("El campo correo electrónico no puede estar vacío");
 							correos = false;
 						}else if (!validate(correo)) {
 							$("#Correo").attr("class", "form-group has-feedback has-error");
 							$("#correo01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 							$("#correo02").removeClass("hidden");
-							$("#correo02").text("El formato del campo correo electrónico es incorrecto.");
+							$("#correo02").text("El formato del campo correo electrónico es incorrecto");
 							correos  = false;
 						}else {
 							$("#Correo").attr("class", "form-group has-feedback has-success");
@@ -303,7 +283,7 @@
 							$("#Pass2").attr("class", "form-group has-feedback has-error");
 							$("#repass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 							$("#repass02").removeClass("hidden");
-							$("#repass02").text("El campo contraseña  no puede estar vacío.");
+							$("#repass02").text("El campo contraseña  no puede estar vacío");
 							contrasenas = false;                        
 						}else if(p1 != p2){
 							$("#Pass1").attr("class", "form-group has-feedback has-error");

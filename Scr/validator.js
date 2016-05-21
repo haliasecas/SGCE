@@ -23,7 +23,7 @@ function enviarForm() {
 		$("#email02").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 		$("#email03").attr("class", "text-center help-block");
 		if (!validate($("#correoE01").val())) {
-			$("#email03").text("El formato del campo correo es incorrecto");
+			$("#email03").text("Por favor, introduce una dirección de correo electrónico válida. Por ejemplo usuario@dominio.com");
 		}
 		else if ($("#correoE01").val() !== $("#correoE02").val()) {
 			$("#email03").text("Correos proporcionados no coinciden");
@@ -68,7 +68,7 @@ function enviarForm() {
 		}
 
 		$("#apm02").attr("class", "text-center help-block");
-		$("#apm02").text("El formato del campo nombre o apellido son incorrectos");
+		$("#apm02").text("El formato del campo nombre o apellido es incorrecto");
 		vn = false;
 	}
 	else {
