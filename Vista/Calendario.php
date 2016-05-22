@@ -130,10 +130,19 @@
 			</div>
 		</nav>
         
-        <?php    set_include_path(get_include_path() . PATH_SEPARATOR . '/google-api-php-client/src'); ?>   <!--API GOOGLE CALENDAR-->
-        <iframe src="https://calendar.google.com/calendar/embed?src=sgceescom%40gmail.com&ctz=America/Mexico_City" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-        
-                                                  				                       
+               <?php 
+                        $calendar = $service->calendars->get('primary');
+                        echo $calendar->getSummary();
+                ?>
+                             
+<!--
+        <div class="container" style="padding: 50px; 200px; ">                                  
+                <iframe src="https://calendar.google.com/calendar/embed?height=800&amp;wkst=1&amp;hl=es_419&amp;bgcolor=%23ffffff&amp;src=sgceescom%40gmail.com&amp;color=%23711616&amp;ctz=America%2FMexico_City" style="border-width:0" width="800" height="800" frameborder="0" scrolling="no"></iframe>
+        </div>
+-->
+        <br>
+        <br>
+        <br>
 		<!-- Nav de abajo -->
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
