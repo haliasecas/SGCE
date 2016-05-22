@@ -159,6 +159,52 @@
 				</div>
 			</div>
 		</nav>
+		<div class="modal fade" id="MSGA_04" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Mensaje de Alerta</h4>
+					</div>
+					<div class="modal-body">
+						<p>Se ha enviado un correo con su nueva contraseña a la dirección proporcionada.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" data-keyboard="false" id="MSGE_06" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Mensaje de error</h4>
+					</div>
+					<div class="modal-body">
+						<p>Ocurrió un error interno al enviar el correo electrónico, por favor intente de nuevo.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" data-keyboard="false" id="MSGE_13" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Mensaje de error</h4>
+					</div>
+					<div class="modal-body">
+						<p>Correo no registrado, por favor revise que haya escrito el correo correctamente.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal";">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<?php 
 			if (!empty($_POST)) {
 				include("../Modelo/abre_conexion.php"); 
@@ -180,18 +226,37 @@
 				if($row_cnt > 0){
 					require_once("../Modelo/enviarCorreo.php");
 					if(mandarCorreoRecuperar($nombre,$appaterno,$apmaterno,$email,$contrasena)){
-						//MSGA_04 "ENVIO DE CONTRASEÑA REALIZADO EXITOSAMENTE"
 						$sql = sprintf("UPDATE personal SET contrasena=aes_encrypt('$contrasena','C1r4l3t1890') WHERE correo='$email'");
 						$result=mysqli_query($link,$sql);
+						echo 
+							"<script type='text/javascript'>
+								$(document).ready(function() {
+									$('#process').modal('hide');
+									$('#MSGA_04').modal();
+								});
+							</script>";
 					}
 					else{
+						echo 
+							"<script type='text/javascript'>
+								$(document).ready(function() {
+									$('#process').modal('hide');
+									$('#MSGE_06').modal();
+								});
+							</script>";
 						//MSGE_06 "ERROR AL ENVIAR EL CORREO ELECTRÓNICO"
 					}	
 				}
 				else{
+					echo 
+							"<script type='text/javascript'>
+								$(document).ready(function() {
+									$('#process').modal('hide');
+									$('#MSGE_13').modal();
+								});
+							</script>";
 					//MSGE_13 "CORREO ELECTRONICO NO REGISTRADO"
 				}
-
 			}
 		?>
 		<div style="padding-bottom:57px;" id="main-content">
@@ -225,7 +290,6 @@
 				}
 			</script>
 		</div>
-
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">

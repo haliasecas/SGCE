@@ -1,6 +1,7 @@
 <?php
+header("Content-Type: text/html;charset=utf-8");
 function mandarCorreoInforme($departamento,$asunto,$contenido,$emailinforme){
-	header("Content-Type: text/html;charset=utf-8");
+	//header("Content-Type: text/html;charset=utf-8");
 	require 'PHPMailerAutoload.php';
 
 		include("abre_conexion.php"); 
@@ -60,7 +61,7 @@ function mandarCorreoInforme($departamento,$asunto,$contenido,$emailinforme){
 }
 
 function mandarCorreoSolicitud($nombre,$appat,$apmat,$email,$stringtoken) {
-	header("Content-Type: text/html;charset=utf-8");
+	//header("Content-Type: text/html;charset=utf-8");
 	require 'PHPMailerAutoload.php';
 	$mail = new PHPMailer();
 	$mail->IsSMTP();
@@ -105,7 +106,7 @@ function mandarCorreoSolicitud($nombre,$appat,$apmat,$email,$stringtoken) {
 }
 
 function mandarCorreoAceptada($nombre,$appaterno,$apmaterno,$correo,$dia,$horainicio,$horafinal){
-	header("Content-Type: text/html;charset=utf-8");
+	//header("Content-Type: text/html;charset=utf-8");
 	require 'PHPMailerAutoload.php';
 	$mail = new PHPMailer();
 	$mail->IsSMTP();
@@ -140,7 +141,7 @@ function mandarCorreoAceptada($nombre,$appaterno,$apmaterno,$correo,$dia,$horain
 }
 
 function mandarCorreoRechazada($nombre,$appaterno,$apmaterno,$correo){
-	header("Content-Type: text/html;charset=utf-8");
+	//header("Content-Type: text/html;charset=utf-8");
 	require 'PHPMailerAutoload.php';
 	$mail = new PHPMailer();
 	$mail->IsSMTP();
@@ -173,7 +174,7 @@ function mandarCorreoRechazada($nombre,$appaterno,$apmaterno,$correo){
 	}
 }
 function mandarCorreoRecuperar($nombre,$appaterno,$apmaterno,$correo,$contrasena){
-	header("Content-Type: text/html;charset=utf-8");
+	//header("Content-Type: text/html;charset=utf-8");
 	require 'PHPMailerAutoload.php';
 	$mail = new PHPMailer();
 	$mail->IsSMTP();
@@ -194,7 +195,7 @@ function mandarCorreoRecuperar($nombre,$appaterno,$apmaterno,$correo,$contrasena
         </div><br><br><br><br> <br> ";
 	$msg=$msg."<b>Buen día </b> <br>".$nombre." ".$appaterno." ".$apmaterno."<br>";
 	$msg=$msg."Usted ha solicitado recuperar su contraseña, su nueva contraseña es: <br><br> ";
-	$msg=$msg."<b>".$contrasena."</b><br>";
+	$msg=$msg."<b>".$contrasena."</b><br><br>";
 	$msg=$msg."Se le recomienda que una vez acceda al sistema cambie su contraseña a una más segura.<br>";
 	$mail->MsgHTML($msg);
 	$mail->AddAddress($correo, $nombre);

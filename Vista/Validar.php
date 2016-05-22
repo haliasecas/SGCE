@@ -125,9 +125,6 @@
 						<?php
 							} } else {
 						?>
-						<script type="text/javascript">
-							window.location = "../";
-						</script>
 						<?php }?>
 					</ul>
 				</div>
@@ -224,7 +221,7 @@
 											});
 										</script>";
 			$sql = "DELETE FROM SolicitudToken WHERE token='$token'";
-			$result=mysqli_query($link,$sql);
+			result=mysqli_query($link,$sql);
 		}
 		else{
 			echo 
