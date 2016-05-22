@@ -10,6 +10,7 @@
 		<script type="text/javascript" src="../Scr/validator.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
+		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 
@@ -181,16 +182,18 @@
 							}
 							?>
 						</tbody>
-							<script type="text/javascript">
-                                    $("[name='EliminaC']").click(function() {        
-                                        var id = $(this).closest('tr').attr('id');
+							<script>                                
+                                    $("[name='EliminaC']").click(function() {                                                
+                                        debugger;
+                                        var id = $(this).closest('tr').attr('id');                                        
                                         eliminar(id);
-                                    });
+                                    });                                
 						    </script>    
 					</table>
-					        <script type="text/javascript">
+					        <script>
                                         function eliminar(str) {
-                                            var id = str.substring(1);
+                                            debugger;
+                                            var id = str;
                                             $("#confirmacion").modal();
                                             $("#eliminarT").click(function() {
                                                 $.ajax({
@@ -198,7 +201,10 @@
                                                     url: "../Modelo/elimina_cuenta.php",
                                                     data: { value: id }
                                                 }).done(function(msg){
-                                                    if (msg == "hecho") location.reload();
+                                                    if (msg == "hecho"){
+                                                        location.reload();
+                                                        $("#exitoso").modal();
+                                                    }else $("#error").modal();
                                                 });
                                             });
                                         }
@@ -206,10 +212,42 @@
 				</div>
 				<div class="form-group text-right">
 					<div class="col-md-8 col-md-offset-4">							                     
-						<a class="btn btn-success" href="AgregarCuenta.php" style="width: 80px; height:40px;" onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
+						<a class="btn btn-success" style="width: 80px; height:40px;" href="AgregarCuenta.php"  onclick="enviarForm();"><span class="glyphicon glyphicon-plus"  style="color:#FFF; padding-top:5px;"></span></a>
 					</div>           
 				</div>
 			</div>                                                               
+		</div>
+		
+		<div class="modal fade" data-keyboard="false" id="error" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Mensaje de error</h4>
+					</div>
+					<div class="modal-body">
+						<p>No se puede eliminar esta cuenta ya que tiene asociado un departamento</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="exitoso" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Mensaje de alerta</h4>
+					</div>
+					<div class="modal-body">
+						<p>Algo ha sido exitoso.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
 		</div>
 		
 		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
@@ -219,7 +257,7 @@
 						<h4 class="modal-title">Mensaje de confirmación</h4>
 					</div>
 					<div class="modal-body">
-						<p>¿Seguro que desea eliminar este departamento?</p>
+						<p>¿Seguro que desea eliminar esta cuenta?</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-warning" data-dismiss="modal">No</button>

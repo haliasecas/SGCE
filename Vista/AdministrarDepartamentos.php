@@ -195,7 +195,7 @@
 									url: "../Modelo/elimina_depto.php",
 									data: { value: id }
 								}).done(function(msg){
-									if (msg == "hecho") location.reload();
+									if (msg == "hecho") location.reload();                                    
 								});
 							});
 						}

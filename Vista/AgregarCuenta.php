@@ -205,7 +205,7 @@
 						<div class="form-group text-right">
 							<div class="col-md-10 col-md-offset-2">
 								<a class="btn btn-success" style="width: 150px;" onclick="window.location = './AdministrarCuentas.php';">CANCELAR</a>
-								<a class="btn btn-success" style="width: 150px;" onclick="ingresacuenta()" href="./AdministrarCuentas.php">ENVIAR</a>
+								<a class="btn btn-success" style="width: 150px;" onclick="ingresacuenta()">ENVIAR</a>
 							</div>
 						</div>
 					</div>
@@ -328,8 +328,11 @@
 									cargo: cargo
 								}
 							}).done(function(msg) {
-								if(msg == "Insertado") $("#exitoso").modal();
-								console.log(msg);                                
+								if(msg == "Insertado"){ 
+                                    $("#exitoso").modal();								                            
+                                }else{
+                                    window.location = "AdministrarCuentas.php";   
+                                }                                
 							});   
 						}else{
 							$(window).scrollTop(0);

@@ -29,7 +29,7 @@
                         <h4 class="modal-title">Mensaje de alerta</h4>
                     </div>
                     <div class="modal-body">
-                        <p>El área seleccionada tiene solicitudes de citas asociadad. Error al eliminar</p>
+                        <p>El área seleccionada tiene solicitudes de citas asociada. Error al eliminar</p>
                     </div>
                     <div class="modal-footer">
                         <!--

@@ -1,4 +1,3 @@
-
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 define('APPLICATION_NAME', 'Google Calendar API PHP Quickstart');
@@ -95,3 +94,4 @@ if (count($results->getItems()) == 0) {
     printf("%s (%s)\n", $event->getSummary(), $start);
   }
 }
+
