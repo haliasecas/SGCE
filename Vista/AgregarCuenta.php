@@ -205,7 +205,7 @@
 						<div class="form-group text-right">
 							<div class="col-md-10 col-md-offset-2">
 								<a class="btn btn-success" style="width: 150px;" onclick="window.location = './AdministrarCuentas.php';">CANCELAR</a>
-								<a class="btn btn-success" style="width: 150px;" onclick="ingresacuenta()" href="./AdministrarCuentas.php">ENVIAR</a>
+								<a class="btn btn-success" style="width: 150px;" onclick="ingresacuenta()">ENVIAR</a>
 							</div>
 						</div>
 					</div>
@@ -316,6 +316,26 @@
 						}
 						// Si los cuatro fueron correctos
 						if(nombres && correos && contrasenas && cargos){
+<<<<<<< HEAD
+							$.ajax({
+								url: "../Modelo/agrega_cuenta.php",
+								method: "POST",
+								data: { 
+									name: nombre,
+									appat: appat,
+									apmat: apmat,
+									pass: p1,
+									correo: correo,
+									cargo: cargo
+								}
+							}).done(function(msg) {
+								if(msg == "Insertado"){ 
+                                    $("#exitoso").modal();								                            
+                                }else{
+                                    window.location = "AdministrarCuentas.php";   
+                                }                                
+							});   
+=======
 		                          $.ajax({
 											method: "POST",
 											url: "../Modelo/agrega_cuenta.php",
@@ -325,6 +345,7 @@
 										}).done(function(msg){
 											$("[name='area']").append(msg);
 										});
+>>>>>>> 2c3fbb7ad860e79569cb82df80be68ca91246987
 						}else{
 							$(window).scrollTop(0);
 							$("#error").modal();
