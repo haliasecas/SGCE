@@ -181,28 +181,25 @@
 							?>
 						</tbody>
 						<script>                                
-							$("[name='EliminaC']").click(function() {                                                
-								debugger;
-								var id = $(this).closest('tr').attr('id');                                        
+							$("[name='EliminaC']").click(function() {
+								var id = $(this).closest('tr').attr('id');
 								eliminar(id);
 							});                                
 						</script>    
 					</table>
 					<script>
 						function eliminar(str) {
-							debugger;
-							var id = str;
+							var id = str.substring(1);
 							$("#confirmacion").modal();
 							$("#eliminarT").click(function() {
 								$.ajax({
 									method: "POST",
 									url: "../Modelo/elimina_cuenta.php",
 									data: { value: id }
-								}).done(function(msg){
-									if (msg == "hecho"){
-										location.reload();
-										$("#exitoso").modal();
-									}else $("#error").modal();
+								}).done(function(msg) {
+									console.log(msg);
+									if (msg == "hecho") $("#exitoso").modal();
+									else $("#error").modal();
 								});
 							});
 						}
@@ -215,14 +212,15 @@
 				</div>
 			</div>                                                               
 		</div>
-		<div class="modal fade" data-keyboard="false" id="error" role="dialog">
+
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="error" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header modal-has-error">
 						<h4 class="modal-title">Mensaje de error</h4>
 					</div>
 					<div class="modal-body">
-						<p>No se puede eliminar esta cuenta ya que tiene asociado un departamento</p>
+						<p>Ocurrió un error al eliminar cuenta, por favor intente de nuevo en un par de minutos</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
@@ -230,7 +228,7 @@
 				</div>
 			</div>
 		</div>
-
+		
 		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="exitoso" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -238,10 +236,10 @@
 						<h4 class="modal-title">Mensaje de alerta</h4>
 					</div>
 					<div class="modal-body">
-						<p>Algo ha sido exitoso.</p>
+						<p>La cuenta ha sido eliminada exitosamente</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+						<button type="button" class="btn btn-success" onclick="location.reload();" data-dismiss="modal">Aceptar</button>
 					</div>
 				</div>
 			</div>

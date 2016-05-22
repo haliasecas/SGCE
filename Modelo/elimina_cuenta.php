@@ -1,10 +1,12 @@
 <?php
 include("../Modelo/abre_conexion.php");
 $id = htmlspecialchars($_POST['value']);
+
 $q = "SELECT * FROM personal WHERE idpersonal = $id";
 $result = mysqli_query($link, $q);
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-if ($row['ocupado']) {
+
+if ($row['ocupado'] == 1) {
 	echo "Nel prro";
 }
 else {
