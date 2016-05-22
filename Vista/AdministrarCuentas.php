@@ -155,8 +155,9 @@
 
 							include("../Modelo/abre_conexion.php");
 							$query = "SELECT *  FROM personal  WHERE idpersonal>0 ORDER BY nombre";
-							$result = mysqli_query($link, $query);
-                            
+                            $result = mysqli_query($link, $query);
+                            if (mysqli_num_rows($result) > 0 ){								
+							     $result = mysqli_query($link, $query);
 							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 								$appaterno=$row['appaterno'];
 								$nombre = $row['nombre'];
@@ -179,6 +180,10 @@
                                 echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarCuenta.php?id=$idpersonal'>Editar</a></th>";   
 							    echo "<td><a class='text-success text-right' name='EliminaC' style='text-decoration:underline; cursor:pointer;'>Eliminar</a></td>";
 								echo "</tr>";
+							   }
+                            }else {
+								$jaja = "ALTER TABLE personal AUTO_INCREMENT = 2";
+								mysqli_query($link, $jaja);
 							}
 							?>
 						</tbody>
