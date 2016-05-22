@@ -164,9 +164,9 @@
 						<label   class="control-label col-md-2" id="Depa">Nombre del departamento</label>						                                                                
 						<div class="col-md-10">                                        
 							<select name="departamento" class="form-control">
-								<!--<option value="DepartamentoA">Departamento A</option> -->
+								<option value="-1">Seleccione un departamento</option>
 								<?php
-								$query = "SELECT * FROM depto";
+								$query = "SELECT * FROM depto where iddepto>1";
 								$result2 = mysqli_query($link, $query);
 								$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 								while($row = mysqli_fetch_array($result2, MYSQLI_ASSOC)){
@@ -208,7 +208,7 @@
 						function editarArea() {
 							var a1 = false, a2 = false;
 							var ts = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð -]+$/u;
-							var nombredepartamento = $("[name='departamento']").val();
+							var iddepto = $("[name='iddepto']").val();
 							var nombrearea = $("[name='nombreArea']").val();
 							if (nombrearea == "") {
 								error("#Nombre", "El campo nombre del área no puede estar vacio.");
@@ -221,7 +221,7 @@
 								nohayerror("#Nombre");
 								a1 = true;
 							}
-							if (nombredepartamento== "-1") {
+							if (iddepto== "-1") {
 								error("#Depa", "El nombre del departamento no puede estar vacio.");
 								a2 = false;
 							}
@@ -234,9 +234,9 @@
 								$("#confirmacion").modal();
 								$("#Neta").click(function() {
 									$.ajax({
-										url: "../Modelo/edita_area.php",
+										url: '../Modelo/edita_area.php?id=<?php echo"$id"?>',
 										method: "POST",
-										data: { value: "<?php echo htmlspecialchars($id); ?>", nombre: nombrearea }
+										data: { nombrearea: nombrearea, iddepto: iddepto }
 									}).done(function(msg){
 										if (msg == "hecho") window.location = "AdministrarAreas.php";
 									});
