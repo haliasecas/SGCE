@@ -228,7 +228,7 @@
 					<div class="form-group">
 						<div class="form-group text-right">
 							<div class="col-md-8 col-md-offset-4">
-								<a class="btn btn-success" style="width: 150px;" onclick="$('#seguro').modal;">CANCELAR</a>
+								<a class="btn btn-success" style="width: 150px;" onclick="$('#seguro').modal();">CANCELAR</a>
 								<?php 
 								echo "<a class='btn btn-success' style='width: 150px; cursor: pointer;' onclick='editarCuenta()'>ENVIAR</a>"
 								?>
@@ -402,7 +402,7 @@
 						<p>¿Seguro que desea editar ésta cuenta?</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-warning" onclick="window.location = 'AdministrarDepartamentos.php';"
+						<button type="button" class="btn btn-warning" onclick="window.location = 'AdministrarCuentas.php';"
 								data-dismiss="modal">No</button>
 						<button type="button" class="btn btn-warning" id="Neta" data-dismiss="modal">Si</button>
 					</div>
@@ -421,7 +421,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
-						<button type="button" class="btn btn-warning" onclick="window.location = 'AdministrarDepartamentos.php';"
+						<button type="button" class="btn btn-warning" onclick="window.location = 'AdministrarCuentas.php';"
 								data-dismiss="modal">Si</button>
 					</div>
 				</div>
@@ -455,22 +455,7 @@
 				</div>
 			</div>
 		</nav>
-		<script>
-			$(document).ready(function(){
-				$("#frmRestablecer").submit(function(event){
-					event.preventDefault();
-					$.ajax({
-						url:'validaremail.php',
-						type:'post',
-						dataType:'json',
-						data:$("#frmRestablecer").serializeArray()
-					}).done(function(respuesta){
-						$("#mensaje").html(respuesta.mensaje);
-						$("#email").val('');
-					});
-				});
-			});
-		</script>
+
 		<script type="text/javascript">
 			$(document).ready(function() {
 				// Sticky bar plz
