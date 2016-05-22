@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>SGCE</title>
@@ -10,6 +10,7 @@
 		<script type="text/javascript" src="../Scr/validator.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
+		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 
@@ -150,19 +151,11 @@
 							</tr>
 						</thead>
 						<tbody>
-
 							<?php
-
 							include("../Modelo/abre_conexion.php");
-							$query = "SELECT *  FROM personal  WHERE idpersonal>0 ORDER BY nombre";
-<<<<<<< HEAD
-                            $result = mysqli_query($link, $query);
-                            if (mysqli_num_rows($result) > 0 ){								
-							     $result = mysqli_query($link, $query);
-=======
-							$result = mysqli_query($link, $query);                            
->>>>>>> c7baf9c3aba064d21994e78eace463e4c023032d
-							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+							$query = "SELECT * FROM personal";
+							$result = mysqli_query($link, $query);
+							while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 								$appaterno=$row['appaterno'];
 								$nombre = $row['nombre'];
 								$apmaterno=$row['apmaterno'];
@@ -170,49 +163,46 @@
 								$cargo = $row['cargo'];
 								$idpersonal = $row['idpersonal'];
 
-								echo "<tr>";
-								echo "<th>$nombre</th>";
-								echo "<th>$appaterno</th>";
-								echo "<th>$apmaterno</th>";
-								echo "<th>$correo</th>";   
-								
-                                if($cargo==2)
-									echo "<th>Personal Administrativo</th>  ";
+								echo "<tr id='P$idpersonal'>";
+								echo "<td>$nombre</td>";
+								echo "<td>$appaterno</td>";
+								echo "<td>$apmaterno</td>";
+								echo "<td>$correo</td>";   
+
+								if ($cargo == 2)
+									echo "<td>Personal Administrativo</td>";
 								else
-									echo "<th>Administrador</th>  ";
-								
-                                echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarCuenta.php?id=$idpersonal'>Editar</a></th>";   
-							    echo "<td><a class='text-success text-right' name='EliminaC' style='text-decoration:underline; cursor:pointer;'>Eliminar</a></td>";
+									echo "<td>Administrador</td>";
+
+								echo "<td><a class='text-success text-right' style='text-decoration:underline;' href='EditarCuenta.php?id=$idpersonal'>Editar</a></td>";
+								echo "<td><a class='text-success text-right' name='EliminaC' style='text-decoration:underline; cursor:pointer;'>Eliminar</a></td>";
 								echo "</tr>";
-							   }
-                            }else {
-								$jaja = "ALTER TABLE personal AUTO_INCREMENT = 2";
-								mysqli_query($link, $jaja);
 							}
 							?>
 						</tbody>
-							<script type="text/javascript">
-                                    $("[name='EliminaC']").click(function() {        
-                                        var id = $(this).closest('tr').attr('id');
-                                        eliminar(id);
-                                    });
-						    </script>    
+						<script type="text/javascript">
+							$("[name='EliminaC']").click(function() {        
+								var id = $(this).closest('tr').attr('id');
+								eliminar(id);
+							});
+						</script>    
 					</table>
-					        <script type="text/javascript">
-                                        function eliminar(str) {
-                                            var id = str.substring(1);
-                                            $("#confirmacion").modal();
-                                            $("#eliminarT").click(function() {
-                                                $.ajax({
-                                                    method: "POST",
-                                                    url: "../Modelo/elimina_cuenta.php",
-                                                    data: { value: id }
-                                                }).done(function(msg){
-                                                    if (msg == "hecho") location.reload();
-                                                });
-                                            });
-                                        }
-					        </script>
+					<script type="text/javascript">
+						function eliminar(str) {
+							var id = str.substring(1);
+							$("#confirmacion").modal();
+							$("#eliminarT").click(function() {
+								$.ajax({
+									method: "POST",
+									url: "../Modelo/elimina_cuenta.php",
+									data: { value: id }
+								}).done(function(msg){
+									if (msg == "hecho") location.reload();
+									else $("#error").modal();
+								});
+							});
+						}
+					</script>
 				</div>
 				<div class="form-group text-right">
 					<div class="col-md-8 col-md-offset-4">							                     
@@ -221,7 +211,7 @@
 				</div>
 			</div>                                                               
 		</div>
-		
+
 		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -229,7 +219,7 @@
 						<h4 class="modal-title">Mensaje de confirmación</h4>
 					</div>
 					<div class="modal-body">
-						<p>¿Seguro que desea eliminar este departamento?</p>
+						<p>¿Seguro que desea eliminar esta cuenta?</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
@@ -265,23 +255,7 @@
 					</ul>
 				</div>
 			</div>
-		</nav>
-		<script>
-			$(document).ready(function(){
-				$("#frmRestablecer").submit(function(event){
-					event.preventDefault();
-					$.ajax({
-						url:'validaremail.php',
-						type:'post',
-						dataType:'json',
-						data:$("#frmRestablecer").serializeArray()
-					}).done(function(respuesta){
-						$("#mensaje").html(respuesta.mensaje);
-						$("#email").val('');
-					});
-				});
-			});
-		</script>						
+		</nav>						
 		<script type="text/javascript">
 			$(document).ready(function() {
 				// Sticky bar plz
