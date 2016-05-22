@@ -156,8 +156,7 @@ function mandarCorreoRechazada($nombre,$appaterno,$apmaterno,$correo){
             <img class=\"img-head\" src=\"../Img/logoIPNGris.png\" style=\"float:right; padding-top:15px; padding-right:15px;\">
         </div><br><br><br><br> <br> ";
 	$msg=$msg."<b>Buen día </b> <br>".$nombre." ".$appaterno." ".$apmaterno."<br>";
-	$msg=$msg."Le informamos que su cita fue <b>Rechazada</b><br>";
-	$msg=$msg."Lamentamos mucho la perdida de su tiempo y le agradecemos que realice su solicitud nuevamente en un día distinto<br>";
+	$msg=$msg."Su cita ha sido <b>rechazada</b>, puede ser debido a la no disponibilidad de horario o a que proporcionó datos ambiguos.<br><br>";
 	$msg=$msg."Gracias por utilizar el sistema generador de citas de ESCOM <br>";
 	$mail->MsgHTML($msg);
 	$mail->AddAddress($correo, $nombre);

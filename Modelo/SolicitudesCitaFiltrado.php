@@ -15,6 +15,10 @@ switch($value){
 $result = mysqli_query($link,$query);
 
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+		$busquedaSol = sprintf("SELECT idSolicitud FROM solicitud WHERE idSolicitud=1 AND estado='ACEPTADA'");
+		$resultSol=mysqli_query($link, $busquedaSol);
+		$row_cntSol = mysqli_num_rows($resultSol); // Busco si ya hay una solicitud aceptada para
+
 		$idarea=$row['idarea'];
 		$id = sprintf("SELECT nombre FROM area WHERE idarea='$idarea'");
 		$result2=mysqli_query($link,$id);
@@ -33,7 +37,12 @@ $result = mysqli_query($link,$query);
 		echo "<td>$correo</td>";
 		echo "<td>$recibido</td>";
 		echo "<p><td>$estado</td></p>";
-		echo "<th><a class='text-success text-right'  style = 'text-decoration:underline;' href='VerSolicitudesCita.php?id=$idsolicitud'>Ver más</a></th>";
+		if(!$row_cntSol==1){
+				echo "<th><a class='text-success text-right'  style = 'text-decoration:underline;' href='VerSolicitudesCita.php?id=$idsolicitud'>Ver más</a></th>";
+		}
+		else{
+			echo "<th><a class='text-success text-right'  style = 'text-decoration:underline;'>Ver más</a></th>";
+		}
 		//echo "<td><p class='click-me text-success text-right'  style='text-decoration:underline;'' id='1'>Ver más</p></td>
 		//	<td><p class='click-me text-success text-right' style='text-decoration:underline;''  id='2'>Eliminar</p></td>";
 		echo "</tr>";
