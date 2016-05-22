@@ -4,7 +4,7 @@ if(isset($_GET["id"]))
     $id = $_GET["id"];
 $nombrearea = $_POST["nombrearea"]; 
 $iddepto = $_POST["iddepto"];   
-echo "$nombrearea     $iddepto"
+echo "$nombrearea     $iddepto";
     if(isset($_GET["id"]))
         $idarea = $_GET['id'];
 include("abre_conexion.php");                

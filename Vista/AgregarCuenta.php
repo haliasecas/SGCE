@@ -142,7 +142,7 @@
 					<div class="form-group" id="Nombre">
 						<label  for="" class="control-label col-md-2">Nombre(s)</label>
 						<div class="col-md-10">
-							<input type='text' id="nombre" class='form-control' placeholder="Rodrigo">
+							<input type='text' name="nombre" class='form-control' placeholder="Rodrigo">
 							<span id="nombre01" class="hidden glyphicon form-control-feedback"></span>
 							<span id="nombre02" class="text-center help-block hidden"></span>
 						</div>
@@ -150,7 +150,7 @@
 					<div class="form-group" id="Appaterno">
 						<label  for="" class="control-label col-md-2">Apellido paterno</label>
 						<div class="col-md-10">
-							<input type='text' id="appat" class='form-control' placeholder="Perez">
+							<input type='text' name="appat" class='form-control' placeholder="Perez">
 							<span id="appat01" class="hidden glyphicon form-control-feedback"></span>
 							<span id="appat02" class="text-center help-block hidden"></span>
 						</div>
@@ -158,19 +158,16 @@
 					<div class="form-group" id="Apmaterno">
 						<label  for="" class="control-label col-md-2">Apellido materno</label>
 						<div class="col-md-10">
-							<input type='text' id="apmat" class='form-control' placeholder="Perez">
+							<input type='text' name="apmat" class='form-control' placeholder="Perez">
 							<span id="apmat01" class="hidden glyphicon form-control-feedback"></span>
+                            <span id="apmat02" class="text-center help-block hidden"></span>
 						</div>
 					</div>
-					<div class="form-group has-error has-feedback">
-						<div class="col-md-10 col-md-offset-2">
-							<span id="apmat02" class="text-center help-block hidden"></span>
-						</div>
-					</div>
+				
 					<div class="form-group" id="Correo">
 						<label  for="" class="control-label col-md-2">Correo electrónico</label>
 						<div class="col-md-10">
-							<input type='correo' id="correo" class='form-control' placeholder="ejemplo@dominio.com">
+							<input type='correo' name="correo" class='form-control' placeholder="ejemplo@dominio.com">
 							<span id="correo01" class="hidden glyphicon form-control-feedback"></span>
 							<span id="correo02" class="text-center help-block hidden"></span>
 						</div>
@@ -178,7 +175,7 @@
 					<div class="form-group" id="Pass1">
 						<label class="control-label col-md-2">Contraseña</label>
 						<div class="col-md-10">
-							<input type='password' id="pass1" class='form-control' placeholder="***************">
+							<input type='password' name="pass1" class='form-control' placeholder="***************">
 							<span id="pass01" class="hidden glyphicon form-control-feedback"></span>
 							<span id="pass02" class="text-center help-block hidden"></span>
 						</div>
@@ -186,7 +183,7 @@
 					<div class="form-group" id="Pass2">
 						<label  for="" class="control-label col-md-2">Repetir contraseña</label>
 						<div class="col-md-10">
-							<input type='password' id="pass2" class='form-control' placeholder="***************">
+							<input type='password' name="pass2" class='form-control' placeholder="***************">
 							<span id="repass01" class="hidden glyphicon form-control-feedback"></span>
 							<span id="repass02" class="text-center help-block hidden"></span>
 						</div>
@@ -194,7 +191,7 @@
 					<div class="form-group" id="Cargo">
 						<label class="control-label col-md-2">Cargo</label>
 						<div class="col-md-10">                                        
-							<select id="cargo" class="form-control">
+							<select name="cargo" class="form-control">
 								<option value="-1">Selecciona un cargo</option>
 								<option value="1">Administrador</option> 
 								<option value="2">Personal Administrativo</option>                                 
@@ -205,24 +202,26 @@
 						<div class="form-group text-right">
 							<div class="col-md-10 col-md-offset-2">
 								<a class="btn btn-success" style="width: 150px;" onclick="window.location = './AdministrarCuentas.php';">CANCELAR</a>
-								<a class="btn btn-success" style="width: 150px;" onclick="ingresacuenta()">ENVIAR</a>
+								<a class="btn btn-success" style="width: 150px;" onclick="ingresacuenta();">ENVIAR</a>
 							</div>
 						</div>
 					</div>
 				</form>
 				<script type="text/javascript">
+                    
 					function ingresacuenta(){
 						var nombres = false, correos = false, contrasenas = false, cargos = false;
 						var nomb = false, app = false, apm = false;
-						var p1 = $("#pass1").val();
-						var p2 = $("#pass2").val();
-						var nombre = $("#nombre").val();
-						var appat = $("#appat").val();
-						var apmat = $("#apmat").val();
-						var correo = $("#correo").val();
-						var cargo = $("#cargo").val();
+                        //var nombrearea = $("[name='nombrearea']").val();
+						var p1 = $("[name='pass1']").val();
+						var p2 = $("[name='pass2']").val();
+						var nombre = $("[name='nombre']").val();
+						var appat = $("[name='appat']").val();
+						var apmat = $("[name='apmat']").val();
+						var correo = $("[name='correo']").val();
+						var cargo = $("[name='cargo']").val();
 						// Validando el nombre,apellido paterno y materno
-						$("#apmat02").text("El formato del campo nombre o apellido es incorrecto");
+						//$("#apmat02").text("El formato del campo nombre o apellido es incorrecto");
 						if(!valname(nombre) || nombre == "") {
 							$("#Nombre").attr("class", "form-group has-feedback has-error");
 							$("#nombre01").attr("class", "glyphicon glyphicon-remove form-control-feedback");							
