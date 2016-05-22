@@ -128,18 +128,10 @@
 					</ul>
 				</div>
 			</div>
-		</nav>
-        
-               <?php 
-                        $calendar = $service->calendars->get('primary');
-                        echo $calendar->getSummary();
-                ?>
-                             
-<!--
+		</nav>                 
         <div class="container" style="padding: 50px; 200px; ">                                  
                 <iframe src="https://calendar.google.com/calendar/embed?height=800&amp;wkst=1&amp;hl=es_419&amp;bgcolor=%23ffffff&amp;src=sgceescom%40gmail.com&amp;color=%23711616&amp;ctz=America%2FMexico_City" style="border-width:0" width="800" height="800" frameborder="0" scrolling="no"></iframe>
         </div>
--->
         <br>
         <br>
         <br>
