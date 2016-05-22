@@ -152,18 +152,17 @@
 				<br>
 				<br>                                
 				<form method="post" class="form-horizontal">
-					<div class="form-group">
+					<div class="form-group" id='Nombre'>
 						<label  for="" class="control-label col-md-2">Nombre del área</label>
 						<div class="col-md-10">
 							<?php echo "<input type='text' class='form-control' value='$nombrearea' name='nombrearea'>";	?>
 
 						</div>
-						<br>              						                               
-						<br>              						                               
-						<br>              						                               
-						<label   class="control-label col-md-2" id="Depa">Nombre del departamento</label>						                                                                
-						<div class="col-md-10">                                        
-							<select name="departamento" class="form-control">
+                    </div> 
+                    <div class="form-group" id="Depa">
+						<label   class="control-label col-md-2" >Nombre del departamento</label>						                                                                
+						<div class="col-md-10" >                                        
+							<select  class="form-control" name='iddepto'>
 								<option value="-1">Seleccione un departamento</option>
 								<?php
 								$query = "SELECT * FROM depto where iddepto>1";
@@ -172,12 +171,13 @@
 								while($row = mysqli_fetch_array($result2, MYSQLI_ASSOC)){
 									$nombredepto= $row['nombre'];
 									$iddepto = $row["iddepto"];
-									echo "<option value='$iddepto' name='iddepto'>$nombredepto</option>";
+									echo "<option value='$iddepto' >$nombredepto</option>";
 								}
 								?>
 							</select>
 						</div>                                                                       
-						<br><br><br>                                                 
+                    </div>    
+                    <div class="form-group">
 						<div class="form-group text-right">
 							<div class="col-md-8 col-md-offset-4">
                                 <a class="btn btn-success" style="width: 150px;" onclick="window.location = 'AdministrarAreas.php'">CANCELAR</a>                
@@ -186,6 +186,7 @@
 							     ?>
 							</div>					                                                                               						                             
 						</div>
+                    </div>
                        	<script>
 						function error(donde, str) {
 							$(donde).addClass("has-error has-feedback");
@@ -209,7 +210,7 @@
 							var a1 = false, a2 = false;
 							var ts = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð -]+$/u;
 							var iddepto = $("[name='iddepto']").val();
-							var nombrearea = $("[name='nombreArea']").val();
+							var nombrearea = $("[name='nombrearea']").val();
 							if (nombrearea == "") {
 								error("#Nombre", "El campo nombre del área no puede estar vacio.");
 								a1 = false;
@@ -221,13 +222,14 @@
 								nohayerror("#Nombre");
 								a1 = true;
 							}
-							if (iddepto== "-1") {
+							if (iddepto == "-1") {
 								error("#Depa", "El nombre del departamento no puede estar vacio.");
 								a2 = false;
 							}
 							else {
 								nohayerror("#Depa");
 								a2 = true;
+                                
 							}
 
 							if (a1 && a2) {
@@ -245,7 +247,7 @@
 						}
 
 					</script>
-					</div>
+					
 				</form>   
 			</div>
 		</div>                                
@@ -260,8 +262,7 @@
 						<p>¿Seguro que desea cambiar el nombre de esta área ?</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-warning" onclick="window.location = 'AdministrarAreas.php';"
-								data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-warning" onclick="window.location = 'EditarAreas.php?id=<?php echo"$id"?>';"	data-dismiss="modal">Cancelar</button>
 						<button type="button" class="btn btn-warning" id="Neta" data-dismiss="modal">Aceptar</button>
 					</div>
 				</div>
