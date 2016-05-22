@@ -1,6 +1,4 @@
-
-<?php  
-
+<?php
 // Recibimos por POST los datos procedentes del formulario  
 $nombrearea = $_POST["area"]; 
 $iddepto = $_POST["departamento"]; 
