@@ -134,7 +134,7 @@
 
 		<?php
 		if(isset($_GET["id"]))
-			$id = $_GET['id'];
+                $id = $_GET['id'];
 		include("../Modelo/abre_conexion.php");
 		$query = "SELECT * FROM personal WHERE idpersonal = '$id'";
 		$result = mysqli_query($link, $query);
@@ -213,7 +213,7 @@
 							                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 							             while($row = mysqli_fetch_array($result2, MYSQLI_ASSOC)){
 								                    $nombredepto= $row['nombre'];
-								                    echo "<option value='DepartamentoA'>$nombredepto</option>";
+								                    echo "<option value='$nombredepto'>$nombredepto</option>";
 							             }
 								?>
 							</select>
@@ -230,7 +230,7 @@
 						</div>
 						 	<script>
                                     function editarCuenta(){
-                                        var nombres = false, correos = false,depas = false;
+                                        var nombres = false, correos = false,depas = false;                                        
                                         var c1 = $("#correo1").val(); //Correo 
                                         var c2 = $("#correo2").val(); //Repite correo
                                         var nombre = $("#nombre").val();
@@ -335,24 +335,31 @@
                                         }
                                         // Si los tres fueron correctos
                                         if(nombres && correos  && depas){
+                                            $("#confirmacion").modal();
+                                            $("#Neta").click(function() {
                                             $.ajax({
                                                 url: "../Modelo/edita_cuenta.php",
                                                 method: "POST",
-                                                data: { 
-                                                    name: nombre,
-                                                    appat: appat,
-                                                    apmat: apmat,                                                    
-                                                    correo: c1,
-                                                    dep: depa 
+                                                data: {
+                                                        value:  "<?php echo htmlspecialchars($id); ?>",
+                                                        name: nombre,
+                                                        appat: appat,
+                                                        apmat: apmat,                                                    
+                                                        correo: c1,
+                                                        dep: depa                                                    
                                                 }
                                             }).done(function(msg) {
-                                                if(msg == "editado") $("#exitoso").modal();
-                                                console.log(msg);                                
-                                            });   
+                                                if(msg != "hecho"){
+                                                    $("#exitoso").modal();                                                    
+                                                }else{
+                                                    $("#error").modal();
+                                                }                                                                           
+                                            });
+                                            });
                                         }else{
                                             $(window).scrollTop(0);
                                             $("#error").modal();
-                                        }                        
+                                        }                                           
                                     }
 					       </script>					   
 					</div>
@@ -378,7 +385,25 @@
 				</div>
 			</div>
 		</div>
-
+		
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-warning">
+						<h4 class="modal-title">Mensaje de confirmación</h4>
+					</div>
+					<div class="modal-body">
+						<p>¿Seguro que desea modificar la cuenta de este usuario?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-warning" onclick="window.location = 'AdministrarCuentas.php';"
+								data-dismiss="modal">No</button>
+						<button type="button" class="btn btn-warning" id="Neta" data-dismiss="modal">Si</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<div class="modal fade" data-keyboard="false" id="error" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
