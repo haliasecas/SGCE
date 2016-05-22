@@ -180,17 +180,18 @@
 							}
 							?>
 						</tbody>
-<<<<<<< HEAD
-						<script type="text/javascript">
-							$("[name='EliminaC']").click(function() {        
-								var id = $(this).closest('tr').attr('id');
+						<script>                                
+							$("[name='EliminaC']").click(function() {                                                
+								debugger;
+								var id = $(this).closest('tr').attr('id');                                        
 								eliminar(id);
-							});
+							});                                
 						</script>    
 					</table>
-					<script type="text/javascript">
+					<script>
 						function eliminar(str) {
-							var id = str.substring(1);
+							debugger;
+							var id = str;
 							$("#confirmacion").modal();
 							$("#eliminarT").click(function() {
 								$.ajax({
@@ -198,41 +199,14 @@
 									url: "../Modelo/elimina_cuenta.php",
 									data: { value: id }
 								}).done(function(msg){
-									if (msg == "hecho") location.reload();
-									else $("#error").modal();
+									if (msg == "hecho"){
+										location.reload();
+										$("#exitoso").modal();
+									}else $("#error").modal();
 								});
 							});
 						}
 					</script>
-=======
-							<script>                                
-                                    $("[name='EliminaC']").click(function() {                                                
-                                        debugger;
-                                        var id = $(this).closest('tr').attr('id');                                        
-                                        eliminar(id);
-                                    });                                
-						    </script>    
-					</table>
-					        <script>
-                                        function eliminar(str) {
-                                            debugger;
-                                            var id = str;
-                                            $("#confirmacion").modal();
-                                            $("#eliminarT").click(function() {
-                                                $.ajax({
-                                                    method: "POST",
-                                                    url: "../Modelo/elimina_cuenta.php",
-                                                    data: { value: id }
-                                                }).done(function(msg){
-                                                    if (msg == "hecho"){
-                                                        location.reload();
-                                                        $("#exitoso").modal();
-                                                    }else $("#error").modal();
-                                                });
-                                            });
-                                        }
-					        </script>
->>>>>>> c0c83b35321a8a9e12a8c2075a6fafcf8b20c30d
 				</div>
 				<div class="form-group text-right">
 					<div class="col-md-8 col-md-offset-4">							                     
@@ -241,10 +215,6 @@
 				</div>
 			</div>                                                               
 		</div>
-<<<<<<< HEAD
-
-=======
-		
 		<div class="modal fade" data-keyboard="false" id="error" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -260,7 +230,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="exitoso" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -276,8 +246,7 @@
 				</div>
 			</div>
 		</div>
-		
->>>>>>> c0c83b35321a8a9e12a8c2075a6fafcf8b20c30d
+
 		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
