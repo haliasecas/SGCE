@@ -85,7 +85,7 @@
 
 						<?php }else{?> 
 
-						<! Personal administrativo -->                    
+						<!-- Personal administrativo -->                    
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span><img src="../Img/bookmarkGreen.png" height="30px"></span> Personal Administrativo<span class="caret"></span>
@@ -316,6 +316,7 @@
 						}
 						// Si los cuatro fueron correctos
 						if(nombres && correos && contrasenas && cargos){
+<<<<<<< HEAD
 							$.ajax({
 								url: "../Modelo/agrega_cuenta.php",
 								method: "POST",
@@ -334,6 +335,17 @@
                                     window.location = "AdministrarCuentas.php";   
                                 }                                
 							});   
+=======
+		                          $.ajax({
+											method: "POST",
+											url: "../Modelo/agrega_cuenta.php",
+											data: { value: 
+                                                   
+                                                  }
+										}).done(function(msg){
+											$("[name='area']").append(msg);
+										});
+>>>>>>> 2c3fbb7ad860e79569cb82df80be68ca91246987
 						}else{
 							$(window).scrollTop(0);
 							$("#error").modal();
