@@ -292,6 +292,7 @@
 						$("#Email").attr("class", "form-group has-feedback has-error");
 						$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
 						$("#email03").removeClass("hidden");
+						$("#error").modal();
 					}
 					else {
 						$("#Email").attr("class", "form-group has-feedback has-success");
@@ -337,7 +338,7 @@
 						<h4 class="modal-title">Mensaje de error</h4>
 					</div>
 					<div class="modal-body">
-						<p>Falta un dato obligatorio para efectuar la operación solicitada.</p>
+						<p>Falta un dato obligatorio para efectuar la operación solicitada</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
