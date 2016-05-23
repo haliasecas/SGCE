@@ -14,7 +14,11 @@
 							
 					}*/
 					include("../Modelo/abre_conexion.php"); 
-                    $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+					$busqueda = sprintf("SELECT idSolicitud FROM solicitud WHERE idSolicitud=1 AND estado='ACEPTADA'");
+						$result=mysqli_query($link, $busqueda);
+						$row_cnt = mysqli_num_rows($result);
+						echo $row_cnt;
+                   /* $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
 					$string = '';
 					$random_string_length = 20;	//GENERAMOS EL TOKEN
 					for ($i = 0; $i < $random_string_length; $i++) {
@@ -22,7 +26,7 @@
 					}
                     $tok=sprintf("INSERT INTO solicitudtoken (idSolicitud, token) VALUES (2,'$string')");   
 						$result=mysqli_query($link,$tok);
-echo mysqli_error($link);
+echo mysqli_error($link);*/
 					/*$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
 					$contrasena = '';
 					$random_string_length = 10;	//GENERAMOS EL TOKEN

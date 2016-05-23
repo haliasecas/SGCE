@@ -199,7 +199,7 @@
 						<p>Correo no registrado, por favor revise que haya escrito el correo correctamente.</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal";">Aceptar</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal";>Aceptar</button>
 					</div>
 				</div>
 			</div>

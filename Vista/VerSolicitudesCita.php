@@ -67,6 +67,21 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="MSGA_10" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Mensaje de alerta</h4>
+					</div>
+					<div class="modal-body">
+						<p>La cita fue rechazada de manera exitosa.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<!-- Nueva nav -->
 		<nav class="navbar navbar-inverse navbar-static-top" style="height:84px;" id="top-bar">
@@ -189,25 +204,26 @@
 				$idsol = $_GET['id'];
 				$opcion=$_POST['opcionSelect'];
 				include("../Modelo/abre_conexion.php");
-				if($opcion=='Agendar'){
-					$query = "SELECT * FROM solicitud WHERE idsolicitud = '$idsol'";
-					$result = mysqli_query($link, $query);
-					$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-					$idinteresado=$row['idinteresado'];
+				$query = "SELECT * FROM solicitud WHERE idsolicitud = '$idsol'";
+				$result = mysqli_query($link, $query);
+				$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+				$idinteresado=$row['idinteresado'];
 
-					$query = "SELECT * FROM interesado WHERE idinteresado='$idinteresado'";
-					$result2 = mysqli_query($link, $query);
-					$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
+				$query = "SELECT * FROM interesado WHERE idinteresado='$idinteresado'";
+				$result2 = mysqli_query($link, $query);
+				$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
+				$appaterno=$row2['appaterno'];
+				$nombre = $row2['nombre'];
+				$apmaterno=$row2['apmaterno'];
+				$correo = $row2['correo'];
+				$telefono = $row2['telefono'];
+				if($opcion=='Agendar'){
 
 					$idarea=$row['idarea'];
 					$iddepto=$row['iddepto'];
 
 					$asunto=$row['asunto'];
-					$appaterno=$row2['appaterno'];
-					$nombre = $row2['nombre'];
-					$apmaterno=$row2['apmaterno'];
-					$correo = $row2['correo'];
-					$telefono = $row2['telefono'];
+					
 					$dia = $row['dia'];
 
 					$horasel=$_POST['hora'];
@@ -227,13 +243,12 @@
 					$result2=mysqli_query($link, $busqueda2);
 					$row_cnt2 = mysqli_num_rows($result2);
 
-
 					if($row_cnt=='1' && $row_cnt2=='1'){
-		?>
-		<script type="text/javascript">
-			$("#MSGE17").modal();
-		</script>
-		<?php
+						?>
+						<script type="text/javascript">
+							$("#MSGE17").modal();
+						</script>
+						<?php
 					}
 					else{
 						$sql = sprintf("INSERT INTO cita (hinicio,hfin,dia,idarea,iddepto,idinteresado) VALUES ('$hinicio','$hfin','$dia','$idarea','$iddepto','$idinteresado')");
@@ -265,8 +280,20 @@
 				else{
 					$sql = sprintf("UPDATE solicitud SET estado='RECHAZADA' WHERE idSolicitud='$idsol'");
 					$result=mysqli_query($link,$sql);
+					require_once("../Modelo/enviarCorreo.php");
 					if (mandarCorreoRechazada($nombre,$appaterno,$apmaterno,$correo)){
-						echo "Hola";
+						?>
+						<script type="text/javascript">
+							$("#MSGA_10").modal();
+						</script>
+						<?php
+					}
+					else{
+						?>
+						<script type="text/javascript">
+							$("#MSGE06").modal();
+						</script>
+						<?php
 					}
 				}
 			}
@@ -285,6 +312,11 @@
 			if(isset($_GET["id"]))
 				$idsol = $_GET['id'];
 			include("../Modelo/abre_conexion.php");
+			$busquedaSol = sprintf("SELECT idSolicitud FROM solicitud WHERE idSolicitud=1 AND estado='ACEPTADA'");
+			$resultSol=mysqli_query($link, $busquedaSol);
+			$row_cntSol = mysqli_num_rows($resultSol); // Busco si ya hay una solicitud aceptada para
+	
+
 			$query = "SELECT * FROM solicitud WHERE idsolicitud = '$idsol'";
 			$result = mysqli_query($link, $query);
 			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
@@ -298,8 +330,6 @@
 			$query = "SELECT * FROM area WHERE idarea='$idarea'";
 			$result3 = mysqli_query($link, $query);
 			$row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
-
-
 
 			$asunto=$row['asunto'];
 			$appaterno=$row2['appaterno'];
@@ -393,15 +423,21 @@
 						<label class="control-label col-md-2">Horario(s) preferente(s)</label>
 						<div class="col-md-10">
 							<?php
-			$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
-			$result = mysqli_query($link,$query);
-			while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-				$idhorario=$row['idHorario'];
-				$query2 = "SELECT * FROM HoraPref WHERE idHorario='$idhorario'";
-				$result2=mysqli_query($link,$query2);
-				$rowarea = mysqli_fetch_assoc($result2);
-				echo "<p class='form-control-static' id='horario' name='horario'>".$dia." ".$rowarea['hinicio']."-".$rowarea['hfin']."</p>";
+								if(!$row_cntSol==1){
+
+				$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
+				$result = mysqli_query($link,$query);
+				while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+					$idhorario=$row['idHorario'];
+					$query2 = "SELECT * FROM HoraPref WHERE idHorario='$idhorario'";
+					$result2=mysqli_query($link,$query2);
+					$rowarea = mysqli_fetch_assoc($result2);
+					echo "<p class='form-control-static' id='horario' name='horario'>".$dia." ".$rowarea['hinicio']."-".$rowarea['hfin']."</p>";
+				}
 			}
+								else{
+									echo "SOLICITUD ACEPTADA";
+								}
 							?>
 						</div>
 						<br> 
@@ -411,8 +447,16 @@
 						<label class="control-label col-md-2"><p class="text-success">¿QUÉ DESEA HACER?</p></label>
 						<div class="col-md-10">
 							<select class="form-control" name='opcionSelect'>
-								<option>Agendar</option>
-								<option>Rechazar</option>
+							<?php
+							if(!$row_cntSol==1){
+								echo"<option >Agendar</option>";
+								echo"<option >Rechazar</option>";
+							}
+							else{
+								echo "<option disabled>ACEPTADA</option>";
+							}
+								?>
+							
 							</select>
 						</div>
 						<br> 
@@ -424,7 +468,13 @@
 						<div class="col-md-10">
 							<select class="form-control" name='diaselect'>
 								<?php
-			echo "<option>$dia</option>";
+										if(!$row_cntSol==1){
+											echo "<option>$dia</option>";
+										}
+										else{
+											echo "<option disabled>ACEPTADA</option>";
+										}
+
 								?>
 							</select>
 						</div>
@@ -438,6 +488,7 @@
 							<select class="form-control" name="hora">
 								<?php
 			$k=1;
+			if(!$row_cntSol==1){
 			$query = "SELECT * FROM HoraSol WHERE idSolicitud='$idsol'";
 			$result = mysqli_query($link,$query);
 			while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -449,6 +500,11 @@
 				echo "<option value='$idhorario'>".$rowarea['hinicio']."-".$rowarea['hfin']."</option>";
 				$k=$k+1;
 			}
+		}
+			else{
+				echo "<option value='aceptada' disabled>ACEPTADA</option>";
+			}
+			
 								?>
 
 							</select>
@@ -462,8 +518,11 @@
 						<div class="col-md-10 col-md-offset-2">
 						
 							<a class="btn btn-success" data-toggle="modal" data-target="#MSGC_02" style="width: 150px;">CANCELAR</a>
-							
-							<button class="btn btn-success" type="submit" style="width: 150px;">ENVIAR</a>
+							<?php
+							if(!$row_cntSol==1)
+								echo "<button class='btn btn-success' type='submit' style='width: 150px;'>ENVIAR</a>";
+							?>
+						
 						</div>
 					</div>
 				</form>
