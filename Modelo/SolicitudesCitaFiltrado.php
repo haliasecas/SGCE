@@ -15,9 +15,7 @@ switch($value){
 $result = mysqli_query($link,$query);
 
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-		$busquedaSol = sprintf("SELECT idSolicitud FROM solicitud WHERE idSolicitud=1 AND estado='ACEPTADA'");
-		$resultSol=mysqli_query($link, $busquedaSol);
-		$row_cntSol = mysqli_num_rows($resultSol); // Busco si ya hay una solicitud aceptada para
+		
 
 		$idarea=$row['idarea'];
 		$id = sprintf("SELECT nombre FROM area WHERE idarea='$idarea'");
@@ -32,6 +30,9 @@ $result = mysqli_query($link,$query);
 		$recibido=$row['dia'];
 		$estado=$row['estado'];
 		$idsolicitud=$row['idSolicitud'];
+		$busquedaSol = sprintf("SELECT idSolicitud FROM solicitud WHERE idSolicitud='$idsolicitud' AND (estado='AGENDADA' OR estado='RECHAZADA')");
+		$resultSol=mysqli_query($link, $busquedaSol);
+		$row_cntSol = mysqli_num_rows($resultSol); // Busco si ya hay una solicitud aceptada para
 		echo "<tr>";
 		echo "<th>$area</th>";
 		echo "<td>$correo</td>";

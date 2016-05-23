@@ -312,7 +312,7 @@
 			if(isset($_GET["id"]))
 				$idsol = $_GET['id'];
 			include("../Modelo/abre_conexion.php");
-			$busquedaSol = sprintf("SELECT idSolicitud FROM solicitud WHERE idSolicitud=1 AND estado='ACEPTADA'");
+			$busquedaSol = sprintf("SELECT idSolicitud FROM solicitud WHERE idSolicitud='$idsol' AND (estado='AGENDADA' OR estado='RECHAZADA')");
 			$resultSol=mysqli_query($link, $busquedaSol);
 			$row_cntSol = mysqli_num_rows($resultSol); // Busco si ya hay una solicitud aceptada para
 	

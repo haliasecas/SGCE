@@ -148,7 +148,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header modal-has-success">
-						<h4 class="modal-title">Token Válido</h4>
+						<h4 class="modal-title">Mensaje de Alerta</h4>
 					</div>
 					<div class="modal-body">
 						<p>Dirección de correo electrónico validada. Su solicitud de cita ha sido enviada y se esta procesando.</p>
@@ -163,10 +163,10 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header modal-has-error">
-						<h4 class="modal-title">Token Inválido</h4>
+						<h4 class="modal-title">Mensaje de error</h4>
 					</div>
 					<div class="modal-body">
-						<p>El enlace es incorrecto.</p>
+						<p>El enlace es incorrecto .</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
@@ -221,7 +221,7 @@
 											});
 										</script>";
 			$sql = "DELETE FROM SolicitudToken WHERE token='$token'";
-			result=mysqli_query($link,$sql);
+			$result=mysqli_query($link,$sql);
 		}
 		else{
 			echo 
