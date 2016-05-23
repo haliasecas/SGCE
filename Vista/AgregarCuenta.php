@@ -225,6 +225,7 @@
                                 $("#Nombre").attr("class", "form-group has-feedback has-error");
                                 $("#nombre01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
                                 $("#nombre02").removeClass("hidden");
+                                $("#nombre02").text("El campo nombre no puede estar vacío");
                             }else{
                                 $("#Nombre").attr("class", "form-group has-feedback has-success");
                                 $("#nombre01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
@@ -234,6 +235,8 @@
                             if(!valname(appat) || appat == "") {
                                 $("#Appaterno").attr("class", "form-group has-feedback has-error");
                                 $("#appat01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+                                $("#appat02").removeClass("hidden");
+                                $("#appat02").text("El campo apellido paterno no puede estar vacío");
                             }else{
                                 $("#Appaterno").attr("class", "form-group has-feedback has-success");
                                 $("#appat01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
@@ -244,6 +247,7 @@
                                 $("#Apmaterno").attr("class", "form-group has-feedback has-error");
                                 $("#apmat01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
                                 $("#apmat02").removeClass("hidden");
+                                $("#apmat02").text("El campo apellido materno no puede estar vacío");
                             }else {                              
                                 $("#Apmaterno").attr("class", "form-group has-feedback has-success");
                                 $("#apmat01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
@@ -276,13 +280,18 @@
                             if(p1 == ""){
                                 $("#Pass1").attr("class", "form-group has-feedback has-error");
                                 $("#pass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
-                                $("#pass02").removeClass("hidden");				            
+                                $("#pass02").removeClass("hidden");	
+                                $("#pass02").text("El campo contraseña no puede estar vacío");
                                 contrasenas = false;
-                            }if(p2 == ""){
+                            }else{
+                                $("#Pass1").attr("class", "form-group has-feedback has-success");
+                                $("#pass01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+                            }
+                            if(p2 == ""){
                                 $("#Pass2").attr("class", "form-group has-feedback has-error");
                                 $("#repass01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
                                 $("#repass02").removeClass("hidden");
-                                $("#repass02").text("El campo contraseña  no puede estar vacío");
+                                $("#repass02").text("El campo repetir contraseña  no puede estar vacío");
                                 contrasenas = false;                        
                             }else if(p1 != p2){
                                 $("#Pass1").attr("class", "form-group has-feedback has-error");
@@ -315,7 +324,7 @@
                             }
                             // Si los cuatro fueron correctos
                             if(nombres && correos && contrasenas && cargos){
-                                <<<<<<< HEAD
+                               
                                 $.ajax({
                                     url: "../Modelo/agrega_cuenta.php",
                                     method: "POST",
@@ -334,17 +343,6 @@
                                         window.location = "AdministrarCuentas.php";   
                                     }                                
                                 });   
-                                =======
-                                    $.ajax({
-                                    method: "POST",
-                                    url: "../Modelo/agrega_cuenta.php",
-                                    data: { value: 
-
-                                          }
-                                          }).done(function(msg){
-                                    $("[name='area']").append(msg);
-                                });
-                                >>>>>>> 2c3fbb7ad860e79569cb82df80be68ca91246987
                             }else{
                                 $(window).scrollTop(0);
                                 $("#error").modal();
