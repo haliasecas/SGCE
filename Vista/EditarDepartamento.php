@@ -295,7 +295,7 @@
 						<h4 class="modal-title">Mensaje de error</h4>
 					</div>
 					<div class="modal-body">
-						<p>El nombre de este departamento ya existe en el sistema.</p>
+						<p>El nombre de este departamento ya existe en el sistema</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>

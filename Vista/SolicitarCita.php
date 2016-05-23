@@ -590,7 +590,7 @@
 			</div>
 		</div>
 
-		<div class="modal fade" data-keyboard="false" id="error" role="dialog">
+		<div class="modal fade" data-keyboard="false" id="error" role="dialog" data-backdrop="static">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header modal-has-error">
