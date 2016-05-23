@@ -46,25 +46,14 @@
 				<p class='avisos' id="aviso">Se ha cerrado sesion. Será redirigido automáticamente en 3 segundos</p>
 				<?php 
 				//setcookie("cargo", "", time()-3600);
-                if (isset($_COOKIE['cargo'])) {
-                    unset($_COOKIE['cargo']);
-                    setcookie('cargo', '', time() - 3600, '/'); // empty value and old timestamp
-                }
+                setcookie("cargo", "", 1);
 				//setcookie("id", "", time()-3600);
-                if (isset($_COOKIE['id'])) {
-                    unset($_COOKIE['id']);
-                    setcookie('id', '', time() - 3600, '/'); // empty value and old timestamp
-                }
+                setcookie("id", "", 1);
 				//setcookie("first", "", time()-3600);			
-                if (isset($_COOKIE['first'])) {
-                    unset($_COOKIE['first']);
-                    setcookie('first', '', time() - 3600, '/'); // empty value and old timestamp
-                }
+                setcookie("first", "", 1);                
 				//setcookie("name", "", time()-3600);
-                if (isset($_COOKIE['name'])) {
-                    unset($_COOKIE['name']);
-                    setcookie('name', '', time() - 3600, '/'); // empty value and old timestamp
-                }
+                setcookie("name", "", 1);
+                
 
 				header("refresh: 3; url = ./");
 
