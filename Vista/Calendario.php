@@ -129,9 +129,45 @@
 				</div>
 			</div>
 		</nav>                 
-        <div class="container" style="padding: 50px; 200px; ">                                  
-                <iframe src="https://calendar.google.com/calendar/embed?height=800&amp;wkst=1&amp;hl=es_419&amp;bgcolor=%23ffffff&amp;src=sgceescom%40gmail.com&amp;color=%23711616&amp;ctz=America%2FMexico_City" style="border-width:0" width="800" height="800" frameborder="0" scrolling="no"></iframe>
-        </div>
+        <div style="padding-bottom: 57px; " id="main-content" class="container-fluid col-md-offset-1 col-md-10">         
+                <h2><p><strong>Calendario de Citas</strong></p></h2>
+				<p>Aquí se consulta las citas que se van generando.</p>
+                   <br>
+                   <br>
+            <div class="container">
+               <iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=sgceescom%40gmail.com&amp;color=%230F4B38&amp;ctz=America%2FMexico_City" style="border-width:0 left:300px;" width="1000" height="800" frameborder="0" scrolling="no"></iframe>      
+            </div>                   
+            <?php
+                        /********************************************************************
+                        * Función getGCalendar (Eduardo Revilla Vaquero)                    *
+                        * Genera url para la creación de un evento en google calendar.      *
+                        *********************************************************************/
+                    function getGCalendarUrl($event){  
+                        $titulo = urlencode($event['titulo']); 
+                        $descripcion = urlencode($event['descripcion']); 
+                        $localizacion = urlencode($event['localizacion']); 
+                        $start=new DateTime($event['fecha_inicio'].' '.$event['hora_inicio'].' '.date_default_timezone_get()); 
+                        $end=new DateTime($event['fecha_fin'].' '.$event['hora_fin'].' '.date_default_timezone_get()); $dates = urlencode($start->format("Ymd\THis")) . "/" . urlencode($end->format("Ymd\THis"));
+                        $name = urlencode($event['nombre']);
+                        $url = urlencode($event['url']);
+                        $gCalUrl = "http://www.google.com/calendar/event?action=TEMPLATE&amp;text=$titulo&amp;dates=$dates&amp;details=$descripcion&amp;location=$localizacion&amp;trp=false&amp;sprop=$url&amp;sprop=name:$name";
+                        return ($gCalUrl);
+                        }
+                        // array asociativo con los parametros mecesarios.
+                        $evento = array(
+                          'titulo' => 'Mi evento de prueba',
+                          'descripcion' => 'Descripcion del evento de prueba',
+                          'localizacion' => 'Aqui ponemos la dirección donde se celebra el evento',
+                          'fecha_inicio' => '2014-04-10', // Fecha de inicio de evento en formato AAAA-MM-DD
+                        'hora_inicio'=>'17:30', // Hora Inicio del evento
+                        'fecha_fin'=>'2014-04-12', // Fecha de fin de evento en formato AAAA-MM-DD
+                        'hora_fin'=>'19:00', // Hora final del evento
+                        'nombre'=>'ReviBlog', // Nombre del sitio
+                        'url'=>'www.reviblog.net' // Url de la página
+                        );
+            ?>
+            <a href="<?php echo getGCalendarUrl($evento); ?>"><img src="http://www.google.com/calendar/images/ext/gc_button6_es.gif" border="0"></a>                          
+        </div>                   
         <br>
         <br>
         <br>

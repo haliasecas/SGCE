@@ -189,6 +189,22 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" id="process" role="dialog" data-keyboard="false" data-backdrop="static">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Mensaje de alerta</h4>
+					</div>
+					<div class="modal-body">
+						<p>Tu solicitud está siendo procesada</p>
+						<div class="progress progress-striped active">
+							<div class="progress-bar progress-bar-success" style="width: 100%"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="modal fade" data-keyboard="false" id="MSGE_13" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -206,58 +222,58 @@
 		</div>
 
 		<?php 
-			if (!empty($_POST)) {
-				include("../Modelo/abre_conexion.php"); 
-				$email=$_POST['email'];
-				$busqueda = sprintf("SELECT * FROM personal WHERE correo='$email'");
-				$result=mysqli_query($link, $busqueda);
-				$row_cnt = mysqli_num_rows($result);
-				$row = mysqli_fetch_assoc($result);
-				$nombre=$row['nombre'];
-				$appaterno=$row['appaterno'];
-				$apmaterno=$row['apmaterno'];
+		if (!empty($_POST)) {
+			include("../Modelo/abre_conexion.php"); 
+			$email=$_POST['email'];
+			$busqueda = sprintf("SELECT * FROM personal WHERE correo='$email'");
+			$result=mysqli_query($link, $busqueda);
+			$row_cnt = mysqli_num_rows($result);
+			$row = mysqli_fetch_assoc($result);
+			$nombre=$row['nombre'];
+			$appaterno=$row['appaterno'];
+			$apmaterno=$row['apmaterno'];
 
-				$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-				$contrasena = '';
-				$random_string_length = 10;	//GENERAMOS EL TOKEN
-				for ($i = 0; $i < $random_string_length; $i++) {
-					$contrasena .= $characters[rand(0, strlen($characters) - 1)];
-				}
-				if($row_cnt > 0){
-					require_once("../Modelo/enviarCorreo.php");
-					if(mandarCorreoRecuperar($nombre,$appaterno,$apmaterno,$email,$contrasena)){
-						$sql = sprintf("UPDATE personal SET contrasena=aes_encrypt('$contrasena','C1r4l3t1890') WHERE correo='$email'");
-						$result=mysqli_query($link,$sql);
-						echo 
-							"<script type='text/javascript'>
+			$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+			$contrasena = '';
+			$random_string_length = 10;	//GENERAMOS EL TOKEN
+			for ($i = 0; $i < $random_string_length; $i++) {
+				$contrasena .= $characters[rand(0, strlen($characters) - 1)];
+			}
+			if($row_cnt > 0){
+				require_once("../Modelo/enviarCorreo.php");
+				if(mandarCorreoRecuperar($nombre,$appaterno,$apmaterno,$email,$contrasena)){
+					$sql = sprintf("UPDATE personal SET contrasena=aes_encrypt('$contrasena','C1r4l3t1890') WHERE correo='$email'");
+					$result=mysqli_query($link,$sql);
+					echo 
+						"<script type='text/javascript'>
 								$(document).ready(function() {
 									$('#process').modal('hide');
 									$('#MSGA_04').modal();
 								});
 							</script>";
-					}
-					else{
-						echo 
-							"<script type='text/javascript'>
+				}
+				else{
+					echo 
+						"<script type='text/javascript'>
 								$(document).ready(function() {
 									$('#process').modal('hide');
 									$('#MSGE_06').modal();
 								});
 							</script>";
-						//MSGE_06 "ERROR AL ENVIAR EL CORREO ELECTRÓNICO"
-					}	
-				}
-				else{
-					echo 
-							"<script type='text/javascript'>
+					//MSGE_06 "ERROR AL ENVIAR EL CORREO ELECTRÓNICO"
+				}	
+			}
+			else{
+				echo 
+					"<script type='text/javascript'>
 								$(document).ready(function() {
 									$('#process').modal('hide');
 									$('#MSGE_13').modal();
 								});
 							</script>";
-					//MSGE_13 "CORREO ELECTRONICO NO REGISTRADO"
-				}
+				//MSGE_13 "CORREO ELECTRONICO NO REGISTRADO"
 			}
+		}
 		?>
 		<div style="padding-bottom:57px;" id="main-content">
 			<form class="form-horizontal" role="form" id="frmRestablecer" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -286,7 +302,19 @@
 			</form>
 			<script type="text/javascript">
 				function enviarRecuperar() {
-					$("#frmRestablecer").submit();
+					var correo = $("[name='email']").val();
+					if (correo == "" || !validate(correo)) {
+						$("#Email").attr("class", "form-group has-feedback has-error");
+						$("#email01").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+						$("#email03").removeClass("hidden");
+						$("#error").modal();
+					}
+					else {
+						$("#Email").attr("class", "form-group has-feedback has-success");
+						$("#email01").attr("class", "glyphicon glyphicon-ok form-control-feedback");		
+						$("#email03").addClass("hidden");
+						$("#frmRestablecer").submit();
+					}
 				}
 			</script>
 		</div>
@@ -325,7 +353,7 @@
 						<h4 class="modal-title">Mensaje de error</h4>
 					</div>
 					<div class="modal-body">
-						<p>Falta un dato obligatorio para efectuar la operación solicitada.</p>
+						<p>Falta un dato obligatorio para efectuar la operación solicitada</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>

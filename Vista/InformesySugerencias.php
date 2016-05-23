@@ -38,10 +38,9 @@
 		<?php
 					include("../Modelo/abre_conexion.php"); 
 					require_once("../Modelo/enviarCorreo.php");
-					$ans = mandarCorreoInforme($dpto, $asunto, $contenido, $email);
-					if (ans) {
+					if (mandarCorreoInforme($dpto, $asunto, $contenido, $email)) {
 						$timestamp = date('d/m/Y');
-						$sql = sprintf("INSERT INTO mensaje (idMensaje, correo, asunto,contenido,estado,fecha,iddepto) VALUES (NULL,'$email','$asunto','$contenido','PENDIENTE','$timestamp','$dpto')");
+						$sql = sprintf("INSERT INTO mensaje ( correo, asunto,contenido,estado,fecha,iddepto) VALUES ('$email','$asunto','$contenido','PENDIENTE','$timestamp','$dpto')");
 						$result=mysqli_query($link,$sql);
 						echo "<script type='text/javascript'>
 								$(document).ready(function() {

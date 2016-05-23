@@ -9,6 +9,7 @@
 		<script type="text/javascript" src="../Scr/bootstrap-datetimepicker.js"></script>
 		<link type="text/css" rel="stylesheet" href="../Css/bootstrap.css">
 		<link type="text/css" rel="stylesheet" href="../Css/letras.css">
+		<link type="text/css" rel="stylesheet" href="../Css/modals.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 
@@ -139,19 +140,101 @@
 				</div>
 			</div>
 		</nav>
+		<div class="modal fade" id="MSGA_09" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Mensaje de alerta</h4>
+					</div>
+					<div class="modal-body">
+						<p>Se te ha enviado un correo con instrucciones para continuar el proceso de solicitud de cita.
+							Verifica que has recibido el correo, de lo contrario vuelve a llenar la solicitud.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" data-keyboard="false" id="MSG_E06" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-error">
+						<h4 class="modal-title">Mensaje de error</h4>
+					</div>
+					<div class="modal-body">
+						<p>Ocurrió un error interno al enviar el correo electrónico, por favor intente de nuevo.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location = '../';">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php
+				if (!empty($_POST)) {
 
+						$idmen = $_GET['id'];
+						include("../Modelo/abre_conexion.php");
+						$id = htmlspecialchars($_GET['id']);
+						$q = "SELECT * FROM mensaje WHERE idMensaje = $id";
+						$ans = mysqli_query($link, $q);
+						$row = mysqli_fetch_array($ans, MYSQLI_ASSOC);
+						$email=$row['correo']; 
+						$respuesta=$_POST['respuesta'];
+						require_once("../Modelo/enviarCorreo.php");
+						if (mandarCorreoInformeRespuesta($email,$respuesta)) {
+								$sql = sprintf("UPDATE mensaje SET estado='REVISADO' WHERE idMensaje='$idmen'");
+								$result=mysqli_query($link,$sql);
+								echo 
+									"<script type='text/javascript'>
+										$(document).ready(function() {
+											$('#process').modal('hide');
+											$('#MSGA_09').modal();
+										});
+									</script>";
+							}
+						else {
+							echo 
+								"<script type='text/javascript'>
+									$(document).ready(function() {
+										$('#process').modal('hide');
+										$('#MSG_E06').modal();
+									});
+							</script>";
+					} 
+
+					}
+		?>
+		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="MSGC_02" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-warning">
+						<h4 class="modal-title">Mensaje de confirmación</h4>
+					</div>
+					<div class="modal-body">
+						<p>¿Está seguro de que desea cancelar Ver Solicitudes?.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
+						<button type="button" class="btn btn-warning" onclick="window.location = 'SolicitudesCita.php'" data-dismiss="modal">Si</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
 			<div class="container-fluid col-md-10 col-md-offset-1">
 				<h3><strong>Ver más</strong></h3>
 				<p>La respuesta se enviará directamente al correo electrónico indicado y el estado del
 					mensaje pasará a "REVISADO".</p>
 				<br><br>
-				<form class="form-horizontal">
+				<form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?id='.$_GET['id']; ?>" id="Formulario" method="POST">
 					<h4 class="text-uppercase">Datos del mensaje:</h4>
 
 					<!-- Correo electrónico -->
 					<?php
 		include("../Modelo/abre_conexion.php");
+		$id = htmlspecialchars($_GET['id']);
 		$q = "SELECT * FROM mensaje WHERE idMensaje = $id";
 		$ans = mysqli_query($link, $q);
 		if (($row = mysqli_fetch_array($ans, MYSQLI_ASSOC)) > 0) {
@@ -161,7 +244,7 @@
 						<div class="col-md-10">
 							<p class="form-control-static" id="correoE01" name="email">
 								<?php
-			echo htmlspecialchars($row["correo"]);
+									echo htmlspecialchars($row["correo"]);
 								?>
 							</p>	
 						</div>
@@ -187,7 +270,7 @@
 						<div class="col-md-10">
 							<p class="form-control-static" id="contenido" name="contenido">
 								<?php
-			echo htmlspecialchars($row["contenido"]);
+									echo htmlspecialchars($row["contenido"]);
 								?>
 							</p>
 						</div>
@@ -210,10 +293,8 @@
 					<!-- Botones -->
 					<div class="form-group text-right" style="padding-top: 9px;">
 						<div class="col-md-10 col-md-offset-2">
-							<a class="btn btn-success" style="width: 150px;" onClick="window.location='../Vista/VerInformesYS.php';">
-								CANCELAR
-							</a>
-							<a class="btn btn-success" style="width: 150px;">ENVIAR</a>
+							<a class="btn btn-success" data-toggle="modal" data-target="#MSGC_02" style="width: 150px;">CANCELAR</a>
+							<a class="btn btn-success" style="width: 150px;" onclick="enviarRecuperar();">ENVIAR</a>
 						</div>
 					</div>
 					<?php
@@ -221,26 +302,20 @@
 					?>
 
 					<!-- Botones -->
-					<div class="form-group text-right" style="padding-top: 9px;">
-						<div class="col-md-10 col-md-offset-2">
-							<a class="btn btn-success" style="width: 150px;" onClick="window.location='../Vista/VerInformesYS.php';">
-								CANCELAR
-							</a>
-							<a class="btn btn-success" style="width: 150px;">ENVIAR</a>
-						</div>
-					</div>
 					<?php
 			}
 		} else {
 			include("../Modelo/cierra_conexion.php");
 					?>
-					<script type="text/javascript">
-						window.location = "../Vista/VerInformesYS.php";
-					</script>
 					<?php
 		}
 					?>
 				</form>
+				<script type="text/javascript">
+						function enviarRecuperar() {
+							$("#Formulario").submit();
+						}
+			</script>
 			</div>
 		</div>
 

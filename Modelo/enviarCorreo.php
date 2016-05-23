@@ -1,4 +1,35 @@
 <?php
+function mandarCorreoInformeRespuesta($email,$contenido){
+	require 'PHPMailerAutoload.php';
+	$mail = new PHPMailer();
+	$mail->IsSMTP();
+	$mail->SMTPAuth = true;
+	$mail->SMTPSecure = "ssl";
+	$mail->Host = "smtp.gmail.com";
+	$mail->Port = 465;
+	$mail->SMTPKeepAlive = true;
+	$mail->Username = "sgceescom@gmail.com";
+	$mail->Password = "sgceescom10";
+	$mail->CharSet = 'UTF-8';
+	$mail->From = $email;
+	$mail->FromName = "Respuesta de Informe o Sugerencia";
+	$mail->Subject = "Informe o sugerencia";
+	$msg="<div class=\"container-fluid\" style=\"padding-bottom:9px;\" id=\"header\">
+            <img src=\"../Img/SEP.png\" height=\"64px\" style=\"float:left; padding-left:15px;\">
+            <img class=\"img-head\" src=\"../Img/logoIPNGris.png\" style=\"float:right; padding-top:15px; padding-right:15px;\">
+        </div><br><br><br><br> <br> ";
+	$msg=$msg."<b>Buen día </b> <br><br>";
+	$msg=$msg.$contenido;
+	$msg=$msg."<br><br>Gracias por utilizar el sistema generador de citas de ESCOM <br>";
+	$mail->MsgHTML($msg);
+	$mail->AddAddress($email,"Holaaaaaaaaa");
+	$mail->IsHTML(true);
+	if(!$mail->Send()) {
+		return 0;
+	} else {
+		return 1;
+	}
+}
 function mandarCorreoInforme($departamento,$asunto,$contenido,$emailinforme){
 	require 'PHPMailerAutoload.php';
 

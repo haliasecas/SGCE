@@ -408,7 +408,7 @@
 					</div>
 				</div>
 			</div>
-		</div>        
+		</div>
 
 		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="seguro" role="dialog">
 			<div class="modal-dialog">
