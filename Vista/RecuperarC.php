@@ -189,6 +189,21 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" id="process" role="dialog" data-keyboard="false" data-backdrop="static">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Mensaje de alerta</h4>
+					</div>
+					<div class="modal-body">
+						<p>Tu solicitud está siendo procesada</p>
+						<div class="progress progress-striped active">
+							<div class="progress-bar progress-bar-success" style="width: 100%"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<div class="modal fade" data-keyboard="false" id="MSGE_13" role="dialog">
 			<div class="modal-dialog">
