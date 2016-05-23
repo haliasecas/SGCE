@@ -14,10 +14,21 @@
 							
 					}*/
 					include("../Modelo/abre_conexion.php"); 
-					$busqueda = sprintf("SELECT idSolicitud FROM solicitud WHERE idSolicitud=1 AND estado='ACEPTADA'");
-						$result=mysqli_query($link, $busqueda);
-						$row_cnt = mysqli_num_rows($result);
-						echo $row_cnt;
+					include("../Modelo/abre_conexion.php"); 
+					require_once("../Modelo/enviarCorreo.php");
+						mandarCorreoInforme(1, 'Informe', 'Adios', 'ydroz@gmail.com');
+					/*$busquedaSol = sprintf("SELECT idSolicitud FROM solicitud WHERE idSolicitud=1 AND estado='ACEPTADA'");
+						$resultSol=mysqli_query($link, $busquedaSol);
+						$row_cntSol = mysqli_num_rows($resultSol);
+						echo $row_cntSol;*/
+							$id = sprintf("SELECT * FROM personal WHERE idpersonal='1'");     
+								$resulta = mysqli_query($link,$id);
+							$row = mysqli_fetch_array($resulta, MYSQLI_ASSOC);
+							$nombreEncargado = $row['nombre'];
+							$appatEncargado = $row['appaterno'];
+							$apmatEncargado = $row['apmaterno'];
+							$correoEncargado = $row['correo'];
+							echo $correoEncargado;
                    /* $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
 					$string = '';
 					$random_string_length = 20;	//GENERAMOS EL TOKEN
