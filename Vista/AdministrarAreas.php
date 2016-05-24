@@ -193,8 +193,8 @@
 									data: { value: id }
 								}).done(function(msg){
 									console.log(msg);
-									if (msg == "hecho") location.reload();
-									$("#dropfail").modal();
+									if (msg == "hecho") $("#drop").modal();
+									else if (msg == "nohecho") $("#dropfail").modal();
 								});
 							});
 						}
@@ -207,6 +207,21 @@
 				</div>
 			</div>                                                               
 		</div>
+        <div class="modal fade" data-keyboard="false" data-backdrop="static" id="drop" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-has-success">
+						<h4 class="modal-title">Mensaje de confirmacion</h4>
+					</div>
+					<div class="modal-body">
+						<p>El área seleccionada ha sido eliminada.</p>
+					</div>
+					<div class="modal-footer">                        
+						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location = '../Vista/AdministrarAreas.php';">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="dropfail" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -214,7 +229,7 @@
 						<h4 class="modal-title">Mensaje de error</h4>
 					</div>
 					<div class="modal-body">
-						<p>El área seleccionada tiene al menos una solicitud de cita asociada. Error al eliminar</p>
+						<p>El área seleccionada tiene al menos una solicitud de cita asociada. Error al eliminar.</p>
 					</div>
 					<div class="modal-footer">                        
 						<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location = '../Vista/AdministrarAreas.php';">Aceptar</button>
