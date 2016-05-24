@@ -469,7 +469,7 @@ Cerrar sesión
 					$("#top-bar").addClass("navbar-fixed-top");
 					$("#main-content").css({"padding-top":"90px"});
 				}
-				if ($(window).scrollTop() < $("#header").height()) {
+				else {
 					$("#top-bar").removeClass("navbar-fixed-top");
 					$("#main-content").css({"padding-top":"0px"});
 				}
@@ -483,7 +483,7 @@ Cerrar sesión
 				if ($(window).width() > 886) {
 					$("#top-bar").attr({"style":"height:84px;"});
 				}
-				if ($(window).width() <= 886) {
+				else {
 					$("#top-bar").removeAttr("style");
 				}
 			}); 

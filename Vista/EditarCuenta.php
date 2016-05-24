@@ -150,7 +150,7 @@
 		$apmaterno=$row['apmaterno'];
 		$correo = $row['correo'];        
 		?>
-		<div class="container-fluid" style="padding-bottom:81px;" id="main-content">
+		<div class="container-fluid" style="padding-bottom:90px;" id="main-content">
 			<div class="container">
 				<h3><strong>Editar cuenta</strong></h3>
 				<p><strong class="text-success">Todos los campos son obligatorios.</strong> El nombre del departamento debe estar previamente registrado en el sistema.</p> 
