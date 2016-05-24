@@ -1,9 +1,6 @@
 <?php
 $id = htmlspecialchars($_POST['value']);
-include("abre_conexion.php");
-//Recibimos por POST los datos procedentes del formulario          
-
-//echo "NO hay LOL";
+include("../Modelo/abre_conexion.php");
 $query = "select * from solicitud where idarea=$id";
 $result = mysqli_query($link, $query);
 if(($row = mysqli_fetch_array($result, MYSQLI_ASSOC))>0){
@@ -13,6 +10,6 @@ if(($row = mysqli_fetch_array($result, MYSQLI_ASSOC))>0){
     mysqli_query($link, $query1);       
     echo "hecho";
 }
-include("cierra_conexion.php");  
+include("../Modelo/cierra_conexion.php");  
 ?>
 

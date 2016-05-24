@@ -1,6 +1,7 @@
 <?php
-include("../Modelo/abre_conexion.php");
 $id = htmlspecialchars($_POST['value']);
+include("../Modelo/abre_conexion.php");
+
 
 $q = "SELECT idpersonal FROM depto WHERE iddepto = $id";
 $result = mysqli_query($link, $q);

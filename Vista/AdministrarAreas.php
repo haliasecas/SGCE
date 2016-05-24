@@ -210,15 +210,13 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header modal-has-error">
-                        <h4 class="modal-title">Mensaje de alerta</h4>
+                        <h4 class="modal-title">Mensaje de error</h4>
                     </div>
                     <div class="modal-body">
-                        <p>El área seleccionada tiene solicitudes de citas asociada. Error al eliminar</p>
+                        <p>El área seleccionada tiene al menos una solicitud de cita asociada. Error al eliminar</p>
                     </div>
                     <div class="modal-footer">                        
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location = '../Vista/AdministrarAreas.php';">
-                            Aceptar
-                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location = '../Vista/AdministrarAreas.php';">Aceptar</button>
                     </div>
                 </div>
             </div>
@@ -231,7 +229,7 @@
                         <h4 class="modal-title">Mensaje de confirmación</h4>
                     </div>
                     <div class="modal-body">
-                        <p>¿Seguro que desea eliminar este departamento?</p>
+                        <p>¿Seguro que desea eliminar esta área?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
