@@ -191,7 +191,8 @@
 							$("#pass01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
 							$("#email01").attr("class", "glyphicon glyphicon-ok form-control-feedback");
 							$("#email02").addClass("hidden"); $("#pass02").addClass("hidden");
-							$("#bienvenido").modal();
+							//$("#bienvenido").modal();
+                            window.location = '../';
 						}
 					});
 				}
