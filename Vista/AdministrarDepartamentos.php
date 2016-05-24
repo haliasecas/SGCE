@@ -161,7 +161,7 @@
 									$correoE = $row['correo'];
 									$nombreE = $row['nombreP'];
 
-									echo "<tr id='D$iddepto'>";
+									echo "<tr id='$iddepto'>";
 									echo "<td colspan='4'>$nombre</td>";
 									echo "<td>$correoE</td>";
 									echo "<td>$nombreE</td>";

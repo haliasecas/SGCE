@@ -159,11 +159,13 @@
                                     $idarea=$row['idarea'];
                                     $area = $row['area'];
                                     $depto = $row['depto'];
-                                    echo "<tr>";
+                                    echo "<tr id='$idarea'>";
                                     echo "<th>$area</th>";
                                     echo "<th>$depto</th>";
                                     echo "<th><a class=' text-success text-right'  style = 'text-decoration:underline;' href='EditarAreas.php?id=$idarea'>Editar</a></th>";   
-                                    echo "<th><a class=' text-success text-right' onclick=''  name='EliminaA' style = 'text-decoration:underline; cursor:pointer;' href='../Modelo/eliminar_area.php?id=$idarea'>Eliminar</a></th>  ";
+                                    echo "<td><a class='text-success text-right' name='EliminaA' style='text-decoration:underline; cursor:pointer;'>
+								Eliminar
+								</a></td>";
                                     echo "</tr>";
                                 }
                             }else{
@@ -191,6 +193,7 @@
                                     data: { value: id }
                                 }).done(function(msg){
                                     if (msg == "hecho") location.reload();
+                                    else if (msg == "nohecho") $("#dropfail").modal();
                                 });
                             });
                         }
@@ -202,6 +205,23 @@
                     </div>					                                                                               						                             
                 </div>
             </div>                                                               
+        </div>
+        <div class="modal fade" data-keyboard="false" data-backdrop="static" id="dropfail" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header modal-has-error">
+                        <h4 class="modal-title">Mensaje de alerta</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>El área seleccionada tiene solicitudes de citas asociada. Error al eliminar</p>
+                    </div>
+                    <div class="modal-footer">                        
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location = '../Vista/AdministrarAreas.php';">
+                            Aceptar
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="modal fade" data-keyboard="false" data-backdrop="static" id="confirmacion" role="dialog">
