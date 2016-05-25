@@ -517,7 +517,7 @@
 					<div class="form-group text-right" style="padding-top: 9px;">
 						<div class="col-md-10 col-md-offset-2">
 						
-							<a class="btn btn-success" data-toggle="modal" data-target="#MSGC_02" style="width: 150px;">CANCELAR</a>
+							<a class="btn btn-success" onclick="window.location = 'SolicitudesCita.php';" style="width: 150px;">CANCELAR</a>
 							<?php
 							if(!$row_cntSol==1)
 								echo "<button class='btn btn-success' type='submit' style='width: 150px;'>ENVIAR</a>";
@@ -531,22 +531,7 @@
 		<?php
 		}
 		?>
-		<div class="modal fade" data-keyboard="false" data-backdrop="static" id="MSGC_02" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header modal-has-warning">
-						<h4 class="modal-title">Mensaje de confirmación</h4>
-					</div>
-					<div class="modal-body">
-						<p>¿Está seguro de que desea cancelar Ver Solicitudes?.</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
-						<button type="button" class="btn btn-warning" onclick="window.location = 'SolicitudesCita.php'" data-dismiss="modal">Si</button>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottom-bar">
 			<div class="container-fluid" style="padding-right:51px;">
 				<div class="navbar-header">
@@ -583,7 +568,7 @@
 						$("#top-bar").addClass("navbar-fixed-top");
 						$("#main-content").css({"padding-top":"90px"});
 					}
-					if ($(window).scrollTop() < $("#header").height()) {
+					else {
 						$("#top-bar").removeClass("navbar-fixed-top");
 						$("#main-content").css({"padding-top":"0px"});
 					}
@@ -597,7 +582,7 @@
 					if ($(window).width() > 886) {
 						$("#top-bar").attr({"style":"height:84px;"});
 					}
-					if ($(window).width() <= 886) {
+					else {
 						$("#top-bar").removeAttr("style");
 					}
 				}); 
