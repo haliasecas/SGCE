@@ -1,18 +1,24 @@
 <?php
 $value = htmlspecialchars($_POST["value"]);
 include("../Modelo/abre_conexion.php");
+$idPersonal = $_COOKIE["id"];
+$q = "SELECT * FROM depto WHERE idpersonal = $idPersonal";
+$result = mysqli_query($link, $q);
+$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+$idDepto = $row["iddepto"];
+
 switch($value){
 	case 1:
-		$query = "SELECT * FROM solicitud WHERE estado!=' ' order by estado ";
+		$query = "SELECT * FROM solicitud WHERE estado != ' ' AND iddepto = $idDepto order by estado ";
 		break;
 	case 2:
-		$query = "SELECT * FROM solicitud WHERE estado='AGENDADA'";
+		$query = "SELECT * FROM solicitud WHERE estado='AGENDADA' AND iddepto = $idDepto";
 		break;
 	case 3:
-		$query = "SELECT * FROM solicitud WHERE estado='PENDIENTE'";
+		$query = "SELECT * FROM solicitud WHERE estado='PENDIENTE' AND iddepto = $idDepto";
 		break;
 }
-$result = mysqli_query($link,$query);
+$result = mysqli_query($link, $query);
 
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 		
